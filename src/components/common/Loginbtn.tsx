@@ -10,26 +10,42 @@ const color = {
   secondary: '#1E1008',
 };
 
+const width = {
+  portrait: '60px',
+  landscape: '60px',
+};
+
+const fontSize = {
+  portrait: '10px',
+  landscape: '0.6rem',
+};
+
+const padding = {
+  portrait: '5px 7px 7px 5px',
+  landscape: '9px 11px 11px 9px',
+};
+
 interface StyledButtonProps {
   readonly variant: 'primary' | 'secondary';
+  readonly type: 'portrait' | 'landscape';
 }
 
 const LoginBtn = styled.button<StyledButtonProps>`
-  border-radius: 20px;
+  border-radius: 15px;
   border: none;
   background: ${(props) => backgroundColor[props.variant]};
   color: ${(props) => color[props.variant]};
   display: flex;
-  width: 120px;
-  padding: 13px 10px 13px 10px;
+  width: ${(props) => width[props.type]};
+  padding: ${(props) => padding[props.type]};
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: 0.1s background-color ease-in-out;
-  font-size: 14px;
+  font-size: ${(props) => fontSize[props.type]};
   font-style: normal;
   font-weight: 600;
-  letter-spacing: 0.56px;
+  margin: 3%;
 
   &:hover {
     background-color: ${(props) => backgroundColor[props.variant]};
