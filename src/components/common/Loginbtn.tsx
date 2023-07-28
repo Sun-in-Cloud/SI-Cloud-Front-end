@@ -43,7 +43,7 @@ const LoginBtn = styled.button<StyledButtonProps>`
   cursor: pointer;
   transition: 0.1s background-color ease-in-out;
   font-size: ${(props) => fontSize[props.type]};
-  font-style: normal;
+  font-family: Jalnan;
   font-weight: 600;
   margin: 3%;
 
