@@ -86,7 +86,12 @@ function Header(type: any) {
         </MenuTab>
         <HeaderImages>
           <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}` }} />
-          <img src={logo} style={{ width: `${StyleType(style) === 'portrait' ? '150px' : '55%'}` }} />
+          <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}`, zIndex: '-1' }} />
+          <img
+            src={logo}
+            style={{ width: `${StyleType(style) === 'portrait' ? '150px' : '70%'}`, marginTop: '-20px' }}
+          />
+          <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}`, zIndex: '-1' }} />
           <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}` }} />
         </HeaderImages>
       </HeaderBar>
@@ -120,7 +125,7 @@ const Loginbtns = styled.div`
 
 const HeaderImages = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   justify-items: center;
   z-index: 0;
 `;
