@@ -6,13 +6,23 @@ const color = {
 };
 
 const fontSize = {
-  portrait: '1em',
+  portrait: '18px',
   landscape: '1.3rem',
 };
 
-const background = {
-  active: '#ffe9a9',
-  none: 'none',
+const width = {
+  portrait: '77%',
+  landscape: '80%',
+};
+
+const hover_width = {
+  portrait: '80%',
+  landscape: '85%',
+};
+
+const padding = {
+  portrait: '5px',
+  landscape: '5px',
 };
 
 interface ScreenTypeProps {
@@ -24,19 +34,20 @@ const HeaderMenu = styled.button<ScreenTypeProps>`
   font-family: chab;
   color: ${(props) => color[props.type]};
   font-size: ${(props) => fontSize[props.type]};
-  font-weight: 400;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
   background: none;
-  width: 80%;
+  width: ${(props) => width[props.type]};
+  margin-bottom: 20px;
+  padding: ${(props) => padding[props.type]};
 
   &:hover {
-    width: 100%;
+    width: ${(props) => hover_width[props.type]};
     left: 0;
-    transition: all 0.4s;
+    transition: all 0.5s;
     background: #ffe9a9;
     z-index: -1;
     border-radius: 15px;
