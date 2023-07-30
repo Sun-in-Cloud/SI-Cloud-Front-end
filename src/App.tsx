@@ -5,7 +5,7 @@ import { useMediaQuery } from 'react-responsive';
 
 // 세로 모드
 const TabletPortrait = ({ children }: any) => {
-  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 999 });
+  const isTablet = useMediaQuery({ minWidth: 700, maxWidth: 900 });
   return isTablet ? children : null;
 };
 
