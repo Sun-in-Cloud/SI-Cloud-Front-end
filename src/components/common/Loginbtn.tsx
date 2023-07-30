@@ -12,7 +12,7 @@ const color = {
 
 const width = {
   portrait: '60px',
-  landscape: '60px',
+  landscape: '70px',
 };
 
 const fontSize = {
@@ -44,13 +44,12 @@ const LoginBtn = styled.button<StyledButtonProps>`
   transition: 0.1s background-color ease-in-out;
   font-size: ${(props) => fontSize[props.type]};
   font-family: Jalnan;
-  font-weight: 600;
-  margin: 3%;
+  margin: 0 3% 3% 0;
 
-  &:hover {
-    background-color: ${(props) => backgroundColor[props.variant]};
-    filter: brightness(0.95);
-  }
+  // &:hover {
+  //   background-color: ${(props) => backgroundColor[props.variant]};
+  //   filter: brightness(0.95);
+  // }
 `;
 
 export default LoginBtn;

@@ -31,6 +31,14 @@ function Header(type: any) {
   return (
     <Headers>
       <HeaderBar>
+        <Loginbtns>
+          <LoginBtn variant="secondary" type={StyleType(style)}>
+            로그인
+          </LoginBtn>
+          <LoginBtn variant="primary" type={StyleType(style)}>
+            로그아웃
+          </LoginBtn>
+        </Loginbtns>
         <MenuTab>
           <HeaderMenu
             type={StyleType(style)}
@@ -56,6 +64,9 @@ function Header(type: any) {
           >
             입출고 관리
           </HeaderMenu>
+          <h1></h1>
+          <h1></h1>
+
           <HeaderMenu
             type={StyleType(style)}
             onClick={onChangeMenu}
@@ -73,19 +84,10 @@ function Header(type: any) {
             마이페이지
           </HeaderMenu>
         </MenuTab>
-
-        <Loginbtns>
-          <LoginBtn variant="secondary" type={StyleType(style)}>
-            로그인
-          </LoginBtn>
-          <LoginBtn variant="primary" type={StyleType(style)}>
-            로그아웃
-          </LoginBtn>
-        </Loginbtns>
         <HeaderImages>
-          <img src={line} />
-          <img src={logo} style={{ width: '80%' }} />
-          <img src={line} />
+          <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}` }} />
+          <img src={logo} style={{ width: `${StyleType(style) === 'portrait' ? '150px' : '55%'}` }} />
+          <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}` }} />
         </HeaderImages>
       </HeaderBar>
     </Headers>
@@ -97,14 +99,16 @@ const HeaderBar = styled.div`
   background: '#FCF9ED';
   display: grid;
   align-items: center;
-  grid-template-rows: 60px 20px 60px;
+  grid-template-rows: 30px 50px 70px;
   padding: 4%;
 `;
 
 const MenuTab = styled.div`
   display: grid;
-  width: max-width;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  // align-items: center;
+  // justify-items: center;
+  width: 100%;
+  grid-template-columns: 1.3fr 1.3fr 1.5fr 150px 30px 1.5fr 1.5fr;
   z-index: 2;
 `;
 
@@ -124,6 +128,8 @@ const HeaderImages = styled.div`
 const Headers = styled.div`
   width: 100%;
   background-color: #fcf9ed;
+  overflow: hidden;
+  display: flex;
 `;
 
 export default Header;
