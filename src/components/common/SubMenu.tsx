@@ -47,7 +47,7 @@ const SubMenuBar = styled.div`
 `;
 const SubItem = styled.button`
   margin-left: 20px;
-  font-family: Jalnan;
+  font-family: Batang_Medium;
   font-size: 14px;
   border: none;
   color: black;

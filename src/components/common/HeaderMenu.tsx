@@ -11,8 +11,8 @@ const fontSize = {
 };
 
 const width = {
-  portrait: '77%',
-  landscape: '80%',
+  portrait: '100%',
+  landscape: '100%',
 };
 
 const hover_width = {
@@ -51,12 +51,4 @@ const HeaderMenu = styled.button<ScreenTypeProps>`
   padding: ${(props) => padding[props.type]};
 `;
 
-// &:hover {
-//   width: ${(props) => hover_width[props.type]};
-//   left: 0;
-//   transition: all 0.5s;
-//   background: #ffe9a9;
-//   z-index: -1;
-//   border-radius: 15px 15px 0 0;
-// }
 export default HeaderMenu;
