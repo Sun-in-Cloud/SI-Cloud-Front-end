@@ -3,9 +3,22 @@ import TableTitleBk from './common/TableTitleBk';
 import TableTitleWH from './common/TableTitleWH';
 import { styled } from 'styled-components';
 
+interface StyledGridProps {
+  readonly colums: '2' | '3' | '4' | '5' | '6';
+}
+
+const gridLayout = {
+  2: '1fr 1fr',
+  3: '1fr 1fr 1fr',
+  4: '1fr 1fr 1fr 1fr',
+  5: '1fr 1fr 1fr 1fr 1fr',
+  6: '1fr 1fr 1fr 1fr 1fr 1fr',
+};
+
 function TableColumn(props: any) {
+  console.log(props.columns);
   return (
-    <TableColums>
+    <TableColums colums={props.columns}>
       {props.title.map((item: string, index: number) => {
         if (index % 2 === 0) {
           return (
@@ -25,9 +38,9 @@ function TableColumn(props: any) {
   );
 }
 
-const TableColums = styled.div`
+const TableColums = styled.div<StyledGridProps>`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: ${(props) => gridLayout[props.colums]};
   align-items: center;
   justify-items: center;
   border: 1.5px solid #1e1008;

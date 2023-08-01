@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbtn from './components/common/Navbtn';
 import ListingPage from './components/ListingPage';
 import LandscapeMain from './components/LandscapeMain';
+import SellerMain from './components/Seller/SellerMain';
 import ThreeplMain from './components/3pl/ThreeplMain';
 
 // 세로 모드
@@ -25,15 +26,15 @@ function App() {
     <div className="App">
       <TabletPortrait>
         <Header type="portrait" />
-        <ListingPage />
+        {/* <ListingPage /> */}
       </TabletPortrait>
 
       <TabletLandscape>
         <BrowserRouter>
           <Routes>
-            <Route path="/ex" element={<LandscapeMain />}></Route>
-            <Route path="/seller" element={<LandscapeMain />}></Route>
-            <Route path="/3pl/*" element={<ThreeplMain type="landscape" />}></Route>
+            <Route path="/" element={<LandscapeMain />}></Route>
+            <Route path="/3pl/*" element={<ThreeplMain type={'landscape'} />}></Route>
+            <Route path="/seller/*" element={<SellerMain type={'landscape'} />}></Route>
           </Routes>
         </BrowserRouter>
       </TabletLandscape>
