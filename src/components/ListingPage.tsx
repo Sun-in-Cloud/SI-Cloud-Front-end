@@ -13,15 +13,16 @@ interface propsItems {
   row: string[];
 }
 
-function ListingPage() {
+function ListingPage(props: any) {
   const titles: string[] = ['바코드 번호', '상품군', '상품명', '충분재고', '안전재고', '현재재고'];
   const paging: number[] = [0, 1, 2, 3, 4, 5]; // for문이 안돌아.. 다른 방법 찾겠숨..
   const rows = [
-    ['0101010', '바지', '핑크한 바지', '100', '100', '150'],
-    ['111111', '바지', '파란한 바지', '13', '15', '30'],
+    ['0101010', '바지', '귀여운 핑크바지', '10', '15'],
+    ['111111', '바지', '귀여운 파란바지', '13', '15'],
   ];
   return (
     <div>
+      <h1>{props.sellerName}</h1>
       <TableForm>
         <TableColumn title={titles} />
         <TableRow content={rows} />

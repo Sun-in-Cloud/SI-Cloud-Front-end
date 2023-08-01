@@ -9,7 +9,13 @@ function Sidebar(props: any) {
       {props.company.map((item: string, index: number) => {
         return (
           <>
-            <Company>{item}</Company>
+            <Company
+              onClick={() => {
+                props.findSeller({ item });
+              }}
+            >
+              {item}
+            </Company>
             <img src={line} style={{ zIndex: '0', marginTop: '-15px', width: '80%' }}></img>
           </>
         );
