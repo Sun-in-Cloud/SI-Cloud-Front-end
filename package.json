@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -11,10 +13,12 @@
     "@types/react": "^18.2.17",
     "@types/react-dom": "^18.2.7",
     "@types/react-responsive": "^8.0.5",
+    "@types/react-router-dom": "^5.3.3",
     "react": "^18.2.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
     "react-responsive": "^9.0.2",
+    "react-router-dom": "^6.14.2",
     "react-scripts": "5.0.1",
     "styled-components": "^6.0.5",
     "typescript": "^4.9.5",
@@ -56,5 +60,8 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.0",
     "prettier": "^3.0.0"
-  }
+  },
+  "presets": [
+    "@babel/preset-env"
+  ]
 }
