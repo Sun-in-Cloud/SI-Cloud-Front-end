@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbtn from './components/common/Navbtn';
 import ListingPage from './components/ListingPage';
 import LandscapeMain from './components/LandscapeMain';
+import SellerMain from './components/Seller/SellerMain';
 
 // 세로 모드
 const TabletPortrait = ({ children }: any) => {
@@ -24,16 +25,16 @@ function App() {
     <div className="App">
       <TabletPortrait>
         <Header type="portrait" />
-        <ListingPage />
+        {/* <ListingPage /> */}
       </TabletPortrait>
-      {/* <BrowserRouter>
-        <Routes>
-          <Route></Route>
-        </Routes>
-      </BrowserRouter> */}
 
       <TabletLandscape>
-        <LandscapeMain type="landscape" />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LandscapeMain type={'landscape'} />}></Route>
+            <Route path="/seller/*" element={<SellerMain type={'landscape'} />}></Route>
+          </Routes>
+        </BrowserRouter>
       </TabletLandscape>
     </div>
   );
