@@ -17,6 +17,7 @@ function TableRow(props: any) {
                 <Item>{item[2]}</Item>
                 <Item>{item[3]}</Item>
                 <Item>{item[4]}</Item>
+                <Item>{item[5]}</Item>
               </Row>
               <img src={dashedLine} />
             </>
@@ -36,7 +37,7 @@ const Tablerows = styled.div`
 
 const Row = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-auto-rows: 1fr;
   margin: 10px 0 5px 0;
 `;

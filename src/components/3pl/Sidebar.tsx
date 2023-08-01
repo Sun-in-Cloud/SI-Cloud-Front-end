@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from 'styled-components';
-import line from '../img/miniLine.svg';
+import line from '../../img/miniLine.svg';
 
 function Sidebar(props: any) {
   console.log(props.company);
@@ -20,11 +20,11 @@ function Sidebar(props: any) {
 
 const SideBars = styled.div`
   display: grid;
-  grid-template-rows: 30px 30px 30px 30px 30px;
+  grid-template-rows: repeat(16, 30px);
   width: fit-content;
   justify-items: center;
   margin-right: 20px;
-  margin-top: 30px;
+  margin-top: 10px;
 `;
 const Company = styled.button`
   font-family: chab;
