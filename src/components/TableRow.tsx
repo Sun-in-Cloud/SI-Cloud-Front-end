@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { styled } from 'styled-components';
 import dashedLine from '../img/dashedLine.svg';
 
 interface StyledGridProps {
-  readonly colums: '2' | '3' | '4' | '5' | '6';
+  readonly columns: '2' | '3' | '4' | '5' | '6' | '7';
 }
 
 const gridLayout = {
@@ -12,9 +12,18 @@ const gridLayout = {
   4: '1fr 1fr 1fr 1fr',
   5: '1fr 1fr 1fr 1fr 1fr',
   6: '1fr 1fr 1fr 1fr 1fr 1fr',
+  7: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
 };
 
 function TableRow(props: any) {
+  function getColumns(columns: number): string {
+    let new_columns = columns;
+    if (props.onDetail) {
+      new_columns = columns + 1;
+    }
+    return String(new_columns);
+  }
+
   return (
     <>
       <Tablerows>
@@ -22,7 +31,8 @@ function TableRow(props: any) {
           console.log(item);
           return (
             <>
-              <Row key={index} colums={props.columns}>
+              <Row key={index} columns={props.columns}>
+                {/* {props.onDetail && <input type="checkbox" />} */}
                 {Object.values(item).map((value: any, idx: number) => {
                   return <Item key={idx}>{value}</Item>;
                 })}
@@ -45,7 +55,7 @@ const Tablerows = styled.div`
 
 const Row = styled.div<StyledGridProps>`
   display: grid;
-  grid-template-columns: ${(props) => gridLayout[props.colums]};
+  grid-template-columns: ${(props) => gridLayout[props.columns]};
   grid-auto-rows: 1fr;
   margin: 10px 0 5px 0;
 `;
