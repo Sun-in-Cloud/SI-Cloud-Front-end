@@ -39,7 +39,7 @@ const LoginBtn = styled.button<StyledButtonProps>`
   width: ${(props) => width[props.type]};
   padding: ${(props) => padding[props.type]};
   justify-content: center;
-  align-items: center;
+  align-content: center;
   cursor: pointer;
   transition: 0.1s background-color ease-in-out;
   font-size: ${(props) => fontSize[props.type]};

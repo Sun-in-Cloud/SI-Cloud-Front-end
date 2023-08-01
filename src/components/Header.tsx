@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import line from '../img/line.svg';
 import logo from '../img/logo.svg';
 import HeaderMenu from './common/HeaderMenu';
+import SubMenu from './common/SubMenu';
 
 function Header(type: any) {
   const [tab, setTab] = useState<string>('curr');
@@ -84,6 +85,7 @@ function Header(type: any) {
             마이페이지
           </HeaderMenu>
         </MenuTab>
+        <SubMenu title={tab} />
         <HeaderImages>
           <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}` }} />
           <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}`, zIndex: '-1' }} />
@@ -104,7 +106,7 @@ const HeaderBar = styled.div`
   background: '#FCF9ED';
   display: grid;
   align-items: center;
-  grid-template-rows: 30px 50px 70px;
+  grid-template-rows: 30px 30px 30px 50px;
   padding: 4%;
 `;
 
@@ -125,6 +127,7 @@ const Loginbtns = styled.div`
 
 const HeaderImages = styled.div`
   display: grid;
+  bottom: 20;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   justify-items: center;
   z-index: 0;
@@ -133,8 +136,8 @@ const HeaderImages = styled.div`
 const Headers = styled.div`
   width: 100%;
   background-color: #fcf9ed;
-  overflow: hidden;
   display: flex;
 `;
+//overflow : hidden
 
 export default Header;
