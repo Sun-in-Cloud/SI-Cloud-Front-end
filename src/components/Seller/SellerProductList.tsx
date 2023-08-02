@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
 import ListingPage from '../ListingPage';
+import LoginBtn from '../common/Loginbtn';
 
 interface Product {
   productNo: string;
@@ -12,6 +13,8 @@ interface Product {
 }
 
 function SellerProductList(props: any) {
+  const style = props.style;
+  console.log(style);
   const [product, setProduct] = useState<Product[] | null>([
     {
       productNo: '0101010',
@@ -98,13 +101,32 @@ function SellerProductList(props: any) {
   const titles: string[] = ['바코드 번호', '상품군', '상품명', '안전재고', '현재재고', '안전재고'];
   const paging: number[] = [0, 1, 2, 3, 4, 5];
   const columns: number = titles.length;
+  const sellerNo: number = 30123123;
+
+  function StyleType(style: any) {
+    if (style == 'portrait') {
+      return 'portrait';
+    } else {
+      return 'landscape';
+    }
+  }
 
   return (
     <>
       <ProductMain>
-        <h1></h1>
-        <ListingPage titles={titles} number={paging} rows={product} columns={columns} />
-        <h1></h1>
+        <Buttons>
+          <LoginBtn variant="primary" type={StyleType(style)}>
+            등록하기
+          </LoginBtn>
+        </Buttons>
+        <ListingPage
+          titles={titles}
+          number={paging}
+          rows={product}
+          columns={columns}
+          sellerNo={sellerNo}
+          onDetail={true}
+        />
       </ProductMain>
     </>
   );
@@ -114,7 +136,16 @@ const ProductMain = styled.div`
   margin-top: -40px;
   display: grid;
   grid-template-columns: 0.7fr 6.6fr 0.7fr;
-  grid-template-areas: '. . ListingPage .';
+  grid-template-rows: 0.7fr 8fr;
+  grid-template-areas: '. Buttons .' '. ListingPage .';
+`;
+
+const Buttons = styled.div`
+  grid-area: Buttons;
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 13px;
+  margin-right: 13px;
 `;
 
 export default SellerProductList;

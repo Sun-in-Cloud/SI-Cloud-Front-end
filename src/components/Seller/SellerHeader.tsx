@@ -116,7 +116,7 @@ const HeaderBar = styled.div`
   background: '#FCF9ED';
   display: grid;
   align-items: center;
-  grid-template-rows: 30px 40px 30px 50px;
+  grid-template-rows: 30px 40px 30px 0px;
   padding: 4%;
 `;
 

@@ -21,7 +21,7 @@ function SellerMain(props: any) {
       <SellerHeader type={StyleType(style)} />
       <Routes>
         {/* 상품 */}
-        <Route path="/product" element={<SellerProductList type={'landscape'} />}></Route>
+        <Route path="/product/*" element={<SellerProductList type={StyleType(style)} />}></Route>
         {/* 발주 */}
         <Route path="/order" element={<SellerProductList type={'landscape'} />}></Route>
         <Route path="/order/list" element={<SellerProductList type={'landscape'} />}></Route>

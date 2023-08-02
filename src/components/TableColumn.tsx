@@ -4,7 +4,7 @@ import TableTitleWH from './common/TableTitleWH';
 import { styled } from 'styled-components';
 
 interface StyledGridProps {
-  readonly colums: '2' | '3' | '4' | '5' | '6';
+  readonly colums: '2' | '3' | '4' | '5' | '6' | '7';
 }
 
 const gridLayout = {
@@ -13,6 +13,7 @@ const gridLayout = {
   4: '1fr 1fr 1fr 1fr',
   5: '1fr 1fr 1fr 1fr 1fr',
   6: '1fr 1fr 1fr 1fr 1fr 1fr',
+  7: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
 };
 
 function TableColumn(props: any) {
