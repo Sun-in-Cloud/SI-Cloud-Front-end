@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import dashedLine from '../img/dashedLine.svg';
 import { Route, useNavigate } from 'react-router-dom';
 import LandscapeMain from './LandscapeMain';
+import TableTitleWH from './common/TableTitleWH';
 
 interface StyledGridProps {
   readonly columns: '2' | '3' | '4' | '5' | '6' | '7';
@@ -17,20 +18,29 @@ const gridLayout = {
   7: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
 };
 
+interface Product {
+  productNo: string;
+  productGroup: string;
+  productName: string;
+  safetyStock: number;
+  currentStock: number;
+  enoughStock: number;
+}
+
 function TableRow(props: any) {
   const navigate = useNavigate();
 
-  function getColumns(columns: number): string {
-    let new_columns = columns;
-    if (props.onDetail) {
-      new_columns = columns + 1;
-    }
-    return String(new_columns);
-  } // checkbox 만드는 용
+  // function getColumns(columns: number): string {
+  //   let new_columns = columns;
+  //   if (props.onDetail) {
+  //     new_columns = columns + 1;
+  //   }
+  //   return String(new_columns);
+  // } // checkbox 만드는 용
 
   function onDetail(detail: boolean, item: any) {
     if (detail) {
-      navigate('/seller/product/' + item.productNo);
+      navigate('/seller/product/' + item.productNo, { state: { productNo: `${item.productNo}` } });
     }
     return;
   }
@@ -38,14 +48,20 @@ function TableRow(props: any) {
   return (
     <>
       <Tablerows>
-        {props.rows.map((item: any, index: number) => {
-          console.log(item);
+        {props.rows.map((item: Product, index: number) => {
           return (
             <>
-              <Row key={index} columns={props.columns} onClick={() => onDetail(props.onDetail, item)}>
-                {/* {props.onDetail && <input type="checkbox" />} */}
-                {Object.values(item).map((value: any, idx: number) => {
-                  return <Item key={idx}>{value}</Item>;
+              <Row key={item.productNo} columns={props.columns} onClick={() => onDetail(props.onDetail, item)}>
+                {props.title.map((it: string, idx: number) => {
+                  return (
+                    <>
+                      {Object.keys(item).map((title: string, id: number) => {
+                        if (it[1] === title) {
+                          return <Item>{item[title as keyof Product]}</Item>;
+                        }
+                      })}
+                    </>
+                  );
                 })}
               </Row>
               <img src={dashedLine} />
@@ -58,7 +74,7 @@ function TableRow(props: any) {
 }
 
 const Tablerows = styled.div`
-  height: 500px;
+  height: 400px;
   width: 100%;
   overflow: hidden;
   margin-top: 5px;
@@ -78,3 +94,7 @@ const Item = styled.div`
 `;
 
 export default TableRow;
+
+{
+  /* {props.onDetail && <input type="checkbox" />} */
+}

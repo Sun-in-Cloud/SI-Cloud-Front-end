@@ -24,13 +24,13 @@ function TableColumn(props: any) {
         if (index % 2 === 0) {
           return (
             <TableTitleBk key={index} disabled>
-              {item}
+              {item[0]}
             </TableTitleBk>
           );
         } else {
           return (
             <TableTitleWH key={index} disabled>
-              {item}
+              {item[0]}
             </TableTitleWH>
           );
         }
