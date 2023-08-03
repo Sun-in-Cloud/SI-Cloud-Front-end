@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { styled } from 'styled-components';
-import dashedLine from '../img/dashedLine.svg';
+import dashedLine from '../../img/dashedLine.svg';
+import LoginBtn from '../common/Loginbtn';
+import { Location, useLocation } from 'react-router-dom';
+import { Order } from '../../global/OrderInterface';
 
 interface StyledGridProps {
   readonly columns: '2' | '3' | '4' | '5' | '6' | '7';
@@ -15,7 +18,7 @@ const gridLayout = {
   7: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
 };
 
-function TableRow(props: any) {
+function Threepl_TableRow(props: any) {
   function getColumns(columns: number): string {
     let new_columns = columns;
     if (props.onDetail) {
@@ -23,6 +26,8 @@ function TableRow(props: any) {
     }
     return String(new_columns);
   }
+
+  const location: Location = useLocation();
 
   return (
     <>
@@ -34,8 +39,22 @@ function TableRow(props: any) {
               <Row key={index} columns={props.columns}>
                 {/* {props.onDetail && <input type="checkbox" />} */}
                 {Object.values(item).map((value: any, idx: number) => {
-                  return <Item key={idx}>{value}</Item>;
+                  return (
+                    <Item
+                      key={idx}
+                      onClick={() => {
+                        props.getItem(item);
+                      }}
+                    >
+                      {value}
+                    </Item>
+                  );
                 })}
+                {props.onDetail && location.pathname === '/3pl/import/pre/list' && (
+                  <LoginBtn variant="primary" type="landscape">
+                    입고
+                  </LoginBtn>
+                )}
               </Row>
 
               <img src={dashedLine} />
@@ -67,4 +86,4 @@ const Item = styled.div`
   letter-spacing: 2px;
 `;
 
-export default TableRow;
+export default Threepl_TableRow;

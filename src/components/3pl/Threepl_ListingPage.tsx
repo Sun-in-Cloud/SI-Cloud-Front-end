@@ -1,10 +1,10 @@
 import React from 'react';
-import Navbtn from './common/Navbtn';
+import Navbtn from '../common/Navbtn';
 import { styled } from 'styled-components';
-import TableColumn from './TableColumn';
-import TableRow from './TableRow';
+import TableColumn from './Threepl_TableColumn';
+import TableRow from './Threepl_TableRow';
 
-function ListingPage(props: any) {
+function Threepl_ListingPage(props: any) {
   console.log(props.titles); // columns name
   console.log(props.number); // page number
   console.log(props.rows); // row data
@@ -26,7 +26,7 @@ function ListingPage(props: any) {
       {/* <h1>{props.sellerNo}</h1> */}
       <TableForm>
         <TableColumn title={props.titles} columns={props.columns} />
-        <TableRow rows={props.rows} columns={props.columns} onDetail={props.onDetail} />
+        <TableRow rows={props.rows} columns={props.columns} onDetail={props.onDetail} getItem={props.setOrder} />
       </TableForm>
       <Navbtns>
         <Navbtn number={props.number} />
@@ -46,4 +46,4 @@ const Navbtns = styled.div`
   display: flex;
   justify-content: center;
 `;
-export default ListingPage;
+export default Threepl_ListingPage;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { sellerCompany } from '../../global/CompanyInterface';
 import { Location, useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
-import ListingPage from '../ListingPage';
+import ListingPage from './Threepl_ListingPage';
 import { styled } from 'styled-components';
 import { Order } from '../../global/OrderInterface';
 
@@ -37,7 +37,7 @@ function Threepl_OrderList(props: any) {
         rows={rows}
         columns={columns.length}
         onDetail={true}
-        setOrder={setOrder}
+        getItem={setOrder}
       />
       <h1></h1>
       {order != undefined && (
