@@ -51,7 +51,7 @@ const SubItem = styled.button`
   font-size: 14px;
   border: none;
   color: black;
-  background-color: transparent;
+  background-color: 'transparent';
 `;
 
 export default SubMenu;

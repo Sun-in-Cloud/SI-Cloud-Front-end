@@ -19,14 +19,14 @@ const PagingBtn = styled.button`
   align-items: center;
   font-family: Jalnan;
   color: #1e1008;
-  background: #f7e600;
+  background: transparent;
   width: 30px;
   height: 30px;
   margin: 7px;
 
   &:hover {
     background: #1e1008;
-    color: #f7e600;
+    color: #fff;
   }
 `;
 

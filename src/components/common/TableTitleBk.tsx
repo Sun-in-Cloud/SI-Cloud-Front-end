@@ -8,7 +8,7 @@ const TableTitleBk = styled.button`
   align-items: center;
   font-family: Jalnan;
   font-size: 15px;
-  color: #ffffff;
+  color: #fff;
   letter-spacing: 2px;
   background: #1e1008;
   width: fit-content;
