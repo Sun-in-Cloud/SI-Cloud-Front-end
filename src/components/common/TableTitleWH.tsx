@@ -10,6 +10,7 @@ const TableTitleWH = styled.button`
   font-size: 15px;
   color: #1e1008;
   background: #ffffff;
+  letter-spacing: 2px;
   width: fit-content;
   padding: 10px;
   margin: 5px;
