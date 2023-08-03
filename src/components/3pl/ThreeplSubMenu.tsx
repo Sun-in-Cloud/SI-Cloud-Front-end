@@ -19,7 +19,12 @@ function SubMenu(props: any) {
         setMenuOn(false);
         break;
       case '발주관리':
-        setMenuOn(false);
+        const blist = [
+          { subMenuName: '발주 등록', subMenuUrl: '/3pl/order/register' },
+          { subMenuName: '발주 내역', subMenuUrl: '/3pl/order/auto-list' },
+        ];
+        setSubMenu(blist);
+        setMenuOn(true);
         break;
       case '입출고관리':
         const clist = [

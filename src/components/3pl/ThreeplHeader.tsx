@@ -52,16 +52,14 @@ function Header(type: any) {
               상품관리
             </HeaderMenu>
           </Link>
-          <Link to="/3pl/order/auto-list" style={{ textDecoration: 'none' }}>
-            <HeaderMenu
-              type={StyleType(style)}
-              onClick={onChangeMenu}
-              value="발주관리"
-              bg={`${tab === '발주관리' ? 'active' : 'none'}`}
-            >
-              발주관리
-            </HeaderMenu>
-          </Link>
+          <HeaderMenu
+            type={StyleType(style)}
+            onClick={onChangeMenu}
+            value="발주관리"
+            bg={`${tab === '발주관리' ? 'active' : 'none'}`}
+          >
+            발주관리
+          </HeaderMenu>
           <HeaderMenu
             type={StyleType(style)}
             onClick={onChangeMenu}

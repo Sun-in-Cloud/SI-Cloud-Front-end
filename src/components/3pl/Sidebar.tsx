@@ -1,20 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import line from '../../img/miniLine.svg';
+import { sellerCompany } from '../../global/CompanyInterface';
+
+interface ScreenTypeProps {
+  readonly type: 'portrait' | 'landscape';
+  readonly bg: 'active' | 'none'; // 여기서 active를 안쓰는중..?
+}
 
 function Sidebar(props: any) {
   console.log(props.company);
+
+  const [tab, setTab] = useState<string>('curr');
+
+  useEffect(() => {}, [tab]);
+
   return (
     <SideBars>
-      {props.company.map((item: string, index: number) => {
+      {props.company.map((item: sellerCompany, index: number) => {
         return (
           <>
             <Company
               onClick={() => {
+                setTab(item.companyName);
                 props.findSeller({ item });
               }}
+              key={index}
+              value={item.companyName}
+              style={{
+                backgroundColor: tab === item.companyName ? '#ffe9a9' : 'transparent',
+                transition: tab === item.companyName ? 'all 0.5s' : 'none',
+                left: tab === item.companyName ? '0' : '0',
+              }}
             >
-              {item}
+              {item.companyName}
             </Company>
             <img src={line} style={{ zIndex: '0', marginTop: '-15px', width: '80%' }}></img>
           </>
@@ -36,21 +55,15 @@ const Company = styled.button`
   font-family: chab;
   color: #fff;
   font-size: 18px;
+  width: 85%;
   letter-spacing: 2px;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
-  background: none;
+  background-color: none;
   border: none;
+  border-radius: 30px;
+  padding: 5px;
   z-index: 1;
-
-  &:hover {
-    width: 85%;
-    left: 0;
-    transition: all 0.5s;
-    background: #ffe9a9;
-    border-radius: 30px;
-    z-index: 1;
-  }
 `;
 
 export default Sidebar;
