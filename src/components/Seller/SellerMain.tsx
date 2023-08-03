@@ -1,8 +1,9 @@
 import React from 'react';
 import SellerHeader from './SellerHeader';
 import { Route, Router, Routes } from 'react-router-dom';
-import LandscapeMain from '../LandscapeMain';
-import SellerProductList from './SellerProductList';
+import SellerProductList from './product/SellerProductList';
+import SellerProductDetail from './product/SellerProductDetail';
+import SellerProductRegister from './product/SellerProductRegister';
 
 function SellerMain(props: any) {
   const style = String(props.type);
@@ -21,7 +22,9 @@ function SellerMain(props: any) {
       <SellerHeader type={StyleType(style)} />
       <Routes>
         {/* 상품 */}
-        <Route path="/product/*" element={<SellerProductList type={StyleType(style)} />}></Route>
+        <Route path="/product" element={<SellerProductList type={StyleType(style)} />}></Route>
+        <Route path="/product/register" element={<SellerProductRegister type={StyleType(style)} />}></Route>
+        <Route path="/product/*" element={<SellerProductDetail type={StyleType(style)} />}></Route>
         {/* 발주 */}
         <Route path="/order" element={<SellerProductList type={'landscape'} />}></Route>
         <Route path="/order/list" element={<SellerProductList type={'landscape'} />}></Route>

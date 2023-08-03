@@ -31,23 +31,26 @@ function SellerHeader(type: any) {
   return (
     <Headers>
       <HeaderBar>
-        <Loginbtns>
+        {/* <Loginbtns>
           <LoginBtn variant="secondary" type={StyleType(style)}>
             로그인
           </LoginBtn>
           <LoginBtn variant="primary" type={StyleType(style)}>
             로그아웃
-          </LoginBtn>
-        </Loginbtns>
+          </LoginBtn> // 옮기기로 했음
+        </Loginbtns> */}
+        <p></p>
         <MenuTab>
-          <HeaderMenu
-            type={StyleType(style)}
-            onClick={onChangeMenu}
-            value="상품관리"
-            bg={`${tab === '상품관리' ? 'active' : 'none'}`}
-          >
-            상품관리
-          </HeaderMenu>
+          <Link to="/seller/product" style={{ textDecoration: 'none' }}>
+            <HeaderMenu
+              type={StyleType(style)}
+              onClick={onChangeMenu}
+              value="상품관리"
+              bg={`${tab === '상품관리' ? 'active' : 'none'}`}
+            >
+              상품관리
+            </HeaderMenu>
+          </Link>
           <Link to="/seller/order/list" style={{ textDecoration: 'none' }}>
             <HeaderMenu
               type={StyleType(style)}
@@ -137,7 +140,6 @@ const Loginbtns = styled.div`
 
 const HeaderImages = styled.div`
   display: grid;
-  bottom: 20;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   justify-items: center;
   z-index: 0;

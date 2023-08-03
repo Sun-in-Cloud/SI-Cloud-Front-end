@@ -6,6 +6,7 @@ import Dotum_Medium from '../fonts/Dotum_Medium.ttf';
 import Dotum_Bold from '../fonts/Dotum_Medium.ttf';
 import tt from '../fonts/tt.ttf';
 import Pilseung_Gothic from '../fonts/Pilseung_Gothic.ttf';
+import Leferi from '../fonts/Leferi.ttf';
 
 const GlobalStyle = createGlobalStyle`
     @font-face{
@@ -49,6 +50,12 @@ const GlobalStyle = createGlobalStyle`
         src: local('Pilseung_Gothic'), local('Pilseung_Gothic');
         font-style: normal;
         src: url(${Pilseung_Gothic}) format('truetype');
+    }
+    @font-face {
+        font-family: 'Leferi';
+        src: local('Leferi'), local('Leferi');
+        font-style: normal;
+        src: url(${Leferi}) format('truetype');
     }
 `;
 

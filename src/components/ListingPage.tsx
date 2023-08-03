@@ -12,15 +12,6 @@ function ListingPage(props: any) {
   console.log(props.sellerNo); //seller number
   console.log(props.onDetail); // 바코드 번호로 상세보기 봐야하나?
 
-  // function getColums(column: any) {
-  //   let new_columns = Number(column);
-  //   if (props.onDetail) {
-  //     new_columns += 1;
-  //   }
-  //   console.log(new_columns);
-  //   return new_columns;
-  // }
-
   return (
     <TableList>
       {/* <h1>{props.sellerNo}</h1> */}

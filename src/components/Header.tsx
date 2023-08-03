@@ -5,6 +5,8 @@ import line from '../img/line.svg';
 import logo from '../img/logo.svg';
 import HeaderMenu from './common/HeaderMenu';
 import SubMenu from './common/SubMenu';
+import TableColumn from './TableColumn';
+import TableTitleBk from './common/TableTitleBk';
 
 function Header(type: any) {
   const [tab, setTab] = useState<string>('curr');
@@ -87,14 +89,14 @@ function Header(type: any) {
         </MenuTab>
         <SubMenu title={tab} />
         <HeaderImages>
-          <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}` }} />
+          <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}`, zIndex: '-1' }} />
           <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}`, zIndex: '-1' }} />
           <img
             src={logo}
             style={{ width: `${StyleType(style) === 'portrait' ? '150px' : '70%'}`, marginTop: '-20px' }}
           />
           <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}`, zIndex: '-1' }} />
-          <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}` }} />
+          <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}`, zIndex: '-1' }} />
         </HeaderImages>
       </HeaderBar>
     </Headers>

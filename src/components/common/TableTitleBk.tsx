@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const TableTitleBk = styled.button`
-  border: none;
+  border: 1px solid #1e1008;
   border-radius: 30px;
   display: flex;
   justify-content: center;
@@ -13,6 +13,6 @@ const TableTitleBk = styled.button`
   background: #1e1008;
   width: fit-content;
   padding: 10px;
-  margin: 5x;
+  margin: 5px;
 `;
 export default TableTitleBk;
