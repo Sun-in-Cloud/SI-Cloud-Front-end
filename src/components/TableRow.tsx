@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { styled } from 'styled-components';
 import dashedLine from '../img/dashedLine.svg';
+import { Route, useNavigate } from 'react-router-dom';
+import LandscapeMain from './LandscapeMain';
 
 interface StyledGridProps {
   readonly columns: '2' | '3' | '4' | '5' | '6' | '7';
@@ -16,12 +18,21 @@ const gridLayout = {
 };
 
 function TableRow(props: any) {
+  const navigate = useNavigate();
+
   function getColumns(columns: number): string {
     let new_columns = columns;
     if (props.onDetail) {
       new_columns = columns + 1;
     }
     return String(new_columns);
+  } // checkbox 만드는 용
+
+  function onDetail(detail: boolean, item: any) {
+    if (detail) {
+      navigate('/seller/product/' + item.productNo);
+    }
+    return;
   }
 
   return (
@@ -31,7 +42,7 @@ function TableRow(props: any) {
           console.log(item);
           return (
             <>
-              <Row key={index} columns={props.columns}>
+              <Row key={index} columns={props.columns} onClick={() => onDetail(props.onDetail, item)}>
                 {/* {props.onDetail && <input type="checkbox" />} */}
                 {Object.values(item).map((value: any, idx: number) => {
                   return <Item key={idx}>{value}</Item>;
