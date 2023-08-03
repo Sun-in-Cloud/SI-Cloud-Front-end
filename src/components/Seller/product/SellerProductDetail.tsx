@@ -110,7 +110,7 @@ function SellerProductDetail(props: any) {
 const ProductMain = styled.div`
   margin-top: -55px;
   display: grid;
-  height: 100%;
+  height: 350px;
   grid-template-columns: 0.7fr 6.6fr 0.7fr;
   grid-template-rows: 0.7fr 10fr 0.7fr;
   grid-template-areas: '. TopButtons .' '. ListingDetailPage .' '. BotButtons .';

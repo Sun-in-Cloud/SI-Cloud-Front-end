@@ -5,6 +5,8 @@ import line from '../img/line.svg';
 import logo from '../img/logo.svg';
 import HeaderMenu from './common/HeaderMenu';
 import SubMenu from './common/SubMenu';
+import TableColumn from './TableColumn';
+import TableTitleBk from './common/TableTitleBk';
 
 function Header(type: any) {
   const [tab, setTab] = useState<string>('curr');

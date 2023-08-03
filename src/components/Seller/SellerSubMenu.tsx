@@ -82,17 +82,19 @@ const SubMenuBar = styled.div`
   height: 50px;
   z-index: 100;
   border-radius: 10px;
-  background: #ffe9a9;
+  background: #d9eaff;
   opacity: 90%;
 `;
 const SubItem = styled.button`
   margin-left: 20px;
   font-family: Dotum_Bold;
   font-size: 16px;
+  font-weight: 800;
   border: none;
   color: black;
   background-color: transparent;
   margin-top: 10px;
+  z-index: 50;
 `;
 
 export default SellerSubMenu;

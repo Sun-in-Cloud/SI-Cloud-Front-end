@@ -31,14 +31,15 @@ function SellerHeader(type: any) {
   return (
     <Headers>
       <HeaderBar>
-        <Loginbtns>
+        {/* <Loginbtns>
           <LoginBtn variant="secondary" type={StyleType(style)}>
             로그인
           </LoginBtn>
           <LoginBtn variant="primary" type={StyleType(style)}>
             로그아웃
-          </LoginBtn>
-        </Loginbtns>
+          </LoginBtn> // 옮기기로 했음
+        </Loginbtns> */}
+        <p></p>
         <MenuTab>
           <Link to="/seller/product" style={{ textDecoration: 'none' }}>
             <HeaderMenu

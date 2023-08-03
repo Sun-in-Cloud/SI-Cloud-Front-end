@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 const backgroundColor = {
-  primary: '#0073ff',
-  secondary: '#F7E600',
+  primary: '#0073FF',
+  secondary: '#DA3915',
 };
 
 const color = {
-  primary: '#FFFFFF',
-  secondary: '#1E1008',
+  primary: '#0073FF',
+  secondary: '#DA3915',
 };
 
 const width = {
@@ -30,21 +30,39 @@ interface StyledButtonProps {
   readonly type: 'portrait' | 'landscape';
 }
 
+// const LoginBtn = styled.button<StyledButtonProps>`
+//   border-radius: 15px;
+//   border: 2px solid black;
+//   background: ${(props) => backgroundColor[props.variant]};
+//   color: ${(props) => color[props.variant]};
+//   display: flex;
+//   width: ${(props) => width[props.type]};
+//   padding: ${(props) => padding[props.type]};
+//   justify-content: center;
+//   align-content: center;
+//   font-size: ${(props) => fontSize[props.type]};
+//   font-family: Jalnan;
+//   margin: 0 3% 3% 0;
+//   z-index: 1;
+// `;
+
 const LoginBtn = styled.button<StyledButtonProps>`
-  border-radius: 15px;
-  border: none;
-  background: ${(props) => backgroundColor[props.variant]};
-  color: ${(props) => color[props.variant]};
-  display: flex;
-  width: ${(props) => width[props.type]};
-  padding: ${(props) => padding[props.type]};
-  justify-content: center;
-  align-content: center;
-  font-size: ${(props) => fontSize[props.type]};
-  font-family: Jalnan;
-  margin: 0 3% 3% 0;
-  z-index: 1;
   position: relative;
+  z-index: 3;
+  border-style: solid;
+  cursor: pointer;
+  border-width: 2px;
+  border-radius: 10px;
+  text-decoration: none;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  transition: all 0.2s linear 0s;
+  font-weight: 700;
+  font-family: Jalnan;
+  color: ${(props) => color[props.variant]};
+  border-color: ${(props) => backgroundColor[props.variant]};
+  background: transparent;
+  font-size: 14px !important;
 `;
 
 export default LoginBtn;

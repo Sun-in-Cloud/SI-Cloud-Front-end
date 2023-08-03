@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 const color = {
   portrait: '#0073FF',
-  landscape: '#0073FF',
+  landscape: 'black',
 };
 
 const fontSize = {
   portrait: '18px',
-  landscape: '1.3rem',
+  landscape: '20px',
 };
 
 const width = {
@@ -21,7 +21,7 @@ const hover_width = {
 };
 
 const clickItem = {
-  active: '#ffe9a9',
+  active: '#D9EAFF',
   none: 'transparent',
 };
 
@@ -36,9 +36,10 @@ interface ScreenTypeProps {
 }
 
 const HeaderMenu = styled.button<ScreenTypeProps>`
-  font-family: chab;
+  font-family: Jalnan;
   color: ${(props) => color[props.type]};
   font-size: ${(props) => fontSize[props.type]};
+
   letter-spacing: 4px;
   border-radius: 15px 15px 0 0;
   border: none;
@@ -52,3 +53,5 @@ const HeaderMenu = styled.button<ScreenTypeProps>`
 `;
 
 export default HeaderMenu;
+
+// /-webkit-text-stroke: 1px black;
