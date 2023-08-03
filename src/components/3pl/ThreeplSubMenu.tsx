@@ -26,14 +26,16 @@ function SubMenu(props: any) {
         setSubMenu(blist);
         setMenuOn(true);
         break;
-      case '입출고관리':
+      case '입고관리':
         const clist = [
           { subMenuName: '입고 예정', subMenuUrl: '/3pl/import/pre/list' },
           { subMenuName: '입고 내역', subMenuUrl: '/3pl/import/list' },
-          { subMenuName: '출고', subMenuUrl: '/3pl/export/list' },
         ];
         setSubMenu(clist);
         setMenuOn(true);
+        break;
+      case '출고관리':
+        setMenuOn(false);
         break;
       case '매칭서비스':
         setMenuOn(false);

@@ -64,14 +64,23 @@ function Header(type: any) {
           <HeaderMenu
             type={StyleType(style)}
             onClick={onChangeMenu}
-            value="입출고관리"
-            bg={`${tab === '입출고관리' ? 'active' : 'none'}`}
+            value="입고관리"
+            bg={`${tab === '입고관리' ? 'active' : 'none'}`}
           >
-            입출고 관리
+            입고관리
           </HeaderMenu>
           <h1></h1>
           <h1></h1>
-
+          <Link to="/3pl/export/list" style={{ textDecoration: 'none' }}>
+            <HeaderMenu
+              type={StyleType(style)}
+              onClick={onChangeMenu}
+              value="출고관리"
+              bg={`${tab === '출고관리' ? 'active' : 'none'}`}
+            >
+              출고관리
+            </HeaderMenu>
+          </Link>
           <Link to="/3pl/match/list" style={{ textDecoration: 'none' }}>
             <HeaderMenu
               type={StyleType(style)}
@@ -94,12 +103,27 @@ function Header(type: any) {
         <SubMenu title={tab} />
         <HeaderImages>
           <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}` }} />
-          <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}`, zIndex: '-1' }} />
+          <img
+            src={line}
+            style={{
+              width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}`,
+              zIndex: '-1',
+            }}
+          />
           <img
             src={logo}
-            style={{ width: `${StyleType(style) === 'portrait' ? '150px' : '70%'}`, marginTop: '-20px' }}
+            style={{
+              width: `${StyleType(style) === 'portrait' ? '150px' : '70%'}`,
+              marginTop: '-20px',
+            }}
           />
-          <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}`, zIndex: '-1' }} />
+          <img
+            src={line}
+            style={{
+              width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}`,
+              zIndex: '-1',
+            }}
+          />
           <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}` }} />
         </HeaderImages>
       </HeaderBar>
@@ -121,7 +145,7 @@ const MenuTab = styled.div`
   // align-items: center;
   // justify-items: center;
   width: 100%;
-  grid-template-columns: 1.3fr 1.3fr 1.5fr 150px 30px 1.5fr 1.5fr;
+  grid-template-columns: 1fr 1fr 1fr 150px 30px 1fr 1fr 1fr;
   z-index: 2;
   text-decoration: none;
 `;
