@@ -23,10 +23,10 @@ function ListingPage(props: any) {
 
   return (
     <TableList>
-      <h1>{props.sellerNo}</h1>
+      {/* <h1>{props.sellerNo}</h1> */}
       <TableForm>
         <TableColumn title={props.titles} columns={props.columns} />
-        <TableRow rows={props.rows} columns={props.columns} onDetail={props.onDetail} />
+        <TableRow rows={props.rows} columns={props.columns} onDetail={props.onDetail} setOrder={props.setOrder} />
       </TableForm>
       <Navbtns>
         <Navbtn number={props.number} />
@@ -36,7 +36,7 @@ function ListingPage(props: any) {
 }
 
 const TableList = styled.div`
-  grid-area: ListingPage;
+  grid-area: ListingPage, ListingPage;
 `;
 const TableForm = styled.div`
   display: grid;

@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { styled } from 'styled-components';
 import dashedLine from '../img/dashedLine.svg';
+import LoginBtn from './common/Loginbtn';
+import { Location, useLocation } from 'react-router-dom';
+import { Order } from '../global/OrderInterface';
 
 interface StyledGridProps {
   readonly columns: '2' | '3' | '4' | '5' | '6' | '7';
@@ -24,6 +27,8 @@ function TableRow(props: any) {
     return String(new_columns);
   }
 
+  const location: Location = useLocation();
+
   return (
     <>
       <Tablerows>
@@ -34,9 +39,23 @@ function TableRow(props: any) {
               <Row key={index} columns={props.columns}>
                 {/* {props.onDetail && <input type="checkbox" />} */}
                 {Object.values(item).map((value: any, idx: number) => {
-                  return <Item key={idx}>{value}</Item>;
+                  return (
+                    <Item
+                      key={idx}
+                      onClick={() => {
+                        props.setOrder(item);
+                      }}
+                    >
+                      {value}
+                    </Item>
+                  );
                 })}
               </Row>
+              {props.onDetail && location.pathname === '/3pl/import/pre/list' && (
+                <LoginBtn variant="primary" type="landscape">
+                  입고
+                </LoginBtn>
+              )}
               <img src={dashedLine} />
             </>
           );
