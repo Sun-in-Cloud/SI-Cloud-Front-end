@@ -40,16 +40,11 @@ const LoginBtn = styled.button<StyledButtonProps>`
   padding: ${(props) => padding[props.type]};
   justify-content: center;
   align-content: center;
-  cursor: pointer;
-  transition: 0.1s background-color ease-in-out;
   font-size: ${(props) => fontSize[props.type]};
   font-family: Jalnan;
   margin: 0 3% 3% 0;
-
-  // &:hover {
-  //   background-color: ${(props) => backgroundColor[props.variant]};
-  //   filter: brightness(0.95);
-  // }
+  z-index: 1;
+  position: relative;
 `;
 
 export default LoginBtn;
