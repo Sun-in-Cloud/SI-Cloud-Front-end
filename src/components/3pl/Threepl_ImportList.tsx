@@ -21,6 +21,10 @@ function Threepl_ImportList(props: any) {
 
   const [finImport, setFinImport] = useState<Import>();
 
+  useEffect(() => {
+    setFinImport(undefined);
+  }, [props.seller]);
+
   useEffect(() => {}, [finImport]);
 
   return (

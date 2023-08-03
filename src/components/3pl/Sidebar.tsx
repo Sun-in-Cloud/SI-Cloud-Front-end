@@ -5,7 +5,7 @@ import { sellerCompany } from '../../global/CompanyInterface';
 
 interface ScreenTypeProps {
   readonly type: 'portrait' | 'landscape';
-  readonly bg: 'active' | 'none'; // 여기서 active를 안쓰는중..?
+  readonly bg: 'active' | 'none';
 }
 
 function Sidebar(props: any) {
@@ -28,7 +28,7 @@ function Sidebar(props: any) {
               key={index}
               value={item.companyName}
               style={{
-                backgroundColor: tab === item.companyName ? '#CDF0EA' : 'transparent',
+                backgroundColor: tab === item.companyName ? '#B0DAFF' : 'transparent',
                 transition: tab === item.companyName ? 'all 0.5s' : 'none',
                 left: tab === item.companyName ? '0' : '0',
               }}

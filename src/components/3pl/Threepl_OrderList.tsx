@@ -25,6 +25,10 @@ function Threepl_OrderList(props: any) {
   const [order, setOrder] = useState<Order>();
 
   useEffect(() => {
+    setOrder(undefined);
+  }, [props.seller]);
+
+  useEffect(() => {
     console.log('order', order?.orderDate);
   }, [order]);
 

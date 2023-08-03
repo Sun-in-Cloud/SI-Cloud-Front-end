@@ -15,12 +15,16 @@ function Threepl_ImportPreList(props: any) {
 
   const columns2: string[] = ['바코드 번호', '상품명', '예상 입고'];
   const rows2 = [
-    { product_no: 12312542, productName: '청바지', requestAmount: 10 },
-    { product_no: 12156104, productName: '자켓', requestAmount: 5 },
-    { product_no: 125156306, productName: '반바지', requestAmount: 30 },
+    { productNo: 12312542, productName: '청바지', requestAmount: 10 },
+    { productNo: 12156104, productName: '자켓', requestAmount: 5 },
+    { productNo: 125156306, productName: '반바지', requestAmount: 30 },
   ];
 
   const [preImport, setPreImport] = useState<Import>();
+
+  useEffect(() => {
+    setPreImport(undefined);
+  }, [props.seller]);
 
   useEffect(() => {}, [preImport]);
 
@@ -36,7 +40,7 @@ function Threepl_ImportPreList(props: any) {
         getItem={setPreImport}
       />
       <h1></h1>
-      {preImport != undefined && (
+      {preImport !== undefined && (
         <DetailTable>
           <DetailTitle>
             <p>입고예정번호: {preImport?.importNo}</p>
