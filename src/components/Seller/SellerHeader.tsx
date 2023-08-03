@@ -40,14 +40,16 @@ function SellerHeader(type: any) {
           </LoginBtn>
         </Loginbtns>
         <MenuTab>
-          <HeaderMenu
-            type={StyleType(style)}
-            onClick={onChangeMenu}
-            value="상품관리"
-            bg={`${tab === '상품관리' ? 'active' : 'none'}`}
-          >
-            상품관리
-          </HeaderMenu>
+          <Link to="/seller/product" style={{ textDecoration: 'none' }}>
+            <HeaderMenu
+              type={StyleType(style)}
+              onClick={onChangeMenu}
+              value="상품관리"
+              bg={`${tab === '상품관리' ? 'active' : 'none'}`}
+            >
+              상품관리
+            </HeaderMenu>
+          </Link>
           <Link to="/seller/order/list" style={{ textDecoration: 'none' }}>
             <HeaderMenu
               type={StyleType(style)}
@@ -137,7 +139,6 @@ const Loginbtns = styled.div`
 
 const HeaderImages = styled.div`
   display: grid;
-  bottom: 20;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   justify-items: center;
   z-index: 0;
