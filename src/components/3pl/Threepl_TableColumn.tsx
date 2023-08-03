@@ -9,7 +9,7 @@ interface StyledGridProps {
 
 const gridLayout = {
   2: '1fr 1fr',
-  3: '1fr 1fr 1fr',
+  3: '1.2fr 1fr 1fr',
   4: '1fr 1fr 1fr 1fr',
   5: '1fr 1fr 1fr 1fr 1fr',
   6: '1fr 1fr 1fr 1fr 1fr 1fr',
