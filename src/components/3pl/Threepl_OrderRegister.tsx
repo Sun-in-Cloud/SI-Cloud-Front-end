@@ -1,7 +1,7 @@
 import React from 'react';
-import ListingPage from '../ListingPage';
 import LoginBtn from '../common/Loginbtn';
 import { styled } from 'styled-components';
+import Threepl_ListingPage from './Threepl_ListingPage';
 
 function Threepl_OrderRegister(props: any) {
   const columns: string[] = ['바코드 번호', '상품명', '충분재고', '안전재고', '현재재고', '발주량'];
@@ -19,7 +19,7 @@ function Threepl_OrderRegister(props: any) {
           등록
         </LoginBtn>
       </Btn>
-      <ListingPage
+      <Threepl_ListingPage
         sellerNo={props.seller}
         titles={columns}
         number={[0, 1, 2, 3]}
@@ -34,7 +34,6 @@ function Threepl_OrderRegister(props: any) {
 const MainPage = styled.div`
   display: grid;
   grid-template-rows: 0.1fr 0.9fr;
-  //   grid-template-areas: 'LoginBtn ListingPage';
 `;
 
 const Btn = styled.div`

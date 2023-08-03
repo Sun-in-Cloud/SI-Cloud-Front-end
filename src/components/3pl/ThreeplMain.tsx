@@ -10,6 +10,8 @@ import Threepl_OrderList from './Threepl_OrderList';
 import Threepl_ImportPreList from './Threepl_ImportPreList';
 import Threepl_ImportRegister from './Threepl_ImportRegister';
 import Threepl_ImportList from './Threepl_ImportList';
+import Threepl_Export from './Threepl_Export';
+import Threepl_ExportInvoice from './Threepl_ExportInvoice';
 
 function ThreeplMain(props: any) {
   function StyleType(style: any) {
@@ -67,7 +69,17 @@ function ThreeplMain(props: any) {
         </RegisterPage>
       )}
 
-      {location.pathname !== '/3pl/import/pre/register' && (
+      {location.pathname === '/3pl/export/invoice' && (
+        <ExportPage>
+          <h1></h1>
+          <Routes>
+            <Route path="/export/invoice" element={<Threepl_ExportInvoice seller={seller} />}></Route>{' '}
+          </Routes>
+          <h1></h1>
+        </ExportPage>
+      )}
+
+      {location.pathname !== '/3pl/import/pre/register' && location.pathname !== '/3pl/export/invoice' && (
         <MainPage>
           <h1></h1>
           {submenu(location)}
@@ -77,6 +89,7 @@ function ThreeplMain(props: any) {
             <Route path="/order/auto-list" element={<Threepl_OrderList seller={seller} />}></Route>{' '}
             <Route path="/import/list" element={<Threepl_ImportList seller={seller} />}></Route>{' '}
             <Route path="/import/pre/list" element={<Threepl_ImportPreList seller={seller} />}></Route>{' '}
+            <Route path="/export/list" element={<Threepl_Export seller={seller} />}></Route>{' '}
           </Routes>
           <h1></h1>
         </MainPage>
@@ -97,6 +110,13 @@ const RegisterPage = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 5fr 2fr 0.5fr;
   grid-template-areas: '. Routes . .';
+`;
+
+const ExportPage = styled.div`
+  margin-top: -40px;
+  display: grid;
+  grid-template-columns: 0.5fr 5fr 0.5fr;
+  grid-template-areas: '. Routes .';
 `;
 
 export default ThreeplMain;
