@@ -33,14 +33,15 @@ function Header(type: any) {
   return (
     <Headers>
       <HeaderBar>
-        <Loginbtns>
+        {/* <Loginbtns>
           <LoginBtn variant="secondary" type={StyleType(style)}>
             로그인
           </LoginBtn>
           <LoginBtn variant="primary" type={StyleType(style)}>
             로그아웃
           </LoginBtn>
-        </Loginbtns>
+        </Loginbtns> */}
+        <p></p>
         <MenuTab>
           <Link to="/3pl/product/list" style={{ textDecoration: 'none' }}>
             <HeaderMenu
