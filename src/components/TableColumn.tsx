@@ -17,7 +17,6 @@ const gridLayout = {
 };
 
 function TableColumn(props: any) {
-  console.log(props.columns);
   return (
     <TableColums colums={props.columns}>
       {props.title.map((item: string, index: number) => {
