@@ -49,7 +49,7 @@ function Threepl_OrderList(props: any) {
           <ListingPage
             sellerNo={props.seller}
             titles={columns2}
-            number={[0, 1, 2, 3, 4]}
+            number={null}
             rows={rows2}
             columns={columns2.length}
             onDetail={false}
@@ -68,8 +68,8 @@ const MainPage = styled.div`
 
 const DetailTable = styled.div`
   display: grid;
-  grid-template-rows: 0.1fr 0.9fr;
-  margin-top: -50px;
+  grid-template-rows: 0.1fr 1fr;
+  margin-top: -10px;
 `;
 
 const DetailTitle = styled.div`

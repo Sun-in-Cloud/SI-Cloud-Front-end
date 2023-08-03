@@ -26,11 +26,13 @@ function Threepl_ListingPage(props: any) {
       {/* <h1>{props.sellerNo}</h1> */}
       <TableForm>
         <TableColumn title={props.titles} columns={props.columns} />
-        <TableRow rows={props.rows} columns={props.columns} onDetail={props.onDetail} getItem={props.setOrder} />
+        <TableRow rows={props.rows} columns={props.columns} onDetail={props.onDetail} getItem={props.getItem} />
       </TableForm>
-      <Navbtns>
-        <Navbtn number={props.number} />
-      </Navbtns>
+      {props.number != null && (
+        <Navbtns>
+          <Navbtn number={props.number} />
+        </Navbtns>
+      )}
     </TableList>
   );
 }

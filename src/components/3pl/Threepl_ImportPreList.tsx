@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import ListingPage from '../ListingPage';
 import { styled } from 'styled-components';
 import { Order } from '../../global/OrderInterface';
+import Threepl_ListingPage from './Threepl_ListingPage';
+import { Import } from '../../global/ImportInterface';
 
 function Threepl_ImportPreList(props: any) {
-  const columns: string[] = ['입고 예정 번호', '작성 일자'];
+  const columns: string[] = ['입고예정번호', '작성 일자'];
   const rows = [
-    { orderNo: 12312542, orderDate: '2023-02-03' },
-    { orderNo: 12156104, orderDate: '2023-02-15' },
-    { orderNo: 125156306, orderDate: '2023-02-18' },
+    { importNo: 12312542, requestDate: '2023-02-03', importDate: '2023-02-05' },
+    { importNo: 12156104, requestDate: '2023-02-15', importDate: '2023-02-21' },
+    { importNo: 125156306, requestDate: '2023-02-18', importDate: null },
+    { importNo: 7852225452, requestDate: '2023-07-18', importDate: null },
   ];
 
-  const [preImport, setPreImport] = useState<Order>();
+  const columns2: string[] = ['바코드 번호', '상품명', '예상 입고량'];
+  const rows2 = [
+    { product_no: 12312542, productName: '청바지', requestAmount: 10 },
+    { product_no: 12156104, productName: '자켓', requestAmount: 5 },
+    { product_no: 125156306, productName: '반바지', requestAmount: 30 },
+  ];
 
-  useEffect(() => {
-    console.log('order', preImport?.orderDate);
-  }, [preImport]);
+  const [preImport, setPreImport] = useState<Import>();
+
+  useEffect(() => {}, [preImport]);
 
   return (
     <MainPage>
-      <ListingPage
+      <Threepl_ListingPage
         sellerNo={props.seller}
         titles={columns}
         number={[0, 1]}
@@ -29,34 +36,36 @@ function Threepl_ImportPreList(props: any) {
         getItem={setPreImport}
       />
       <h1></h1>
-      <DetailTable>
-        <DetailTitle>
-          <p>발주번호: {preImport?.orderNo}</p>
-          <p>{preImport?.orderDate}</p>
-        </DetailTitle>
-        <ListingPage
-          sellerNo={props.seller}
-          titles={columns}
-          number={[0, 1]}
-          rows={rows}
-          columns={columns.length}
-          onDetail={true}
-        />
-      </DetailTable>
+      {preImport != undefined && (
+        <DetailTable>
+          <DetailTitle>
+            <p>입고예정번호: {preImport?.importNo}</p>
+            <p>{preImport?.requestDate}</p>
+          </DetailTitle>
+          <Threepl_ListingPage
+            sellerNo={props.seller}
+            titles={columns2}
+            number={null}
+            rows={rows2}
+            columns={columns2.length}
+            onDetail={false}
+          />
+        </DetailTable>
+      )}
     </MainPage>
   );
 }
 
 const MainPage = styled.div`
   display: grid;
-  grid-template-columns: 1fr 0.3fr 1fr;
+  grid-template-columns: 1fr 0.1fr 1fr;
   grid-template-areas: 'ListingPage . ListingPage';
 `;
 
 const DetailTable = styled.div`
   display: grid;
   grid-template-rows: 0.1fr 0.9fr;
-  margin-top: -50px;
+  margin-top: -10px;
 `;
 
 const DetailTitle = styled.div`

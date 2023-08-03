@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { styled } from 'styled-components';
 import dashedLine from '../../img/dashedLine.svg';
 import LoginBtn from '../common/Loginbtn';
-import { Location, useLocation } from 'react-router-dom';
+import { Location, useLocation, useNavigate } from 'react-router-dom';
 import { Order } from '../../global/OrderInterface';
 
 interface StyledGridProps {
@@ -29,6 +29,8 @@ function Threepl_TableRow(props: any) {
 
   const location: Location = useLocation();
 
+  const navigate = useNavigate();
+
   return (
     <>
       <Tablerows>
@@ -43,18 +45,31 @@ function Threepl_TableRow(props: any) {
                     <Item
                       key={idx}
                       onClick={() => {
-                        props.getItem(item);
+                        props.getItem !== undefined ? props.getItem(item) : '';
                       }}
                     >
-                      {value}
+                      {item?.importDate === null && value === item?.importDate ? (
+                        <LoginBtn
+                          variant="primary"
+                          type="landscape"
+                          onClick={() => {
+                            console.log('입고');
+                            navigate('/3pl/import/pre/register', { state: item });
+                          }}
+                        >
+                          입고
+                        </LoginBtn>
+                      ) : item?.importDate !== null && value === item?.importDate ? (
+                        ''
+                      ) : (
+                        value
+                      )}
                     </Item>
                   );
                 })}
-                {props.onDetail && location.pathname === '/3pl/import/pre/list' && (
-                  <LoginBtn variant="primary" type="landscape">
-                    입고
-                  </LoginBtn>
-                )}
+                {/* {props.onDetail && location.pathname === '/3pl/import/pre/list' && item.importDate === null && (
+                  
+                )} */}
               </Row>
 
               <img src={dashedLine} />
@@ -78,6 +93,8 @@ const Row = styled.div<StyledGridProps>`
   grid-template-columns: ${(props) => gridLayout[props.columns]};
   grid-auto-rows: 1fr;
   margin: 10px 0 5px 0;
+  align-items: center;
+  justify-items: center;
 `;
 
 const Item = styled.div`

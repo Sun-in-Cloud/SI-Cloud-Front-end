@@ -8,6 +8,7 @@ import { sellerCompany } from '../../global/CompanyInterface';
 import Threepl_OrderRegister from './Threepl_OrderRegister';
 import Threepl_OrderList from './Threepl_OrderList';
 import Threepl_ImportPreList from './Threepl_ImportPreList';
+import Threepl_ImportRegister from './Threepl_ImportRegister';
 
 function ThreeplMain(props: any) {
   function StyleType(style: any) {
@@ -43,7 +44,7 @@ function ThreeplMain(props: any) {
       return <Sidebar company={com} findSeller={findSeller} />;
     } else if (location.pathname.includes('/3pl/order')) {
       return <Sidebar company={com} findSeller={findSeller} />;
-    } else if (location.pathname.includes('/3pl/import')) {
+    } else if (location.pathname.includes('/3pl/import/pre/list')) {
       return <Sidebar company={com} findSeller={findSeller} />;
     } else if (location.pathname.includes('/3pl/export')) {
       return <Sidebar company={com} findSeller={findSeller} />;
@@ -55,17 +56,29 @@ function ThreeplMain(props: any) {
   return (
     <>
       <Header type={StyleType(props.type)} />
-      <MainPage>
-        <h1></h1>
-        {submenu(location)}
-        <Routes>
-          <Route path="/product/list" element={<Threepl_ProductList seller={seller} />}></Route>{' '}
-          <Route path="/order/register" element={<Threepl_OrderRegister seller={seller} />}></Route>{' '}
-          <Route path="/order/auto-list" element={<Threepl_OrderList seller={seller} />}></Route>{' '}
-          <Route path="/import/pre/list" element={<Threepl_ImportPreList seller={seller} />}></Route>{' '}
-        </Routes>
-        <h1></h1>
-      </MainPage>
+      {location.pathname === '/3pl/import/pre/register' && (
+        <RegisterPage>
+          <h1></h1>
+          <Routes>
+            <Route path="/import/pre/register" element={<Threepl_ImportRegister seller={seller} />}></Route>{' '}
+          </Routes>
+          <h1></h1>
+        </RegisterPage>
+      )}
+
+      {location.pathname !== '/3pl/import/pre/register' && (
+        <MainPage>
+          <h1></h1>
+          {submenu(location)}
+          <Routes>
+            <Route path="/product/list" element={<Threepl_ProductList seller={seller} />}></Route>{' '}
+            <Route path="/order/register" element={<Threepl_OrderRegister seller={seller} />}></Route>{' '}
+            <Route path="/order/auto-list" element={<Threepl_OrderList seller={seller} />}></Route>{' '}
+            <Route path="/import/pre/list" element={<Threepl_ImportPreList seller={seller} />}></Route>{' '}
+          </Routes>
+          <h1></h1>
+        </MainPage>
+      )}
     </>
   );
 }
@@ -75,6 +88,13 @@ const MainPage = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 1.6fr 5fr 0.5fr;
   grid-template-areas: '. . Routes .';
+`;
+
+const RegisterPage = styled.div`
+  margin-top: -40px;
+  display: grid;
+  grid-template-columns: 0.5fr 5fr 2fr 0.5fr;
+  grid-template-areas: '. Routes . .';
 `;
 
 export default ThreeplMain;
