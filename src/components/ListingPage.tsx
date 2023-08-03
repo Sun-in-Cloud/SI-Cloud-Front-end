@@ -5,21 +5,21 @@ import TableColumn from './TableColumn';
 import TableRow from './TableRow';
 
 function ListingPage(props: any) {
-  console.log(props.titles); // columns name
-  console.log(props.number); // page number
-  console.log(props.rows); // row data
-  console.log(props.columns); //colums number
-  console.log(props.sellerNo); //seller number
-  console.log(props.onDetail); // 바코드 번호로 상세보기 봐야하나?
+  // console.log(props.titles); // columns name
+  console.log('total + ' + props.number); // page number
+  // console.log(props.rows); // row data
+  // console.log(props.columns); //colums number
+  // console.log(props.sellerNo); //seller number
+  // console.log(props.onDetail); // 바코드 번호로 상세보기 봐야하나?
 
   return (
     <TableList>
       <TableForm>
         <TableColumn title={props.titles} columns={props.columns} />
-        <TableRow rows={props.rows} columns={props.columns} onDetail={props.onDetail} />
+        <TableRow title={props.titles} rows={props.rows} columns={props.columns} onDetail={props.onDetail} />
       </TableForm>
       <Navbtns>
-        <Navbtn number={props.number} />
+        <Navbtn number={props.number} navPage={props.navPage} />
       </Navbtns>
     </TableList>
   );
