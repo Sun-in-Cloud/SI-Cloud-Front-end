@@ -48,7 +48,9 @@ function Threepl_TableRow(props: any) {
                         props.getItem !== undefined ? props.getItem(item) : '';
                       }}
                     >
-                      {item?.importDate === null && value === item?.importDate ? (
+                      {location.pathname === '/3pl/import/pre/list' &&
+                      item?.importDate === null &&
+                      value === item?.importDate ? (
                         <LoginBtn
                           variant="primary"
                           type="landscape"
@@ -59,7 +61,9 @@ function Threepl_TableRow(props: any) {
                         >
                           입고
                         </LoginBtn>
-                      ) : item?.importDate !== null && value === item?.importDate ? (
+                      ) : location.pathname === '/3pl/import/pre/list' &&
+                        item?.importDate !== null &&
+                        value === item?.importDate ? (
                         ''
                       ) : (
                         value

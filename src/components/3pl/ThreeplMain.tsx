@@ -9,6 +9,7 @@ import Threepl_OrderRegister from './Threepl_OrderRegister';
 import Threepl_OrderList from './Threepl_OrderList';
 import Threepl_ImportPreList from './Threepl_ImportPreList';
 import Threepl_ImportRegister from './Threepl_ImportRegister';
+import Threepl_ImportList from './Threepl_ImportList';
 
 function ThreeplMain(props: any) {
   function StyleType(style: any) {
@@ -44,7 +45,7 @@ function ThreeplMain(props: any) {
       return <Sidebar company={com} findSeller={findSeller} />;
     } else if (location.pathname.includes('/3pl/order')) {
       return <Sidebar company={com} findSeller={findSeller} />;
-    } else if (location.pathname.includes('/3pl/import/pre/list')) {
+    } else if (location.pathname.includes('/3pl/import')) {
       return <Sidebar company={com} findSeller={findSeller} />;
     } else if (location.pathname.includes('/3pl/export')) {
       return <Sidebar company={com} findSeller={findSeller} />;
@@ -74,6 +75,7 @@ function ThreeplMain(props: any) {
             <Route path="/product/list" element={<Threepl_ProductList seller={seller} />}></Route>{' '}
             <Route path="/order/register" element={<Threepl_OrderRegister seller={seller} />}></Route>{' '}
             <Route path="/order/auto-list" element={<Threepl_OrderList seller={seller} />}></Route>{' '}
+            <Route path="/import/list" element={<Threepl_ImportList seller={seller} />}></Route>{' '}
             <Route path="/import/pre/list" element={<Threepl_ImportPreList seller={seller} />}></Route>{' '}
           </Routes>
           <h1></h1>

@@ -28,7 +28,7 @@ function Sidebar(props: any) {
               key={index}
               value={item.companyName}
               style={{
-                backgroundColor: tab === item.companyName ? '#ffe9a9' : 'transparent',
+                backgroundColor: tab === item.companyName ? '#CDF0EA' : 'transparent',
                 transition: tab === item.companyName ? 'all 0.5s' : 'none',
                 left: tab === item.companyName ? '0' : '0',
               }}
