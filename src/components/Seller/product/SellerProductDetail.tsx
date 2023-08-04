@@ -9,8 +9,8 @@ import SellerProductEdit from './SellerProductEdit';
 import axios from 'axios';
 
 interface ProductDetail {
-  [index: string]: string;
-  productNo: string;
+  [index: string]: string | undefined;
+  productNo: string | undefined;
   productName: string;
   productGroup: string;
   safetyStock: string;
@@ -27,23 +27,60 @@ function SellerProductDetail(props: any) {
   const [editProduct, setEditProduct] = useState<ProductDetail[]>([]);
   const [isModalOpen, setOpenModal] = useState<boolean>(false);
 
-  const [productDetail, setProductDetail] = useState<ProductDetail | null>();
+  const [productDetail, setProductDetail] = useState<ProductDetail>();
+  const location = useLocation();
 
   useEffect(() => {
-    const location = useLocation();
-    const productNo: string = String(location.state.productNo);
-
-    getProductDetail(productNo);
-  }, []);
+    console.log(location.state.productNo);
+    getProductDetail(location.state.productNo);
+  }, [location]);
 
   async function getProductDetail(productNo: string) {
     const listurl = '/seller/product/' + productNo;
-    console.log(listurl);
     await axios
       .get(listurl)
       .then(function (response) {
         setProductDetail(response.data);
         console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  async function putProductDetail() {
+    const listurl = '/seller/product/edit';
+    await axios
+      .put(listurl, {
+        params: {
+          product: { productDetail },
+        },
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  async function deleteProductDetail() {
+    const listurl = '/seller/product/delete';
+    await axios
+      .delete(listurl, {
+        data: {
+          productNo: deleteProduct,
+        },
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+        alert('삭제되었습니다!');
       })
       .catch(function (error) {
         console.log(error);
@@ -73,6 +110,7 @@ function SellerProductDetail(props: any) {
 
   function getEditProduct(editProduct: ProductDetail) {
     setProductDetail(editProduct);
+    putProductDetail();
     console.log(editProduct);
   }
 
@@ -83,7 +121,9 @@ function SellerProductDetail(props: any) {
   }
 
   const showDeleteProduct = () => {
-    console.log(deleteProduct);
+    // const deleteNo = Number(deleteProduct);
+    // console.log('123 : ' + deleteNo);
+    deleteProductDetail();
   };
 
   const onClickToggleModal = useCallback(() => {
