@@ -38,9 +38,11 @@ function TableRow(props: any) {
   //   return String(new_columns);
   // } // checkbox 만드는 용
 
-  function onDetail(detail: boolean, item: any) {
+  function onDetail(detail: boolean, item: Product) {
+    const productNo = item.productNo;
+    console.log('productNo : ' + productNo);
     if (detail) {
-      navigate('/seller/product/' + item.productNo, { state: { productNo: `${item.productNo}` } });
+      navigate('/seller/product/' + productNo, { state: { productNo: productNo } });
     }
     return;
   }
@@ -76,7 +78,7 @@ function TableRow(props: any) {
 const Tablerows = styled.div`
   height: 400px;
   width: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
   margin-top: 5px;
 `;
 
@@ -84,7 +86,8 @@ const Row = styled.div<StyledGridProps>`
   display: grid;
   grid-template-columns: ${(props) => gridLayout[props.columns]};
   grid-auto-rows: 1fr;
-  margin: 10px 0 5px 0;
+  lign-items: center;
+  margin: 15px 0 5px 15px;
 `;
 
 const Item = styled.div`
