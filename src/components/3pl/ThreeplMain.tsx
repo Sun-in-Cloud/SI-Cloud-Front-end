@@ -22,8 +22,32 @@ function ThreeplMain(props: any) {
     }
   }
 
+  // const [com, setCom] = useState<sellerCompany[]>([]);
+
+  // async function getList(pageNum: number, seller: number) {
+
+  //   const listurl = '/3pl/product/list';
+  //   await axios
+  //     .get(listurl, {
+  //       params: {
+  //         sellerNo: seller,
+  //         pageNum: pageNum,
+  //         countPerPage: 10,
+  //       },
+  //       headers: {
+  //         'Content-type': 'application/json',
+  //       },
+  //     })
+  //     .then(function (response) {
+  //       console.log(response.data);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }
+
   const com: sellerCompany[] = [
-    { companyName: '성은이네 옷장', sellerNo: 1 },
+    { companyName: '성은이네 옷장', sellerNo: 9 },
     { companyName: '유진 아이스크림', sellerNo: 2 },
     { companyName: '성은 케이크', sellerNo: 3 },
     { companyName: '성은이네 옷장1', sellerNo: 4 },

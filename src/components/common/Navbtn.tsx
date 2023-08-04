@@ -1,16 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
 function Navbtn(props: any) {
+  const [pages, setPages] = useState<number[]>(props.number);
+  useEffect(() => {
+    setPages(props.number);
+  }, [props.number]);
+  const navigatePage = (e: any) => {
+    props.navPage(e);
+  };
   return (
     <>
-      {props.number.map((item: number, index: number) => {
-        return <PagingBtn>{item + 1}</PagingBtn>;
+      {pages?.map((item: number, index: number) => {
+        return (
+          <PagingBtn onClick={navigatePage} value={item} key={item}>
+            {item}
+          </PagingBtn>
+        );
       })}
     </>
   );
 }
-
 const PagingBtn = styled.button`
   border: 1.5px solid #1e1008;
   border-radius: 10px;
@@ -23,11 +32,9 @@ const PagingBtn = styled.button`
   width: 30px;
   height: 30px;
   margin: 7px;
-
-  &:hover {
+  ​ &:hover {
     background: #1e1008;
     color: #fff;
   }
 `;
-
 export default Navbtn;

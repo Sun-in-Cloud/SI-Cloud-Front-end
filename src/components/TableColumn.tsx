@@ -17,20 +17,19 @@ const gridLayout = {
 };
 
 function TableColumn(props: any) {
-  console.log(props.columns);
   return (
     <TableColums colums={props.columns}>
       {props.title.map((item: string, index: number) => {
         if (index % 2 === 0) {
           return (
             <TableTitleBk key={index} disabled>
-              {item}
+              {item[0]}
             </TableTitleBk>
           );
         } else {
           return (
             <TableTitleWH key={index} disabled>
-              {item}
+              {item[0]}
             </TableTitleWH>
           );
         }
