@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 function Navbtn(props: any) {
-  const [page, setPage] = useState<number[]>(props.number);
+  const [pages, setPages] = useState<number[]>(props.number);
+
+  useEffect(() => {
+    setPages(props.number);
+  }, [props.number]);
 
   const navigatePage = (e: any) => {
     props.navPage(e);
@@ -10,7 +14,7 @@ function Navbtn(props: any) {
 
   return (
     <>
-      {page.map((item: number, index: number) => {
+      {pages?.map((item: number, index: number) => {
         return (
           <PagingBtn onClick={navigatePage} value={item} key={item}>
             {item}
