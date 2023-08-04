@@ -8,16 +8,14 @@ interface Product {
   productNo: string;
   productName: string;
   productGroup: string;
-  safetyStock: string;
-  enoughStock: string;
-  importPrice: string;
-  consumerPrice: string;
+  safetyStock: number;
+  enoughStock: number;
+  importPrice: number;
+  consumerPrice: number;
 }
 
 function ProductRegisterPage(props: any) {
   const title = props.productTitle;
-
-  const [newProduct, setNewProduct] = useState<Product[]>([]);
 
   const handleFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
     e.target.select();
