@@ -3,41 +3,105 @@ import { styled } from 'styled-components';
 import { Order } from '../../../global/OrderInterface';
 import Threepl_ListingPage from '../Threepl_ListingPage';
 import { Import } from '../../../global/ImportInterface';
+import axios from 'axios';
 
 function Threepl_ImportPreList(props: any) {
-  const columns: string[] = ['입고예정번호', '작성 일자'];
-  const rows = [
-    { importNo: 12312542, requestDate: '2023-02-03', importDate: '2023-02-05' },
-    { importNo: 12156104, requestDate: '2023-02-15', importDate: '2023-02-21' },
-    { importNo: 125156306, requestDate: '2023-02-18', importDate: null },
-    { importNo: 7852225452, requestDate: '2023-07-18', importDate: null },
+  const titleMain: string[][] = [
+    ['입고예정번호', 'importNo'],
+    ['작성 일자', 'requestDate'],
+  ];
+  const [rowsList, setRowsList] = useState<any[]>([]);
+
+  const [pageList, setPageList] = useState<number[]>([]);
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const titleDetail: string[][] = [
+    ['바코드 번호', 'productNo'],
+    ['상품명', 'productName'],
+    ['입고량', 'importAmount'],
   ];
 
-  const columns2: string[] = ['바코드 번호', '상품명', '예상 입고'];
-  const rows2 = [
-    { productNo: 12312542, productName: '청바지', requestAmount: 10 },
-    { productNo: 12156104, productName: '자켓', requestAmount: 5 },
-    { productNo: 125156306, productName: '반바지', requestAmount: 30 },
-  ];
+  const [rowsDetail, setRowsDetail] = useState<any[]>([]);
+
+  //입고 예정 내역 목록 조회
+  async function getPreImportList() {
+    const listurl = '/3pl/import/pre/list';
+    await axios
+      .get(listurl, {
+        params: {
+          sellerNo: props.seller,
+          pageNum: currentPage,
+          countPerPage: 3,
+        },
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(function (response) {
+        console.log('-', response.data);
+        //setRowsList(response.data.orders);
+        const list: number[] = [];
+        for (let i = 0; i < response.data.totalPage; i++) {
+          list[i] = i + 1;
+        }
+        setPageList(list);
+
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  //입고 예정 상세 조회
+  async function getPreImportDetail() {
+    const listurl = '/3pl/import/pre/' + preImport?.importNo;
+    await axios
+      .get(listurl, {
+        params: {},
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(function (response) {
+        console.log('-', response.data);
+        //setRowsDetail(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  function navPage(e: React.MouseEvent<HTMLButtonElement> | undefined) {
+    if (e != undefined) {
+      const pageNum = Number(e.currentTarget.value);
+      setCurrentPage(pageNum);
+    }
+  }
 
   const [preImport, setPreImport] = useState<Import>();
 
   useEffect(() => {
     setPreImport(undefined);
+    getPreImportList();
   }, [props.seller]);
 
-  useEffect(() => {}, [preImport]);
+  useEffect(() => {
+    getPreImportDetail();
+  }, [preImport]);
 
   return (
     <MainPage>
       <Threepl_ListingPage
         sellerNo={props.seller}
-        titles={columns}
-        number={[0, 1]}
-        rows={rows}
-        columns={columns.length + 1}
+        titles={titleMain}
+        number={pageList}
+        rows={rowsList}
+        columns={titleMain.length + 1}
         onDetail={true}
         getItem={setPreImport}
+        navPage={navPage}
       />
       <h1></h1>
       {preImport !== undefined && (
@@ -48,10 +112,10 @@ function Threepl_ImportPreList(props: any) {
           </DetailTitle>
           <Threepl_ListingPage
             sellerNo={props.seller}
-            titles={columns2}
+            titles={titleDetail}
             number={null}
-            rows={rows2}
-            columns={columns2.length}
+            rows={rowsDetail}
+            columns={titleDetail.length}
             onDetail={false}
           />
         </DetailTable>

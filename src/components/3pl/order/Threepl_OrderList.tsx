@@ -85,13 +85,6 @@ function Threepl_OrderList(props: any) {
     }
   }
 
-  const columns2: string[] = ['바코드 번호', '상품명', '발주량'];
-  const rows2 = [
-    { product_no: 12312542, productName: '청바지', amount: 10 },
-    { product_no: 12156104, productName: '자켓', amount: 5 },
-    { product_no: 125156306, productName: '반바지', amount: 30 },
-  ];
-
   const [order, setOrder] = useState<Order>();
 
   useEffect(() => {

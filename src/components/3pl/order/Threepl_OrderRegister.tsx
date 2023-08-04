@@ -20,8 +20,8 @@ function Threepl_OrderRegister(props: any) {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  //발주 필요 내역 조회
-  async function getAutoOrder() {
+  //입고 등록할 내역 조회
+  async function getImportList() {
     const listurl = '/3pl/order/auto-list';
     console.log('auto', props.seller);
     await axios
@@ -51,18 +51,22 @@ function Threepl_OrderRegister(props: any) {
       });
   }
 
-  //발주 등록
-  async function registerOrder() {
-    const listurl = '/3pl/order/register/' + props.seller;
+  //입고 등록
+  async function registerImport() {
+    const listurl = '/3pl/import/register' + props.seller;
     console.log('reg', props.seller);
     await axios
-      .post(listurl)
+      .post(listurl, {
+        parmas: {
+          list: rows,
+        },
+      })
       .then(function (response) {
         if (response.data === 'true') {
-          alert('발주 등록 성공');
+          alert('입고 등록 성공');
           //getAutoOrder();
         } else {
-          alert('발주 등록 실패');
+          alert('입고 등록 실패');
         }
         console.log(response);
       })
@@ -80,12 +84,12 @@ function Threepl_OrderRegister(props: any) {
 
   useEffect(() => {
     console.log('---');
-    getAutoOrder();
+    getImportList();
   }, [props.seller, currentPage]);
 
   const onClickRegister = () => {
     console.log('등록');
-    registerOrder();
+    registerImport();
   };
   return (
     <MainPage>

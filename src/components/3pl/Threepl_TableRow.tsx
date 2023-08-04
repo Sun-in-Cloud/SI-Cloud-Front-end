@@ -90,7 +90,8 @@ function Threepl_TableRow(props: any) {
 const Tablerows = styled.div`
   height: 400px;
   width: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   margin-top: 5px;
 `;
 

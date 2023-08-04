@@ -2,22 +2,97 @@ import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import Threepl_ListingPage from '../Threepl_ListingPage';
 import { Import } from '../../../global/ImportInterface';
+import axios from 'axios';
 
 function Threepl_ImportList(props: any) {
-  const columns: string[] = ['입고 번호', '입고 일자'];
-  const rows = [
-    { importNo: 12312542, importDate: '2023-02-05' },
-    { importNo: 12156104, importDate: '2023-05-11' },
-    { importNo: 125156306, importDate: '2023-06-21' },
-    { importNo: 7852225452, importDate: '2023-07-26' },
+  // const columns: string[] = ['입고 번호', '입고 일자'];
+  // const rows = [
+  //   { importNo: 12312542, importDate: '2023-02-05' },
+  //   { importNo: 12156104, importDate: '2023-05-11' },
+  //   { importNo: 125156306, importDate: '2023-06-21' },
+  //   { importNo: 7852225452, importDate: '2023-07-26' },
+  // ];
+
+  // const columns2: string[] = ['바코드 번호', '상품명', '입고량'];
+  // const rows2 = [
+  //   { product_no: 12312542, productName: '청바지', importAmount: 10 },
+  //   { product_no: 12156104, productName: '자켓', importAmount: 5 },
+  //   { product_no: 125156306, productName: '반바지', importAmount: 30 },
+  // ];
+
+  const titleMain: string[][] = [
+    ['입고 번호', 'importNo'],
+    ['입고 일자', 'importDate'],
+  ];
+  const [rowsList, setRowsList] = useState<any[]>([]);
+
+  const [pageList, setPageList] = useState<number[]>([]);
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const titleDetail: string[][] = [
+    ['바코드 번호', 'productNo'],
+    ['상품명', 'productName'],
+    ['입고량', 'importAmount'],
   ];
 
-  const columns2: string[] = ['바코드 번호', '상품명', '입고량'];
-  const rows2 = [
-    { product_no: 12312542, productName: '청바지', importAmount: 10 },
-    { product_no: 12156104, productName: '자켓', importAmount: 5 },
-    { product_no: 125156306, productName: '반바지', importAmount: 30 },
-  ];
+  const [rowsDetail, setRowsDetail] = useState<any[]>([]);
+
+  //입고 내역 목록 조회
+  async function getPreImportList() {
+    const listurl = '/3pl/import/list';
+    await axios
+      .get(listurl, {
+        params: {
+          sellerNo: props.seller,
+          pageNum: currentPage,
+          countPerPage: 3,
+        },
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(function (response) {
+        console.log('-', response.data);
+        //setRowsList(response.data);
+        const list: number[] = [];
+        for (let i = 0; i < response.data.totalPage; i++) {
+          list[i] = i + 1;
+        }
+        setPageList(list);
+
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  //입고 상세 조회
+  async function getPreImportDetail() {
+    const listurl = '/3pl/import/pre/' + finImport?.importNo;
+    await axios
+      .get(listurl, {
+        params: {},
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(function (response) {
+        console.log('-', response.data);
+        //setRowsDetail(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  function navPage(e: React.MouseEvent<HTMLButtonElement> | undefined) {
+    if (e != undefined) {
+      const pageNum = Number(e.currentTarget.value);
+      setCurrentPage(pageNum);
+    }
+  }
 
   const [finImport, setFinImport] = useState<Import>();
 
@@ -31,10 +106,10 @@ function Threepl_ImportList(props: any) {
     <MainPage>
       <Threepl_ListingPage
         sellerNo={props.seller}
-        titles={columns}
-        number={[0, 1]}
-        rows={rows}
-        columns={columns.length}
+        titles={titleMain}
+        number={pageList}
+        rows={rowsList}
+        columns={titleMain.length}
         onDetail={true}
         getItem={setFinImport}
       />
@@ -47,10 +122,10 @@ function Threepl_ImportList(props: any) {
           </DetailTitle>
           <Threepl_ListingPage
             sellerNo={props.seller}
-            titles={columns2}
+            titles={titleDetail}
             number={null}
-            rows={rows2}
-            columns={columns2.length}
+            rows={rowsDetail}
+            columns={titleDetail.length}
             onDetail={false}
           />
         </DetailTable>
