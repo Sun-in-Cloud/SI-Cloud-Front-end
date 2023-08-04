@@ -65,7 +65,6 @@ function SellerProductList(props: any) {
         console.log(response.data);
         setProduct(response.data.products);
         let list = [];
-
         for (let i = 1; i <= response.data.totalPage; i++) {
           list.push(i);
         }
@@ -78,7 +77,6 @@ function SellerProductList(props: any) {
 
   function navPage(e: React.MouseEvent<HTMLButtonElement> | undefined) {
     if (e != undefined) {
-      console.log(e.currentTarget.value);
       const pageNum = Number(e.currentTarget.value);
       setCurrentPage(pageNum);
     }
