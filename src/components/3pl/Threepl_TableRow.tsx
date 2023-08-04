@@ -35,49 +35,57 @@ function Threepl_TableRow(props: any) {
     <>
       <Tablerows>
         {props.rows.map((item: any, index: number) => {
-          console.log(item);
+          //console.log('=', props.title);
           return (
             <>
               <Row key={index} columns={props.columns}>
-                {Object.values(item).map((value: any, idx: number) => {
+                {props.title.map((it: string, idx: number) => {
+                  //console.log(it);
                   return (
-                    <Item
-                      key={idx}
-                      onClick={() => {
-                        props.getItem !== undefined ? props.getItem(item) : '';
-                        location.pathname === '/3pl/export/list'
-                          ? navigate('/3pl/export/invoice', { state: item })
-                          : '';
-                      }}
-                    >
-                      {location.pathname === '/3pl/import/pre/list' &&
-                      item?.importDate === null &&
-                      value === item?.importDate ? (
-                        <LoginBtn
-                          variant="primary"
-                          type="landscape"
-                          onClick={() => {
-                            console.log('입고');
-                            navigate('/3pl/import/pre/register', { state: item });
-                          }}
-                        >
-                          입고
-                        </LoginBtn>
-                      ) : location.pathname === '/3pl/import/pre/list' &&
-                        item?.importDate !== null &&
-                        value === item?.importDate ? (
-                        ''
-                      ) : (
-                        value
-                      )}
-                    </Item>
+                    <>
+                      {Object.keys(item).map((title: string, id: number) => {
+                        if (it[1] === title) {
+                          return (
+                            <Item
+                              onClick={() => {
+                                props.getItem !== undefined ? props.getItem(item) : '';
+                                location.pathname === '/3pl/export/list'
+                                  ? navigate('/3pl/export/invoice', { state: item })
+                                  : '';
+                              }}
+                            >
+                              {location.pathname === '/3pl/import/pre/list' &&
+                              item?.importDate === null &&
+                              item[title as keyof any] === item?.importDate ? (
+                                <LoginBtn
+                                  variant="primary"
+                                  type="landscape"
+                                  onClick={() => {
+                                    console.log('입고');
+                                    navigate('/3pl/import/pre/register', { state: item });
+                                  }}
+                                >
+                                  입고
+                                </LoginBtn>
+                              ) : location.pathname === '/3pl/import/pre/list' &&
+                                item?.importDate !== null &&
+                                item[title as keyof any] === item?.importDate ? (
+                                ''
+                              ) : (
+                                item[title as keyof any]
+                              )}
+                            </Item>
+                          );
+                        }
+                      })}
+                    </>
                   );
                 })}
                 {props.onDetail && location.pathname === '/3pl/export/invoice' && item?.invoiceNo === null && (
+                  // <ChkBox type="checkbox" onClick={props.getItem({ productNo: item.productNo, amount: item.amount })} />
                   <ChkBox type="checkbox" />
                 )}
               </Row>
-
               <img src={dashedLine} />
             </>
           );

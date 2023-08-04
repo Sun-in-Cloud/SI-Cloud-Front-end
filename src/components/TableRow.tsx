@@ -40,7 +40,11 @@ function TableRow(props: any) {
 
   function onDetail(detail: boolean, item: any) {
     if (detail) {
-      navigate('/seller/product/' + item.productNo, { state: { productNo: `${item.productNo}` } });
+      if (item.productNo !== undefined) {
+        navigate('/seller/product/' + item.productNo, { state: { productNo: `${item.productNo}` } });
+      } else if (item.ordererName !== undefined) {
+        navigate('/3pl/export/invoice', { state: { exportNo: `${item.exportNo}` } });
+      }
     }
     return;
   }
