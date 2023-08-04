@@ -59,11 +59,10 @@ function ThreeplMain(props: any) {
 
   const location: Location = useLocation();
 
-  const [seller, setSeller] = useState('');
+  const [seller, setSeller] = useState<number>();
 
   function findSeller(new_seller: any): void {
     setSeller(new_seller.item.sellerNo);
-    console.log(new_seller.item.companyName);
   }
 
   function submenu(location: Location) {
@@ -79,6 +78,10 @@ function ThreeplMain(props: any) {
   }
 
   useEffect(() => {}, [seller]);
+
+  useEffect(() => {
+    setSeller(com[0].sellerNo);
+  }, [location]);
 
   return (
     <>
@@ -110,7 +113,7 @@ function ThreeplMain(props: any) {
           <Routes>
             <Route path="/product/list" element={<Threepl_ProductList seller={seller} />}></Route>{' '}
             <Route path="/order/register" element={<Threepl_OrderRegister seller={seller} />}></Route>{' '}
-            <Route path="/order/auto-list" element={<Threepl_OrderList seller={seller} />}></Route>{' '}
+            <Route path="/order/list" element={<Threepl_OrderList seller={seller} />}></Route>{' '}
             <Route path="/import/list" element={<Threepl_ImportList seller={seller} />}></Route>{' '}
             <Route path="/import/pre/list" element={<Threepl_ImportPreList seller={seller} />}></Route>{' '}
             <Route path="/export/list" element={<Threepl_Export seller={seller} />}></Route>{' '}

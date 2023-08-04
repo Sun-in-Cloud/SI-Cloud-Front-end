@@ -8,8 +8,6 @@ interface ThreeplSubMenu {
 }
 
 function SubMenu(props: any) {
-  console.log(props.title);
-
   const [subMenu, setSubMenu] = useState<ThreeplSubMenu[] | null>([]);
   const [menuOn, setMenuOn] = useState(false);
 
@@ -21,7 +19,7 @@ function SubMenu(props: any) {
       case '발주관리':
         const blist = [
           { subMenuName: '발주 등록', subMenuUrl: '/3pl/order/register' },
-          { subMenuName: '발주 내역', subMenuUrl: '/3pl/order/auto-list' },
+          { subMenuName: '발주 내역', subMenuUrl: '/3pl/order/list' },
         ];
         setSubMenu(blist);
         setMenuOn(true);

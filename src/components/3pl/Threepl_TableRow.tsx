@@ -88,16 +88,15 @@ function Threepl_TableRow(props: any) {
 }
 
 const Tablerows = styled.div`
-  height: 500px;
+  height: 400px;
   width: 100%;
-  overflow: hidden;
+  overflow: scroll;
   margin-top: 5px;
 `;
 
 const Row = styled.div<StyledGridProps>`
   display: grid;
   grid-template-columns: ${(props) => gridLayout[props.columns]};
-  grid-auto-rows: 1fr;
   margin: 10px 0 5px 0;
   align-items: center;
   justify-items: center;

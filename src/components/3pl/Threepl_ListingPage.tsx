@@ -5,12 +5,12 @@ import TableColumn from './Threepl_TableColumn';
 import TableRow from './Threepl_TableRow';
 
 function Threepl_ListingPage(props: any) {
-  console.log(props.titles); // columns name
-  console.log(props.number); // page number
-  console.log(props.rows); // row data
-  console.log(props.columns); //colums number
-  console.log(props.sellerNo); //seller number
-  console.log(props.onDetail); // 바코드 번호로 상세보기 봐야하나?
+  // console.log(props.titles); // columns name
+  // console.log(props.number); // page number
+  // console.log(props.rows); // row data
+  // console.log(props.columns); //colums number
+  // console.log(props.sellerNo); //seller number
+  // console.log(props.onDetail); // 바코드 번호로 상세보기 봐야하나?
 
   // function getColums(column: any) {
   //   let new_columns = Number(column);
@@ -30,7 +30,7 @@ function Threepl_ListingPage(props: any) {
       </TableForm>
       {props.number != null && (
         <Navbtns>
-          <Navbtn number={props.number} />
+          <Navbtn number={props.number} navPage={props.navPage} />
         </Navbtns>
       )}
     </TableList>
@@ -48,4 +48,5 @@ const Navbtns = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 export default Threepl_ListingPage;

@@ -9,28 +9,27 @@ interface StyledGridProps {
 
 const gridLayout = {
   2: '1fr 1fr',
-  3: '1.2fr 1fr 1fr',
+  3: '1fr 1fr 1fr',
   4: '1fr 1fr 1fr 1fr',
   5: '1fr 1fr 1fr 1fr 1fr',
   6: '1fr 1fr 1fr 1fr 1fr 1fr',
   7: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
 };
 
-function Threepl_TableColumn(props: any) {
-  console.log(props.columns);
+function TableColumn(props: any) {
   return (
     <TableColums colums={props.columns}>
       {props.title.map((item: string, index: number) => {
         if (index % 2 === 0) {
           return (
             <TableTitleBk key={index} disabled>
-              {item}
+              {item[0]}
             </TableTitleBk>
           );
         } else {
           return (
             <TableTitleWH key={index} disabled>
-              {item}
+              {item[0]}
             </TableTitleWH>
           );
         }
@@ -52,4 +51,4 @@ const TableColums = styled.div<StyledGridProps>`
   background-color: #f4f0df;
 `;
 
-export default Threepl_TableColumn;
+export default TableColumn;

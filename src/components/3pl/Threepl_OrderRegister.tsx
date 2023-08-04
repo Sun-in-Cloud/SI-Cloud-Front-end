@@ -1,16 +1,91 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import LoginBtn from '../common/Loginbtn';
 import { styled } from 'styled-components';
 import Threepl_ListingPage from './Threepl_ListingPage';
+import axios from 'axios';
+import ListingPage from '../ListingPage';
 
 function Threepl_OrderRegister(props: any) {
-  const columns: string[] = ['바코드 번호', '상품명', '충분재고', '안전재고', '현재재고', '발주량'];
-  const rows = [
-    { productNo: 12312542, productName: '2023-02-03', safetyStock: 15, currentStock: 20, enoughStock: 14, amount: 10 },
+  const titles: string[][] = [
+    ['바코드 번호', 'productNo'],
+    ['상품명', 'productName'],
+    ['충분재고', 'enoughStock'],
+    ['안전재고', 'safetyStock'],
+    ['현재재고', 'currentStock'],
+    ['발주량', 'amount'],
   ];
+  const [rows, setRows] = useState<any[]>([]);
+
+  const [pageList, setPageList] = useState<number[]>([]);
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  //발주 필요 내역 조회
+  async function getAutoOrder() {
+    const listurl = '/3pl/order/auto-list';
+    console.log('auto', props.seller);
+    await axios
+      .get(listurl, {
+        params: {
+          sellerNo: props.seller,
+          pageNum: currentPage,
+          countPerPage: 3,
+        },
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(function (response) {
+        console.log('-', response.data);
+        setRows(response.data.products);
+        const list: number[] = [];
+        for (let i = 0; i < response.data.totalPage; i++) {
+          list[i] = i + 1;
+        }
+        setPageList(list);
+
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  //발주 등록
+  async function registerOrder() {
+    const listurl = '/3pl/order/register/' + props.seller;
+    console.log('reg', props.seller);
+    await axios
+      .post(listurl)
+      .then(function (response) {
+        if (response.data === 'true') {
+          alert('발주 등록 성공');
+          //getAutoOrder();
+        } else {
+          alert('발주 등록 실패');
+        }
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  function navPage(e: React.MouseEvent<HTMLButtonElement> | undefined) {
+    if (e != undefined) {
+      const pageNum = Number(e.currentTarget.value);
+      setCurrentPage(pageNum);
+    }
+  }
+
+  useEffect(() => {
+    console.log('---');
+    getAutoOrder();
+  }, [props.seller, currentPage]);
 
   const onClickRegister = () => {
     console.log('등록');
+    registerOrder();
   };
   return (
     <MainPage>
@@ -19,13 +94,14 @@ function Threepl_OrderRegister(props: any) {
           등록
         </LoginBtn>
       </Btn>
-      <Threepl_ListingPage
+      <ListingPage
         sellerNo={props.seller}
-        titles={columns}
-        number={[0, 1, 2, 3]}
+        titles={titles}
+        number={pageList}
         rows={rows}
-        columns={columns.length}
+        columns={titles.length}
         onDetail={false}
+        navPage={navPage}
       />
     </MainPage>
   );
