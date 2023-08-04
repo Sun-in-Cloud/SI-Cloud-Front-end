@@ -6,7 +6,7 @@ import TableRow from './TableRow';
 
 function ListingPage(props: any) {
   // console.log(props.titles); // columns name
-  console.log('total + ' + props.number); // page number
+  //console.log('total + ' + props.number); // page number
   // console.log(props.rows); // row data
   // console.log(props.columns); //colums number
   // console.log(props.sellerNo); //seller number
