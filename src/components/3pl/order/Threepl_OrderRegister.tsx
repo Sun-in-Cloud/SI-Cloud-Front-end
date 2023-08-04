@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import LoginBtn from '../common/Loginbtn';
+import LoginBtn from '../../common/Loginbtn';
 import { styled } from 'styled-components';
-import Threepl_ListingPage from './Threepl_ListingPage';
+import Threepl_ListingPage from '../Threepl_ListingPage';
 import axios from 'axios';
-import ListingPage from '../ListingPage';
+import ListingPage from '../../ListingPage';
 
 function Threepl_OrderRegister(props: any) {
   const titles: string[][] = [

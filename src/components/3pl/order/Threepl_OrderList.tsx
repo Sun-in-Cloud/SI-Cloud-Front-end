@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { sellerCompany } from '../../global/CompanyInterface';
+import { sellerCompany } from '../../../global/CompanyInterface';
 import { Location, useLocation } from 'react-router-dom';
-import Sidebar from './Sidebar';
+import Sidebar from '../Sidebar';
 import { styled } from 'styled-components';
-import { Order } from '../../global/OrderInterface';
+import { Order } from '../../../global/OrderInterface';
 import axios from 'axios';
-import Threepl_ListingPage from './Threepl_ListingPage';
+import Threepl_ListingPage from '../Threepl_ListingPage';
 import { title } from 'process';
 
 function Threepl_OrderList(props: any) {

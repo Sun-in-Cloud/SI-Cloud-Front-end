@@ -1,6 +1,6 @@
 import React from 'react';
-import Threepl_ListingPage from './Threepl_ListingPage';
-import LoginBtn from '../common/Loginbtn';
+import Threepl_ListingPage from '../Threepl_ListingPage';
+import LoginBtn from '../../common/Loginbtn';
 import { styled } from 'styled-components';
 
 function Threepl_Export(props: any) {

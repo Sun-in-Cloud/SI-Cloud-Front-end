@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
-import { Order } from '../../global/OrderInterface';
-import Threepl_ListingPage from './Threepl_ListingPage';
-import { Import } from '../../global/ImportInterface';
+import { Order } from '../../../global/OrderInterface';
+import Threepl_ListingPage from '../Threepl_ListingPage';
+import { Import } from '../../../global/ImportInterface';
 
 function Threepl_ImportPreList(props: any) {
   const columns: string[] = ['입고예정번호', '작성 일자'];

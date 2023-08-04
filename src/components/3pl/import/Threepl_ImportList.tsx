@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
-import Threepl_ListingPage from './Threepl_ListingPage';
-import { Import } from '../../global/ImportInterface';
+import Threepl_ListingPage from '../Threepl_ListingPage';
+import { Import } from '../../../global/ImportInterface';
 
 function Threepl_ImportList(props: any) {
   const columns: string[] = ['입고 번호', '입고 일자'];

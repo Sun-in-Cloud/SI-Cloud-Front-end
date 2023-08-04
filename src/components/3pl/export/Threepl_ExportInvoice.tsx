@@ -1,8 +1,8 @@
 import React from 'react';
-import Threepl_ListingPage from './Threepl_ListingPage';
+import Threepl_ListingPage from '../Threepl_ListingPage';
 import { useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
-import LoginBtn from '../common/Loginbtn';
+import LoginBtn from '../../common/Loginbtn';
 
 function Threepl_ExportInvoice(props: any) {
   const columns: string[] = ['바코드 번호', '상품명', '주문수량', '출고일자', '송장번호', '주문 상태'];

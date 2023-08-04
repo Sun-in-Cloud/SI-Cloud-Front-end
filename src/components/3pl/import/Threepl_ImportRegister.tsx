@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Threepl_ListingPage from './Threepl_ListingPage';
+import Threepl_ListingPage from '../Threepl_ListingPage';
 
 function Threepl_ImportRegister(props: any) {
   const { state } = useLocation();

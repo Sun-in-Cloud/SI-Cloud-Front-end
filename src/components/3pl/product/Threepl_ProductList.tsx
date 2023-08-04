@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Sidebar from './Sidebar';
-import ListingPage from '../ListingPage';
+import Sidebar from '../Sidebar';
+import ListingPage from '../../ListingPage';
 import { styled } from 'styled-components';
 import { Location, useLocation } from 'react-router-dom';
-import { sellerCompany } from '../../global/CompanyInterface';
+import { sellerCompany } from '../../../global/CompanyInterface';
 import axios from 'axios';
 
 function Threepl_ProductList(props: any) {

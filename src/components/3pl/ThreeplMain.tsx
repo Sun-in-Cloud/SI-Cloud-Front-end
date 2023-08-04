@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Header from './ThreeplHeader';
-import Threepl_ProductList from './Threepl_ProductList';
+import Threepl_ProductList from './product/Threepl_ProductList';
 import { BrowserRouter, Location, Route, Routes, useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import { styled } from 'styled-components';
 import { sellerCompany } from '../../global/CompanyInterface';
-import Threepl_OrderRegister from './Threepl_OrderRegister';
-import Threepl_OrderList from './Threepl_OrderList';
-import Threepl_ImportPreList from './Threepl_ImportPreList';
-import Threepl_ImportRegister from './Threepl_ImportRegister';
-import Threepl_ImportList from './Threepl_ImportList';
-import Threepl_Export from './Threepl_Export';
-import Threepl_ExportInvoice from './Threepl_ExportInvoice';
+import Threepl_OrderRegister from './order/Threepl_OrderRegister';
+import Threepl_OrderList from './order/Threepl_OrderList';
+import Threepl_ImportPreList from './import/Threepl_ImportPreList';
+import Threepl_ImportRegister from './import/Threepl_ImportRegister';
+import Threepl_ImportList from './import/Threepl_ImportList';
+import Threepl_Export from './export/Threepl_Export';
+import Threepl_ExportInvoice from './export/Threepl_ExportInvoice';
 
 function ThreeplMain(props: any) {
   function StyleType(style: any) {
