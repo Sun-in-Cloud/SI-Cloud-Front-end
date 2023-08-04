@@ -22,7 +22,6 @@ interface OrderList {
   orderNo: number;
   orderDate: string;
   importNo: number;
-  isImported: boolean;
 }
 
 function TableRowOrder(props: any) {
@@ -79,15 +78,17 @@ const Tablerows = styled.div`
 
 const Row = styled.div<StyledGridProps>`
   display: grid;
+  align-items: center;
   grid-template-columns: ${(props) => gridLayout[props.columns]};
   grid-auto-rows: 1fr;
-  margin: 10px 0 5px 0;
+  margin: 10px 0 5px 0px;
 `;
 
 const Item = styled.div`
   font-size: 15px;
   font-family: 'Jalnan';
   letter-spacing: 2px;
+  padding: 10px;
 `;
 
 export default TableRowOrder;
