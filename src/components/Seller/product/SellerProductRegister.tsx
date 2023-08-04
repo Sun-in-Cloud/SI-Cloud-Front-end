@@ -3,15 +3,16 @@ import { styled } from 'styled-components';
 import ProductRegisterPage from './ProductRegisterPage';
 import BarcodeReader from '../../common/BarcodeReader';
 import LoginBtn from '../../common/Loginbtn';
+import axios from 'axios';
 
 interface Product {
   productNo: string;
   productName: string;
   productGroup: string;
-  safetyStock: string;
-  enoughStock: string;
-  importPrice: string;
-  consumerPrice: string;
+  safetyStock: number;
+  enoughStock: number;
+  importPrice: number;
+  consumerPrice: number;
 }
 
 function SellerProductRegister(props: any) {
@@ -40,14 +41,36 @@ function SellerProductRegister(props: any) {
   // 새로운 product 가져오기
   function getNewProduct(e: React.ChangeEvent<HTMLInputElement> | undefined) {
     if (e != undefined) {
-      const { name, value } = e.currentTarget;
-      setNewProduct({ ...newProduct, [name]: value });
+      const name = e.currentTarget.name;
+
+      if (name === 'safetyStock' || name === 'enoughStock' || name === 'importPrice' || name === 'consumerPrice') {
+        let editValue: number = Number(e.currentTarget.value);
+        setNewProduct({ ...newProduct, [name]: editValue });
+      } else {
+        const value = e.currentTarget.value;
+        setNewProduct({ ...newProduct, [name]: value });
+      }
     }
   }
-
   // onclick 호출
   function getNewPro() {
+    postProduct();
     console.log(newProduct);
+  }
+
+  async function postProduct() {
+    const sellerNo = 8;
+    const listurl = '/seller/product/register/' + sellerNo;
+    await axios
+      .post(listurl, {
+        product: newProduct,
+      })
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (
