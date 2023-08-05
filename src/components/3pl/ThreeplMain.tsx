@@ -12,6 +12,7 @@ import Threepl_ImportRegister from './import/Threepl_ImportRegister';
 import Threepl_ImportList from './import/Threepl_ImportList';
 import Threepl_Export from './export/Threepl_Export';
 import Threepl_ExportInvoice from './export/Threepl_ExportInvoice';
+import Threepl_Match from './match/Threepl_MatchList';
 
 function ThreeplMain(props: any) {
   function StyleType(style: any) {
@@ -101,6 +102,16 @@ function ThreeplMain(props: any) {
           <h1></h1>
           <Routes>
             <Route path="/export/invoice" element={<Threepl_ExportInvoice seller={seller} />}></Route>{' '}
+          </Routes>
+          <h1></h1>
+        </ExportPage>
+      )}
+
+      {location.pathname === '/3pl/match/list' && (
+        <ExportPage>
+          <h1></h1>
+          <Routes>
+            <Route path="/match/list" element={<Threepl_Match />}></Route>{' '}
           </Routes>
           <h1></h1>
         </ExportPage>
