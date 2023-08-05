@@ -5,8 +5,10 @@ import SellerProductList from './product/SellerProductList';
 import SellerProductDetail from './product/SellerProductDetail';
 import SellerProductRegister from './product/SellerProductRegister';
 import SellerOrderList from './order/SellerOrderList';
-import SellerImportList from './import/SellerImportList';
+import SellerImportList from './import/SellerImportPre';
 import SellerExportList from './export/SellerExportList';
+import SellerImportPre from './import/SellerImportPre';
+import SellerImportFixedList from './import/SellerImportFixedList';
 
 function SellerMain(props: any) {
   const style = String(props.type);
@@ -31,9 +33,9 @@ function SellerMain(props: any) {
         {/* 발주 */}
         <Route path="/order/list" element={<SellerOrderList type={'landscape'} />}></Route>
         {/* 입고 */}
-        <Route path="/import/pre/*" element={<SellerImportList type={'landscape'} />}></Route>
-        <Route path="/import/search" element={<SellerProductList type={'landscape'} />}></Route>
-        <Route path="/import/list" element={<SellerProductList type={'landscape'} />}></Route>
+        <Route path="/import/pre/list" element={<SellerImportFixedList type={'landscape'} />}></Route>
+        <Route path="/import/pre/*" element={<SellerImportPre type={'landscape'} />}></Route>
+        <Route path="/import/list" element={<SellerImportList type={'landscape'} />}></Route>
         {/* 출고 */}
         <Route path="/export/*" element={<SellerExportList type={'landscape'} />}></Route>
         {/* 매칭 */}
