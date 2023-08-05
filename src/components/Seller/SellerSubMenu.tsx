@@ -30,8 +30,7 @@ function SellerSubMenu(props: any) {
       case '입출고관리':
         const clist = [
           { subMenuName: '입고 등록', subMenuUrl: '/seller/import/pre' },
-          { subMenuName: '입고 예정', subMenuUrl: '/seller/import/list' },
-          { subMenuName: '입고 내역', subMenuUrl: '/seller/import/list' },
+          { subMenuName: '입고 내역', subMenuUrl: '/seller/import/pre/list' },
           { subMenuName: '출고', subMenuUrl: '/seller/export/list' },
         ];
 
