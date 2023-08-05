@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import dashedLine from '../../../img/dashedLine.svg';
-import { Route, useLocation, useNavigate } from 'react-router-dom';
+import { Route, useNavigate } from 'react-router-dom';
 import LandscapeMain from '../../LandscapeMain';
 import TableTitleWH from '../../common/TableTitleWH';
+import CheckBox from '../../common/CheckBox';
+import RegisterNew from '../../common/RegisterNew';
+import InputAmount from '../../common/InputAmount';
 
 interface StyledGridProps {
   readonly columns: '2' | '3' | '4' | '5' | '6' | '7';
-  readonly bkgd: 'active' | 'none';
 }
 
 const gridLayout = {
@@ -19,44 +21,22 @@ const gridLayout = {
   7: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
 };
 
-const backgroundColor = {
-  active: '#f4f0df',
-  none: 'transparent',
-};
-
-const border = {
-  active: '2px solid black',
-  none: 'transparent',
-};
-
-interface OrderList {
-  orderNo: number;
-  orderDate: string;
+interface PreDetailList {
+  productNo: string;
   importNo: number;
+  requestAmount: number;
 }
 
-function TableRowOrder(props: any) {
+function TableRowImport(props: any) {
+  console.log(props.preImportNo);
   const [num, setNum] = useState(0);
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const pathName = location.pathname;
 
-  function onDetail(detail: boolean, item: any) {
+  function onDetail(detail: boolean, item: PreDetailList) {
     if (detail) {
-      switch (pathName) {
-        case '/seller/order/list': {
-          props.getOrderNo(item);
-          setNum(item.orderNo);
-          break;
-        }
-        case '/seller/import/pre': {
-          props.getOrderNo(item);
-          setNum(item.orderNo);
-          props.onClickToggleModal();
-          break;
-        }
-      }
+      props.getOrderNo(item);
+      setNum(item.importNo);
     }
     return;
   }
@@ -64,21 +44,29 @@ function TableRowOrder(props: any) {
   return (
     <>
       <Tablerows>
-        {props.rows.map((item: OrderList, index: number) => {
+        {props.rows.map((item: PreDetailList, index: number) => {
           return (
             <>
-              <Row
-                key={item.orderNo}
-                columns={props.columns}
-                onClick={() => onDetail(props.onDetail, item)}
-                bkgd={`${num === item.orderNo ? 'active' : 'none'}`}
-              >
+              <Row key={item.productNo} columns={props.columns} onClick={() => onDetail(props.onDetail, item)}>
                 {props.title.map((it: string, idx: number) => {
                   return (
                     <>
+                      {it[1] === 'importAmount' ? (
+                        <Box>
+                          <InputAmount
+                            type="number"
+                            name={item.productNo}
+                            onChange={(e) => {
+                              props.onImportProduct(item, e.target.value);
+                            }}
+                          />
+                        </Box>
+                      ) : (
+                        ''
+                      )}
                       {Object.keys(item).map((title: string, id: number) => {
                         if (it[1] === title) {
-                          return <Item>{item[title as keyof OrderList]}</Item>;
+                          return <Item>{item[title as keyof PreDetailList]}</Item>;
                         }
                       })}
                     </>
@@ -100,25 +88,22 @@ const Tablerows = styled.div`
   overflow-x: hidden;
   margin-top: 5px;
 `;
-
+const Box = styled.div``;
 const Row = styled.div<StyledGridProps>`
   display: grid;
-  align-items: center;
   grid-template-columns: ${(props) => gridLayout[props.columns]};
   grid-auto-rows: 1fr;
-  margin: 10px 0 5px 0px;
-  background-color: ${(props) => backgroundColor[props.bkgd]};
-  border: ${(props) => border[props.bkgd]};
+  align-items: center;
+  margin: 15px 0 5px 15px;
 `;
 
 const Item = styled.div`
   font-size: 15px;
   font-family: 'Jalnan';
   letter-spacing: 2px;
-  padding: 10px;
 `;
 
-export default TableRowOrder;
+export default TableRowImport;
 
 {
   /* {props.onDetail && <input type="checkbox" />} */
