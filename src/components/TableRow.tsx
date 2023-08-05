@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import dashedLine from '../img/dashedLine.svg';
 import { Route, useNavigate } from 'react-router-dom';
 import LandscapeMain from './LandscapeMain';
 import TableTitleWH from './common/TableTitleWH';
+import CheckBox from './common/CheckBox';
 
 interface StyledGridProps {
   readonly columns: '2' | '3' | '4' | '5' | '6' | '7';
@@ -30,17 +31,8 @@ interface Product {
 function TableRow(props: any) {
   const navigate = useNavigate();
 
-  // function getColumns(columns: number): string {
-  //   let new_columns = columns;
-  //   if (props.onDetail) {
-  //     new_columns = columns + 1;
-  //   }
-  //   return String(new_columns);
-  // } // checkbox 만드는 용
-
   function onDetail(detail: boolean, item: Product) {
     const productNo = item.productNo;
-    console.log('productNo : ' + productNo);
     if (detail) {
       navigate('/seller/product/' + productNo, { state: { productNo: productNo } });
     }
@@ -57,6 +49,19 @@ function TableRow(props: any) {
                 {props.title.map((it: string, idx: number) => {
                   return (
                     <>
+                      {it[1] === 'checkBox' ? (
+                        <Box>
+                          <CheckBox
+                            type="checkbox"
+                            name={item.productNo}
+                            onChange={(e) => {
+                              props.onCheckedItem(e.target.checked, item);
+                            }}
+                          />
+                        </Box>
+                      ) : (
+                        ''
+                      )}
                       {Object.keys(item).map((title: string, id: number) => {
                         if (it[1] === title) {
                           return <Item>{item[title as keyof Product]}</Item>;
@@ -81,12 +86,12 @@ const Tablerows = styled.div`
   overflow-x: hidden;
   margin-top: 5px;
 `;
-
+const Box = styled.div``;
 const Row = styled.div<StyledGridProps>`
   display: grid;
   grid-template-columns: ${(props) => gridLayout[props.columns]};
   grid-auto-rows: 1fr;
-  lign-items: center;
+  align-items: center;
   margin: 15px 0 5px 15px;
 `;
 
