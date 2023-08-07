@@ -47,17 +47,17 @@ function SelectTable(props: any) {
     ['10000 이상', '10000'],
     ['50000 이상', '50000'],
   ];
-  const options4: string[][] = [
-    ['전체', '0'],
-    ['1000 이상', '1000'],
-    ['10000 이상', '10000'],
-    ['50000 이상', '50000'],
+  const options4: any[][] = [
+    ['전체', 0],
+    ['1000 이상', 1000],
+    ['10000 이상', 10000],
+    ['50000 이상', 5000],
   ];
-  const options5: string[][] = [
-    ['전체', '0'],
-    ['1달', '1'],
-    ['2달', '2'],
-    ['3달', '3'],
+  const options5: any[][] = [
+    ['전체', 0],
+    ['1달', 1],
+    ['2달', 2],
+    ['3달', 3],
   ];
 
   interface filter {
@@ -85,7 +85,8 @@ function SelectTable(props: any) {
   }
 
   const getMacthList = () => {
-    console.log(filters);
+    //console.log(filters);
+    props.getFilter(filters);
   };
 
   useEffect(() => {
@@ -96,7 +97,7 @@ function SelectTable(props: any) {
     <>
       <Table>
         <h1></h1>
-        <hr></hr>
+        <hr style={{ border: '0', height: '2px', background: '#1e1008' }}></hr>
         <Filter title={['상품군', 'productGroup']} option={options1} findFilter={findFilter}></Filter>
         <Filter title={['위치', 'location']} option={options2} findFilter={findFilter}></Filter>
         {location.pathname.includes('3pl') && (
@@ -117,7 +118,7 @@ function SelectTable(props: any) {
 const Table = styled.div`
   //display: grid;
   margin-bottom: 10px;
-  border: 1.5px solid #1e1008;
+  border: 2px solid #1e1008;
   border-radius: 25px;
   text-align: left;
   padding: 30px;
