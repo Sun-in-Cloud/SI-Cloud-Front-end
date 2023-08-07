@@ -1,15 +1,16 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import LoginBtn from '../../common/Loginbtn';
 import ListingPage from '../../ListingPage';
 import ListDetailPage from '../../ListDetailPage';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Modal from '../../common/Modal';
 import SellerProductEdit from './SellerProductEdit';
+import axios from 'axios';
 
 interface ProductDetail {
-  [index: string]: string;
-  productNo: string;
+  [index: string]: string | undefined;
+  productNo: string | undefined;
   productName: string;
   productGroup: string;
   safetyStock: string;
@@ -20,20 +21,71 @@ interface ProductDetail {
 }
 
 function SellerProductDetail(props: any) {
+  const sellerNo = 8;
+
   const [deleteProduct, setDeleteProduct] = useState<string>();
   const [editProduct, setEditProduct] = useState<ProductDetail[]>([]);
   const [isModalOpen, setOpenModal] = useState<boolean>(false);
 
-  const [productDetail, setProductDetail] = useState<ProductDetail | null>({
-    productNo: '0101010',
-    productGroup: '바지',
-    productName: '귀여운 핑크바지',
-    safetyStock: '10',
-    currentStock: '15',
-    enoughStock: '12',
-    importPrice: '1100',
-    consumerPrice: '15000',
-  });
+  const [productDetail, setProductDetail] = useState<ProductDetail>();
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log(location.state.productNo);
+    getProductDetail(location.state.productNo);
+  }, [location]);
+
+  async function getProductDetail(productNo: string) {
+    const listurl = '/seller/product/' + productNo;
+    await axios
+      .get(listurl)
+      .then(function (response) {
+        setProductDetail(response.data);
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  async function putProductDetail() {
+    const listurl = '/seller/product/edit';
+    await axios
+      .put(listurl, {
+        params: {
+          product: { productDetail },
+        },
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  async function deleteProductDetail() {
+    const listurl = '/seller/product/delete';
+    await axios
+      .delete(listurl, {
+        data: {
+          productNo: deleteProduct,
+        },
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+        alert('삭제되었습니다!');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   const titles: string[][] = [
     ['바코드번호', 'productNo'],
@@ -45,8 +97,6 @@ function SellerProductDetail(props: any) {
     ['원가', 'importPrice'],
     ['소비자가', 'consumerPrice'],
   ];
-
-  const sellerNo: number = 30123123;
 
   function StyleType(style: any) {
     if (style == 'portrait') {
@@ -60,6 +110,7 @@ function SellerProductDetail(props: any) {
 
   function getEditProduct(editProduct: ProductDetail) {
     setProductDetail(editProduct);
+    putProductDetail();
     console.log(editProduct);
   }
 
@@ -70,7 +121,9 @@ function SellerProductDetail(props: any) {
   }
 
   const showDeleteProduct = () => {
-    console.log(deleteProduct);
+    // const deleteNo = Number(deleteProduct);
+    // console.log('123 : ' + deleteNo);
+    deleteProductDetail();
   };
 
   const onClickToggleModal = useCallback(() => {

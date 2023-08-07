@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
-import dashedLine from '../img/dashedLine.svg';
+import dashedLine from '../../../img/dashedLine.svg';
 import { Route, useNavigate } from 'react-router-dom';
-import LandscapeMain from './LandscapeMain';
-import CheckBox from './common/CheckBox';
+import LandscapeMain from '../../LandscapeMain';
+import TableTitleWH from '../../common/TableTitleWH';
+import CheckBox from '../../common/CheckBox';
+import RegisterNew from '../../common/RegisterNew';
+import InputAmount from '../../common/InputAmount';
 
 interface StyledGridProps {
   readonly columns: '2' | '3' | '4' | '5' | '6' | '7';
@@ -18,26 +21,23 @@ const gridLayout = {
   7: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
 };
 
-interface Product {
+interface PreDetailList {
   productNo: string;
-  productGroup: string;
-  productName: string;
-  safetyStock: number;
-  currentStock: number;
-  enoughStock: number;
+  importNo: number;
+  requestAmount: number;
 }
 
-function TableRow(props: any) {
+function TableRowImport(props: any) {
+  console.log(props.preImportNo);
+  const [num, setNum] = useState(0);
+
   const navigate = useNavigate();
 
-  function onDetail(detail: boolean, item: any) {
-    const productNo = item.productNo;
+  function onDetail(detail: boolean, item: PreDetailList) {
     if (detail) {
-      if (item.productNo !== undefined) {
-        navigate('/seller/product/' + item.productNo, { state: { productNo: `${item.productNo}` } });
-      } else if (item.ordererName !== undefined) {
-        navigate('/3pl/export/invoice', { state: { exportNo: `${item.exportNo}` } });
-      }
+      props.getOrderNo(item.importNo);
+      setNum(item.importNo);
+      console.log(item);
     }
     return;
   }
@@ -45,20 +45,20 @@ function TableRow(props: any) {
   return (
     <>
       <Tablerows>
-        {props.rows.map((item: Product, index: number) => {
+        {props.rows.map((item: PreDetailList, index: number) => {
           return (
             <>
               <Row key={item.productNo} columns={props.columns} onClick={() => onDetail(props.onDetail, item)}>
                 {props.title.map((it: string, idx: number) => {
                   return (
                     <>
-                      {it[1] === 'checkBox' ? (
+                      {it[1] === 'importAmount' ? (
                         <Box>
-                          <CheckBox
-                            type="checkbox"
+                          <InputAmount
+                            type="number"
                             name={item.productNo}
                             onChange={(e) => {
-                              props.onCheckedItem(e.target.checked, item);
+                              props.onImportProduct(item, e.target.value);
                             }}
                           />
                         </Box>
@@ -67,7 +67,7 @@ function TableRow(props: any) {
                       )}
                       {Object.keys(item).map((title: string, id: number) => {
                         if (it[1] === title) {
-                          return <Item>{item[title as keyof Product]}</Item>;
+                          return <Item>{item[title as keyof PreDetailList]}</Item>;
                         }
                       })}
                     </>
@@ -104,7 +104,7 @@ const Item = styled.div`
   letter-spacing: 2px;
 `;
 
-export default TableRow;
+export default TableRowImport;
 
 {
   /* {props.onDetail && <input type="checkbox" />} */

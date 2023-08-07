@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 function Navbtn(props: any) {
   const [pages, setPages] = useState<number[]>(props.number);
+
   useEffect(() => {
     setPages(props.number);
   }, [props.number]);
+
   const navigatePage = (e: any) => {
     props.navPage(e);
   };
+
   return (
     <>
       {pages?.map((item: number, index: number) => {
@@ -32,7 +35,7 @@ const PagingBtn = styled.button`
   width: 30px;
   height: 30px;
   margin: 7px;
-  ​ &:hover {
+  &:hover {
     background: #1e1008;
     color: #fff;
   }
