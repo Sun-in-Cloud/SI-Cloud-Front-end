@@ -1,30 +1,81 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SelectTable from '../../common/matching/SelectTable';
 import { styled } from 'styled-components';
 import Threepl_ListingPage from '../Threepl_ListingPage';
+import axios from 'axios';
 function Threepl_MatchList(props: any) {
-  const columns: string[][] = [
-    ['바코드 번호', 'productNo'],
-    ['상품명', 'productName'],
-    ['입고량', 'importAmount'],
+  // const rows = [
+  //   { companyName: 12312542, productGroup: '의류', endDate: '2023-09-09' },
+  //   { companyName: 12156104, productGroup: '냉장', endDate: '2023-09-09' },
+  //   { companyName: 125156306, productGroup: '냉장', endDate: '2023-09-09' },
+  // ];
+
+  const titles: string[][] = [
+    ['화주사명', 'companyName'],
+    ['상품군', 'productGroup'],
+    ['계약 종료일', 'endDate'],
   ];
 
-  const rows = [
-    { product_no: 12312542, productName: '청바지', importAmount: 10 },
-    { product_no: 12156104, productName: '자켓', importAmount: 5 },
-    { product_no: 125156306, productName: '반바지', importAmount: 30 },
-  ];
+  const [rows, setRows] = useState<any[]>([]);
+
+  const [pageList, setPageList] = useState<number[]>([]);
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  async function getSellerList(item: any) {
+    const listurl = '/3pl/match/list';
+    await axios
+      .get(listurl, {
+        params: {
+          productGroup: item.productGroup,
+          address: item.address,
+          numValue: item.numValue,
+          contractPeriod: item.contractPeriod,
+          pageNum: currentPage,
+          countPerPage: 3,
+        },
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(function (response) {
+        console.log('res', response);
+        setRows(response.data.matchingSellers);
+        const list: number[] = [];
+        for (let i = 0; i < response.data.totalPage; i++) {
+          list[i] = i + 1;
+        }
+        setPageList(list);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  function navPage(e: React.MouseEvent<HTMLButtonElement> | undefined) {
+    if (e != undefined) {
+      const pageNum = Number(e.currentTarget.value);
+      setCurrentPage(pageNum);
+    }
+  }
+
+  useEffect(() => {
+    console.log('---');
+    //getSellerList();
+  }, [currentPage]);
+
   return (
     <MainPage>
-      <SelectTable></SelectTable>
+      <SelectTable getFilter={getSellerList}></SelectTable>
       <h1></h1>
       <Threepl_ListingPage
         sellerNo={props.seller}
-        titles={columns}
-        number={[1, 2, 3]}
+        titles={titles}
+        number={pageList}
         rows={rows}
-        columns={columns.length}
+        columns={titles.length + 1}
         onDetail={true}
+        navPage={navPage}
       />
     </MainPage>
   );

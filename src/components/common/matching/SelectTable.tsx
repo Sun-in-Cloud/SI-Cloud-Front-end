@@ -41,39 +41,41 @@ function SelectTable(props: any) {
     '제주',
   ];
 
-  const options3: string[][] = [
-    ['전체', '0'],
-    ['1000 이상', '1000'],
-    ['10000 이상', '10000'],
-    ['50000 이상', '50000'],
+  const options3: any[][] = [
+    ['전체', 0],
+    ['1000 이상', 1000],
+    ['10000 이상', 10000],
+    ['50000 이상', 50000],
   ];
-  const options4: string[][] = [
-    ['전체', '0'],
-    ['1000 이상', '1000'],
-    ['10000 이상', '10000'],
-    ['50000 이상', '50000'],
+  const options4: any[][] = [
+    ['전체', 0],
+    ['1000 이상', 1000],
+    ['10000 이상', 10000],
+    ['50000 이상', 50000],
   ];
-  const options5: string[][] = [
-    ['전체', '0'],
-    ['1달', '1'],
-    ['2달', '2'],
-    ['3달', '3'],
+  const options5: any[][] = [
+    ['즉시 가능', 0],
+    ['1달', 1],
+    ['2달', 2],
+    ['3달', 3],
+    ['4달', 4],
+    ['5달', 5],
   ];
 
   interface filter {
     productGroup: string;
-    location: string;
-    exportAmount?: number;
+    address: string;
+    numValue?: number;
     price?: number;
-    period: number;
+    contractPeriod: number;
   }
 
   const initFilter: filter = {
     productGroup: '',
-    location: '',
-    exportAmount: 0,
+    address: '',
+    numValue: 0,
     price: 0,
-    period: 0,
+    contractPeriod: 0,
   };
 
   const [filters, setFilters] = useState<filter>(initFilter);
@@ -86,6 +88,7 @@ function SelectTable(props: any) {
 
   const getMacthList = () => {
     console.log(filters);
+    props.getFilter(filters);
   };
 
   useEffect(() => {
@@ -98,14 +101,14 @@ function SelectTable(props: any) {
         <h1></h1>
         <hr></hr>
         <Filter title={['상품군', 'productGroup']} option={options1} findFilter={findFilter}></Filter>
-        <Filter title={['위치', 'location']} option={options2} findFilter={findFilter}></Filter>
+        <Filter title={['위치', 'address']} option={options2} findFilter={findFilter}></Filter>
         {location.pathname.includes('3pl') && (
-          <Filter title={['출고건수', 'exportAmount']} option={options3} findFilter={findFilter}></Filter>
+          <Filter title={['출고건수', 'numValue']} option={options3} findFilter={findFilter}></Filter>
         )}
         {location.pathname.includes('seller') && (
           <Filter title={['가격', 'price']} option={options4} findFilter={findFilter}></Filter>
         )}
-        <Filter title={['남은 계약 기간', 'period']} option={options5} findFilter={findFilter}></Filter>
+        <Filter title={['남은 계약 기간', 'contractPeriod']} option={options5} findFilter={findFilter}></Filter>
         <LoginBtn variant="primary" type="landscape" onClick={getMacthList} style={{ marginTop: '20px' }}>
           조회하기
         </LoginBtn>

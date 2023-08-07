@@ -113,6 +113,11 @@ function Threepl_TableRow(props: any) {
                 {props.onDetail && location.pathname === '/3pl/export/invoice' && item?.invoiceNo === null && (
                   <ChkBox type="checkbox" onChange={(e) => onCheckedItem(e, item)} />
                 )}
+                {props.onDetail && location.pathname === '/3pl/match/list' && item?.endDate === null && (
+                  <LoginBtn variant="primary" type="landscape">
+                    계약하기
+                  </LoginBtn>
+                )}
               </Row>
               <img src={dashedLine} />
             </>
