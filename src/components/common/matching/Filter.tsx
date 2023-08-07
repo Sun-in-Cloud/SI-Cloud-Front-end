@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
-function SelectTable(props: any) {
+function Filter(props: any) {
   const [selected, setSelected] = useState<string>(props.title);
   const [onList, setOnList] = useState<boolean>(false);
 
@@ -69,4 +69,4 @@ const Chip = styled.button`
     background: #1e1008;
   }
 `;
-export default SelectTable;
+export default Filter;
