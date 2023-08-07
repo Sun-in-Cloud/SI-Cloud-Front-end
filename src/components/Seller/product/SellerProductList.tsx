@@ -55,7 +55,7 @@ function SellerProductList(props: any) {
         params: {
           sellerNo: 8,
           pageNum: currentPage,
-          countPerPage: '3',
+          countPerPage: '7',
         },
         headers: {
           'Content-type': 'application/json',
@@ -124,6 +124,7 @@ const Buttons = styled.div`
   align-items: center;
   margin-left: 13px;
   margin-right: 13px;
+  margin-bottom: 10px;
 `;
 
 export default SellerProductList;
