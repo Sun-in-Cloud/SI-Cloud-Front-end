@@ -34,7 +34,7 @@ function Threepl_Export(props: any) {
 
   //출고 내역 조회
   async function getExportList() {
-    const listurl = '/3pl/export/list';
+    const listurl: string = '/3pl/export/list';
     await axios
       .get(listurl, {
         params: {

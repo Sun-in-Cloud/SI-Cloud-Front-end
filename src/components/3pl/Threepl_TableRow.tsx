@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import dashedLine from '../../img/dashedLine.svg';
 import LoginBtn from '../common/Loginbtn';
@@ -30,6 +30,33 @@ function Threepl_TableRow(props: any) {
   const location: Location = useLocation();
 
   const navigate = useNavigate();
+
+  const [checkedList, setCheckedList] = useState<Array<any>>([]);
+
+  interface invoice {
+    productNo: string;
+    amount: number;
+  }
+
+  const onCheckedItem = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>, item: invoice) => {
+      if (e.target.checked) {
+        setCheckedList((prev) => [...prev, item]);
+      } else if (!e.target.checked) {
+        setCheckedList(checkedList.filter((el) => el !== item));
+      }
+    },
+    [checkedList],
+  );
+
+  useEffect(() => {
+    const itemList: invoice[] = [];
+    checkedList.map((value: invoice, index) => {
+      itemList[index] = { productNo: value.productNo, amount: value.amount };
+    });
+
+    props.getItem(itemList);
+  }, [checkedList]);
 
   return (
     <>
@@ -82,8 +109,7 @@ function Threepl_TableRow(props: any) {
                   );
                 })}
                 {props.onDetail && location.pathname === '/3pl/export/invoice' && item?.invoiceNo === null && (
-                  // <ChkBox type="checkbox" onClick={props.getItem({ productNo: item.productNo, amount: item.amount })} />
-                  <ChkBox type="checkbox" />
+                  <ChkBox type="checkbox" onChange={(e) => onCheckedItem(e, item)} />
                 )}
               </Row>
               <img src={dashedLine} />

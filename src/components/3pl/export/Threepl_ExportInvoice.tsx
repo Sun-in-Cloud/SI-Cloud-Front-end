@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Threepl_ListingPage from '../Threepl_ListingPage';
 import { useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -59,7 +59,7 @@ function Threepl_ExportInvoice(props: any) {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const [invoiceProducts, setInvoiceProducts] = useState<any[]>([]);
+  const [checkedList, setCheckedList] = useState<[]>();
 
   async function getExportDetail() {
     const listurl = '/3pl/export/' + state.exportNo;
@@ -97,12 +97,27 @@ function Threepl_ExportInvoice(props: any) {
     }
   }
 
-  function regInvoice(): void {
-    console.log('invo', invoiceProducts);
+  function getExportProduct(invoiceList: any): void {
+    setCheckedList(invoiceList);
   }
 
-  function findExp(exp: any): void {
-    setInvoiceProducts([...invoiceProducts, exp.item]);
+  async function printInvoice() {
+    const listurl: string = '/3pl/export/invoice';
+    await axios
+      .put(listurl, {
+        exportNo: state.exportNo,
+        invoiceProducts: checkedList,
+
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(function (response) {
+        getExportDetail();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   useEffect(() => {
@@ -114,12 +129,14 @@ function Threepl_ExportInvoice(props: any) {
 
   return (
     <MainPage>
-      <Btn>
-        <p>{state.exportNo}</p>
-        <LoginBtn variant="primary" type="landscape" onClick={regInvoice}>
-          송장 출력
-        </LoginBtn>
-      </Btn>
+      <ExportHeader>
+        <p>주문번호: {state.exportNo}</p>
+        <Btn>
+          <LoginBtn variant="primary" type="landscape" onClick={printInvoice}>
+            송장 출력
+          </LoginBtn>
+        </Btn>
+      </ExportHeader>
       <Threepl_ListingPage
         sellerNo={props.seller}
         titles={title}
@@ -127,7 +144,7 @@ function Threepl_ExportInvoice(props: any) {
         rows={rows}
         columns={title.length + 1}
         onDetail={true}
-        getItem={findExp}
+        getItem={getExportProduct}
         navPage={navPage}
       />
     </MainPage>
@@ -137,6 +154,13 @@ function Threepl_ExportInvoice(props: any) {
 const MainPage = styled.div`
   display: grid;
   grid-template-rows: 0.1fr 0.9fr;
+`;
+
+const ExportHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-family: jalnan;
 `;
 
 const Btn = styled.div`
