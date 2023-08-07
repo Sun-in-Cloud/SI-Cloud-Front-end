@@ -63,13 +63,15 @@ function SellerImportPre(props: any) {
 
   const addPreProduct: string[][] = [
     ['상품번호', 'productNo'],
-    ['상품군', 'productGroup'],
+    ['상품명', 'productName'],
     ['현재재고', 'currentStock'],
     ['안전재고', 'safetyStock'],
+    ['발주여부', 'checkBox'],
   ];
 
   const [preImportList, setPreImportList] = useState<PreImportList[]>([]);
   const [preImportNo, setPreImportNo] = useState(0);
+
   const [preProductList, setPreProductList] = useState<PreProductList[]>([]);
 
   const [isModalOpen, setOpenModal] = useState<boolean>(false);
@@ -79,6 +81,7 @@ function SellerImportPre(props: any) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [checkedList, setCheckedList] = useState<Array<PreProductList>>([]);
+  const [numberList, setNumberList] = useState<Array<PreProductList>>([]);
 
   const [confirmList, setConfirmList] = useState<Array<ConfirmImport>>([]);
 
@@ -129,9 +132,12 @@ function SellerImportPre(props: any) {
   }
 
   async function confirmImportList() {
+    console.log(confirmList);
+    const sellerNo = 8;
+    const post = { sellerNo: sellerNo, orderNo: confirmList };
     const listurl = '/seller/import/register';
     await axios
-      .post(listurl, { confirmList })
+      .post(listurl, { post })
       .then(function (response) {
         console.log(response.data);
       })
@@ -149,8 +155,8 @@ function SellerImportPre(props: any) {
         },
       })
       .then(function (response) {
-        console.log(response);
-        //console.log(response.data);
+        console.log(response.data);
+        setPreProductList(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -170,6 +176,7 @@ function SellerImportPre(props: any) {
 
   useEffect(() => {
     getPreImportProduct();
+    setNumberList([]);
   }, [preImportNo]);
 
   function getPreNo(props: PreImportList) {
@@ -184,30 +191,44 @@ function SellerImportPre(props: any) {
 
   const onClickToggleModal = useCallback(() => {
     setOpenModal(!isModalOpen);
+    setPreProductList([]);
   }, [isModalOpen]);
 
   const onClickSearchModal = useCallback(() => {
     setSearchModal(!isSearchModal);
+    setPreProductList([]);
   }, [isSearchModal]);
 
   const onImportProduct = (props: PreProductList, e: number) => {
     setConfirmList({ ...confirmList, [props.productNo]: e });
   };
+
   const conFirmImport = () => {
     console.log(confirmList);
     let num = preImportNo;
     confirmImportList();
 
     let fixed = { importNo: num, imports: confirmList };
+
     console.log(fixed);
     setConfirmList([]);
     setCheckedList([]);
+    setPreProductList([]);
   };
 
   const searchProductList = (props: string) => {
     searchProduct(props);
-    console.log('검색');
   };
+
+  function resetSearch() {
+    setPreProductList([]);
+  }
+
+  function inputList(props: any) {
+    setNumberList((prev) => [...prev, props]);
+    console.log('----------------------');
+    console.log(numberList);
+  }
 
   return (
     <>
@@ -222,6 +243,7 @@ function SellerImportPre(props: any) {
             onDetail={true}
             getOrderNo={getPreNo}
             onClickToggleModal={onClickToggleModal}
+            getPreImportProduct={getPreImportProduct}
           ></TableRowOrder>
           <Navbtns>
             <Navbtn number={totalPage} navPage={navPage}></Navbtn>
@@ -233,7 +255,7 @@ function SellerImportPre(props: any) {
               <TableColumn title={preDetailTitles} columns={preDetailTitles.length} />
               <TableRowImport
                 title={preDetailTitles}
-                rows={checkedList}
+                rows={numberList}
                 columns={preDetailTitles.length}
                 onDetail={false}
                 onImportProduct={onImportProduct}
@@ -258,6 +280,7 @@ function SellerImportPre(props: any) {
               rows={preProductList}
               onClickToggleModal={onClickToggleModal}
               getProductList={getProductList}
+              inputList={inputList}
             />
           </Modal>
         )}
@@ -269,6 +292,8 @@ function SellerImportPre(props: any) {
               onClickSearchModal={onClickSearchModal}
               getProductList={getProductList}
               searchProductList={searchProductList}
+              resetSearch={resetSearch}
+              inputList={inputList}
             />
           </Modal>
         )}

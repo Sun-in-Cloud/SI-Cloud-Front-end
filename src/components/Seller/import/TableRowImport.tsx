@@ -24,7 +24,7 @@ const gridLayout = {
 interface PreDetailList {
   productNo: string;
   importNo: number;
-  requestAmount: number;
+  requestAmount?: number;
 }
 
 function TableRowImport(props: any) {
@@ -67,7 +67,11 @@ function TableRowImport(props: any) {
                       )}
                       {Object.keys(item).map((title: string, id: number) => {
                         if (it[1] === title) {
-                          return <Item>{item[title as keyof PreDetailList]}</Item>;
+                          if (item[title as keyof PreDetailList] === null) {
+                            console.log('');
+                            return <p></p>;
+                          } else return <Item>{item[title as keyof PreDetailList]}</Item>;
+                          // 한칸이 비어서 나오게됨
                         }
                       })}
                     </>

@@ -54,6 +54,7 @@ function TableRowOrder(props: any) {
           props.getOrderNo(item);
           setNum(item.orderNo);
           props.onClickToggleModal();
+          props.getPreImportProduct();
           break;
         }
       }
