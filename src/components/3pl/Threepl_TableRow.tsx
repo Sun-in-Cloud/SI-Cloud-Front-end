@@ -35,6 +35,7 @@ function Threepl_TableRow(props: any) {
 
   interface invoice {
     productNo: string;
+    productName: string;
     amount: number;
   }
 
@@ -52,10 +53,11 @@ function Threepl_TableRow(props: any) {
   useEffect(() => {
     const itemList: invoice[] = [];
     checkedList.map((value: invoice, index) => {
-      itemList[index] = { productNo: value.productNo, amount: value.amount };
+      itemList[index] = { productNo: value.productNo, productName: value.productName, amount: value.amount };
     });
-
-    props.getItem(itemList);
+    if (location.pathname.includes('export/invoice')) {
+      props.getItem(itemList);
+    }
   }, [checkedList]);
 
   return (

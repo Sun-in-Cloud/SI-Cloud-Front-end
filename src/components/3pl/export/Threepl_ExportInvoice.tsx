@@ -48,7 +48,7 @@ function Threepl_ExportInvoice(props: any) {
     ['바코드 번호', 'productNo'],
     ['상품명', 'productName'],
     ['주문수량', 'amount'],
-    ['출고일자', 'exportDate'],
+    ['출고일자', 'localExportDate'],
     ['송장번호', 'invoiceNo'],
     ['주문상태', 'orderStatus'],
   ];
@@ -60,6 +60,8 @@ function Threepl_ExportInvoice(props: any) {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const [checkedList, setCheckedList] = useState<[]>();
+
+  //const [nullList, setNullList] = useState<string[]>([]);
 
   async function getExportDetail() {
     const listurl = '/3pl/export/' + state.exportNo;
@@ -103,6 +105,7 @@ function Threepl_ExportInvoice(props: any) {
 
   async function printInvoice() {
     const listurl: string = '/3pl/export/invoice';
+    console.log(checkedList);
     await axios
       .put(listurl, {
         exportNo: state.exportNo,
@@ -113,6 +116,16 @@ function Threepl_ExportInvoice(props: any) {
         },
       })
       .then(function (response) {
+        console.log('-------------');
+        console.log(response);
+        let nullList: string = '';
+        response.data.map((value: any, index: number) => {
+          if (value.invoiceNo === null) {
+            nullList += value.productName;
+          }
+        });
+        alert(nullList + ' 재고 부족');
+
         getExportDetail();
       })
       .catch(function (error) {
