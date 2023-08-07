@@ -89,11 +89,14 @@ function SellerProductList(props: any) {
   return (
     <>
       <ProductMain>
+        <p></p>
+        <p></p>
         <Buttons>
           <LoginBtn variant="primary" type={StyleType(style)} onClick={() => registerProduct()}>
             등록하기
           </LoginBtn>
         </Buttons>
+        <p></p>
         <ListingPage
           titles={titles}
           number={totalPage}
@@ -103,6 +106,7 @@ function SellerProductList(props: any) {
           onDetail={true}
           navPage={navPage}
         />
+        <p></p>
       </ProductMain>
     </>
   );

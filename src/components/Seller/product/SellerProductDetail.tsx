@@ -48,17 +48,11 @@ function SellerProductDetail(props: any) {
       });
   }
 
-  async function putProductDetail() {
+  async function putProductDetail(editProduct: ProductDetail) {
     const listurl = '/seller/product/edit';
+    console.log(productDetail);
     await axios
-      .put(listurl, {
-        params: {
-          product: { productDetail },
-        },
-        headers: {
-          'Content-type': 'application/json',
-        },
-      })
+      .put(listurl, editProduct)
       .then(function (response) {
         console.log(response);
       })
@@ -110,7 +104,7 @@ function SellerProductDetail(props: any) {
 
   function getEditProduct(editProduct: ProductDetail) {
     setProductDetail(editProduct);
-    putProductDetail();
+    putProductDetail(editProduct);
     console.log(editProduct);
   }
 
@@ -121,8 +115,6 @@ function SellerProductDetail(props: any) {
   }
 
   const showDeleteProduct = () => {
-    // const deleteNo = Number(deleteProduct);
-    // console.log('123 : ' + deleteNo);
     deleteProductDetail();
   };
 

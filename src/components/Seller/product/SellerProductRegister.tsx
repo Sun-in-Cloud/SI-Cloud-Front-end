@@ -62,9 +62,7 @@ function SellerProductRegister(props: any) {
     const sellerNo = 8;
     const listurl = '/seller/product/register/' + sellerNo;
     await axios
-      .post(listurl, {
-        product: newProduct,
-      })
+      .post(listurl, newProduct)
       .then(function (response) {
         console.log(response.data);
       })
