@@ -35,8 +35,9 @@ function TableRowImport(props: any) {
 
   function onDetail(detail: boolean, item: PreDetailList) {
     if (detail) {
-      props.getOrderNo(item);
+      props.getOrderNo(item.importNo);
       setNum(item.importNo);
+      console.log(item);
     }
     return;
   }

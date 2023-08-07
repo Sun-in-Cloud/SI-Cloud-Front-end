@@ -25,7 +25,6 @@ function SellerImportModal(props: any) {
   );
 
   function getCheckProList() {
-    //console.log(checkedList);
     props.onClickToggleModal();
     props.getProductList(checkedList);
   }

@@ -73,6 +73,8 @@ function SellerOrderList(props: any) {
 
   async function getOrderDetail() {
     const listurl = '/seller/order/' + orderNo;
+
+    console.log(listurl);
     await axios
       .get(listurl, {
         params: {

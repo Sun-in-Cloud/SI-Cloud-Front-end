@@ -18,6 +18,7 @@ interface FixedDetailImportList {
   importAmount: number;
 }
 
+// 입고 예정 내역 - 화주사 확정
 function SellerImportFixedList(props: any) {
   const [onDetail, setOnDetail] = useState(false);
   const [preImportList, setPreImportList] = useState<FixedImportList[]>([]);
@@ -40,7 +41,8 @@ function SellerImportFixedList(props: any) {
 
   function getImportNo(props: FixedImportList) {
     setOnDetail(true);
-    // setImportNo(props.importNo);
+    setImportNo(props.importNo);
+    console.log(props.importNo);
   }
 
   async function getFixedImportList() {
@@ -72,6 +74,7 @@ function SellerImportFixedList(props: any) {
 
   async function getPreImportDetail() {
     const listurl = '/seller/import/pre/' + importNo;
+    console.log(listurl);
     await axios
       .get(listurl)
       .then(function (response) {

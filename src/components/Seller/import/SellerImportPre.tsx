@@ -88,7 +88,7 @@ function SellerImportPre(props: any) {
   }
 
   async function getPreImportList() {
-    const listurl = '/seller/import/pre/list';
+    const listurl = '/seller/import/pre';
     await axios
       .get(listurl, {
         params: {
@@ -149,7 +149,8 @@ function SellerImportPre(props: any) {
         },
       })
       .then(function (response) {
-        console.log(response.data);
+        console.log(response);
+        //console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -195,6 +196,7 @@ function SellerImportPre(props: any) {
   const conFirmImport = () => {
     console.log(confirmList);
     let num = preImportNo;
+    confirmImportList();
 
     let fixed = { importNo: num, imports: confirmList };
     console.log(fixed);
@@ -204,6 +206,7 @@ function SellerImportPre(props: any) {
 
   const searchProductList = (props: string) => {
     searchProduct(props);
+    console.log('검색');
   };
 
   return (
