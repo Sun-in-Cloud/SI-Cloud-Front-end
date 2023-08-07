@@ -36,8 +36,13 @@ interface DetailExportList {
 }
 
 function ExportTableRow(props: any) {
+  const navigate = useNavigate();
   function onDetail(detail: boolean, item: any) {
+    const exportNo = item.exportNo;
+    console.log(exportNo);
+
     if (detail) {
+      navigate('/seller/export/' + exportNo, { state: { exportNo: exportNo } });
     }
     return;
   }

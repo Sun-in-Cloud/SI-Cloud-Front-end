@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { styled } from 'styled-components';
-import ExportList from './ExportList';
-import DetailExport from './DetailExport';
+import DetailExport from './SellerDetailExport';
+import TableColumn from '../../TableColumn';
+import ExportTableRow from './ExportTableRow';
+import Navbtn from '../../common/Navbtn';
+import axios from 'axios';
 
 interface ExportList {
   exportNo: number;
@@ -24,7 +27,7 @@ interface DetailExportList {
 
 function SellerExportList(props: any) {
   const exportTitles: string[][] = [
-    ['주문번호', 'orderNo'],
+    ['주문번호', 'exportNo'],
     ['주문자명', 'ordererName'],
     ['주소', 'address'],
     ['채널', 'salesChannel'],
@@ -40,69 +43,66 @@ function SellerExportList(props: any) {
     ['송장번호', 'invoiceNo'],
     ['주문상태', 'orderStatus'],
   ];
-  const [exportList, setExportList] = useState<ExportList[]>([
-    { exportNo: 123123, ordererName: '양돌', address: '서울특별시 000', salesChannel: '쿠팡', orderStatus: '주문취소' },
-    { exportNo: 234234, ordererName: '양밥', address: '경기도 000', salesChannel: '11번가', orderStatus: '준비중' },
-    { exportNo: 345345, ordererName: '양찐', address: '강원도 000', salesChannel: '자사몰', orderStatus: '출고완료' },
-  ]);
+  const [exportList, setExportList] = useState<ExportList[]>([]);
 
-  const [detailExport, setDetailExport] = useState<DetailExportList[]>([
-    {
-      productNo: 123123,
-      productName: '양말',
-      amount: 100,
-      exportDate: '23.05.05',
-      invoiceNo: 135789,
-      orderStatus: '배송중',
-      sellingPrice: 168000,
-    },
-    {
-      productNo: 123123,
-      productName: '줄무늬 양말',
-      amount: 100,
-      exportDate: '23.05.05',
-      invoiceNo: 123123,
-      orderStatus: '배송준비중',
-      sellingPrice: 234234,
-    },
-    {
-      productNo: 123123,
-      productName: '땡땡이양말',
-      amount: 30,
-      exportDate: '23.05.05',
-      invoiceNo: 42378,
-      orderStatus: '배송중',
-      sellingPrice: 50000,
-    },
-  ]);
+  const [totalPage, setTotalPage] = useState<number[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const [orderNo, setOrderNo] = useState(0);
+  async function getPreImportList() {
+    const listurl = '/seller/export/list';
+    await axios
+      .get(listurl, {
+        params: {
+          sellerNo: 8,
+          pageNum: currentPage,
+          countPerPage: '3',
+        },
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+        setExportList(response.data.exports);
 
-  function getExportNo(props: ExportList) {
-    // setOrderNo();
+        let list = [];
+        for (let i = 1; i <= response.data.totalPage; i++) {
+          list.push(i);
+        }
+        setTotalPage(list);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
+
+  function navPage(e: React.MouseEvent<HTMLButtonElement> | undefined) {
+    if (e != undefined) {
+      const pageNum = Number(e.currentTarget.value);
+      setCurrentPage(pageNum);
+    }
+  }
+  useEffect(() => {
+    getPreImportList();
+  }, [currentPage]);
 
   return (
     <>
       <ExportForm>
         <p></p>
-        <Routes>
-          <Route
-            path="/list"
-            element={
-              <ExportList
-                title={exportTitles}
-                rows={exportList}
-                columns={exportTitles.length}
-                getExportNo={getExportNo}
-              ></ExportList>
-            }
-          ></Route>
-          <Route
-            path="/*"
-            element={<DetailExport title={detailExportTitles} rows={detailExport}></DetailExport>}
-          ></Route>
-        </Routes>
+        <ExportList>
+          <TableColumn title={exportTitles} columns={exportTitles.length} />
+          <ExportTableRow
+            title={exportTitles}
+            rows={exportList}
+            columns={exportTitles.length}
+            onDetail={true}
+          ></ExportTableRow>
+          <Navbtns>
+            <Navbtn number={totalPage} navPage={navPage}></Navbtn>
+          </Navbtns>
+        </ExportList>
         <p></p>
       </ExportForm>
     </>
@@ -114,6 +114,17 @@ const ExportForm = styled.div`
   display: grid;
   grid-template-columns: 0.7fr 6.6fr 0.7fr;
   z-index: 2;
+`;
+
+const ExportList = styled.div`
+  margin-top: 30px;
+  padding: 11px;
+  overflow-x: hidden;
+`;
+
+const Navbtns = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 export default SellerExportList;
