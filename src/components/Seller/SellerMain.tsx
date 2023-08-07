@@ -11,6 +11,7 @@ import SellerImportPre from './import/SellerImportPre';
 import SellerImportFixedList from './import/SellerImportFixedList';
 import DetailExport from './export/SellerDetailExport';
 import SellerDetailExport from './export/SellerDetailExport';
+import SellerMatchList from './match/SellerMatchList';
 
 function SellerMain(props: any) {
   const style = String(props.type);
@@ -45,8 +46,7 @@ function SellerMain(props: any) {
         <Route path="/export/list" element={<SellerExportList type={'landscape'} />}></Route>
         <Route path="/export/*" element={<SellerDetailExport type={'landscape'} />}></Route>
         {/* 매칭 */}
-        <Route path="/match" element={<SellerProductList type={'landscape'} />}></Route>
-        <Route path="/match/list" element={<SellerProductList type={'landscape'} />}></Route>
+        <Route path="/match/*" element={<SellerMatchList type={'landscape'} />}></Route>
         {/* 마이페이지 */}
         <Route path="/mypage" element={<SellerProductList type={'landscape'} />}></Route>
         {/* 마케팅 */}
