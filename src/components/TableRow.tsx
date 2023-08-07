@@ -3,7 +3,6 @@ import { styled } from 'styled-components';
 import dashedLine from '../img/dashedLine.svg';
 import { Route, useNavigate } from 'react-router-dom';
 import LandscapeMain from './LandscapeMain';
-import TableTitleWH from './common/TableTitleWH';
 import CheckBox from './common/CheckBox';
 
 interface StyledGridProps {
@@ -31,10 +30,14 @@ interface Product {
 function TableRow(props: any) {
   const navigate = useNavigate();
 
-  function onDetail(detail: boolean, item: Product) {
+  function onDetail(detail: boolean, item: any) {
     const productNo = item.productNo;
     if (detail) {
-      navigate('/seller/product/' + productNo, { state: { productNo: productNo } });
+      if (item.productNo !== undefined) {
+        navigate('/seller/product/' + item.productNo, { state: { productNo: `${item.productNo}` } });
+      } else if (item.ordererName !== undefined) {
+        navigate('/3pl/export/invoice', { state: { exportNo: `${item.exportNo}` } });
+      }
     }
     return;
   }

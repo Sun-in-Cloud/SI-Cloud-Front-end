@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
 function Navbtn(props: any) {
   const [pages, setPages] = useState<number[]>(props.number);
 
@@ -24,7 +23,6 @@ function Navbtn(props: any) {
     </>
   );
 }
-
 const PagingBtn = styled.button`
   border: 1.5px solid #1e1008;
   border-radius: 10px;
@@ -37,11 +35,9 @@ const PagingBtn = styled.button`
   width: 30px;
   height: 30px;
   margin: 7px;
-
   &:hover {
     background: #1e1008;
     color: #fff;
   }
 `;
-
 export default Navbtn;

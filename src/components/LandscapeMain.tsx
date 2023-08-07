@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import ListingPage from './ListingPage';
 import { styled } from 'styled-components';
-import Sidebar from './Sidebar';
+import Sidebar from './3pl/Sidebar';
 
 function LandscapeMain(props: any) {
   const com: string[] = ['성은이네 옷장', '유진 아이스크림', '성은 케이크'];

@@ -7,6 +7,7 @@ import Navbtn from './components/common/Navbtn';
 import ListingPage from './components/ListingPage';
 import LandscapeMain from './components/LandscapeMain';
 import SellerMain from './components/Seller/SellerMain';
+import ThreeplMain from './components/3pl/ThreeplMain';
 
 // 세로 모드
 const TabletPortrait = ({ children }: any) => {
@@ -31,7 +32,8 @@ function App() {
       <TabletLandscape>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LandscapeMain type={'landscape'} />}></Route>
+            <Route path="/" element={<LandscapeMain />}></Route>
+            <Route path="/3pl/*" element={<ThreeplMain type={'landscape'} />}></Route>
             <Route path="/seller/*" element={<SellerMain type={'landscape'} />}></Route>
           </Routes>
         </BrowserRouter>
