@@ -62,18 +62,18 @@ function SelectTable(props: any) {
 
   interface filter {
     productGroup: string;
-    location: string;
+    address: string;
     exportAmount?: number;
-    price?: number;
-    period: number;
+    numValue?: number;
+    contractPeriod: number;
   }
 
   const initFilter: filter = {
     productGroup: '',
-    location: '',
+    address: '',
     exportAmount: 0,
-    price: 0,
-    period: 0,
+    numValue: 0,
+    contractPeriod: 0,
   };
 
   const [filters, setFilters] = useState<filter>(initFilter);
@@ -99,14 +99,14 @@ function SelectTable(props: any) {
         <h1></h1>
         <hr style={{ border: '0', height: '2px', background: '#1e1008' }}></hr>
         <Filter title={['상품군', 'productGroup']} option={options1} findFilter={findFilter}></Filter>
-        <Filter title={['위치', 'location']} option={options2} findFilter={findFilter}></Filter>
+        <Filter title={['위치', 'address']} option={options2} findFilter={findFilter}></Filter>
         {location.pathname.includes('3pl') && (
           <Filter title={['출고건수', 'exportAmount']} option={options3} findFilter={findFilter}></Filter>
         )}
         {location.pathname.includes('seller') && (
-          <Filter title={['가격', 'price']} option={options4} findFilter={findFilter}></Filter>
+          <Filter title={['가격', 'numValue']} option={options4} findFilter={findFilter}></Filter>
         )}
-        <Filter title={['남은 계약 기간', 'period']} option={options5} findFilter={findFilter}></Filter>
+        <Filter title={['남은 계약 기간', 'contractPeriod']} option={options5} findFilter={findFilter}></Filter>
         <LoginBtn variant="primary" type="landscape" onClick={getMacthList} style={{ marginTop: '20px' }}>
           조회하기
         </LoginBtn>

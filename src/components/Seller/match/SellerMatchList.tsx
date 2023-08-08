@@ -14,9 +14,9 @@ import SellerThreeplModal from './SellerThreeplModal';
 interface MatchingOpt {
   threePLNo: number;
   companyName: string;
-  productGroupName: string;
+  productGroup: string;
   endDate: string;
-  leftPos: number;
+  leftLocation: number;
 }
 
 interface DetailThreepl {
@@ -26,24 +26,28 @@ interface DetailThreepl {
   ceoName: string;
   address: string;
   managerEmail: string;
+  managerName: string;
   managerPhone: string;
-  cnt: number;
+  leftContract: number;
   cntTotal: number;
   fee: number;
+  endDate: string;
 }
 
 interface filter {
   productGroup: string;
-  location: string;
+  address: string;
   exportAmount?: number;
-  price?: number;
-  period: number;
+  numValue?: number;
+  contractPeriod: number;
 }
 function SellerMatchList(props: any) {
   const [matchingOpt, setMatchingOpt] = useState<MatchingOpt>();
   const [totalPage, setTotalPage] = useState<number[]>([1, 2, 3]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setOpenModal] = useState<boolean>(false);
+
+  const [filter, setFilter] = useState<filter>();
 
   const columns: string[][] = [
     ['3PL명', 'companyName'],
@@ -64,23 +68,21 @@ function SellerMatchList(props: any) {
     ['사용료', 'fee'],
   ];
 
-  const [ThreeplList, setThreeplList] = useState<Array<MatchingOpt>>([
-    { threePLNo: 123, companyName: '성은이네 창고', productGroupName: '옷', endDate: '2023-01-02', leftPos: 3 },
-    { threePLNo: 234, companyName: '유진네 창고', productGroupName: '전자제품', endDate: '2023-02-02', leftPos: 2 },
-    { threePLNo: 456, companyName: '진경이네 창고', productGroupName: '화장품', endDate: '2023-03-02', leftPos: 1 },
-  ]);
+  const [ThreeplList, setThreeplList] = useState<Array<MatchingOpt>>([]);
 
   const [detailThreepl, setDetalThreepl] = useState<DetailThreepl>({
     threePLNo: 123,
     companyName: '성은이네 창고',
     productGroupName: '옷',
     ceoName: '양돌',
+    managerName: '양양',
     address: '서울시 마포구 000',
     managerEmail: '123123@123.com',
     managerPhone: '010-456-456',
-    cnt: 123,
-    cntTotal: 11,
+    leftContract: 12,
+    cntTotal: 15,
     fee: 3000,
+    endDate: '2022.12.01',
   });
 
   function navPage(e: React.MouseEvent<HTMLButtonElement> | undefined) {
@@ -93,38 +95,38 @@ function SellerMatchList(props: any) {
     setOpenModal(!isModalOpen);
   }, [isModalOpen]);
 
-  //   async function getThreeplList() {
-  //     const listurl = '/seller/match/list';
-  //     await axios
-  //       .get(listurl, {
-  //         params: {
-  //           matchingOpt: matchingOpt,
-  //           pageNum: currentPage,
-  //           countPerPage: '3',
-  //         },
-  //         headers: {
-  //           'Content-type': 'application/json',
-  //         },
-  //       })
-  //       .then(function (response) {
-  //         console.log(response);
+  async function getThreeplList() {
+    const listurl = '/seller/match/list';
+    await axios
+      .get(listurl, {
+        params: {
+          matchingOpt: filter,
+          pageNum: currentPage,
+          countPerPage: '3',
+        },
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(function (response) {
+        console.log(response);
 
-  //         let list = [];
-  //         for (let i = 1; i <= response.data.totalPage; i++) {
-  //           list.push(i);
-  //         }
-  //         setTotalPage(list);
-  //       })
-  //       .catch(function (error) {
-  //         console.log(error);
-  //       });
-  //   }
+        let list = [];
+        for (let i = 1; i <= response.data.totalPage; i++) {
+          list.push(i);
+        }
+        setTotalPage(list);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
-  //   useEffect(() => {
-  //     getThreeplList();
-  //   }, [currentPage]);
+  useEffect(() => {
+    getThreeplList();
+    console.log(filter);
+  }, [filter]);
 
-  const [filter, setFilter] = useState<filter>();
   function getFilter(props: filter) {
     setFilter(props);
   }
