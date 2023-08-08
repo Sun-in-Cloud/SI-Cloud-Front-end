@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import SellerHeader from './SellerHeader';
 import { Route, Router, Routes } from 'react-router-dom';
 import SellerProductList from './product/SellerProductList';
@@ -12,6 +12,17 @@ import SellerImportFixedList from './import/SellerImportFixedList';
 import DetailExport from './export/SellerDetailExport';
 import SellerDetailExport from './export/SellerDetailExport';
 import SellerMatchList from './match/SellerMatchList';
+
+import MarketingMain from './marketing/MarketingMain';
+import SellerMainPage from './SellerMainPage';
+import MarketingRegister from './marketing/MarketingRegister';
+import MarketingProductManage from './marketing/MarketingProductManage';
+
+function Overlay() {
+  return (
+    <div style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none', width: '100%', height: '100%' }}></div>
+  );
+}
 
 function SellerMain(props: any) {
   const style = String(props.type);
@@ -50,13 +61,14 @@ function SellerMain(props: any) {
         {/* 마이페이지 */}
         <Route path="/mypage" element={<SellerProductList type={'landscape'} />}></Route>
         {/* 마케팅 */}
-        <Route path="/marketing" element={<SellerProductList type={'landscape'} />}></Route>
-        <Route path="/marketing/search" element={<SellerProductList type={'landscape'} />}></Route>
-        <Route path="/marketing/product" element={<SellerProductList type={'landscape'} />}></Route>
+        <Route path="/marketing" element={<MarketingRegister type={'landscape'} />}></Route>
+        <Route path="/marketing/product" element={<MarketingProductManage type={'landscape'} />}></Route>
         <Route path="/marketing/danger" element={<SellerProductList type={'landscape'} />}></Route>
         <Route path="/marketing/channel" element={<SellerProductList type={'landscape'} />}></Route>
         {/* 쇼핑몰 */}
         <Route path="/shop" element={<SellerProductList type={'landscape'} />}></Route>
+
+        <Route path="*" element={<SellerMainPage type={StyleType(style)} />}></Route>
       </Routes>
     </>
   );
