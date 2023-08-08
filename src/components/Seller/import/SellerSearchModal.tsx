@@ -36,7 +36,6 @@ function SellerSearchModal(props: any) {
   function getCheckProList() {
     props.onClickSearchModal();
     props.getProductList(checkedList);
-    props.inputList(checkedList);
     setCheckedList([]);
     props.resetSearch();
   }

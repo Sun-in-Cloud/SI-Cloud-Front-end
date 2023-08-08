@@ -73,7 +73,7 @@ function SellerImportFixedList(props: any) {
   }
 
   async function getPreImportDetail() {
-    const listurl = '/seller/import/pre/' + importNo;
+    const listurl = '/seller/import/pre/detail' + importNo;
     console.log(listurl);
     await axios
       .get(listurl)

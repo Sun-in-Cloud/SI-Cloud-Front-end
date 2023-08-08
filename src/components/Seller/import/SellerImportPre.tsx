@@ -10,6 +10,7 @@ import TableRow from '../../TableRow';
 import TableRowImport from './TableRowImport';
 import LoginBtn from '../../common/Loginbtn';
 import SellerSearchModal from './SellerSearchModal';
+import { check } from 'prettier';
 
 //전체 리스트
 interface PreImportList {
@@ -69,21 +70,28 @@ function SellerImportPre(props: any) {
     ['발주여부', 'checkBox'],
   ];
 
+  // 발주 테이블 * 자동 발주임
   const [preImportList, setPreImportList] = useState<PreImportList[]>([]);
+
+  // 클릭된 발주 번호 저장
   const [preImportNo, setPreImportNo] = useState(0);
 
   const [preProductList, setPreProductList] = useState<PreProductList[]>([]);
 
+  // 자동 발주 내역 모달 + 검색 내역 모달
   const [isModalOpen, setOpenModal] = useState<boolean>(false);
   const [isSearchModal, setSearchModal] = useState<boolean>(false);
 
   const [totalPage, setTotalPage] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-
+  // 선택된 값을 저장해두는곳
   const [checkedList, setCheckedList] = useState<Array<PreProductList>>([]);
-  const [numberList, setNumberList] = useState<Array<PreProductList>>([]);
 
-  const [confirmList, setConfirmList] = useState<Array<ConfirmImport>>([]);
+  // 오른쪽표에 값 저장해두는 곳
+  const [preDetailList, setPreDetailList] = useState<Array<any>>([]);
+
+  // 마지막에 최종 발주 확정시 사용 하는 리스트
+  const [confirmList, setConfirmList] = useState<any>([]);
 
   function getImportNo(props: PreImportList) {
     setOnDetail(true);
@@ -132,12 +140,12 @@ function SellerImportPre(props: any) {
   }
 
   async function confirmImportList() {
-    console.log(confirmList);
     const sellerNo = 8;
-    const post = { sellerNo: sellerNo, orderNo: confirmList };
+    const post = { sellerNo: sellerNo, orderNo: preImportNo, dtos: confirmList };
+    console.log(post);
     const listurl = '/seller/import/register';
     await axios
-      .post(listurl, { post })
+      .post(listurl, post)
       .then(function (response) {
         console.log(response.data);
       })
@@ -148,9 +156,11 @@ function SellerImportPre(props: any) {
 
   async function searchProduct(search: string) {
     const listurl = '/seller/import/search';
+    const sellerNo = 8;
     await axios
       .get(listurl, {
         params: {
+          sellerNo: sellerNo,
           productName: search,
         },
       })
@@ -176,7 +186,7 @@ function SellerImportPre(props: any) {
 
   useEffect(() => {
     getPreImportProduct();
-    setNumberList([]);
+    setPreDetailList([]);
   }, [preImportNo]);
 
   function getPreNo(props: PreImportList) {
@@ -186,8 +196,15 @@ function SellerImportPre(props: any) {
 
   function getProductList(props: PreProductList[]) {
     setCheckedList(props);
+    props.map((item, index) => {
+      setPreDetailList((preDetailList) => [...preDetailList, item]);
+    });
     console.log(props);
   }
+
+  useEffect(() => {
+    console.log(preDetailList);
+  }, [preDetailList]);
 
   const onClickToggleModal = useCallback(() => {
     setOpenModal(!isModalOpen);
@@ -199,21 +216,24 @@ function SellerImportPre(props: any) {
     setPreProductList([]);
   }, [isSearchModal]);
 
-  const onImportProduct = (props: PreProductList, e: number) => {
-    setConfirmList({ ...confirmList, [props.productNo]: e });
+  const onImportProduct = (props: any, e: number) => {
+    let arr: any = [];
+    confirmList.map((item: any, index: number) => {
+      if (item['productNo'] != props.productNo) {
+        arr.push(item);
+      }
+    });
+
+    setConfirmList([...arr, { productNo: props.productNo, importAmount: Number(e) }]);
   };
 
   const conFirmImport = () => {
-    console.log(confirmList);
-    let num = preImportNo;
     confirmImportList();
 
-    let fixed = { importNo: num, imports: confirmList };
-
-    console.log(fixed);
-    setConfirmList([]);
     setCheckedList([]);
     setPreProductList([]);
+    setConfirmList([]);
+    setPreDetailList([]);
   };
 
   const searchProductList = (props: string) => {
@@ -222,12 +242,6 @@ function SellerImportPre(props: any) {
 
   function resetSearch() {
     setPreProductList([]);
-  }
-
-  function inputList(props: any) {
-    setNumberList((prev) => [...prev, props]);
-    console.log('----------------------');
-    console.log(numberList);
   }
 
   return (
@@ -255,7 +269,7 @@ function SellerImportPre(props: any) {
               <TableColumn title={preDetailTitles} columns={preDetailTitles.length} />
               <TableRowImport
                 title={preDetailTitles}
-                rows={numberList}
+                rows={preDetailList}
                 columns={preDetailTitles.length}
                 onDetail={false}
                 onImportProduct={onImportProduct}
@@ -280,7 +294,6 @@ function SellerImportPre(props: any) {
               rows={preProductList}
               onClickToggleModal={onClickToggleModal}
               getProductList={getProductList}
-              inputList={inputList}
             />
           </Modal>
         )}
@@ -293,7 +306,6 @@ function SellerImportPre(props: any) {
               getProductList={getProductList}
               searchProductList={searchProductList}
               resetSearch={resetSearch}
-              inputList={inputList}
             />
           </Modal>
         )}
