@@ -24,11 +24,11 @@ const gridLayout = {
 interface PreDetailList {
   productNo: string;
   importNo: number;
-  requestAmount?: number;
+  amount: number;
 }
 
 function TableRowImport(props: any) {
-  console.log(props.preImportNo);
+  // console.log(props.rows);
   const [num, setNum] = useState(0);
 
   const navigate = useNavigate();
@@ -66,12 +66,11 @@ function TableRowImport(props: any) {
                         ''
                       )}
                       {Object.keys(item).map((title: string, id: number) => {
+                        if (!item['amount']) {
+                          item['amount'] = 0;
+                        }
                         if (it[1] === title) {
-                          if (item[title as keyof PreDetailList] === null) {
-                            console.log('');
-                            return <p></p>;
-                          } else return <Item>{item[title as keyof PreDetailList]}</Item>;
-                          // 한칸이 비어서 나오게됨
+                          return <Item>{item[title as keyof PreDetailList]}</Item>;
                         }
                       })}
                     </>
