@@ -43,10 +43,10 @@ function SellerSubMenu(props: any) {
         break;
       case '마케팅솔루션':
         const dlist = [
-          { subMenuName: '신청', subMenuUrl: '/seller/product/list' },
-          { subMenuName: '상품관리', subMenuUrl: '/seller/product/list' },
-          { subMenuName: '위험군 판단', subMenuUrl: '/seller/product/list' },
-          { subMenuName: '채널별 분석', subMenuUrl: '/seller/product/list' },
+          { subMenuName: '신청', subMenuUrl: '/seller/marketing' },
+          { subMenuName: '상품관리', subMenuUrl: '/seller/marketing/product' },
+          { subMenuName: '위험군 판단', subMenuUrl: '/seller/marketing/danger' },
+          { subMenuName: '채널별 분석', subMenuUrl: '/seller/marketing/channel' },
         ];
         setSubMenu(dlist);
         setMenuOn(true);
