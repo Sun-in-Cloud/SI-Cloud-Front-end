@@ -40,7 +40,7 @@ function Threepl_MatchList(props: any) {
       })
       .then(function (response) {
         console.log('res', response);
-        setRows(response.data.matchingSellers);
+        setRows(response.data.matchingCompanies);
         const list: number[] = [];
         for (let i = 0; i < response.data.totalPage; i++) {
           list[i] = i + 1;
