@@ -37,7 +37,6 @@ function TableRowImport(props: any) {
     if (detail) {
       props.getOrderNo(item.importNo);
       setNum(item.importNo);
-      console.log(item);
     }
     return;
   }

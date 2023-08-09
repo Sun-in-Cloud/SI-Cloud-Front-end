@@ -39,10 +39,10 @@ function SellerImportFixedList(props: any) {
     ['예상수량', 'requestAmount'],
   ];
 
-  function getImportNo(props: FixedImportList) {
+  function getImportNo(props: number) {
     setOnDetail(true);
-    setImportNo(props.importNo);
-    console.log(props.importNo);
+    setImportNo(props);
+    console.log(props);
   }
 
   async function getFixedImportList() {
@@ -73,7 +73,7 @@ function SellerImportFixedList(props: any) {
   }
 
   async function getPreImportDetail() {
-    const listurl = '/seller/import/pre/detail' + importNo;
+    const listurl = '/seller/import/pre/detail/' + importNo;
     console.log(listurl);
     await axios
       .get(listurl)

@@ -18,7 +18,7 @@ interface DetailList {
 }
 
 function SellerImporList(props: any) {
-  const [onDetail, setOnDetail] = useState(false);
+  const [detail, setDetail] = useState(false);
   const [importList, setImportList] = useState<ImportList[]>([]);
   const [importNo, setImportNo] = useState(0); // 선택한 importNo
   const [detailList, setDetailList] = useState<DetailList[]>([]);
@@ -51,7 +51,8 @@ function SellerImporList(props: any) {
       })
       .then(function (response) {
         console.log(response.data);
-        setImportList(response.data.orders);
+        setImportList(response.data.importproduct);
+
         let list = [];
         for (let i = 1; i <= response.data.totalPage; i++) {
           list.push(i);
@@ -65,17 +66,11 @@ function SellerImporList(props: any) {
 
   async function getImportDetail() {
     const listurl = '/seller/import/' + importNo;
+    console.log('여기왔음');
     await axios
-      .get(listurl, {
-        params: {
-          importNo: importNo,
-        },
-        headers: {
-          'Content-type': 'application/json',
-        },
-      })
+      .get(listurl)
       .then(function (response) {
-        setImportList(response.data);
+        //setImportList(response.data);
         console.log(response.data);
       })
       .catch(function (error) {
@@ -83,9 +78,9 @@ function SellerImporList(props: any) {
       });
   }
 
-  function getImportNo(props: ImportList) {
-    setOnDetail(true);
-    setImportNo(props.importNo);
+  function getImportNo(props: number) {
+    setDetail(true);
+    setImportNo(props);
   }
 
   function navPage(e: React.MouseEvent<HTMLButtonElement> | undefined) {
@@ -120,13 +115,11 @@ function SellerImporList(props: any) {
             <Navbtn number={totalPage} navPage={navPage}></Navbtn>
           </Navbtns>
         </ImportList>
-        {onDetail && (
-          <>
-            <ImportDetail>
-              <TableColumn title={ImportTitles} columns={ImportTitles.length} />
-              <TableRow title={DetailTitles} rows={detailList} columns={DetailTitles.length}></TableRow>
-            </ImportDetail>
-          </>
+        {detail && (
+          <ImportDetail>
+            <TableColumn title={ImportTitles} columns={ImportTitles.length} />
+            <TableRow title={DetailTitles} rows={detailList} columns={DetailTitles.length}></TableRow>
+          </ImportDetail>
         )}
         <p></p>
       </SellerImport>
@@ -135,18 +128,19 @@ function SellerImporList(props: any) {
 }
 
 const SellerImport = styled.div`
-  margin-top: -10px;
+  margin-top: -40px;
   display: grid;
   width: 100%;
   height: 600px;
-  grid-template-columns: 0.7fr 2fr 4.5fr 0.7fr;
+  grid-template-columns: 0.7fr 1fr 4.5fr 0.7fr;
   z-index: 2;
 `;
 const ImportList = styled.div`
-  width: 500px;
+  width: 350px;
 `;
 const ImportDetail = styled.div`
-  overflow: scroll;
+  overflow-y: scroll;
+  padding: 0 30px;
 `;
 const Navbtns = styled.div`
   display: flex;
