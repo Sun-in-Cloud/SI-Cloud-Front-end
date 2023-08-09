@@ -52,6 +52,10 @@ function ProductRegisterPage(props: any) {
     getProductList();
   }, []);
 
+  useEffect(() => {
+    props.getProductGroup(groupName);
+  }, [groupName]);
+
   return (
     <RegisterList>
       {title.map((item: string, index: number) => {
@@ -64,11 +68,11 @@ function ProductRegisterPage(props: any) {
                   <RegisterDrop onClick={() => setIsOpen(!isOpen)} type="button" name={item[1]} value={groupName} />
                   {isOpen && (
                     <RegisterUl>
-                      {productList.map((item: any, index: number) => {
+                      {productList.map((it: any, index: number) => {
                         return (
                           <ProductDropdowm
                             key={index}
-                            value={item}
+                            value={it}
                             setIsOpen={setIsOpen}
                             setGroupName={setGroupName}
                             isOpen={isOpen}
