@@ -58,14 +58,13 @@ function Threepl_OrderRegister(props: any) {
     await axios
       .post(listurl, {})
       .then(function (response) {
-        if (response.data === 'true') {
+        if (response.data === true) {
           alert('발주 등록 성공');
-          //getAutoOrder();
         } else {
           alert('발주 등록 실패');
         }
         console.log(response);
-        //getOrderList();
+        getOrderList();
       })
       .catch(function (error) {
         console.log(error);
