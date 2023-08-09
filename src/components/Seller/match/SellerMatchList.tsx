@@ -43,7 +43,7 @@ interface filter {
 }
 function SellerMatchList(props: any) {
   const [matchingOpt, setMatchingOpt] = useState<MatchingOpt>();
-  const [totalPage, setTotalPage] = useState<number[]>([1, 2, 3]);
+  const [totalPage, setTotalPage] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setOpenModal] = useState<boolean>(false);
 
@@ -51,9 +51,9 @@ function SellerMatchList(props: any) {
 
   const columns: string[][] = [
     ['3PL명', 'companyName'],
-    ['상품군', 'productGroupName'],
+    ['상품군', 'productGroup'],
     ['계약종료일', 'endDate'],
-    ['남은자리', 'cntTotal'],
+    ['남은자리', 'leftLocation'],
   ];
 
   const detailColumns: string[][] = [
@@ -63,27 +63,14 @@ function SellerMatchList(props: any) {
     ['주소', 'address'],
     ['이메일', 'managerEmail'],
     ['연락처', 'managerPhone'],
-    ['전체자리', 'cnt'],
-    ['남은자리', 'cntTotal'],
+    ['전체자리', 'cntTotal'],
+    ['남은자리', 'leftContract'],
     ['사용료', 'fee'],
   ];
 
   const [ThreeplList, setThreeplList] = useState<Array<MatchingOpt>>([]);
-
-  const [detailThreepl, setDetalThreepl] = useState<DetailThreepl>({
-    threePLNo: 123,
-    companyName: '성은이네 창고',
-    productGroupName: '옷',
-    ceoName: '양돌',
-    managerName: '양양',
-    address: '서울시 마포구 000',
-    managerEmail: '123123@123.com',
-    managerPhone: '010-456-456',
-    leftContract: 12,
-    cntTotal: 15,
-    fee: 3000,
-    endDate: '2022.12.01',
-  });
+  const [company, setCompany] = useState<number>();
+  const [detailThreepl, setDetailThreepl] = useState<DetailThreepl>();
 
   function navPage(e: React.MouseEvent<HTMLButtonElement> | undefined) {
     if (e != undefined) {
@@ -100,16 +87,20 @@ function SellerMatchList(props: any) {
     await axios
       .get(listurl, {
         params: {
-          matchingOpt: filter,
+          productGroup: filter?.productGroup,
+          address: filter?.address,
+          numValue: filter?.numValue,
+          conrtactPeriod: filter?.contractPeriod,
           pageNum: currentPage,
-          countPerPage: '3',
+          countPerPage: 3,
         },
         headers: {
           'Content-type': 'application/json',
         },
       })
       .then(function (response) {
-        console.log(response);
+        setThreeplList(response.data.matchingCompanies);
+        console.log(response.data.matchingCompanies);
 
         let list = [];
         for (let i = 1; i <= response.data.totalPage; i++) {
@@ -124,11 +115,23 @@ function SellerMatchList(props: any) {
 
   useEffect(() => {
     getThreeplList();
-    console.log(filter);
   }, [filter]);
+
+  useEffect(() => {
+    getThreeplList();
+  }, [currentPage]);
 
   function getFilter(props: filter) {
     setFilter(props);
+  }
+
+  function getCompany(props: number) {
+    setCompany(props);
+  }
+
+  function setDetail(props: DetailThreepl) {
+    setDetailThreepl(props);
+    onClickToggleModal();
   }
 
   return (
@@ -143,6 +146,7 @@ function SellerMatchList(props: any) {
           columns={columns.length}
           onDetail={true}
           onClickToggleModal={onClickToggleModal}
+          setDetail={setDetail}
         />
         <Navbtns>
           <Navbtn number={totalPage} navPage={navPage}></Navbtn>

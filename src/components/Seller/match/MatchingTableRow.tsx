@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { styled } from 'styled-components';
 import dashedLine from '../../../img/dashedLine.svg';
 import { Route, useLocation, useNavigate } from 'react-router-dom';
@@ -20,20 +21,30 @@ const gridLayout = {
 interface MatchingOpt {
   threePLNo: number;
   companyName: string;
-  productGropName: string;
+  productGroup: string;
   endDate: string;
   leftPos: number;
 }
 
 function MatchingTableRow(props: any) {
-  const [company, setCompany] = useState('');
-  console.log(props.rows);
+  async function getThreeplDetail(company: number) {
+    const listurl = '/seller/match/' + company;
+    await axios
+      .get(listurl)
+      .then(function (response) {
+        props.setDetail(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   const navigate = useNavigate();
 
   function onDetail(detail: boolean, item: MatchingOpt) {
-    const exportNo = item.threePLNo;
-    console.log(exportNo);
-    props.onClickToggleModal();
+    if (detail) {
+      getThreeplDetail(item.threePLNo);
+    }
     return;
   }
 
@@ -49,6 +60,9 @@ function MatchingTableRow(props: any) {
                     <>
                       {Object.keys(item).map((title: string, id: number) => {
                         if (it[1] === title) {
+                          if (!item['endDate'] && title === 'endDate') {
+                            return <Item>즉시가능</Item>;
+                          }
                           return <Item>{item[title as keyof MatchingOpt]}</Item>;
                         }
                       })}
