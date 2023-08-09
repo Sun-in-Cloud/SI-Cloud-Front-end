@@ -32,6 +32,7 @@ function Threepl_ListingPage(props: any) {
           columns={props.columns}
           onDetail={props.onDetail}
           getItem={props.getItem}
+          onContract={props.onContract}
         />
       </TableForm>
       {props.number != null && (

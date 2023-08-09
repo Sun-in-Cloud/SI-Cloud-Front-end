@@ -114,7 +114,13 @@ function Threepl_TableRow(props: any) {
                   <ChkBox type="checkbox" onChange={(e) => onCheckedItem(e, item)} />
                 )}
                 {props.onDetail && location.pathname === '/3pl/match/list' && item?.endDate === null && (
-                  <LoginBtn variant="primary" type="landscape">
+                  <LoginBtn
+                    variant="primary"
+                    type="landscape"
+                    onClick={() => {
+                      props.onContract(item.sellerNo, item.companyName);
+                    }}
+                  >
                     계약하기
                   </LoginBtn>
                 )}
