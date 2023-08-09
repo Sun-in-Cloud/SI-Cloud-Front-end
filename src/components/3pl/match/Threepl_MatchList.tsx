@@ -5,6 +5,7 @@ import Threepl_ListingPage from '../Threepl_ListingPage';
 import axios from 'axios';
 import Modal from '../../common/Modal';
 import ThreeplContractModal from './ThreeplContractModal';
+import Threepl_DetailSellerModal from './Threepl_DetailSellerModal';
 function Threepl_MatchList(props: any) {
   // const rows = [
   //   { companyName: 12312542, productGroup: '의류', endDate: '2023-09-09' },
@@ -17,8 +18,23 @@ function Threepl_MatchList(props: any) {
     ['상품군', 'productGroup'],
     ['계약 종료일', 'endDate'],
   ];
+  const detailTitles: string[][] = [
+    ['화주사명', 'companyName'],
+    ['상품군', 'productGroupName'],
+    ['화주사 번호', 'businessNo'],
+    ['주소', 'address'],
+    ['매출', 'sales'],
+    ['출고건수', 'exportCnt'],
+    ['대표자명', 'ceoName'],
+    ['담당자명', 'managerName'],
+    ['담당자 메일', 'managerEmail'],
+    ['담당자 번호', 'managerPhone'],
+    ['계약 종료일', 'endDate'],
+  ];
 
   const [rows, setRows] = useState<any[]>([]);
+
+  const [detailSellers, setDetailSellers] = useState<any[]>([]);
 
   const [pageList, setPageList] = useState<number[]>([]);
 
@@ -27,6 +43,8 @@ function Threepl_MatchList(props: any) {
   const [item, setItem] = useState<any>(null);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
 
   const [contractSeller, setContractSeller] = useState<any>();
 
@@ -59,6 +77,28 @@ function Threepl_MatchList(props: any) {
             list[i] = i + 1;
           }
           setPageList(list);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  }
+
+  //화주사 상세 조회
+  async function getSellerDetail() {
+    setItem(item);
+    if (item !== null) {
+      const listurl = '/3pl/match/' + contractSeller.sellerNo;
+      await axios
+        .get(listurl, {
+          params: {},
+          headers: {
+            'Content-type': 'application/json',
+          },
+        })
+        .then(function (response) {
+          console.log('res', response);
+          setDetailSellers(response.data);
         })
         .catch(function (error) {
           console.log(error);
@@ -101,14 +141,27 @@ function Threepl_MatchList(props: any) {
     setIsModalOpen(true);
   }
 
+  function findItem(item: any) {
+    setDetailSellers(item);
+    setIsDetailOpen(true);
+  }
   const onClickToggleModal = useCallback(() => {
     setIsModalOpen(!isModalOpen);
   }, [isModalOpen]);
+
+  const onClickToggleDetailModal = useCallback(() => {
+    setIsDetailOpen(!isDetailOpen);
+  }, [isDetailOpen]);
 
   useEffect(() => {
     console.log('---');
     getSellerList(item);
   }, [currentPage, isModalOpen]);
+
+  useEffect(() => {
+    console.log(contractSeller);
+    getSellerDetail();
+  }, [isDetailOpen]);
 
   return (
     <>
@@ -124,6 +177,7 @@ function Threepl_MatchList(props: any) {
           onDetail={true}
           navPage={navPage}
           onContract={onContract}
+          getItem={findItem}
         />
       </MainPage>
       {isModalOpen && (
@@ -134,6 +188,17 @@ function Threepl_MatchList(props: any) {
             remain={remain}
             setIsModalOpen={setIsModalOpen}
           />
+        </Modal>
+      )}
+      {isDetailOpen && (
+        <Modal onClickToggleModal={onClickToggleDetailModal}>
+          <Threepl_DetailSellerModal
+            onClickToggleModal={onClickToggleDetailModal}
+            title={detailTitles}
+            rows={detailSellers}
+            columns={detailTitles.length}
+            setClose={setIsDetailOpen}
+          ></Threepl_DetailSellerModal>
         </Modal>
       )}
     </>
