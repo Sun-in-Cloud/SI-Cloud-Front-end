@@ -27,7 +27,7 @@ function SellerImporList(props: any) {
 
   const ImportTitles: string[][] = [
     ['입고번호', 'importNo'],
-    ['작성일', 'requestDate'],
+    ['작성일', 'importDate'],
   ];
 
   const DetailTitles: string[][] = [
@@ -66,12 +66,12 @@ function SellerImporList(props: any) {
 
   async function getImportDetail() {
     const listurl = '/seller/import/' + importNo;
-    console.log('여기왔음');
+    console.log(importNo);
     await axios
       .get(listurl)
       .then(function (response) {
-        //setImportList(response.data);
-        console.log(response.data);
+        setDetailList(response.data);
+        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
@@ -133,6 +133,7 @@ const SellerImport = styled.div`
   width: 100%;
   height: 600px;
   grid-template-columns: 0.7fr 1fr 4.5fr 0.7fr;
+  overflow-x: hidden;
   z-index: 2;
 `;
 const ImportList = styled.div`

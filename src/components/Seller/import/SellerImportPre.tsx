@@ -37,7 +37,7 @@ interface PreProductList {
 interface ConfirmImport {
   productNo: string;
   productName: string;
-  importAmount: number;
+  requestAmount: number;
 }
 
 function SellerImportPre(props: any) {
@@ -59,7 +59,7 @@ function SellerImportPre(props: any) {
     ['상품번호', 'productNo'],
     ['상품명', 'productName'],
     ['요청수량', 'amount'],
-    ['입고수량', 'importAmount'],
+    ['입고수량', 'requestAmount'],
   ];
 
   const addPreProduct: string[][] = [
@@ -131,7 +131,6 @@ function SellerImportPre(props: any) {
     await axios
       .get(listurl)
       .then(function (response) {
-        console.log(response.data);
         setPreProductList(response.data);
       })
       .catch(function (error) {
@@ -147,7 +146,9 @@ function SellerImportPre(props: any) {
     await axios
       .post(listurl, post)
       .then(function (response) {
-        console.log(response.data);
+        if (response.data) {
+          alert('등록되었습니다.');
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -202,9 +203,7 @@ function SellerImportPre(props: any) {
     console.log(props);
   }
 
-  useEffect(() => {
-    console.log(preDetailList);
-  }, [preDetailList]);
+  useEffect(() => {}, [preDetailList]);
 
   const onClickToggleModal = useCallback(() => {
     setOpenModal(!isModalOpen);
@@ -224,7 +223,7 @@ function SellerImportPre(props: any) {
       }
     });
 
-    setConfirmList([...arr, { productNo: props.productNo, importAmount: Number(e) }]);
+    setConfirmList([...arr, { productNo: props.productNo, requestAmount: Number(e) }]);
   };
 
   const conFirmImport = () => {
@@ -281,7 +280,7 @@ function SellerImportPre(props: any) {
                 상품추가
               </LoginBtn>
               <LoginBtn variant="secondary" type="landscape" onClick={conFirmImport}>
-                발주확정
+                입고예정등록
               </LoginBtn>
             </Btns>
           </ImportDetail>

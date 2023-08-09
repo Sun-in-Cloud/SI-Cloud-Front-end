@@ -51,7 +51,7 @@ function TableRowImport(props: any) {
                 {props.title.map((it: string, idx: number) => {
                   return (
                     <>
-                      {it[1] === 'importAmount' ? (
+                      {it[1] === 'requestAmount' ? (
                         <Box>
                           <InputAmount
                             type="number"
@@ -69,6 +69,13 @@ function TableRowImport(props: any) {
                           item['amount'] = 0;
                         }
                         if (it[1] === title) {
+                          if (title === 'isImported') {
+                            if (item[title as keyof PreDetailList]) {
+                              return <Item>완료</Item>;
+                            } else {
+                              return <Item>준비중</Item>;
+                            }
+                          }
                           return <Item>{item[title as keyof PreDetailList]}</Item>;
                         }
                       })}
