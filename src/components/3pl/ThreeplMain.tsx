@@ -13,6 +13,8 @@ import Threepl_ImportList from './import/Threepl_ImportList';
 import Threepl_Export from './export/Threepl_Export';
 import Threepl_ExportInvoice from './export/Threepl_ExportInvoice';
 import Threepl_Match from './match/Threepl_MatchList';
+import Threepl_MyPage from './my/Threepl_MyPage';
+import Threepl_MySeller from './my/Threepl_MySeller';
 
 function ThreeplMain(props: any) {
   function StyleType(style: any) {
@@ -48,14 +50,14 @@ function ThreeplMain(props: any) {
   // }
 
   const com: sellerCompany[] = [
-    { companyName: '성은이네 옷장', sellerNo: 9 },
+    { companyName: 'OutSfree', sellerNo: 9 },
     { companyName: '유진 아이스크림', sellerNo: 2 },
     { companyName: '성은 케이크', sellerNo: 3 },
     { companyName: '성은이네 옷장1', sellerNo: 4 },
     { companyName: '유진 아이스크림1', sellerNo: 5 },
     { companyName: '성은 케이크1', sellerNo: 6 },
-    { companyName: '성은이네 옷장2', sellerNo: 7 },
-    { companyName: '유진 아이스크림3', sellerNo: 8 },
+    { companyName: 'Adidas', sellerNo: 7 },
+    { companyName: '에뛰드홈', sellerNo: 8 },
   ];
 
   const location: Location = useLocation();
@@ -74,6 +76,8 @@ function ThreeplMain(props: any) {
     } else if (location.pathname.includes('/3pl/import')) {
       return <Sidebar company={com} findSeller={findSeller} />;
     } else if (location.pathname.includes('/3pl/export')) {
+      return <Sidebar company={com} findSeller={findSeller} />;
+    } else if (location.pathname.includes('/3pl/mypage/seller/list')) {
       return <Sidebar company={com} findSeller={findSeller} />;
     }
   }
@@ -116,6 +120,15 @@ function ThreeplMain(props: any) {
           <h1></h1>
         </ExportPage>
       )}
+      {location.pathname === '/3pl/mypage' && (
+        <ExportPage>
+          <h1></h1>
+          <Routes>
+            <Route path="/mypage" element={<Threepl_MyPage />}></Route>{' '}
+          </Routes>
+          <h1></h1>
+        </ExportPage>
+      )}
 
       {location.pathname !== '/3pl/import/pre/register' && location.pathname !== '/3pl/export/invoice' && (
         <MainPage>
@@ -128,6 +141,7 @@ function ThreeplMain(props: any) {
             <Route path="/import/list" element={<Threepl_ImportList seller={seller} />}></Route>{' '}
             <Route path="/import/pre/list" element={<Threepl_ImportPreList seller={seller} />}></Route>{' '}
             <Route path="/export/list" element={<Threepl_Export seller={seller} />}></Route>{' '}
+            <Route path="/mypage/seller/list" element={<Threepl_MySeller seller={seller} />}></Route>{' '}
           </Routes>
           <h1></h1>
         </MainPage>
