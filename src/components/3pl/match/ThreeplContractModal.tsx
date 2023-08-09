@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { styled } from 'styled-components';
+import DayPicker from './DayPicker';
 
 // dummy data
 const optionData = [
@@ -186,10 +187,7 @@ function ThreeplContractModal(props: any) {
         </Wrapper>
 
         <p>계약 종료일</p>
-        {/* <DatePicker
-          selected={this.state.startDate}
-          onChange={(date) => this.setState({ startDate: date })}
-        /> */}
+        <DayPicker />
       </Box>
       <p></p>
     </ContractModal>
@@ -239,7 +237,6 @@ const Select = styled.select`
   color: inherit;
   box-sizing: content-box;
   margin: 0;
-  width: 120px;
   border-radius: 0.5rem;
   padding: 0.75rem 2.5rem 0.65rem 0.75rem;
   box-shadow: none;
