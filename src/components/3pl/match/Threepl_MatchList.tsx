@@ -24,7 +24,7 @@ function Threepl_MatchList(props: any) {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const [item, setItem] = useState<any>();
+  const [item, setItem] = useState<any>(null);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -35,33 +35,35 @@ function Threepl_MatchList(props: any) {
   //화주사 목록 조회
   async function getSellerList(item: any) {
     setItem(item);
-    const listurl = '/3pl/match/list';
-    await axios
-      .get(listurl, {
-        params: {
-          productGroup: item.productGroup,
-          address: item.address,
-          numValue: item.numValue,
-          contractPeriod: item.contractPeriod,
-          pageNum: currentPage,
-          countPerPage: 3,
-        },
-        headers: {
-          'Content-type': 'application/json',
-        },
-      })
-      .then(function (response) {
-        console.log('res', response);
-        setRows(response.data.matchingCompanies);
-        const list: number[] = [];
-        for (let i = 0; i < response.data.totalPage; i++) {
-          list[i] = i + 1;
-        }
-        setPageList(list);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    if (item !== null) {
+      const listurl = '/3pl/match/list';
+      await axios
+        .get(listurl, {
+          params: {
+            productGroup: item.productGroup,
+            address: item.address,
+            numValue: item.numValue,
+            contractPeriod: item.contractPeriod,
+            pageNum: currentPage,
+            countPerPage: 3,
+          },
+          headers: {
+            'Content-type': 'application/json',
+          },
+        })
+        .then(function (response) {
+          console.log('res', response);
+          setRows(response.data.matchingCompanies);
+          const list: number[] = [];
+          for (let i = 0; i < response.data.totalPage; i++) {
+            list[i] = i + 1;
+          }
+          setPageList(list);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   }
 
   //남은 창고 자리 조회
@@ -106,7 +108,7 @@ function Threepl_MatchList(props: any) {
   useEffect(() => {
     console.log('---');
     getSellerList(item);
-  }, [currentPage]);
+  }, [currentPage, isModalOpen]);
 
   return (
     <>
@@ -130,6 +132,7 @@ function Threepl_MatchList(props: any) {
             sellerNo={contractSeller.sellerNo}
             companyName={contractSeller.companyName}
             remain={remain}
+            setIsModalOpen={setIsModalOpen}
           />
         </Modal>
       )}

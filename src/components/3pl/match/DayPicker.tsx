@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import { getMonth, getYear } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 import { styled } from 'styled-components';
 
 const DayPicker = (props: any) => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date('2023-08-08'));
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
 
-  const YEARS = Array.from({ length: getYear(new Date()) + 1 - 2000 }, (_, i) => getYear(new Date()) - i);
+  const YEARS = Array.from({ length: 30 }, (_, i) => getYear(new Date()) + i);
   const MONTHS = [
     'January',
     'February',
@@ -23,28 +23,23 @@ const DayPicker = (props: any) => {
     'December',
   ];
 
+  const moment = require('moment');
+
   return (
     <StyledDatePicker
-      // showPopperArrow={false}
-      // fixedHeight
-      // dateFormat="yyyy-MM-dd" // 날짜 형태
-      // shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
-      // minDate={new Date('2000-01-01')} // minDate 이전 날짜 선택 불가
-      // selected={selectedDate}
-      // onChange={(date: Date | null) => setSelectedDate(date)}
-      dateFormat="yyyy.MM.dd"
+      showPopperArrow={false}
+      dateFormat="yyyy-MM-dd"
       formatWeekDay={(nameOfDay) => nameOfDay.substring(0, 1)}
       showYearDropdown
       scrollableYearDropdown
       shouldCloseOnSelect
       yearDropdownItemNumber={100}
-      minDate={new Date('2000-01-01')}
-      maxDate={new Date()}
+      minDate={new Date()}
       selected={selectedDate}
-      //calendarClassName={styles.calenderWrapper}
-      //dayClassName={(d) => (d.getDate() === selectedDate!.getDate() ? styles.selectedDay : styles.unselectedDay)}
-      onChange={(date: Date | null) => setSelectedDate(date)}
-      //className={styles.datePicker}
+      onChange={(date: Date | null) => {
+        setSelectedDate(date);
+        props.getDate(moment(date).format('yyyy-MM-DD'));
+      }}
       renderCustomHeader={({
         date,
         changeYear,
@@ -56,7 +51,12 @@ const DayPicker = (props: any) => {
         <CustomHeaderContainer>
           <div>
             <Month>{MONTHS[getMonth(date)]}</Month>
-            <Year value={getYear(date)} onChange={({ target: { value } }) => changeYear(+value)}>
+            <Year
+              value={getYear(date)}
+              onChange={({ target: { value } }) => {
+                changeYear(+value);
+              }}
+            >
               {YEARS.map((option) => (
                 <option key={option} value={option}>
                   {option}
@@ -69,7 +69,7 @@ const DayPicker = (props: any) => {
               <img src="   https://cdn-icons-png.flaticon.com/512/2609/2609370.png " width={'30px'} />
             </MonthBtn>
             <MonthBtn type="button" onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
-              <img src="   https://cdn-icons-png.flaticon.com/512/318/318476.png " width={'30px'} />
+              <img src="   https://cdn-icons-png.flaticon.com/512/318/318476.png" width={'30px'} />
             </MonthBtn>
           </div>
         </CustomHeaderContainer>
@@ -78,19 +78,6 @@ const DayPicker = (props: any) => {
   );
 };
 const StyledDatePicker = styled(ReactDatePicker)`
-  //  display: flex;
-  //  align-items: center;
-  //  border: 1px solid colors.$GRAY6;
-  //  border-radius: 4px;
-  //  background-color: colors.$BG_COLOR;
-  //  box-sizing: border-box;
-  //  width: 100%;
-  //  height: 46px;
-  //  color: colors.$WHITE;
-  //  text-align: center;
-  //  padding-right: 14px;
-  //  font-family: jalnan;
-
   -moz-appearance: none;
   -webkit-appearance: none;
   -o-appearance: none;
@@ -121,7 +108,7 @@ const CustomHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f4f0df;
+  background-color: colors.$BG_COLOR;
   height: 100%;
   margin-top: 8px;
   padding: 0 12px 0 24px;
@@ -139,7 +126,7 @@ const Year = styled.select`
   padding: 5px;
   margin-left: 5px;
   border: none;
-  background-color: #f4f0df;
+  background-color: colors.$BG_COLOR;
   font-family: jalnan;
 
   &:hover {
@@ -156,7 +143,8 @@ const Year = styled.select`
   }
 `;
 const MonthBtn = styled.button`
-  background-color: #f4f0df;
+  background-color: colors.$BG_COLOR;
   border: none;
 `;
+
 export default DayPicker;

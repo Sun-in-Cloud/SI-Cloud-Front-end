@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { styled } from 'styled-components';
 import DayPicker from './DayPicker';
+import LoginBtn from '../../common/Loginbtn';
+import axios from 'axios';
 
 // dummy data
 const optionData = [
@@ -63,41 +65,16 @@ const useResize = () => {
 function ThreeplContractModal(props: any) {
   // state
   const [isExpand, setIsExpand] = useState(false);
-  const [selected, setSelected] = useState('key01');
+  const [selected, setSelected] = useState<string>('A');
+
+  const [date, setDate] = useState<string>();
 
   //const { type: deviceType } = useDevice();
   const { w: deviceWidth } = useResize();
 
-  const handleKeydown = (e: any) => {
-    // 키보드 제어
-    // KeyCode
-    // 38 : 화살표 위 | 40 : 화살표 아래 | 13:엔터
-    if (e.KeyCode === 38 || e.KeyCode === 40 || e.keyCode === 13) {
-      e.preventDefault(); // 기본동작을 막아 options 비노출
-    }
-
-    if (e.keyCode === 38 || e.keyCode === 40) {
-      // 위, 아래 키 눌렀을 때 선택한 데이터 변경
-      setIsExpand(() => true);
-      setSelected((prev) => {
-        function newIdx(): undefined | number {
-          const oldIdx = props.remain.findIndex((option: any) => option.key === prev);
-          if (e.keyCode === 38) {
-            return oldIdx === 0 ? oldIdx : oldIdx - 1;
-          }
-          if (e.keyCode === 40) {
-            return oldIdx === props.remain.length - 1 ? oldIdx : oldIdx + 1;
-          }
-        }
-
-        return props.remain[newIdx()!].optionKey;
-      });
-    }
-    if (e.keyCode === 13) {
-      // 엔터 키 눌렀을 때 ul리스트 토글
-      setIsExpand((prev) => !prev);
-    }
-  };
+  function getDate(item: string) {
+    setDate(item);
+  }
 
   const handleMouseDown = (e: any) => {
     // select태그를 누르는 순간 option 리스트가 노출되므로
@@ -117,22 +94,45 @@ function ThreeplContractModal(props: any) {
 
     return false;
   };
+
+  async function postContract(location: string, endDate: string | undefined) {
+    const listurl: string = '/3pl/match/contract';
+    await axios
+      .post(listurl, {
+        location: location,
+        endDate: endDate,
+        sellerNo: props.sellerNo,
+        threePLNo: 201,
+      })
+      .then(function (response) {
+        console.log('res', response);
+        if (response.data === true) {
+          alert('계약 성공');
+        } else {
+          alert('계약 실패');
+        }
+        props.setIsModalOpen(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   return (
     <ContractModal>
       <p>
         {props.companyName} : {props.sellerNo}
       </p>
       <Box>
-        <p>창고 위치</p>
+        <SelTitle>
+          <p>창고 위치</p>
+        </SelTitle>
         <Wrapper
           onBlur={() => {
             // onBlur일 때 하단 드롭다운 메뉴를 닫는다
             // select 태그가 아니라 ul리스트도 함께 감싼 wrapper에
             // onBlur를 넣어줘야 ul태그의 버튼 이벤트를 onClick에 넣을 수 있다
             setIsExpand(() => false);
-          }}
-          onKeyDown={(e) => {
-            if (deviceWidth > moWidth) handleKeydown(e);
           }}
           onMouseDown={(e) => {
             if (deviceWidth > moWidth) handleMouseDown(e);
@@ -186,10 +186,23 @@ function ThreeplContractModal(props: any) {
           )}
         </Wrapper>
 
-        <p>계약 종료일</p>
-        <DayPicker />
+        <SelTitle>
+          <p>계약 종료일</p>
+        </SelTitle>
+        <DayPicker getDate={getDate} />
       </Box>
-      <p></p>
+      <BtnDiv>
+        <LoginBtn
+          variant="primary"
+          type="landscape"
+          onClick={() => {
+            postContract(selected, date);
+            console.log(selected, date);
+          }}
+        >
+          계약하기
+        </LoginBtn>
+      </BtnDiv>
     </ContractModal>
   );
 }
@@ -197,15 +210,15 @@ const ContractModal = styled.div`
   display: grid;
   width: 100%;
   heihgt: 100%;
-  grid-template-rows: 0.5fr 5fr 0.2fr
-  
+  grid-template-rows: 0.5fr 5fr 0.2fr;
+
   justify-items: center;
   font-size: 16px;
   font-family: jalnan;
 `;
 
 const Box = styled.div`
-  width: 100%;
+  width: 400px;
   height: 3px;
   background-color: #1e1008;
 `;
@@ -283,51 +296,15 @@ const ListBtn = styled.button`
   }
 `;
 
-const Arrow = styled.div`
-  width: 20px;
-  height: 20px;
-  background: #000;
-  display: block;
-  position: absolute;
-  right: 0.5rem;
-  top: 10px;
-  border-radius: 0.25rem;
-  pointer-events: none;
-  &:before,
-  &:after {
-    content: '';
-    background-color: transparent;
-    width: 2px;
-    height: 12px;
-    background: yellow;
-    border-bottom: 7px solid white;
-    display: block;
-    position: absolute;
-    background: none;
-    box-sizing: border-box;
-    transform: rotate(0);
-    transform-origin: center;
-    top: 2px;
-    left: 9px;
-    transition: all 0.3s;
-  }
-  &.is-expanded {
-    &:before,
-    &:after {
-      top: 6px;
-    }
-    &:before {
-      transform: rotate(135deg);
-    }
-    &:after {
-      transform: rotate(-135deg);
-    }
-  }
-  &:before {
-    transform: rotate(45deg);
-  }
-  &:after {
-    transform: rotate(-45deg);
-  }
+const BtnDiv = styled.div`
+  display: flex;
+  width: 400px;
+  justify-content: flex-end;
+`;
+
+const SelTitle = styled.div`
+  display: flex;
+  width: 400px;
+  justify-content: flex-start;
 `;
 export default ThreeplContractModal;

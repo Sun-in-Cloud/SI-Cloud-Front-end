@@ -15,7 +15,9 @@
     "@types/react-dom": "^18.2.7",
     "@types/react-responsive": "^8.0.5",
     "@types/react-router-dom": "^5.3.3",
+    "@zxing/library": "^0.20.0",
     "axios": "^1.4.0",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-datepicker": "^4.16.0",
     "react-device-detect": "^2.2.3",
@@ -25,6 +27,7 @@
     "react-scripts": "5.0.1",
     "styled-components": "^6.0.5",
     "typescript": "^4.9.5",
+    "use-scan-detection": "^0.2.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -68,5 +71,5 @@
   "presets": [
     "@babel/preset-env"
   ],
-  "proxy": "http://192.168.0.101:4885"
+  "proxy": "http://192.168.0.101:5000"
 }
