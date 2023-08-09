@@ -83,26 +83,7 @@ function Threepl_TableRow(props: any) {
                                   : '';
                               }}
                             >
-                              {location.pathname === '/3pl/import/pre/list' &&
-                              item?.importDate === null &&
-                              item[title as keyof any] === item?.importDate ? (
-                                <LoginBtn
-                                  variant="primary"
-                                  type="landscape"
-                                  onClick={() => {
-                                    console.log('입고');
-                                    navigate('/3pl/import/pre/register', { state: item });
-                                  }}
-                                >
-                                  입고
-                                </LoginBtn>
-                              ) : location.pathname === '/3pl/import/pre/list' &&
-                                item?.importDate !== null &&
-                                item[title as keyof any] === item?.importDate ? (
-                                ''
-                              ) : (
-                                item[title as keyof any]
-                              )}
+                              {item[title as keyof any]}
                             </Item>
                           );
                         }
@@ -110,6 +91,20 @@ function Threepl_TableRow(props: any) {
                     </>
                   );
                 })}
+                {location.pathname === '/3pl/import/pre/list' && item?.isImported === false ? (
+                  <LoginBtn
+                    variant="primary"
+                    type="landscape"
+                    onClick={() => {
+                      console.log('입고');
+                      navigate('/3pl/import/pre/register', { state: item });
+                    }}
+                  >
+                    입고
+                  </LoginBtn>
+                ) : (
+                  location.pathname === '/3pl/import/pre/list' && item?.importNo !== null && ''
+                )}
                 {props.onDetail && location.pathname === '/3pl/export/invoice' && item?.invoiceNo === null && (
                   <ChkBox type="checkbox" onChange={(e) => onCheckedItem(e, item)} />
                 )}

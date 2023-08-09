@@ -70,7 +70,7 @@ function Threepl_ImportList(props: any) {
 
   //입고 상세 조회
   async function getPreImportDetail() {
-    const listurl = '/3pl/import/pre/' + finImport?.importNo;
+    const listurl = '/3pl/import/' + finImport?.importNo;
     await axios
       .get(listurl, {
         params: {},
@@ -80,7 +80,7 @@ function Threepl_ImportList(props: any) {
       })
       .then(function (response) {
         console.log('-', response.data);
-        //setRowsDetail(response.data);
+        setRowsDetail(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -98,6 +98,7 @@ function Threepl_ImportList(props: any) {
 
   useEffect(() => {
     setFinImport(undefined);
+    getPreImportList();
   }, [props.seller]);
 
   useEffect(() => {}, [finImport]);

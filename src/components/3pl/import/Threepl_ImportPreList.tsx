@@ -8,7 +8,7 @@ import axios from 'axios';
 function Threepl_ImportPreList(props: any) {
   const titleMain: string[][] = [
     ['입고예정번호', 'importNo'],
-    ['작성 일자', 'requestDate'],
+    ['작성 일자', 'orderDate'],
   ];
   const [rowsList, setRowsList] = useState<any[]>([]);
 
@@ -26,7 +26,7 @@ function Threepl_ImportPreList(props: any) {
 
   //입고 예정 내역 목록 조회
   async function getPreImportList() {
-    const listurl = '/3pl/import/pre/list';
+    const listurl = '/seller/import/pre/list';
     await axios
       .get(listurl, {
         params: {
@@ -40,7 +40,7 @@ function Threepl_ImportPreList(props: any) {
       })
       .then(function (response) {
         console.log('-', response.data);
-        //setRowsList(response.data.orders);
+        setRowsList(response.data.orders);
         const list: number[] = [];
         for (let i = 0; i < response.data.totalPage; i++) {
           list[i] = i + 1;
@@ -56,17 +56,12 @@ function Threepl_ImportPreList(props: any) {
 
   //입고 예정 상세 조회
   async function getPreImportDetail() {
-    const listurl = '/3pl/import/pre/' + preImport?.importNo;
+    const listurl = '/seller/import/pre/detail/' + preImport?.importNo;
     await axios
-      .get(listurl, {
-        params: {},
-        headers: {
-          'Content-type': 'application/json',
-        },
-      })
+      .get(listurl, {})
       .then(function (response) {
-        console.log('-', response.data);
-        //setRowsDetail(response.data);
+        console.log('-', response);
+        setRowsDetail(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -80,7 +75,7 @@ function Threepl_ImportPreList(props: any) {
     }
   }
 
-  const [preImport, setPreImport] = useState<Import>();
+  const [preImport, setPreImport] = useState<any>();
 
   useEffect(() => {
     setPreImport(undefined);
@@ -89,7 +84,7 @@ function Threepl_ImportPreList(props: any) {
 
   useEffect(() => {
     getPreImportDetail();
-  }, [preImport]);
+  }, [props.seller, preImport]);
 
   return (
     <MainPage>
