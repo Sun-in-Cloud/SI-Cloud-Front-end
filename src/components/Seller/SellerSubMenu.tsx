@@ -44,6 +44,7 @@ function SellerSubMenu(props: any) {
       case '마케팅솔루션':
         const dlist = [
           { subMenuName: '신청', subMenuUrl: '/seller/marketing' },
+          { subMenuName: '통계', subMenuUrl: '/seller/marketing/statistics' },
           { subMenuName: '상품관리', subMenuUrl: '/seller/marketing/product' },
           { subMenuName: '위험군 판단', subMenuUrl: '/seller/marketing/danger' },
           { subMenuName: '채널별 분석', subMenuUrl: '/seller/marketing/channel' },
