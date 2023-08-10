@@ -68,31 +68,50 @@ function SellerMainPage(props: any) {
         dpr={[1, 1.5]}
       >
         <color attach="background" args={['#fcf9ed']} />
-        <ScrollControls damping={4} pages={5}>
+        <ScrollControls damping={3.5} pages={5}>
           <Items />
           <Scroll html>
             <h1
               style={{
                 position: 'relative',
                 top: `40vh`,
-                fontSize: '12em',
-                color: '#000',
+                left: `37vh`,
+                fontSize: '8em',
+                color: '#0073ff',
                 transform: `translate3d(0,-100%,0)`,
                 fontFamily: 'Jalnan',
               }}
             >
               siCloud
             </h1>
-            <h1 style={{ position: 'relative', top: '70vh', left: '-5vw', fontFamily: 'Jalnan', fontSize: '8em' }}>
+            <h1 style={{ position: 'relative', top: '36vh', left: '-5vw', fontFamily: 'Jalnan', fontSize: '6em' }}>
               새로운
             </h1>
-            <h1 style={{ position: 'relative', top: '100vh', left: '30vw', fontFamily: 'Jalnan', fontSize: '5em' }}>
+            <h1 style={{ position: 'relative', top: '120vh', left: '35vw', fontFamily: 'Jalnan', fontSize: '5em' }}>
               물류관리
             </h1>
-            <h1 style={{ position: 'relative', top: '160vh', right: '0vw', fontFamily: 'Jalnan', fontSize: '6em' }}>
+            <h1
+              style={{
+                position: 'relative',
+                top: '160vh',
+                right: '0vw',
+                fontFamily: 'Jalnan',
+                fontSize: '6em',
+                letterSpacing: '3px',
+              }}
+            >
               매칭과
             </h1>
-            <h1 style={{ position: 'relative', top: '190vh', left: '40vw', fontFamily: 'Jalnan', fontSize: '5em' }}>
+            <h1
+              style={{
+                position: 'relative',
+                top: '200vh',
+                left: '50vw',
+                fontFamily: 'Jalnan',
+                fontSize: '5em',
+                letterSpacing: '3px',
+              }}
+            >
               솔루션
               <br />
               제안까지
