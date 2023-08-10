@@ -27,7 +27,7 @@ function Overlay() {
 
 function SellerMain(props: any) {
   const style = String(props.type);
-  console.log(style);
+  //console.log(style);
 
   function StyleType(style: any) {
     if (style == 'portrait') {
