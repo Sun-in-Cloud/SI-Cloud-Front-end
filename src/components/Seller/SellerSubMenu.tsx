@@ -10,14 +10,7 @@ interface SellerSubMenu {
 
 function SellerSubMenu(props: any) {
   const [subMenu, setSubMenu] = useState<SellerSubMenu[] | null>([]);
-  const [menuOn, setMenuOn] = useState(false);
-
-  const [page, setPage] = useState('');
-
-  function sub_menu(props: string) {
-    console.log(props);
-    // axios만 들기
-  }
+  const [menuOn, setMenuOn] = useState<boolean>();
 
   useEffect(() => {
     switch (props.title) {
@@ -34,7 +27,6 @@ function SellerSubMenu(props: any) {
           { subMenuName: '입고 내역', subMenuUrl: '/seller/import/list' },
           { subMenuName: '출고', subMenuUrl: '/seller/export/list' },
         ];
-
         setSubMenu(clist);
         setMenuOn(true);
         break;
@@ -58,6 +50,16 @@ function SellerSubMenu(props: any) {
     }
   }, [props.title]);
 
+  function close() {
+    console.log(menuOn);
+    setMenuOn(false);
+    stateChange();
+  }
+
+  function stateChange() {
+    props.closeMenu();
+  }
+
   return (
     <>
       {menuOn && (
@@ -66,7 +68,7 @@ function SellerSubMenu(props: any) {
             subMenu.map((item: SellerSubMenu, index: number) => {
               return (
                 <Link to={item.subMenuUrl}>
-                  <SubItem>{item.subMenuName}</SubItem>
+                  <SubItem onClick={close}>{item.subMenuName}</SubItem>
                 </Link>
               );
             })}

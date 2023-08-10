@@ -10,7 +10,9 @@ import { Link } from 'react-router-dom';
 
 function SellerHeader(type: any) {
   const [tab, setTab] = useState<string>('curr');
+  const [openSub, setOpenSub] = useState<boolean>();
   const style = String(type.type);
+
   function StyleType(style: any) {
     if (style == 'portrait') {
       return 'portrait';
@@ -24,6 +26,10 @@ function SellerHeader(type: any) {
       console.log(e.currentTarget.value);
       setTab(e.currentTarget.value);
     }
+  }
+
+  function closeMenu() {
+    setTab('curr');
   }
 
   useEffect(() => {}, [style, tab]);
@@ -98,7 +104,7 @@ function SellerHeader(type: any) {
             마이페이지
           </HeaderMenu>
         </MenuTab>
-        <SellerSubMenu title={tab} />
+        <SellerSubMenu title={tab} closeMenu={closeMenu} />
         <HeaderImages>
           <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}` }} />
           <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}`, zIndex: '-1' }} />
