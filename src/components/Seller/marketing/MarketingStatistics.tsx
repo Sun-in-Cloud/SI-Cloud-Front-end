@@ -189,7 +189,7 @@ const WeekItem = styled.div`
   font-size: 15px;
   font-family: 'Jalnan';
   letter-spacing: 2px;
-  margin-left: 80px;
+  margin-left: 150px;
   display: flex;
   justify-content: flex-end;
   width: 200px;
