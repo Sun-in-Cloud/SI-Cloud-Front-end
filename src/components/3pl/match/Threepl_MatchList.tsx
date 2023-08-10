@@ -34,7 +34,7 @@ function Threepl_MatchList(props: any) {
 
   const [rows, setRows] = useState<any[]>([]);
 
-  const [detailSellers, setDetailSellers] = useState<any[]>([]);
+  const [detailSellers, setDetailSellers] = useState<any>();
 
   const [pageList, setPageList] = useState<number[]>([]);
 
@@ -88,7 +88,7 @@ function Threepl_MatchList(props: any) {
   async function getSellerDetail() {
     setItem(item);
     if (item !== null) {
-      const listurl = '/3pl/match/' + contractSeller.sellerNo;
+      const listurl = '/3pl/match/' + detailSellers.sellerNo;
       await axios
         .get(listurl, {
           params: {},
@@ -159,8 +159,10 @@ function Threepl_MatchList(props: any) {
   }, [currentPage, isModalOpen]);
 
   useEffect(() => {
-    console.log(contractSeller);
-    getSellerDetail();
+    if (isDetailOpen === true) {
+      console.log(contractSeller);
+      getSellerDetail();
+    }
   }, [isDetailOpen]);
 
   return (
