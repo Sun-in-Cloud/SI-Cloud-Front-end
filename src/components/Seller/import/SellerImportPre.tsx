@@ -10,7 +10,6 @@ import TableRow from '../../TableRow';
 import TableRowImport from './TableRowImport';
 import LoginBtn from '../../common/Loginbtn';
 import SellerSearchModal from './SellerSearchModal';
-import { check } from 'prettier';
 
 //전체 리스트
 interface PreImportList {
