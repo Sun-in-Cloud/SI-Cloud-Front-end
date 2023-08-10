@@ -11,13 +11,13 @@ import ThreeplMain from './components/3pl/ThreeplMain';
 
 // 세로 모드
 const TabletPortrait = ({ children }: any) => {
-  const isTablet = useMediaQuery({ minWidth: 700, maxWidth: 900 });
+  const isTablet = useMediaQuery({ minWidth: 100, maxWidth: 900 });
   return isTablet ? children : null;
 };
 
 // 가로 모드  - 우선 순위
 const TabletLandscape = ({ children }: any) => {
-  const isTablet = useMediaQuery({ minWidth: 1000, maxWidth: 1500 });
+  const isTablet = useMediaQuery({ minWidth: 1000, maxWidth: 1700 });
   return isTablet ? children : null;
 };
 
@@ -25,14 +25,19 @@ function App() {
   return (
     <div className="App">
       <TabletPortrait>
-        <Header type="portrait" />
-        {/* <ListingPage /> */}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/"></Route>
+            <Route path="/3pl/*" element={<ThreeplMain type={'landscape'} />}></Route>
+            <Route path="/seller/*" element={<SellerMain type={'landscape'} />}></Route>
+          </Routes>
+        </BrowserRouter>
       </TabletPortrait>
 
       <TabletLandscape>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LandscapeMain />}></Route>
+            <Route path="/"></Route>
             <Route path="/3pl/*" element={<ThreeplMain type={'landscape'} />}></Route>
             <Route path="/seller/*" element={<SellerMain type={'landscape'} />}></Route>
           </Routes>
