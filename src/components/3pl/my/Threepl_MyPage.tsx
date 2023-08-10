@@ -19,13 +19,13 @@ function Threepl_MyPage(props: any) {
     ['계약 종료일', 'endDate'],
     ['전체 창고 자리', 'cntTotal'],
     ['남은 창고 자리', 'leftContract'],
-    ['100박스 당 가격', 'exportCnt'],
+    ['100박스 당 가격', 'fee'],
   ];
 
   const [row, setRow] = useState<any>();
 
   async function getInfo() {
-    const listurl = '/3pl/mypage/' + '201';
+    const listurl = '/3pl/mypage/' + '10';
     await axios
       .get(listurl, {
         params: {},
