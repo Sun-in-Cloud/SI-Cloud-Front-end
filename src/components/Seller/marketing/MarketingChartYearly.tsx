@@ -143,7 +143,7 @@ function MarketingChartYearly(props: any) {
                   style: {
                     fontSize: '12px',
                     fontFamily: 'Jalnan',
-                    colors: ['#ffffff'],
+                    colors: ['#1E1008'],
                   },
                 },
                 fill: {
