@@ -99,7 +99,7 @@ function Threepl_ImportList(props: any) {
   useEffect(() => {
     setFinImport(undefined);
     getImportList();
-  }, [props.seller]);
+  }, [props.seller, currentPage]);
 
   useEffect(() => {
     getImportDetail();

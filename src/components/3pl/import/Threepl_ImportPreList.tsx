@@ -8,7 +8,7 @@ import axios from 'axios';
 function Threepl_ImportPreList(props: any) {
   const titleMain: string[][] = [
     ['입고예정번호', 'importNo'],
-    ['작성 일자', 'orderDate'],
+    ['작성 일자', 'localRequestDate'],
   ];
   const [rowsList, setRowsList] = useState<any[]>([]);
 
@@ -32,7 +32,7 @@ function Threepl_ImportPreList(props: any) {
         params: {
           sellerNo: props.seller,
           pageNum: currentPage,
-          countPerPage: 3,
+          countPerPage: 15,
         },
         headers: {
           'Content-type': 'application/json',
@@ -40,7 +40,7 @@ function Threepl_ImportPreList(props: any) {
       })
       .then(function (response) {
         console.log('-', response.data);
-        setRowsList(response.data.orders);
+        setRowsList(response.data.preImports);
         const list: number[] = [];
         for (let i = 0; i < response.data.totalPage; i++) {
           list[i] = i + 1;
@@ -78,13 +78,12 @@ function Threepl_ImportPreList(props: any) {
   const [preImport, setPreImport] = useState<any>();
 
   useEffect(() => {
-    setPreImport(undefined);
     getPreImportList();
-  }, [props.seller]);
+  }, [props.seller, currentPage]);
 
   useEffect(() => {
     getPreImportDetail();
-  }, [props.seller, preImport]);
+  }, [preImport]);
 
   return (
     <MainPage>
