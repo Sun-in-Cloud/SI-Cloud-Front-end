@@ -32,10 +32,10 @@ function SelectTable(props: any) {
     ['50000 이상', 50000],
   ];
   const options4: any[][] = [
-    ['전체', 0],
-    ['1000 이상', 1000],
-    ['10000 이상', 10000],
-    ['50000 이상', 50000],
+    ['전체', 10000000],
+    ['30000 이하', 30000],
+    ['500000 이하', 50000],
+    ['100000 이하', 100000],
   ];
   const options5: any[][] = [
     ['즉시 가능', 0],
@@ -49,16 +49,16 @@ function SelectTable(props: any) {
   interface filter {
     productGroup: string;
     address: string;
+    exportAmount?: number;
     numValue?: number;
-    price?: number;
     contractPeriod: number;
   }
 
   const initFilter: filter = {
     productGroup: '',
     address: '',
+    exportAmount: 0,
     numValue: 0,
-    price: 0,
     contractPeriod: 0,
   };
 
@@ -71,7 +71,7 @@ function SelectTable(props: any) {
   }
 
   const getMacthList = () => {
-    console.log(filters);
+    //console.log(filters);
     props.getFilter(filters);
   };
 
@@ -83,14 +83,14 @@ function SelectTable(props: any) {
     <>
       <Table>
         <h1></h1>
-        <hr></hr>
+        <hr style={{ border: '0', height: '2px', background: '#1e1008' }}></hr>
         <Filter title={['상품군', 'productGroup']} option={options1} findFilter={findFilter}></Filter>
         <Filter title={['위치', 'address']} option={options2} findFilter={findFilter}></Filter>
         {location.pathname.includes('3pl') && (
           <Filter title={['출고건수', 'numValue']} option={options3} findFilter={findFilter}></Filter>
         )}
         {location.pathname.includes('seller') && (
-          <Filter title={['가격', 'price']} option={options4} findFilter={findFilter}></Filter>
+          <Filter title={['가격', 'numValue']} option={options4} findFilter={findFilter}></Filter>
         )}
         <Filter title={['남은 계약 기간', 'contractPeriod']} option={options5} findFilter={findFilter}></Filter>
         <LoginBtn variant="primary" type="landscape" onClick={getMacthList} style={{ marginTop: '20px' }}>
@@ -104,7 +104,7 @@ function SelectTable(props: any) {
 const Table = styled.div`
   //display: grid;
   margin-bottom: 10px;
-  border: 1.5px solid #1e1008;
+  border: 2px solid #1e1008;
   border-radius: 25px;
   text-align: left;
   padding: 30px;

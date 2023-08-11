@@ -24,11 +24,11 @@ const gridLayout = {
 interface PreDetailList {
   productNo: string;
   importNo: number;
-  requestAmount: number;
+  amount: number;
 }
 
 function TableRowImport(props: any) {
-  console.log(props.preImportNo);
+  // console.log(props.rows);
   const [num, setNum] = useState(0);
 
   const navigate = useNavigate();
@@ -37,7 +37,6 @@ function TableRowImport(props: any) {
     if (detail) {
       props.getOrderNo(item.importNo);
       setNum(item.importNo);
-      console.log(item);
     }
     return;
   }
@@ -52,7 +51,7 @@ function TableRowImport(props: any) {
                 {props.title.map((it: string, idx: number) => {
                   return (
                     <>
-                      {it[1] === 'importAmount' ? (
+                      {it[1] === 'requestAmount' ? (
                         <Box>
                           <InputAmount
                             type="number"
@@ -66,7 +65,17 @@ function TableRowImport(props: any) {
                         ''
                       )}
                       {Object.keys(item).map((title: string, id: number) => {
+                        if (!item['amount']) {
+                          item['amount'] = 0;
+                        }
                         if (it[1] === title) {
+                          if (title === 'isImported') {
+                            if (item[title as keyof PreDetailList]) {
+                              return <Item>완료</Item>;
+                            } else {
+                              return <Item>준비중</Item>;
+                            }
+                          }
                           return <Item>{item[title as keyof PreDetailList]}</Item>;
                         }
                       })}

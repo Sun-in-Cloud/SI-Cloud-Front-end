@@ -36,7 +36,7 @@ interface PreProductList {
 interface ConfirmImport {
   productNo: string;
   productName: string;
-  importAmount: number;
+  requestAmount: number;
 }
 
 function SellerImportPre(props: any) {
@@ -58,29 +58,39 @@ function SellerImportPre(props: any) {
     ['상품번호', 'productNo'],
     ['상품명', 'productName'],
     ['요청수량', 'amount'],
-    ['입고수량', 'importAmount'],
+    ['입고수량', 'requestAmount'],
   ];
 
   const addPreProduct: string[][] = [
     ['상품번호', 'productNo'],
-    ['상품군', 'productGroup'],
+    ['상품명', 'productName'],
     ['현재재고', 'currentStock'],
     ['안전재고', 'safetyStock'],
+    ['발주여부', 'checkBox'],
   ];
 
+  // 발주 테이블 * 자동 발주임
   const [preImportList, setPreImportList] = useState<PreImportList[]>([]);
+
+  // 클릭된 발주 번호 저장
   const [preImportNo, setPreImportNo] = useState(0);
+
   const [preProductList, setPreProductList] = useState<PreProductList[]>([]);
 
+  // 자동 발주 내역 모달 + 검색 내역 모달
   const [isModalOpen, setOpenModal] = useState<boolean>(false);
   const [isSearchModal, setSearchModal] = useState<boolean>(false);
 
   const [totalPage, setTotalPage] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-
+  // 선택된 값을 저장해두는곳
   const [checkedList, setCheckedList] = useState<Array<PreProductList>>([]);
 
-  const [confirmList, setConfirmList] = useState<Array<ConfirmImport>>([]);
+  // 오른쪽표에 값 저장해두는 곳
+  const [preDetailList, setPreDetailList] = useState<Array<any>>([]);
+
+  // 마지막에 최종 발주 확정시 사용 하는 리스트
+  const [confirmList, setConfirmList] = useState<any>([]);
 
   function getImportNo(props: PreImportList) {
     setOnDetail(true);
@@ -88,7 +98,7 @@ function SellerImportPre(props: any) {
   }
 
   async function getPreImportList() {
-    const listurl = '/seller/import/pre';
+    const listurl = '/seller/import/pre-order';
     await axios
       .get(listurl, {
         params: {
@@ -120,7 +130,6 @@ function SellerImportPre(props: any) {
     await axios
       .get(listurl)
       .then(function (response) {
-        console.log(response.data);
         setPreProductList(response.data);
       })
       .catch(function (error) {
@@ -129,11 +138,16 @@ function SellerImportPre(props: any) {
   }
 
   async function confirmImportList() {
+    const sellerNo = 8;
+    const post = { sellerNo: sellerNo, orderNo: preImportNo, importList: confirmList };
+    console.log(post);
     const listurl = '/seller/import/register';
     await axios
-      .post(listurl, { confirmList })
+      .post(listurl, post)
       .then(function (response) {
-        console.log(response.data);
+        if (response.data) {
+          alert('등록되었습니다.');
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -142,15 +156,17 @@ function SellerImportPre(props: any) {
 
   async function searchProduct(search: string) {
     const listurl = '/seller/import/search';
+    const sellerNo = 8;
     await axios
       .get(listurl, {
         params: {
+          sellerNo: sellerNo,
           productName: search,
         },
       })
       .then(function (response) {
-        console.log(response);
-        //console.log(response.data);
+        console.log(response.data);
+        setPreProductList(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -170,6 +186,7 @@ function SellerImportPre(props: any) {
 
   useEffect(() => {
     getPreImportProduct();
+    setPreDetailList([]);
   }, [preImportNo]);
 
   function getPreNo(props: PreImportList) {
@@ -179,35 +196,51 @@ function SellerImportPre(props: any) {
 
   function getProductList(props: PreProductList[]) {
     setCheckedList(props);
+    props.map((item, index) => {
+      setPreDetailList((preDetailList) => [...preDetailList, item]);
+    });
     console.log(props);
   }
 
+  useEffect(() => {}, [preDetailList]);
+
   const onClickToggleModal = useCallback(() => {
     setOpenModal(!isModalOpen);
+    setPreProductList([]);
   }, [isModalOpen]);
 
   const onClickSearchModal = useCallback(() => {
     setSearchModal(!isSearchModal);
+    setPreProductList([]);
   }, [isSearchModal]);
 
-  const onImportProduct = (props: PreProductList, e: number) => {
-    setConfirmList({ ...confirmList, [props.productNo]: e });
+  const onImportProduct = (props: any, e: number) => {
+    let arr: any = [];
+    confirmList.map((item: any, index: number) => {
+      if (item['productNo'] != props.productNo) {
+        arr.push(item);
+      }
+    });
+
+    setConfirmList([...arr, { productNo: props.productNo, requestAmount: Number(e) }]);
   };
+
   const conFirmImport = () => {
-    console.log(confirmList);
-    let num = preImportNo;
     confirmImportList();
 
-    let fixed = { importNo: num, imports: confirmList };
-    console.log(fixed);
-    setConfirmList([]);
     setCheckedList([]);
+    setPreProductList([]);
+    setConfirmList([]);
+    setPreDetailList([]);
   };
 
   const searchProductList = (props: string) => {
     searchProduct(props);
-    console.log('검색');
   };
+
+  function resetSearch() {
+    setPreProductList([]);
+  }
 
   return (
     <>
@@ -222,6 +255,7 @@ function SellerImportPre(props: any) {
             onDetail={true}
             getOrderNo={getPreNo}
             onClickToggleModal={onClickToggleModal}
+            getPreImportProduct={getPreImportProduct}
           ></TableRowOrder>
           <Navbtns>
             <Navbtn number={totalPage} navPage={navPage}></Navbtn>
@@ -233,7 +267,7 @@ function SellerImportPre(props: any) {
               <TableColumn title={preDetailTitles} columns={preDetailTitles.length} />
               <TableRowImport
                 title={preDetailTitles}
-                rows={checkedList}
+                rows={preDetailList}
                 columns={preDetailTitles.length}
                 onDetail={false}
                 onImportProduct={onImportProduct}
@@ -245,7 +279,7 @@ function SellerImportPre(props: any) {
                 상품추가
               </LoginBtn>
               <LoginBtn variant="secondary" type="landscape" onClick={conFirmImport}>
-                발주확정
+                입고예정등록
               </LoginBtn>
             </Btns>
           </ImportDetail>
@@ -269,6 +303,7 @@ function SellerImportPre(props: any) {
               onClickSearchModal={onClickSearchModal}
               getProductList={getProductList}
               searchProductList={searchProductList}
+              resetSearch={resetSearch}
             />
           </Modal>
         )}

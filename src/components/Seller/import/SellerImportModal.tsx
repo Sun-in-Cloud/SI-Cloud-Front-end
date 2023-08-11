@@ -27,6 +27,7 @@ function SellerImportModal(props: any) {
   function getCheckProList() {
     props.onClickToggleModal();
     props.getProductList(checkedList);
+    setCheckedList([]);
   }
 
   return (

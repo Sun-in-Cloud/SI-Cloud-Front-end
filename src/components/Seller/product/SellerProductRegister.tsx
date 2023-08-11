@@ -58,15 +58,19 @@ function SellerProductRegister(props: any) {
     console.log(newProduct);
   }
 
+  function getProductGroup(props: string) {
+    setNewProduct({ ...newProduct, ['productGroup' as keyof Product]: props });
+  }
+
   async function postProduct() {
     const sellerNo = 8;
     const listurl = '/seller/product/register/' + sellerNo;
     await axios
-      .post(listurl, {
-        product: newProduct,
-      })
+      .post(listurl, newProduct)
       .then(function (response) {
-        console.log(response.data);
+        if (response.data) {
+          alert('등록이 완료 되었습니다.!');
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -76,7 +80,11 @@ function SellerProductRegister(props: any) {
   return (
     <RegisterProduct>
       <RegisterForm>
-        <ProductRegisterPage productTitle={productTitle} getNewProduct={getNewProduct} />
+        <ProductRegisterPage
+          productTitle={productTitle}
+          getNewProduct={getNewProduct}
+          getProductGroup={getProductGroup}
+        />
       </RegisterForm>
       <RegisterBarcode>
         <BarcodeReader />

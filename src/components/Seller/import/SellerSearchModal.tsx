@@ -11,6 +11,7 @@ interface PreProductList {
   productName: string;
   safetyStock: number;
   currentStock: number;
+  amount: 0;
 }
 
 function SellerSearchModal(props: any) {
@@ -28,14 +29,15 @@ function SellerSearchModal(props: any) {
     [checkedList],
   );
 
-  function getCheckProList() {
-    props.onClickToggleModal();
-    props.getProductList(checkedList);
+  function getSearch(search: string) {
+    props.searchProductList(search);
   }
 
-  function getSearch(search: string) {
-    console.log(search);
-    props.searchProductList(search);
+  function getCheckProList() {
+    props.onClickSearchModal();
+    props.getProductList(checkedList);
+    setCheckedList([]);
+    props.resetSearch();
   }
 
   return (

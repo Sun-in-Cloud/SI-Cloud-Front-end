@@ -149,11 +149,11 @@ const SellerOrder = styled.div`
   display: grid;
   width: 100%;
   height: 600px;
-  grid-template-columns: 0.7fr 4fr 2.5fr 0.7fr;
+  grid-template-columns: 0.7fr 2fr 4.3fr 0.7fr;
   z-index: 2;
 `;
 const OrderList = styled.div`
-  width: 500px;
+  width: 300px;
 `;
 const OrderDetail = styled.div`
   overflow: scroll;

@@ -10,14 +10,7 @@ interface SellerSubMenu {
 
 function SellerSubMenu(props: any) {
   const [subMenu, setSubMenu] = useState<SellerSubMenu[] | null>([]);
-  const [menuOn, setMenuOn] = useState(false);
-
-  const [page, setPage] = useState('');
-
-  function sub_menu(props: string) {
-    console.log(props);
-    // axios만 들기
-  }
+  const [menuOn, setMenuOn] = useState<boolean>();
 
   useEffect(() => {
     switch (props.title) {
@@ -34,7 +27,6 @@ function SellerSubMenu(props: any) {
           { subMenuName: '입고 내역', subMenuUrl: '/seller/import/list' },
           { subMenuName: '출고', subMenuUrl: '/seller/export/list' },
         ];
-
         setSubMenu(clist);
         setMenuOn(true);
         break;
@@ -43,10 +35,11 @@ function SellerSubMenu(props: any) {
         break;
       case '마케팅솔루션':
         const dlist = [
-          { subMenuName: '신청', subMenuUrl: '/seller/product/list' },
-          { subMenuName: '상품관리', subMenuUrl: '/seller/product/list' },
-          { subMenuName: '위험군 판단', subMenuUrl: '/seller/product/list' },
-          { subMenuName: '채널별 분석', subMenuUrl: '/seller/product/list' },
+          { subMenuName: '신청', subMenuUrl: '/seller/marketing' },
+          { subMenuName: '통계', subMenuUrl: '/seller/marketing/statistics' },
+          { subMenuName: '상품관리', subMenuUrl: '/seller/marketing/product' },
+          { subMenuName: '위험군 판단', subMenuUrl: '/seller/marketing/danger' },
+          { subMenuName: '채널별 분석', subMenuUrl: '/seller/marketing/channel' },
         ];
         setSubMenu(dlist);
         setMenuOn(true);
@@ -57,6 +50,16 @@ function SellerSubMenu(props: any) {
     }
   }, [props.title]);
 
+  function close() {
+    console.log(menuOn);
+    setMenuOn(false);
+    stateChange();
+  }
+
+  function stateChange() {
+    props.closeMenu();
+  }
+
   return (
     <>
       {menuOn && (
@@ -65,7 +68,7 @@ function SellerSubMenu(props: any) {
             subMenu.map((item: SellerSubMenu, index: number) => {
               return (
                 <Link to={item.subMenuUrl}>
-                  <SubItem>{item.subMenuName}</SubItem>
+                  <SubItem onClick={close}>{item.subMenuName}</SubItem>
                 </Link>
               );
             })}

@@ -28,7 +28,7 @@ function SellerImportFixedList(props: any) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const fixedImportTitles: string[][] = [
-    ['입고번호', 'orderNo'],
+    ['입고번호', 'importNo'],
     ['작성일자', 'orderDate'],
     ['등록여부', 'isImported'],
   ];
@@ -39,10 +39,10 @@ function SellerImportFixedList(props: any) {
     ['예상수량', 'requestAmount'],
   ];
 
-  function getImportNo(props: FixedImportList) {
+  function getImportNo(props: number) {
     setOnDetail(true);
-    setImportNo(props.importNo);
-    console.log(props.importNo);
+    setImportNo(props);
+    console.log(props);
   }
 
   async function getFixedImportList() {
@@ -73,13 +73,12 @@ function SellerImportFixedList(props: any) {
   }
 
   async function getPreImportDetail() {
-    const listurl = '/seller/import/pre/' + importNo;
-    console.log(listurl);
+    const listurl = '/seller/import/pre/detail/' + importNo;
     await axios
       .get(listurl)
       .then(function (response) {
-        console.log(response.data);
         setPreImportDetail(response.data);
+        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);

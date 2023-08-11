@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import dashedLine from '../img/dashedLine.svg';
-import { Route, useNavigate } from 'react-router-dom';
+import { Route, useLocation, useNavigate } from 'react-router-dom';
 import LandscapeMain from './LandscapeMain';
 import CheckBox from './common/CheckBox';
 
@@ -29,8 +29,29 @@ interface Product {
 
 function TableRow(props: any) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const pathName = location.pathname;
 
   function onDetail(detail: boolean, item: any) {
+    // 성은이랑 다시 얘기해보기.. switch로 바꿔도 괜춘?
+
+    if (detail) {
+      switch (pathName) {
+        case '/seller/marketing/product': {
+          props.getProductNo(item.productNo);
+          props.onClickToggleModal(false);
+
+          let arr = [];
+          arr.push(item.productNo);
+          arr.push(item.productName);
+          props.getNum(arr);
+          props.initRow();
+          break;
+        }
+      }
+    }
+    return;
+
     const productNo = item.productNo;
     if (detail) {
       if (item.productNo !== undefined) {

@@ -3,11 +3,13 @@ import styled from 'styled-components';
 const backgroundColor = {
   primary: '#0073FF',
   secondary: '#DA3915',
+  dark: '#1E1008',
 };
 
 const color = {
   primary: '#0073FF',
   secondary: '#DA3915',
+  dark: '#1E1008',
 };
 
 const width = {
@@ -26,7 +28,7 @@ const padding = {
 };
 
 interface StyledButtonProps {
-  readonly variant: 'primary' | 'secondary';
+  readonly variant: 'primary' | 'secondary' | 'dark';
   readonly type: 'portrait' | 'landscape';
 }
 

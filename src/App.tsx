@@ -12,7 +12,7 @@ import WMSMain from './components/WMS/WMSMain';
 
 // 세로 모드
 const TabletPortrait = ({ children }: any) => {
-  const isTablet = useMediaQuery({ minWidth: 700, maxWidth: 900 });
+  const isTablet = useMediaQuery({ minWidth: 100, maxWidth: 900 });
   return isTablet ? children : null;
 };
 
@@ -39,7 +39,7 @@ function App() {
       <TabletLandscape>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LandscapeMain />}></Route>
+            <Route path="/"></Route>
             <Route path="/3pl/*" element={<ThreeplMain type={'landscape'} />}></Route>
             <Route path="/seller/*" element={<SellerMain type={'landscape'} />}></Route>
             <Route path="/wms/*" element={<WMSMain type={'landscape'} />}></Route>
