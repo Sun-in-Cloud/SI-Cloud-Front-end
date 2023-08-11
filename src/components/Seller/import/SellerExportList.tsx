@@ -50,7 +50,7 @@ function SellerExportList(props: any) {
         params: {
           sellerNo: 8,
           pageNum: currentPage,
-          countPerPage: '3',
+          countPerPage: 3,
         },
         headers: {
           'Content-type': 'application/json',

@@ -55,7 +55,7 @@ function SellerProductList(props: any) {
         params: {
           sellerNo: 8,
           pageNum: currentPage,
-          countPerPage: '7',
+          countPerPage: 10,
         },
         headers: {
           'Content-type': 'application/json',

@@ -36,6 +36,7 @@ interface OrderList {
 }
 
 function TableRowOrder(props: any) {
+  console.log(props.rows);
   const [num, setNum] = useState(0);
 
   const navigate = useNavigate();

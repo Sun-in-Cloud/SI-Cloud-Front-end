@@ -51,7 +51,7 @@ function SellerOrderList(props: any) {
         params: {
           sellerNo: 8,
           pageNum: currentPage,
-          countPerPage: '3',
+          countPerPage: 7,
         },
         headers: {
           'Content-type': 'application/json',

@@ -71,6 +71,7 @@ function SellerImportPre(props: any) {
 
   // 발주 테이블 * 자동 발주임
   const [preImportList, setPreImportList] = useState<PreImportList[]>([]);
+  const [preCheck, setPreCheck] = useState(false);
 
   // 클릭된 발주 번호 저장
   const [preImportNo, setPreImportNo] = useState(0);
@@ -98,19 +99,20 @@ function SellerImportPre(props: any) {
   }
 
   async function getPreImportList() {
-    const listurl = '/seller/import/preorder';
+    const listurl = '/seller/import/pre-order';
     await axios
       .get(listurl, {
         params: {
           sellerNo: 8,
           pageNum: currentPage,
-          countPerPage: '3',
+          countPerPage: 7,
         },
         headers: {
           'Content-type': 'application/json',
         },
       })
       .then(function (response) {
+        console.log(response);
         setPreImportList(response.data);
 
         let list = [];
@@ -248,6 +250,7 @@ function SellerImportPre(props: any) {
         <p></p>
         <ImportList>
           <TableColumn title={preImportTitles} columns={preImportTitles.length} />
+
           <TableRowOrder
             title={preImportTitles}
             rows={preImportList}
@@ -257,6 +260,7 @@ function SellerImportPre(props: any) {
             onClickToggleModal={onClickToggleModal}
             getPreImportProduct={getPreImportProduct}
           ></TableRowOrder>
+
           <Navbtns>
             <Navbtn number={totalPage} navPage={navPage}></Navbtn>
           </Navbtns>
