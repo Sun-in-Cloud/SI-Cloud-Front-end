@@ -40,12 +40,15 @@ function TableRow(props: any) {
         case '/seller/marketing/product': {
           props.getProductNo(item.productNo);
           props.onClickToggleModal(false);
-
           let arr = [];
           arr.push(item.productNo);
           arr.push(item.productName);
           props.getNum(arr);
           props.initRow();
+          break;
+        }
+        case '/seller/product': {
+          navigate('/seller/product/' + item.productNo, { state: { productNo: `${item.productNo}` } });
           break;
         }
       }
