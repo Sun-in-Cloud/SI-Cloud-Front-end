@@ -54,16 +54,6 @@ function TableRow(props: any) {
       }
     }
     return;
-
-    const productNo = item.productNo;
-    if (detail) {
-      if (item.productNo !== undefined) {
-        navigate('/seller/product/' + item.productNo, { state: { productNo: `${item.productNo}` } });
-      } else if (item.ordererName !== undefined) {
-        navigate('/3pl/export/invoice', { state: { exportNo: `${item.exportNo}` } });
-      }
-    }
-    return;
   }
 
   return (

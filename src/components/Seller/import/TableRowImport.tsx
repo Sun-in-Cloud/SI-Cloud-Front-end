@@ -114,7 +114,3 @@ const Item = styled.div`
 `;
 
 export default TableRowImport;
-
-{
-  /* {props.onDetail && <input type="checkbox" />} */
-}
