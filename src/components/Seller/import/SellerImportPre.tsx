@@ -98,7 +98,7 @@ function SellerImportPre(props: any) {
   }
 
   async function getPreImportList() {
-    const listurl = '/seller/import/pre';
+    const listurl = '/seller/import/pre-order';
     await axios
       .get(listurl, {
         params: {
@@ -139,7 +139,7 @@ function SellerImportPre(props: any) {
 
   async function confirmImportList() {
     const sellerNo = 8;
-    const post = { sellerNo: sellerNo, orderNo: preImportNo, dtos: confirmList };
+    const post = { sellerNo: sellerNo, orderNo: preImportNo, importList: confirmList };
     console.log(post);
     const listurl = '/seller/import/register';
     await axios
