@@ -17,7 +17,7 @@ const TabletPortrait = ({ children }: any) => {
 
 // 가로 모드  - 우선 순위
 const TabletLandscape = ({ children }: any) => {
-  const isTablet = useMediaQuery({ minWidth: 1000, maxWidth: 1500 });
+  const isTablet = useMediaQuery({ minWidth: 1000, maxWidth: 1700 });
   return isTablet ? children : null;
 };
 
@@ -25,8 +25,13 @@ function App() {
   return (
     <div className="App">
       <TabletPortrait>
-        <Header type="portrait" />
-        {/* <ListingPage /> */}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LandscapeMain />}></Route>
+            <Route path="/3pl/*" element={<ThreeplMain type={'landscape'} />}></Route>
+            <Route path="/seller/*" element={<SellerMain type={'landscape'} />}></Route>
+          </Routes>
+        </BrowserRouter>
       </TabletPortrait>
 
       <TabletLandscape>

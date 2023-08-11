@@ -57,6 +57,12 @@ const GlobalStyle = createGlobalStyle`
         font-style: normal;
         src: url(${Leferi}) format('truetype');
     }
+    @font-face {
+        font-family: 'SDSamliphopangche_Outline';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
 `;
 
 export default GlobalStyle;

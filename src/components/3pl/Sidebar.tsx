@@ -54,9 +54,9 @@ const SideBars = styled.div`
 const Company = styled.button`
   font-family: chab;
   color: #fff;
-  font-size: 18px;
+  font-size: 20px;
   width: 85%;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
   background-color: none;
