@@ -156,7 +156,8 @@ const OrderList = styled.div`
   width: 300px;
 `;
 const OrderDetail = styled.div`
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
 `;
 const Navbtns = styled.div`
   display: flex;

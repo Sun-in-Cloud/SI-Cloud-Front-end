@@ -113,7 +113,7 @@ function SellerImportPre(props: any) {
       })
       .then(function (response) {
         console.log(response);
-        setPreImportList(response.data);
+        setPreImportList(response.data.orders);
 
         let list = [];
         for (let i = 1; i <= response.data.totalPage; i++) {

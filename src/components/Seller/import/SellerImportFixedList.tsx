@@ -29,7 +29,7 @@ function SellerImportFixedList(props: any) {
 
   const fixedImportTitles: string[][] = [
     ['입고번호', 'importNo'],
-    ['작성일자', 'orderDate'],
+    ['작성일자', 'localRequestDate'],
     ['등록여부', 'isImported'],
   ];
 
@@ -52,7 +52,7 @@ function SellerImportFixedList(props: any) {
         params: {
           sellerNo: 8,
           pageNum: currentPage,
-          countPerPage: 3,
+          countPerPage: 10,
         },
         headers: {
           'Content-type': 'application/json',
@@ -60,7 +60,8 @@ function SellerImportFixedList(props: any) {
       })
       .then(function (response) {
         console.log(response.data);
-        setPreImportList(response.data.orders);
+        setPreImportList(response.data.preImports);
+        console.log(response);
         let list = [];
         for (let i = 1; i <= response.data.totalPage; i++) {
           list.push(i);
@@ -148,8 +149,10 @@ const ImportList = styled.div`
   width: 400px;
 `;
 const Detail = styled.div`
-  overflow-y: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: 0 10px;
+  height: 500px;
 `;
 const Navbtns = styled.div`
   display: flex;
