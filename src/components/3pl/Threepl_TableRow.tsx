@@ -97,7 +97,7 @@ function Threepl_TableRow(props: any) {
                     type="landscape"
                     onClick={() => {
                       console.log('입고');
-                      navigate('/3pl/import/pre/register', { state: item });
+                      navigate('/3pl/import/pre/register', { state: { item: item, sellerNo: props.sellerNo } });
                     }}
                   >
                     입고

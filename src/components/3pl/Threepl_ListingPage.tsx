@@ -27,6 +27,7 @@ function Threepl_ListingPage(props: any) {
       <TableForm>
         <TableColumn title={props.titles} columns={props.columns} />
         <TableRow
+          sellerNo={props.sellerNo}
           title={props.titles}
           rows={props.rows}
           columns={props.columns}
