@@ -19,6 +19,7 @@ import MarketingRegister from './marketing/MarketingRegister';
 import MarketingProductManage from './marketing/MarketingProductManage';
 import MarketingStatistics from './marketing/MarketingStatistics';
 import MarketingDanger from './marketing/MarketingDanger';
+import MarketingChannel from './marketing/MarketingChannel';
 
 function Overlay() {
   return (
@@ -67,7 +68,7 @@ function SellerMain(props: any) {
         <Route path="/marketing/statistics" element={<MarketingStatistics type={'landscape'} />}></Route>
         <Route path="/marketing/product" element={<MarketingProductManage type={'landscape'} />}></Route>
         <Route path="/marketing/danger" element={<MarketingDanger type={'landscape'} />}></Route>
-        <Route path="/marketing/channel" element={<SellerProductList type={'landscape'} />}></Route>
+        <Route path="/marketing/channel" element={<MarketingChannel type={'landscape'} />}></Route>
         {/* 쇼핑몰 */}
         <Route path="/shop" element={<SellerProductList type={'landscape'} />}></Route>
 
