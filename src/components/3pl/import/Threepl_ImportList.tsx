@@ -22,7 +22,7 @@ function Threepl_ImportList(props: any) {
 
   const titleMain: string[][] = [
     ['입고 번호', 'importNo'],
-    ['입고 일자', 'importDate'],
+    ['입고 일자', 'localRequestDate'],
   ];
   const [rowsList, setRowsList] = useState<any[]>([]);
 
@@ -39,8 +39,8 @@ function Threepl_ImportList(props: any) {
   const [rowsDetail, setRowsDetail] = useState<any[]>([]);
 
   //입고 내역 목록 조회
-  async function getPreImportList() {
-    const listurl = '/3pl/import/list';
+  async function getImportList() {
+    const listurl = '/seller/import/list';
     await axios
       .get(listurl, {
         params: {
@@ -54,7 +54,7 @@ function Threepl_ImportList(props: any) {
       })
       .then(function (response) {
         console.log('-', response.data);
-        //setRowsList(response.data);
+        setRowsList(response.data.importproduct);
         const list: number[] = [];
         for (let i = 0; i < response.data.totalPage; i++) {
           list[i] = i + 1;
@@ -69,8 +69,8 @@ function Threepl_ImportList(props: any) {
   }
 
   //입고 상세 조회
-  async function getPreImportDetail() {
-    const listurl = '/3pl/import/' + finImport?.importNo;
+  async function getImportDetail() {
+    const listurl = '/seller/import/' + finImport?.importNo;
     await axios
       .get(listurl, {
         params: {},
@@ -98,10 +98,12 @@ function Threepl_ImportList(props: any) {
 
   useEffect(() => {
     setFinImport(undefined);
-    getPreImportList();
+    getImportList();
   }, [props.seller]);
 
-  useEffect(() => {}, [finImport]);
+  useEffect(() => {
+    getImportDetail();
+  }, [finImport]);
 
   return (
     <MainPage>
@@ -113,6 +115,7 @@ function Threepl_ImportList(props: any) {
         columns={titleMain.length}
         onDetail={true}
         getItem={setFinImport}
+        navPage={navPage}
       />
       <h1></h1>
       {finImport != undefined && (
