@@ -87,7 +87,7 @@ function SelectTable(props: any) {
         <Filter title={['상품군', 'productGroup']} option={options1} findFilter={findFilter}></Filter>
         <Filter title={['위치', 'address']} option={options2} findFilter={findFilter}></Filter>
         {location.pathname.includes('3pl') && (
-          <Filter title={['출고건수', 'numValue']} option={options3} findFilter={findFilter}></Filter>
+          <Filter title={['출고건수', 'exportAmount']} option={options3} findFilter={findFilter}></Filter>
         )}
         {location.pathname.includes('seller') && (
           <Filter title={['가격', 'numValue']} option={options4} findFilter={findFilter}></Filter>

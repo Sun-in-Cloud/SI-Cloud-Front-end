@@ -90,7 +90,7 @@ function Threepl_OrderList(props: any) {
   useEffect(() => {
     setOrder(undefined);
     getOrderList();
-  }, [props.seller]);
+  }, [props.seller, currentPage]);
 
   useEffect(() => {
     console.log('order', order?.orderDate);

@@ -98,7 +98,7 @@ function SellerImportPre(props: any) {
   }
 
   async function getPreImportList() {
-    const listurl = '/seller/import/pre-order';
+    const listurl = '/seller/import/preorder';
     await axios
       .get(listurl, {
         params: {
@@ -111,7 +111,7 @@ function SellerImportPre(props: any) {
         },
       })
       .then(function (response) {
-        setPreImportList(response.data.orders);
+        setPreImportList(response.data);
 
         let list = [];
         for (let i = 1; i <= response.data.totalPage; i++) {

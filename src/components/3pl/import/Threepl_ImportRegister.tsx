@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Threepl_ListingPage from '../Threepl_ListingPage';
 import axios from 'axios';
@@ -23,7 +23,7 @@ function Threepl_ImportRegister(props: any) {
     ['실제 입고량', 'importAmount'],
   ];
 
-  const [rows, setRows] = useState<any[]>([]);
+  const rows = useRef<any[]>([]);
 
   async function getProductList() {
     const listurl = '/3pl/import/register';
@@ -38,7 +38,7 @@ function Threepl_ImportRegister(props: any) {
       })
       .then(function (response) {
         console.log('-', response.data);
-        setRows(response.data);
+        rows.current = response.data;
       })
       .catch(function (error) {
         console.log(error);
@@ -52,10 +52,10 @@ function Threepl_ImportRegister(props: any) {
       .post(listurl, {
         sellerNo: props.seller,
         importNo: state.importNo,
-        importList: rows,
+        importList: rows.current,
       })
       .then(function (response) {
-        console.log('res', response.data);
+        console.log('res', response);
         if (response.data === true) {
           alert('입고 등록 성공');
         } else {
@@ -69,8 +69,9 @@ function Threepl_ImportRegister(props: any) {
 
   function getProductNo(barcode: string) {
     console.log('***', barcode);
+    console.log('rows', rows.current);
     const newRow: any[] = [];
-    rows.map((value: any, index: number) => {
+    rows.current.map((value: any, index: number) => {
       console.log('val', value);
       if (value.productNo == barcode) {
         newRow[index] = {
@@ -90,14 +91,16 @@ function Threepl_ImportRegister(props: any) {
       }
     });
     console.log('s', rows);
-    setRows(newRow);
+    rows.current = newRow;
   }
 
   useEffect(() => {
     console.log('---');
     getProductList();
   }, []);
-
+  useEffect(() => {
+    console.log('curr', rows.current);
+  }, [rows]);
   return (
     <>
       <MainPage>
@@ -109,16 +112,15 @@ function Threepl_ImportRegister(props: any) {
             sellerNo={props.seller}
             titles={title}
             number={[]}
-            rows={rows}
+            rows={rows.current}
             columns={title.length}
             onDetail={true}
-            getItem={getProductNo}
           />
         </List>
 
         <p></p>
         <ScanNBtn>
-          <BarcodeScan />
+          <BarcodeScan getItem={getProductNo} />
           <LoginBtn
             variant="primary"
             type="landscape"

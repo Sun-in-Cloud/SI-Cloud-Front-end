@@ -51,6 +51,10 @@ function TableRow(props: any) {
           navigate('/seller/product/' + item.productNo, { state: { productNo: `${item.productNo}` } });
           break;
         }
+        case '/3pl/export/list': {
+          navigate('/3pl/export/invoice', { state: { exportNo: `${item.exportNo}` } });
+          break;
+        }
       }
     }
     return;

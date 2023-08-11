@@ -29,7 +29,7 @@ function Threepl_ProductList(props: any) {
         params: {
           sellerNo: props.seller,
           pageNum: currentPage,
-          countPerPage: 3,
+          countPerPage: 10,
         },
         headers: {
           'Content-type': 'application/json',
