@@ -18,18 +18,21 @@ function MarketingProductManage(props: any) {
   const [yearlyType, setyearlyType] = useState('yearlyCount');
 
   const [data, setData] = useState<any>();
+  const [check, setCheck] = useState<boolean>(false);
 
   async function getMarketingByPro() {
-    const listurl = '/seller/marketing/statistics';
+    const listurl = '/seller/marketing/product';
     await axios
       .get(listurl, {
         params: {
-          sellerNo: 2,
+          sellerNo: 8,
+          productNo: product[0],
         },
       })
       .then(function (response) {
         console.log(response.data);
         setData(response.data);
+        setCheck(true);
       })
       .catch(function (error) {
         console.log(error);
@@ -58,16 +61,19 @@ function MarketingProductManage(props: any) {
   const onClickSearchModal = useCallback(() => {
     setSearchModal(!isSearchModal);
     setProduct([]);
+    setCheck(false);
   }, [isSearchModal]);
 
   useEffect(() => {
     getMarketingByPro();
   }, [product]);
 
+  useEffect(() => {}, [data]);
+
   return (
     <StatisticsPage>
       <Search>
-        <SearchForm value={product[1]} onFocus={onclick}></SearchForm>
+        <SearchForm value={product[1]} onFocus={onclick} readOnly></SearchForm>
         <LoginBtn variant="dark" type="landscape" onClick={() => onclick()}>
           상품찾기
         </LoginBtn>
@@ -77,7 +83,7 @@ function MarketingProductManage(props: any) {
           <SellerMarketingSerch getProductNo={getProductNo} onClickToggleModal={onClickSearchModal} />
         </Modal>
       )}
-      {data && (
+      {check && (
         <>
           <Weekly>
             <StaticsWeekly>

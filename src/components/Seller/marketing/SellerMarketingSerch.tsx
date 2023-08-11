@@ -32,7 +32,7 @@ function SellerMarketingSerch(props: any) {
 
   async function getProduct() {
     const listurl = '/seller/import/search';
-    const sellerNo = 2;
+    const sellerNo = 8;
     await axios
       .get(listurl, {
         params: {
