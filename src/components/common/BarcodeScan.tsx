@@ -5,15 +5,13 @@ const BarcodeScan = (props: any) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const reader = useRef(new BrowserMultiFormatReader());
 
-  const [result, setResult] = useState<string>('');
-
   useEffect(() => {
     if (!videoRef.current) return;
     reader.current.decodeFromConstraints(
       {
         audio: false,
         video: {
-          facingMode: 'environment',
+          facingMode: 'environment', //user
         },
       },
       videoRef.current,
@@ -33,7 +31,6 @@ const BarcodeScan = (props: any) => {
   return (
     <>
       <video ref={videoRef} style={{ width: '100%' }} />
-      <p>{result}</p>
     </>
   );
 };
