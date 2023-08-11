@@ -14,7 +14,23 @@ function MyInfo(props: any) {
               {Object.keys(props.rows).map((title: string, id: number) => {
                 if (props.getItem !== undefined && title === 'companyName') props.getItem(props.rows[title]);
                 if (item[1] === title) {
-                  return <DetailValue>| {props.rows[title]}</DetailValue>;
+                  return (
+                    <DetailValue>
+                      |{' '}
+                      {title === 'marketing'
+                        ? props.rows[title] == true
+                          ? '구독'
+                          : '미구독'
+                        : title === 'matchings'
+                        ? item[title as keyof any] === null
+                          ? ''
+                          : item[title as keyof any].map((match: any, i: number) => {
+                              console.log('item', item[title]);
+                              //.companyName;
+                            })
+                        : props.rows[title]}
+                    </DetailValue>
+                  );
                 }
               })}
             </Row>
