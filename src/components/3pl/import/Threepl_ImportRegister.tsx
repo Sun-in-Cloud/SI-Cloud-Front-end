@@ -12,7 +12,7 @@ function Threepl_ImportRegister(props: any) {
   // const columns: string[] = ['바코드 번호', '상품명', '입고 예정 수량', '실제 입고량'];
   // const row = [
   //   { productNo: 8809718020261, productName: '마스크', requestAmount: 200, importAmount: 23 },
-  //   { productNo: 4029787487862, productName: '비타민', requestAmount: 300, importAmount: null },
+  //   { productNo: 4029787487862, productName: '비타민', requestAmount: 300, importAmount: 10 },
   //   { productNo: 8806521017211, productName: '소화제', requestAmount: 180, importAmount: null },
   // ];
 
@@ -30,7 +30,7 @@ function Threepl_ImportRegister(props: any) {
     await axios
       .get(listurl, {
         params: {
-          importNo: state.importNo,
+          importNo: state.item.importNo,
         },
         headers: {
           'Content-type': 'application/json',
@@ -50,8 +50,8 @@ function Threepl_ImportRegister(props: any) {
     const listurl = '/3pl/import/register';
     await axios
       .post(listurl, {
-        sellerNo: props.seller,
-        importNo: state.importNo,
+        sellerNo: state.sellerNo,
+        importNo: state.item.importNo,
         importList: rows.current,
       })
       .then(function (response) {
@@ -106,7 +106,7 @@ function Threepl_ImportRegister(props: any) {
       <MainPage>
         <List>
           <Title>
-            <p>입고예정번호: {state.importNo}</p>
+            <p>입고예정번호: {state.item.importNo}</p>
           </Title>
           <Threepl_ListingPage
             sellerNo={props.seller}
