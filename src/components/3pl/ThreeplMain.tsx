@@ -97,6 +97,7 @@ function ThreeplMain(props: any) {
 
   useEffect(() => {
     setMove(true);
+    setSeller(com[0].sellerNo);
   }, [location]);
 
   return (
