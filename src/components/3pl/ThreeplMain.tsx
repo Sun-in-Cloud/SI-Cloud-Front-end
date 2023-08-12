@@ -89,7 +89,9 @@ function ThreeplMain(props: any) {
         <Sidebar company={com} findSeller={findSeller} seller={com[0].companyName} move={move} setMove={setMove} />
       );
     } else if (location.pathname.includes('/3pl/mypage/seller/list')) {
-      return <Sidebar company={com} findSeller={findSeller} seller={com[0].companyName} />;
+      return (
+        <Sidebar company={com} findSeller={findSeller} seller={com[0].companyName} move={move} setMove={setMove} />
+      );
     }
   }
 
