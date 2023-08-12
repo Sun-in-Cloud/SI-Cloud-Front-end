@@ -23,7 +23,9 @@ function Threepl_ImportRegister(props: any) {
     ['실제 입고량', 'importAmount'],
   ];
 
-  const rows = useRef<any[]>([]);
+  const rows = useRef<any[]>([]); //처음 axios 값 가져와서 저장 후 변경
+
+  const [vRows, setVRows] = useState<any[]>(rows.current); //변경될 때마다 화면 렌더링을 위함
 
   async function getProductList() {
     const listurl = '/3pl/import/register';
@@ -39,6 +41,7 @@ function Threepl_ImportRegister(props: any) {
       .then(function (response) {
         console.log('-', response.data);
         rows.current = response.data;
+        setVRows(rows.current);
       })
       .catch(function (error) {
         console.log(error);
@@ -52,7 +55,7 @@ function Threepl_ImportRegister(props: any) {
       .post(listurl, {
         sellerNo: state.sellerNo,
         importNo: state.item.importNo,
-        importList: rows.current,
+        importList: vRows,
       })
       .then(function (response) {
         console.log('res', response);
@@ -92,15 +95,14 @@ function Threepl_ImportRegister(props: any) {
     });
     console.log('s', rows);
     rows.current = newRow;
+    setVRows(rows.current);
   }
 
   useEffect(() => {
     console.log('---');
     getProductList();
   }, []);
-  useEffect(() => {
-    console.log('curr', rows.current);
-  }, [rows]);
+
   return (
     <>
       <MainPage>
@@ -112,7 +114,7 @@ function Threepl_ImportRegister(props: any) {
             sellerNo={props.seller}
             titles={title}
             number={[]}
-            rows={rows.current}
+            rows={vRows}
             columns={title.length}
             onDetail={true}
           />
