@@ -13,7 +13,12 @@ function Sidebar(props: any) {
 
   const [tab, setTab] = useState<string>('curr');
 
-  useEffect(() => {}, [tab]);
+  useEffect(() => {}, [tab, props.company]);
+
+  useEffect(() => {
+    props.move ? setTab(props.seller) : '';
+    props.setMove(false);
+  });
 
   return (
     <SideBars>

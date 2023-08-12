@@ -65,28 +65,36 @@ function ThreeplMain(props: any) {
 
   const [seller, setSeller] = useState<number>();
 
+  const [move, setMove] = useState<boolean>(false);
+
   function findSeller(new_seller: any): void {
     setSeller(new_seller.item.sellerNo);
   }
 
   function submenu(location: Location) {
     if (location.pathname.includes('/3pl/product')) {
-      return <Sidebar company={com} findSeller={findSeller} />;
+      return (
+        <Sidebar company={com} findSeller={findSeller} seller={com[0].companyName} move={move} setMove={setMove} />
+      );
     } else if (location.pathname.includes('/3pl/order')) {
-      return <Sidebar company={com} findSeller={findSeller} />;
+      return (
+        <Sidebar company={com} findSeller={findSeller} seller={com[0].companyName} move={move} setMove={setMove} />
+      );
     } else if (location.pathname.includes('/3pl/import')) {
-      return <Sidebar company={com} findSeller={findSeller} />;
+      return (
+        <Sidebar company={com} findSeller={findSeller} seller={com[0].companyName} move={move} setMove={setMove} />
+      );
     } else if (location.pathname.includes('/3pl/export')) {
-      return <Sidebar company={com} findSeller={findSeller} />;
+      return (
+        <Sidebar company={com} findSeller={findSeller} seller={com[0].companyName} move={move} setMove={setMove} />
+      );
     } else if (location.pathname.includes('/3pl/mypage/seller/list')) {
-      return <Sidebar company={com} findSeller={findSeller} />;
+      return <Sidebar company={com} findSeller={findSeller} seller={com[0].companyName} />;
     }
   }
 
-  useEffect(() => {}, [seller]);
-
   useEffect(() => {
-    setSeller(com[0].sellerNo);
+    setMove(true);
   }, [location]);
 
   return (
