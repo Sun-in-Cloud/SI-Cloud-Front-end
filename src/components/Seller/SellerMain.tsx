@@ -20,16 +20,10 @@ import MarketingProductManage from './marketing/MarketingProductManage';
 import MarketingStatistics from './marketing/MarketingStatistics';
 import MarketingDanger from './marketing/MarketingDanger';
 import MarketingChannel from './marketing/MarketingChannel';
-
-function Overlay() {
-  return (
-    <div style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none', width: '100%', height: '100%' }}></div>
-  );
-}
+import { styled } from 'styled-components';
 
 function SellerMain(props: any) {
   const style = String(props.type);
-  //console.log(style);
 
   function StyleType(style: any) {
     if (style == 'portrait') {
@@ -42,40 +36,47 @@ function SellerMain(props: any) {
   return (
     <>
       <SellerHeader type={StyleType(style)} />
-      <Routes>
-        {/* 상품 */}
-        <Route path="/product" element={<SellerProductList type={StyleType(style)} />}></Route>
-        <Route path="/product/register" element={<SellerProductRegister type={StyleType(style)} />}></Route>
-        <Route path="/product/*" element={<SellerProductDetail type={StyleType(style)} />}></Route>
-        {/* 발주 */}
-        <Route path="/order/list" element={<SellerOrderList type={'landscape'} />}></Route>
-        {/* 입고 */}
-        {/* 입고 예정리스트 조회 - 화주사 확정 */}
-        <Route path="/import/pre/list" element={<SellerImportFixedList type={'landscape'} />}></Route>
-        {/* 입고 등록 */}
-        <Route path="/import/pre/*" element={<SellerImportPre type={'landscape'} />}></Route>
-        {/* 입고 확정 - 3PL확정 */}
-        <Route path="/import/list" element={<SellerImportList type={'landscape'} />}></Route>
-        {/* 출고 */}
-        <Route path="/export/list" element={<SellerExportList type={'landscape'} />}></Route>
-        <Route path="/export/*" element={<SellerDetailExport type={'landscape'} />}></Route>
-        {/* 매칭 */}
-        <Route path="/match/*" element={<SellerMatchList type={'landscape'} />}></Route>
-        {/* 마이페이지 */}
-        <Route path="/mypage" element={<SellerProductList type={'landscape'} />}></Route>
-        {/* 마케팅 */}
-        <Route path="/marketing" element={<MarketingRegister type={'landscape'} />}></Route>
-        <Route path="/marketing/statistics" element={<MarketingStatistics type={'landscape'} />}></Route>
-        <Route path="/marketing/product" element={<MarketingProductManage type={'landscape'} />}></Route>
-        <Route path="/marketing/danger" element={<MarketingDanger type={'landscape'} />}></Route>
-        <Route path="/marketing/channel" element={<MarketingChannel type={'landscape'} />}></Route>
-        {/* 쇼핑몰 */}
-        <Route path="/shop" element={<SellerProductList type={'landscape'} />}></Route>
+      <Body>
+        <Routes>
+          {/* 상품 */}
+          <Route path="/product" element={<SellerProductList type={StyleType(style)} />}></Route>
+          <Route path="/product/register" element={<SellerProductRegister type={StyleType(style)} />}></Route>
+          <Route path="/product/*" element={<SellerProductDetail type={StyleType(style)} />}></Route>
+          {/* 발주 */}
+          <Route path="/order/list" element={<SellerOrderList type={'landscape'} />}></Route>
+          {/* 입고 */}
+          {/* 입고 예정리스트 조회 - 화주사 확정 */}
+          <Route path="/import/pre/list" element={<SellerImportFixedList type={'landscape'} />}></Route>
+          {/* 입고 등록 */}
+          <Route path="/import/pre/*" element={<SellerImportPre type={'landscape'} />}></Route>
+          {/* 입고 확정 - 3PL확정 */}
+          <Route path="/import/list" element={<SellerImportList type={'landscape'} />}></Route>
+          {/* 출고 */}
+          <Route path="/export/list" element={<SellerExportList type={'landscape'} />}></Route>
+          <Route path="/export/*" element={<SellerDetailExport type={'landscape'} />}></Route>
+          {/* 매칭 */}
+          <Route path="/match/*" element={<SellerMatchList type={'landscape'} />}></Route>
+          {/* 마이페이지 */}
+          <Route path="/mypage" element={<SellerProductList type={'landscape'} />}></Route>
+          {/* 마케팅 */}
+          <Route path="/marketing" element={<MarketingRegister type={'landscape'} />}></Route>
+          <Route path="/marketing/statistics" element={<MarketingStatistics type={'landscape'} />}></Route>
+          <Route path="/marketing/product" element={<MarketingProductManage type={'landscape'} />}></Route>
+          <Route path="/marketing/danger" element={<MarketingDanger type={'landscape'} />}></Route>
+          <Route path="/marketing/channel" element={<MarketingChannel type={'landscape'} />}></Route>
+          {/* 쇼핑몰 */}
+          <Route path="/shop" element={<SellerProductList type={'landscape'} />}></Route>
 
-        <Route path="*" element={<SellerMainPage type={StyleType(style)} />}></Route>
-      </Routes>
+          <Route path="*" element={<SellerMainPage type={StyleType(style)} />}></Route>
+        </Routes>
+      </Body>
     </>
   );
 }
+const Body = styled.div`
+  margin-top: 95px;
+  width: 100%;
+  height: 630px;
+`;
 
 export default SellerMain;

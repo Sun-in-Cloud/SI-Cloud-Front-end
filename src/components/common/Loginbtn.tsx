@@ -58,9 +58,8 @@ const LoginBtn = styled.button<StyledButtonProps>`
   text-decoration: none;
   padding: 10px 20px;
   text-transform: uppercase;
-  transition: all 0.2s linear 0s;
-  font-weight: 700;
-  font-family: Jalnan;
+  transition: all 0.2s linear 0;
+  font-family: KBO-Light;
   color: ${(props) => color[props.variant]};
   border-color: ${(props) => backgroundColor[props.variant]};
   background: transparent;

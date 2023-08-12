@@ -168,8 +168,12 @@ function SellerMatchList(props: any) {
 }
 
 const MatchPage = styled.div`
-  margin-top: -40px;
+  padding-top: 35px;
+  background-color: #f4f0ed;
+  border-radius: 15px 15px 0 0;
+  height: 92%;
   display: grid;
+  padding-bottom: 20px;
   grid-template-columns: 0.7fr 2fr 4.5fr 0.7fr;
 `;
 

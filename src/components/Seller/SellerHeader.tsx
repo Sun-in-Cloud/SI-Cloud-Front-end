@@ -4,7 +4,7 @@ import LoginBtn from '../common/Loginbtn';
 import HeaderMenu from '../common/HeaderMenu';
 import SubMenu from '../common/SubMenu';
 import line from '../../img/line.svg';
-import logo from '../../img/logo.svg';
+import logo from '../../img/s.png';
 import SellerSubMenu from './SellerSubMenu';
 import { Link } from 'react-router-dom';
 
@@ -46,27 +46,34 @@ function SellerHeader(type: any) {
           </LoginBtn> // 옮기기로 했음
         </Loginbtns> */}
         <p></p>
+        <HeaderLogo>
+          <Link to="/seller">
+            <img src={logo} style={{ width: `${StyleType(style) === 'portrait' ? '90px' : '100px'}` }} />
+          </Link>
+        </HeaderLogo>
         <MenuTab>
-          <Link to="/seller/product" style={{ textDecoration: 'none' }}>
-            <HeaderMenu
-              type={StyleType(style)}
-              onClick={onChangeMenu}
-              value="상품관리"
-              bg={`${tab === '상품관리' ? 'active' : 'none'}`}
-            >
+          <HeaderMenu
+            type={StyleType(style)}
+            onClick={onChangeMenu}
+            value="상품관리"
+            bg={`${tab === '상품관리' ? 'active' : 'none'}`}
+          >
+            <Link to="/seller/product" style={{ textDecoration: 'none', color: 'black' }}>
               상품관리
-            </HeaderMenu>
-          </Link>
-          <Link to="/seller/order/list" style={{ textDecoration: 'none' }}>
-            <HeaderMenu
-              type={StyleType(style)}
-              onClick={onChangeMenu}
-              value="발주관리"
-              bg={`${tab === '발주관리' ? 'active' : 'none'}`}
-            >
+            </Link>
+          </HeaderMenu>
+
+          <HeaderMenu
+            type={StyleType(style)}
+            onClick={onChangeMenu}
+            value="발주관리"
+            bg={`${tab === '발주관리' ? 'active' : 'none'}`}
+          >
+            <Link to="/seller/order/list" style={{ textDecoration: 'none', color: 'black' }}>
               발주관리
-            </HeaderMenu>
-          </Link>
+            </Link>
+          </HeaderMenu>
+
           <HeaderMenu
             type={StyleType(style)}
             onClick={onChangeMenu}
@@ -75,18 +82,18 @@ function SellerHeader(type: any) {
           >
             입출고 관리
           </HeaderMenu>
-          <h1></h1>
-          <h1></h1>
-          <Link to="/seller/match/list" style={{ textDecoration: 'none' }}>
-            <HeaderMenu
-              type={StyleType(style)}
-              onClick={onChangeMenu}
-              value="매칭서비스"
-              bg={`${tab === '매칭서비스' ? 'active' : 'none'}`}
-            >
+
+          <HeaderMenu
+            type={StyleType(style)}
+            onClick={onChangeMenu}
+            value="매칭서비스"
+            bg={`${tab === '매칭서비스' ? 'active' : 'none'}`}
+          >
+            <Link to="/seller/match/list" style={{ textDecoration: 'none', color: 'black' }}>
               매칭서비스
-            </HeaderMenu>
-          </Link>
+            </Link>
+          </HeaderMenu>
+
           <HeaderMenu
             type={StyleType(style)}
             onClick={onChangeMenu}
@@ -103,38 +110,32 @@ function SellerHeader(type: any) {
           >
             마이페이지
           </HeaderMenu>
+
+          <p></p>
+          <p></p>
+          {tab === '입출고관리' ? <SellerSubMenu title={tab} closeMenu={closeMenu} /> : <p></p>}
+          <p></p>
+          {tab === '마케팅솔루션' ? <SellerSubMenu title={tab} closeMenu={closeMenu} /> : ''}
+          <p></p>
         </MenuTab>
-        <SellerSubMenu title={tab} closeMenu={closeMenu} />
-        <HeaderImages>
-          <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}` }} />
-          <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}`, zIndex: '-1' }} />
-          <img
-            src={logo}
-            style={{ width: `${StyleType(style) === 'portrait' ? '150px' : '70%'}`, marginTop: '-20px' }}
-          />
-          <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}`, zIndex: '-1' }} />
-          <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}` }} />
-        </HeaderImages>
+        <p></p>
       </HeaderBar>
     </Headers>
   );
 }
 
 const HeaderBar = styled.div`
-  height: 10%;
-  background: '#FCF9ED';
+  width: 100%;
   display: grid;
-  align-items: center;
-  grid-template-rows: 30px 40px 30px 0px;
-  padding: 4%;
+  grid-template-columns: 0.3fr 1.5fr 12fr 0.5fr;
 `;
 
 const MenuTab = styled.div`
+  margin-top: 15px;
   display: grid;
-  // align-items: center;
-  // justify-items: center;
-  width: 100%;
-  grid-template-columns: 1.3fr 1.3fr 1.5fr 100px 110px 1.5fr 1.5fr 1.5fr;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 1.5fr 1.5fr 2fr 1.8fr 2fr 2fr;
   z-index: 2;
 `;
 
@@ -144,17 +145,23 @@ const Loginbtns = styled.div`
   z-index: 1;
 `;
 
-const HeaderImages = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+const HeaderLogo = styled.div`
+  margin-top: -9px;
+  display: flex;
   justify-items: center;
   z-index: 0;
 `;
 
 const Headers = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  background-color: #fcf9ed;
-  display: flex;
+  display: grid;
+  padding: 20px 10px;
+  background-color: 'transparent';
+  height: 60px;
+  z-index: 10;
 `;
 
 export default SellerHeader;

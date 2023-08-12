@@ -43,12 +43,11 @@ const TableColums = styled.div<StyledGridProps>`
   grid-template-columns: ${(props) => gridLayout[props.colums]};
   align-items: center;
   justify-items: center;
-  border: 1.5px solid #1e1008;
+  border: 2px solid #1e1008;
   border-radius: 10px;
   width: 100%;
   height: 60px;
   padding: 3px;
-  background-color: #f4f0df;
 `;
 
 export default TableColumn;

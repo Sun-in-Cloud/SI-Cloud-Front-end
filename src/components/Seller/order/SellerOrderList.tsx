@@ -145,15 +145,17 @@ function SellerOrderList(props: any) {
 //onDetail={true}
 
 const SellerOrder = styled.div`
-  margin-top: -10px;
+  padding-top: 55px;
+  background-color: #f4f0ed;
+  border-radius: 15px 15px 0 0;
   display: grid;
   width: 100%;
-  height: 600px;
-  grid-template-columns: 0.7fr 2fr 4.3fr 0.7fr;
+  height: 92%;
+  grid-template-columns: 0.7fr 2.3fr 4fr 0.7fr;
   z-index: 2;
 `;
 const OrderList = styled.div`
-  width: 300px;
+  width: 100%;
 `;
 const OrderDetail = styled.div`
   overflow-x: hidden;

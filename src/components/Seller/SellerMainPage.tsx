@@ -124,7 +124,7 @@ function SellerMainPage(props: any) {
 }
 const Marketing = styled.div`
   width: 100%;
-  height: 560px;
+  height: 100%;
   margin-top: -20px;
 `;
 

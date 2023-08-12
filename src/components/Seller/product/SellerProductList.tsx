@@ -92,8 +92,8 @@ function SellerProductList(props: any) {
         <p></p>
         <p></p>
         <Buttons>
-          <LoginBtn variant="primary" type={StyleType(style)} onClick={() => registerProduct()}>
-            등록하기
+          <LoginBtn variant="dark" type={StyleType(style)} onClick={() => registerProduct()}>
+            +
           </LoginBtn>
         </Buttons>
         <p></p>
@@ -113,7 +113,10 @@ function SellerProductList(props: any) {
 }
 
 const ProductMain = styled.div`
-  margin-top: -65px;
+  padding-top: 10px;
+  background-color: #f4f0ed;
+  border-radius: 15px 15px 0 0;
+  height: 100%;
   display: grid;
   grid-template-columns: 0.7fr 6.6fr 0.7fr;
   grid-template-rows: 0.7fr 8fr;
@@ -126,9 +129,7 @@ const Buttons = styled.div`
   display: grid;
   justify-content: end;
   align-items: center;
-  margin-left: 13px;
-  margin-right: 13px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 
 export default SellerProductList;

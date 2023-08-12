@@ -23,7 +23,7 @@ function SellerSubMenu(props: any) {
       case '입출고관리':
         const clist = [
           { subMenuName: '입고 등록', subMenuUrl: '/seller/import/pre' },
-          { subMenuName: '입고 예정 내역', subMenuUrl: '/seller/import/pre/list' },
+          { subMenuName: '입고예정 내역', subMenuUrl: '/seller/import/pre/list' },
           { subMenuName: '입고 내역', subMenuUrl: '/seller/import/list' },
           { subMenuName: '출고', subMenuUrl: '/seller/export/list' },
         ];
@@ -79,25 +79,24 @@ function SellerSubMenu(props: any) {
 }
 
 const SubMenuBar = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
-  height: 50px;
-  z-index: 100;
-  border-radius: 10px;
-  background: #d9eaff;
-  opacity: 90%;
+  margin-top: 10px;
+  display: grid;
+  width: fit-content;
+  background-color: #fff;
+  border: 2px solid black;
+  border-radius: 15px;
+  padding: 5px;
+  justify-items: start;
 `;
 const SubItem = styled.button`
   margin-left: 20px;
   font-family: Dotum_Bold;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 800;
   border: none;
   color: black;
   background-color: transparent;
-  margin-top: 10px;
-  z-index: 50;
+  margin: 5px;
 `;
 
 export default SellerSubMenu;
