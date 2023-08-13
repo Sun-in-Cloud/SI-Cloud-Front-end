@@ -34,12 +34,15 @@ function Threepl_ImportRegister(props: any) {
   const [amount, setAmount] = useState<number>(0);
   const [modal, setModal] = useState(false);
 
+  const [same, setSame] = useState<boolean>(false);
+
   const onChangeAmount = (e: any) => {
     setAmount(e.target.value);
   };
 
   const _toggle = () => {
     setModal(!modal);
+    setSame(false);
   };
 
   const [modal2, setModal2] = useState(false);
@@ -49,20 +52,19 @@ function Threepl_ImportRegister(props: any) {
   };
 
   const _onDetected = (result: any) => {
-    setModal(false);
-    setScanCode(result ? result.codeResult.code : '');
-    setModal2(true);
-    {
-      /*let set: boolean = true;
     rows.current.map((value: any, index: number) => {
-      value.productNo === result ? (set = false) : '';
-    });
-    if (set !== true) {
+      if (value.productNo == result.codeResult.code) {
+        setSame(true);
+        setScanCode(result ? result.codeResult.code : '');
+        setModal(false);
+        setModal2(true);
+        console.log('sc', scanCode);
+        return;
+      }
       setModal(false);
-      setScanCode(result ? result.codeResult.code : '');
       setModal2(true);
-    }*/
-    }
+      console.log(result.codeResult.code);
+    });
   };
 
   async function getProductList() {
@@ -187,9 +189,9 @@ function Threepl_ImportRegister(props: any) {
           aria-describedby="simple-modal-description"
         >
           <DialogContent>
-            <p>{scanCode}</p>
-            수량
-            <input type="number" onChange={onChangeAmount} />
+            <p>{same ? scanCode : '바코드를 다시 인식하세요'}</p>
+            {same ? '수량' : ''}
+            <input type="number" onChange={onChangeAmount} style={{ display: same ? 'block' : 'none' }} />
             <LoginBtn
               variant="primary"
               type="landscape"
@@ -198,6 +200,7 @@ function Threepl_ImportRegister(props: any) {
                 getProductNo(scanCode, amount);
                 setModal2(!modal2);
               }}
+              style={{ display: same ? 'block' : 'none' }}
             ></LoginBtn>
           </DialogContent>
         </Dialog>
