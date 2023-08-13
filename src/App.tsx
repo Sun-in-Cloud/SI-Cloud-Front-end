@@ -9,6 +9,8 @@ import LandscapeMain from './components/LandscapeMain';
 import SellerMain from './components/Seller/SellerMain';
 import ThreeplMain from './components/3pl/ThreeplMain';
 import WMSMain from './components/WMS/WMSMain';
+import CommonMain from './components/Auth/CommonMain';
+import ShopingList from './components/shop/ShopingList';
 
 // 세로 모드
 const TabletPortrait = ({ children }: any) => {
@@ -28,7 +30,7 @@ function App() {
       <TabletPortrait>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LandscapeMain />}></Route>
+            <Route path="/" element={<CommonMain />}></Route>
             <Route path="/3pl/*" element={<ThreeplMain type={'landscape'} />}></Route>
             <Route path="/seller/*" element={<SellerMain type={'landscape'} />}></Route>
             <Route path="/wms/*" element={<WMSMain type={'landscape'} />}></Route>
@@ -39,10 +41,11 @@ function App() {
       <TabletLandscape>
         <BrowserRouter>
           <Routes>
-            <Route path="/"></Route>
+            <Route path="/shop/*" element={<ShopingList type={'landscape'} />}></Route>
             <Route path="/3pl/*" element={<ThreeplMain type={'landscape'} />}></Route>
             <Route path="/seller/*" element={<SellerMain type={'landscape'} />}></Route>
             <Route path="/wms/*" element={<WMSMain type={'landscape'} />}></Route>
+            <Route path="/*" element={<CommonMain />}></Route>
           </Routes>
         </BrowserRouter>
       </TabletLandscape>
