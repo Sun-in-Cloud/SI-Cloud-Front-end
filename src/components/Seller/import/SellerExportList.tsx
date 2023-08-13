@@ -102,6 +102,9 @@ function SellerExportList(props: any) {
   return (
     <>
       <PreImportList>
+        <Title>
+          <SubTitle> 출고 내역 확인하기</SubTitle>
+        </Title>
         <p></p>
         <ImportList>
           <TableColumn title={fixedImportTitles} columns={fixedImportTitles.length} />
@@ -135,11 +138,28 @@ function SellerExportList(props: any) {
     </>
   );
 }
+
+const Title = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #f6f2ef;
+  width: 100%;
+  height: 120px;
+  border-radius: 0 0 10px 10px;
+`;
+
+const SubTitle = styled.div`
+  display: grid;
+  margin-top: 75px;
+  font-size: 20px;
+  font-family: 'GmarketSansMedium';
+`;
 const PreImportList = styled.div`
-  margin-top: -10px;
   display: grid;
   width: 100%;
-  height: 600px;
+  height: 550px;
+  padding-top: 50px;
   grid-template-columns: 0.7fr 3fr 3fr 0.7fr;
 `;
 const ImportList = styled.div`

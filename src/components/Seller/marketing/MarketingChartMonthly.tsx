@@ -76,7 +76,7 @@ function MarketingChartMonthly(props: any) {
                   labels: {
                     style: {
                       fontSize: '12px',
-                      fontFamily: 'Jalnan',
+                      fontFamily: 'GmarketSansMedium',
                       colors: ['#1E1008'],
                     },
                   },
@@ -106,7 +106,7 @@ function MarketingChartMonthly(props: any) {
                   y: { formatter: (value) => `${value}건` },
                   style: {
                     fontSize: '12px',
-                    fontFamily: 'Jalnan',
+                    fontFamily: 'GmarketSansMedium',
                   },
                 },
               }}
@@ -134,7 +134,7 @@ function MarketingChartMonthly(props: any) {
                   labels: {
                     style: {
                       fontSize: '12px',
-                      fontFamily: 'Jalnan',
+                      fontFamily: 'GmarketSansMedium',
                       colors: ['#1E1008'],
                     },
                   },
@@ -150,7 +150,7 @@ function MarketingChartMonthly(props: any) {
                 dataLabels: {
                   style: {
                     fontSize: '12px',
-                    fontFamily: 'Jalnan',
+                    fontFamily: 'GmarketSansMedium',
                     colors: ['#1E1008'],
                   },
                 },
@@ -170,7 +170,7 @@ function MarketingChartMonthly(props: any) {
                   },
                   style: {
                     fontSize: '12px',
-                    fontFamily: 'Jalnan',
+                    fontFamily: 'GmarketSansMedium',
                   },
                 },
               }}
@@ -190,7 +190,6 @@ const Graph = styled.div`
   box-shadow: 0 0 3px -2px black;
   margin-top: -3px;
   padding: 10px;
-  z-index: 10;
   justify-content: center;
   align-items: center;
 `;

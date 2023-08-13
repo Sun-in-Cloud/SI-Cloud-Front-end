@@ -42,49 +42,48 @@ function SellerProductEdit(props: any) {
   };
 
   return (
-    <>
-      <ProductEdit>
-        {props.titles.map((item: string[], index: number) => {
-          return (
-            <>
-              <Title>{item[0]}</Title>
-              {Object.keys(props.rows).map((it: string, idx: number) => {
-                if (item[1] === it) {
-                  return (
-                    <RegisterNew
-                      type="text"
-                      name={it}
-                      key={item[1]}
-                      value={editProduct[it as keyof editProduct]}
-                      onChange={onChangeText}
-                      onFocus={handleFocusEvent}
-                    />
-                  );
-                }
-              })}
-            </>
-          );
-        })}
+    <ProductEdit>
+      {props.titles.map((item: string[], index: number) => {
+        return (
+          <>
+            <Title>{item[0]}</Title>
+            {Object.keys(props.rows).map((it: string, idx: number) => {
+              if (item[1] === it) {
+                return (
+                  <RegisterNew
+                    type="text"
+                    name={it}
+                    key={item[1]}
+                    value={editProduct[it as keyof editProduct]}
+                    onChange={onChangeText}
+                    onFocus={handleFocusEvent}
+                  />
+                );
+              }
+            })}
+          </>
+        );
+      })}
 
-        <p></p>
-        <Btns>
-          <LoginBtn variant="primary" type={StyleType(props.style)} onClick={() => sendEditProduct()}>
-            수정하기
-          </LoginBtn>
-        </Btns>
-      </ProductEdit>
-    </>
+      <p></p>
+      <Btns>
+        <LoginBtn variant="dark" type={StyleType(props.style)} onClick={() => sendEditProduct()}>
+          수정
+        </LoginBtn>
+      </Btns>
+    </ProductEdit>
   );
 }
 
 const ProductEdit = styled.div`
   display: grid;
   width: 100%;
+  margin-top: 30px;
   grid-template-columns: 2fr 3fr;
 `;
 
 const Title = styled.p`
-  font-family: Jalnan;
+  font-family: KBO;
   font-size: 16px;
   letter-spacing: 3px;
 `;
@@ -93,6 +92,7 @@ const Btns = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-left: -70px;
-  margin-top: 15px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 `;
 export default SellerProductEdit;

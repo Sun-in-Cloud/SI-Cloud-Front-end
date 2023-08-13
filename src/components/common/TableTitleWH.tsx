@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const TableTitleWH = styled.button`
-  border: 1px solid #1e1008;
-  border-radius: 30px;
+  border: 2px solid #1e1008;
+  border-radius: 15px;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -27,37 +27,48 @@ function TableDetailPage(props: any) {
       <TableDetail>
         <Row columns="3">
           <Item>
-            {props.titles[0][0]} :{detailInfo?.productNo}
+            <div style={{ fontFamily: 'KBO-Light', display: 'flex' }}>{props.titles[0][0]} : </div>
+            <div style={{ display: 'flex', marginTop: '0px' }}>{detailInfo?.productNo}</div>
           </Item>
           <Item>
-            {props.titles[1][0]} : {detailInfo?.productName}
+            <div style={{ fontFamily: 'KBO-Light', display: 'flex' }}>{props.titles[1][0]} : </div>
+            <div style={{ display: 'flex', marginTop: '0px' }}>{detailInfo?.productName}</div>
           </Item>
           <Item>
-            {props.titles[2][0]} : {detailInfo?.productGroup}
+            <div style={{ fontFamily: 'KBO-Light', display: 'flex' }}>{props.titles[1][0]} : </div>
+            <div style={{ display: 'flex', marginTop: '1px' }}>{detailInfo?.productGroup}</div>
           </Item>
         </Row>
-        <img src={dashedLine} />
+        <div>
+          <hr style={{ border: '1.5px solid black' }} />
+        </div>
 
         <Row columns="3">
           <Item>
-            {props.titles[3][0]} : {detailInfo?.enoughStock}
+            <div style={{ fontFamily: 'KBO-Light', display: 'flex' }}>{props.titles[3][0]} : </div>
+            <div style={{ display: 'flex', marginTop: '-1px' }}> {detailInfo?.enoughStock}</div>
           </Item>
           <Item>
-            {props.titles[4][0]} : {detailInfo?.safetyStock}
+            <div style={{ fontFamily: 'KBO-Light', display: 'flex' }}>{props.titles[4][0]} : </div>
+            <div style={{ display: 'flex', marginTop: '-1px' }}> {detailInfo?.safetyStock}</div>
           </Item>
           <Item>
-            {props.titles[5][0]} : {detailInfo?.currentStock}
+            <div style={{ fontFamily: 'KBO-Light', display: 'flex' }}>{props.titles[5][0]} : </div>
+            <div style={{ display: 'flex', marginTop: '-1px' }}> {detailInfo?.currentStock}</div>
           </Item>
         </Row>
 
-        <img src={dashedLine} />
-
+        <div>
+          <hr style={{ border: '1.5px solid #382F2D' }} />
+        </div>
         <Row columns="3">
           <Item>
-            {props.titles[6][0]} : {detailInfo?.importPrice}
+            <div style={{ fontFamily: 'KBO-Light', display: 'flex' }}>{props.titles[6][0]} : </div>
+            <div style={{ display: 'flex', marginTop: '-1px' }}> {detailInfo?.importPrice}</div>
           </Item>
           <Item>
-            {props.titles[7][0]} : {detailInfo?.consumerPrice}
+            <div style={{ fontFamily: 'KBO-Light', display: 'flex' }}>{props.titles[7][0]} : </div>
+            <div style={{ display: 'flex', marginTop: '-1px' }}> {detailInfo?.consumerPrice}</div>
           </Item>
           <Item></Item>
         </Row>
@@ -67,17 +78,13 @@ function TableDetailPage(props: any) {
 }
 const TableDetail = styled.div`
   grid-area: ListingDetailPage;
-  height: 80%;
-  width: 100%;
-  overflow: hidden;
-  margin-top: 5px;
-  border: 1.5px solid #1e1008;
+  height: 300px;
   border-radius: 10px;
   padding: 10px;
-  background-color: #f4f0df;
+  background-color: #fff;
+  box-shadow: 0 1px 2.5px -2px black;
   display: grid;
   align-items: center;
-  margin-top: 20px;
 `;
 
 const Row: any = styled.div<StyledGridProps>`
@@ -86,14 +93,21 @@ const Row: any = styled.div<StyledGridProps>`
   grid-auto-rows: 1fr;
   margin: 10px 10px 10px 10px;
   justify-items: start;
-  width: 1000px;
+  align-items: center;
+  width: 100%;
 `;
 //width 일단 막아둠
 
 const Item = styled.div`
   display: flex;
   font-size: 18px;
-  font-family: 'Jalnan';
+  font-family: Kim;
+  align-items: center;
   letter-spacing: 2px;
+`;
+
+const Title = styled.div`
+  display: grid;
+  align-items: center;
 `;
 export default TableDetailPage;

@@ -29,7 +29,7 @@ function SellerImportFixedList(props: any) {
 
   const fixedImportTitles: string[][] = [
     ['입고번호', 'importNo'],
-    ['작성일자', 'orderDate'],
+    ['작성일자', 'localRequestDate'],
     ['등록여부', 'isImported'],
   ];
 
@@ -52,7 +52,7 @@ function SellerImportFixedList(props: any) {
         params: {
           sellerNo: 8,
           pageNum: currentPage,
-          countPerPage: 3,
+          countPerPage: 10,
         },
         headers: {
           'Content-type': 'application/json',
@@ -60,7 +60,8 @@ function SellerImportFixedList(props: any) {
       })
       .then(function (response) {
         console.log(response.data);
-        setPreImportList(response.data.orders);
+        setPreImportList(response.data.preImports);
+        console.log(response);
         let list = [];
         for (let i = 1; i <= response.data.totalPage; i++) {
           list.push(i);
@@ -104,6 +105,9 @@ function SellerImportFixedList(props: any) {
   return (
     <>
       <PreImportList>
+        <Title>
+          <SubTitle>입고 예정리스트 조회</SubTitle>
+        </Title>
         <p></p>
         <ImportList>
           <TableColumn title={fixedImportTitles} columns={fixedImportTitles.length} />
@@ -137,19 +141,37 @@ function SellerImportFixedList(props: any) {
     </>
   );
 }
+const Title = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #f6f2ef;
+  width: 100%;
+  height: 120px;
+  border-radius: 0 0 10px 10px;
+`;
+
+const SubTitle = styled.div`
+  display: grid;
+  margin-top: 75px;
+  font-size: 20px;
+  font-family: 'GmarketSansMedium';
+`;
 const PreImportList = styled.div`
-  margin-top: -10px;
   display: grid;
   width: 100%;
-  height: 600px;
+  height: 550px;
+  padding-top: 50px;
   grid-template-columns: 0.7fr 3fr 3fr 0.7fr;
 `;
 const ImportList = styled.div`
   width: 400px;
 `;
 const Detail = styled.div`
-  overflow-y: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: 0 10px;
+  height: 500px;
 `;
 const Navbtns = styled.div`
   display: flex;

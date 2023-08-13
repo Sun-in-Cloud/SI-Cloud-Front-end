@@ -63,6 +63,38 @@ const GlobalStyle = createGlobalStyle`
         font-weight: normal;
         font-style: normal;
     }
+
+    @font-face {
+        font-family: 'KBO';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
+        font-weight: 700;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'KBO-Light';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
+        font-weight: 300;
+        font-style: light;
+    }
+    @font-face {
+        font-family: 'Pretendard';
+        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'GmarketSansMedium';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'Kim';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/KimjungchulGothic-Bold.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+    }
 `;
 
 export default GlobalStyle;

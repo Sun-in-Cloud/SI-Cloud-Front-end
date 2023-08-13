@@ -6,13 +6,8 @@ const color = {
 };
 
 const fontSize = {
-  portrait: '18px',
-  landscape: '20px',
-};
-
-const width = {
-  portrait: '100%',
-  landscape: '100%',
+  portrait: '15px',
+  landscape: '18px',
 };
 
 const hover_width = {
@@ -21,7 +16,7 @@ const hover_width = {
 };
 
 const clickItem = {
-  active: '#D9EAFF',
+  active: '#e1dad3',
   none: 'transparent',
 };
 
@@ -36,22 +31,25 @@ interface ScreenTypeProps {
 }
 
 const HeaderMenu = styled.button<ScreenTypeProps>`
-  font-family: Jalnan;
+  font-family: KBO;
   color: ${(props) => color[props.type]};
   font-size: ${(props) => fontSize[props.type]};
-
-  letter-spacing: 4px;
-  border-radius: 15px 15px 0 0;
+  letter-spacing: 3px;
   border: none;
   display: flex;
+  height: fit-content;
+  width: fit-content;
   justify-content: center;
   align-items: center;
+  padding: 3px;
   background-color: ${(props) => clickItem[props.bg]};
-  width: ${(props) => width[props.type]};
-  margin-bottom: 20px;
-  padding: ${(props) => padding[props.type]};
+
+  &:hover {
+    width: fit-content;
+    background-color: #e1dad3;
+    transition-duration: 2s;
+    transform: translate(-8%);
+  }
 `;
 
 export default HeaderMenu;
-
-// /-webkit-text-stroke: 1px black;

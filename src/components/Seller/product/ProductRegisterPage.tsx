@@ -99,23 +99,23 @@ function ProductRegisterPage(props: any) {
   );
 }
 const RegisterList = styled.div`
-  height: fit-content;
+  padding-top: 10px;
   border-radius: 10px;
-  background-color: #f4f0df;
+  background-color: #fff;
+  box-shadow: 0 1px 2.5px -2px black;
   display: grid;
   align-items: center;
   justify-items: start;
-  margin-top: -20px;
+  height: 85%;
   padding: 20px;
-  height: 95%;
   grid-template-columns: 1fr 2fr;
 `;
 
 const RegisterDrop = styled.input`
   width: 150px;
   height: 40px;
-  border: 1.5px solid black;
-  background-color: #f4f0df;
+  border: 2px solid #382f2d;
+  background-color: #fdfaf7;
   font-family: Jalnan;
   font-size: 15px;
 `;

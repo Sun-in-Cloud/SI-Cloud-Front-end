@@ -72,6 +72,9 @@ function MarketingProductManage(props: any) {
 
   return (
     <StatisticsPage>
+      <Title>
+        <SubTitle> 상품별 통계 확인하기</SubTitle>
+      </Title>
       <Search>
         <SearchForm value={product[1]} onFocus={onclick} readOnly></SearchForm>
         <LoginBtn variant="dark" type="landscape" onClick={() => onclick()}>
@@ -164,9 +167,26 @@ function MarketingProductManage(props: any) {
     </StatisticsPage>
   );
 }
+
+const Title = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #f6f2ef;
+  width: 100%;
+  height: 120px;
+  border-radius: 0 0 10px 10px;
+`;
+
+const SubTitle = styled.div`
+  display: grid;
+  margin-top: 75px;
+  font-size: 20px;
+  font-family: 'GmarketSansMedium';
+`;
 const StatisticsPage = styled.div`
-  margin-top: -45px;
-  height: 480px;
+  height: 550px;
+  padding-top: 50px;
   display: grid;
   grid-template-columns: 0.5fr 3.5fr 2fr 0.5fr;
   grid-template-rows: 45px 2fr 2fr;

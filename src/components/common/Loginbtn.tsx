@@ -3,13 +3,13 @@ import styled from 'styled-components';
 const backgroundColor = {
   primary: '#0073FF',
   secondary: '#DA3915',
-  dark: '#1E1008',
+  dark: '#382F2D',
 };
 
 const color = {
   primary: '#0073FF',
   secondary: '#DA3915',
-  dark: '#1E1008',
+  dark: '#382F2D',
 };
 
 const width = {
@@ -58,13 +58,15 @@ const LoginBtn = styled.button<StyledButtonProps>`
   text-decoration: none;
   padding: 10px 20px;
   text-transform: uppercase;
-  transition: all 0.2s linear 0s;
-  font-weight: 700;
-  font-family: Jalnan;
+  transition: all 0.2s linear 0;
+  font-family: KBO-Light;
   color: ${(props) => color[props.variant]};
   border-color: ${(props) => backgroundColor[props.variant]};
   background: transparent;
   font-size: 14px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default LoginBtn;

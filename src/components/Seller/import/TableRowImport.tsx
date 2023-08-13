@@ -83,7 +83,9 @@ function TableRowImport(props: any) {
                   );
                 })}
               </Row>
-              <img src={dashedLine} />
+              <Line>
+                <hr style={{ border: '0.1px solid black' }} />
+              </Line>
             </>
           );
         })}
@@ -112,5 +114,6 @@ const Item = styled.div`
   font-family: 'Jalnan';
   letter-spacing: 2px;
 `;
+const Line = styled.div``;
 
 export default TableRowImport;
