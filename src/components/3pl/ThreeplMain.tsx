@@ -16,6 +16,7 @@ import Threepl_Match from './match/Threepl_MatchList';
 import Threepl_MyPage from './my/Threepl_MyPage';
 import Threepl_MySeller from './my/Threepl_MySeller';
 import BarcodeScan from '../common/BarcodeScan';
+import SubBar from './SubBar';
 
 function ThreeplMain(props: any) {
   function StyleType(style: any) {
@@ -72,26 +73,14 @@ function ThreeplMain(props: any) {
   }
 
   function submenu(location: Location) {
-    if (location.pathname.includes('/3pl/product')) {
-      return (
-        <Sidebar company={com} findSeller={findSeller} seller={com[0].companyName} move={move} setMove={setMove} />
-      );
-    } else if (location.pathname.includes('/3pl/order')) {
-      return (
-        <Sidebar company={com} findSeller={findSeller} seller={com[0].companyName} move={move} setMove={setMove} />
-      );
-    } else if (location.pathname.includes('/3pl/import')) {
-      return (
-        <Sidebar company={com} findSeller={findSeller} seller={com[0].companyName} move={move} setMove={setMove} />
-      );
-    } else if (location.pathname.includes('/3pl/export')) {
-      return (
-        <Sidebar company={com} findSeller={findSeller} seller={com[0].companyName} move={move} setMove={setMove} />
-      );
-    } else if (location.pathname.includes('/3pl/mypage/seller/list')) {
-      return (
-        <Sidebar company={com} findSeller={findSeller} seller={com[0].companyName} move={move} setMove={setMove} />
-      );
+    if (
+      location.pathname.includes('/3pl/product') ||
+      location.pathname.includes('/3pl/order') ||
+      location.pathname.includes('/3pl/import') ||
+      location.pathname.includes('/3pl/export') ||
+      location.pathname.includes('/3pl/mypage/seller/list')
+    ) {
+      return <SubBar company={com} findSeller={findSeller} seller={com[0].companyName} move={move} setMove={setMove} />;
     }
   }
 
@@ -143,38 +132,59 @@ function ThreeplMain(props: any) {
       )}
 
       {location.pathname !== '/3pl/import/pre/register' && location.pathname !== '/3pl/export/invoice' && (
-        <MainPage>
-          <h1></h1>
-          {submenu(location)}
-          <Routes>
-            <Route path="/product/list" element={<Threepl_ProductList seller={seller} />}></Route>{' '}
-            <Route path="/order/register" element={<Threepl_OrderRegister seller={seller} />}></Route>{' '}
-            <Route path="/order/list" element={<Threepl_OrderList seller={seller} />}></Route>{' '}
-            <Route path="/import/list" element={<Threepl_ImportList seller={seller} />}></Route>{' '}
-            <Route path="/import/pre/list" element={<Threepl_ImportPreList seller={seller} />}></Route>{' '}
-            <Route path="/export/list" element={<Threepl_Export seller={seller} />}></Route>{' '}
-            <Route path="/mypage/seller/list" element={<Threepl_MySeller seller={seller} />}></Route>{' '}
-            <Route path="/barcode" element={<BarcodeScan />}></Route>
-          </Routes>
-          <h1></h1>
-        </MainPage>
+        <>
+          <MainPage>
+            <ComBar>{submenu(location)}</ComBar>
+            <GridPage>
+              <h1></h1>
+
+              <Routes>
+                <Route path="/product/list" element={<Threepl_ProductList seller={seller} />}></Route>{' '}
+                <Route path="/order/register" element={<Threepl_OrderRegister seller={seller} />}></Route>{' '}
+                <Route path="/order/list" element={<Threepl_OrderList seller={seller} />}></Route>{' '}
+                <Route path="/import/list" element={<Threepl_ImportList seller={seller} />}></Route>{' '}
+                <Route path="/import/pre/list" element={<Threepl_ImportPreList seller={seller} />}></Route>{' '}
+                <Route path="/export/list" element={<Threepl_Export seller={seller} />}></Route>{' '}
+                <Route path="/mypage/seller/list" element={<Threepl_MySeller seller={seller} />}></Route>{' '}
+                <Route path="/barcode" element={<BarcodeScan />}></Route>
+              </Routes>
+              <h1></h1>
+            </GridPage>
+          </MainPage>
+        </>
       )}
     </>
   );
 }
 
 const MainPage = styled.div`
-  padding-top: 150px;
-  display: grid;
-  grid-template-columns: 0.5fr 1.6fr 5fr 0.5fr;
-  grid-template-areas: '. . Routes .';
+  margin-top: 100px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  background-color: #f4f0ed;
 `;
 
-const ExportPage = styled.div`
-  padding-top: 150px;
+const ComBar = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const GridPage = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 5fr 0.5fr;
   grid-template-areas: '. Routes .';
+  padding-top: 30px;
+`;
+
+const ExportPage = styled.div`
+  margin-top: 150px;
+  display: grid;
+  grid-template-columns: 0.5fr 5fr 0.5fr;
+  grid-template-areas: '. Routes .';
+  background-color: #f4f0ed;
+  margin-top: 100px;
+  padding-top: 80px;
+  padding-bottom: 20px;
 `;
 
 export default ThreeplMain;

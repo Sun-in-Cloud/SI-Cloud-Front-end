@@ -208,7 +208,6 @@ function Threepl_MatchList(props: any) {
 }
 
 const MainPage = styled.div`
-  margin-top: -40px;
   display: grid;
   grid-template-columns: 3fr 0.2fr 5fr;
   grid-template-areas: 'SelectTable . Threepl_ListingPage';
