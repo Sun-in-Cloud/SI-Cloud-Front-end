@@ -48,16 +48,29 @@ function SubMenu(props: any) {
         break;
     }
   }, [props.title]);
+
+  function close() {
+    console.log(menuOn);
+    setMenuOn(false);
+    stateChange();
+  }
+
+  function stateChange() {
+    props.closeMenu();
+  }
+
   return (
     <>
       {menuOn && (
         <SubMenuBar>
           {subMenu &&
-            subMenu.map((item: ThreeplSubMenu, index: number) => (
-              <Link to={item.subMenuUrl}>
-                <SubItem key={index}>{item.subMenuName}</SubItem>
-              </Link>
-            ))}
+            subMenu.map((item: ThreeplSubMenu, index: number) => {
+              return (
+                <Link to={item.subMenuUrl}>
+                  <SubItem onClick={close}>{item.subMenuName}</SubItem>
+                </Link>
+              );
+            })}
         </SubMenuBar>
       )}
     </>
@@ -65,23 +78,24 @@ function SubMenu(props: any) {
 }
 
 const SubMenuBar = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
-  height: 50px;
-  z-index: 100;
-  border-radius: 10px;
-  background: #d9eaff;
-  opacity: 90%;
+  margin-top: 10px;
+  display: grid;
+  width: fit-content;
+  background-color: #fff;
+  border: 2px solid black;
+  border-radius: 15px;
+  padding: 5px;
+  justify-items: start;
 `;
 const SubItem = styled.button`
   margin-left: 20px;
-  font-family: Jalnan;
+  font-family: Dotum_Bold;
   font-size: 14px;
+  font-weight: 800;
   border: none;
   color: black;
   background-color: transparent;
-  margin-top: 10px;
+  margin: 5px;
 `;
 
 export default SubMenu;

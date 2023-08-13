@@ -164,14 +164,14 @@ function ThreeplMain(props: any) {
 }
 
 const MainPage = styled.div`
-  margin-top: -40px;
+  padding-top: 150px;
   display: grid;
   grid-template-columns: 0.5fr 1.6fr 5fr 0.5fr;
   grid-template-areas: '. . Routes .';
 `;
 
 const ExportPage = styled.div`
-  margin-top: -40px;
+  padding-top: 150px;
   display: grid;
   grid-template-columns: 0.5fr 5fr 0.5fr;
   grid-template-areas: '. Routes .';
