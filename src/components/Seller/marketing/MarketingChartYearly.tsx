@@ -65,7 +65,6 @@ function MarketingChartYearly(props: any) {
                 yaxis: { show: false },
                 xaxis: {
                   categories: numberYearlyTitle,
-
                   position: 'top',
                   axisBorder: {
                     show: false,
@@ -86,7 +85,7 @@ function MarketingChartYearly(props: any) {
                   style: {
                     fontSize: '12px',
                     fontFamily: 'GmarketSansMedium',
-                    colors: ['#ffffff'],
+                    colors: ['#1E1008'],
                   },
                 },
                 fill: {

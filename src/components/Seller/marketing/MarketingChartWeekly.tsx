@@ -112,7 +112,7 @@ function MarketingChartWeekly(props: any) {
                   y: { formatter: (value) => `${value}건` },
                   style: {
                     fontSize: '12px',
-                    fontFamily: 'Jalnan',
+                    fontFamily: 'GmarketSansMedium',
                   },
                 },
               }}
@@ -139,7 +139,8 @@ function MarketingChartWeekly(props: any) {
                   categories: numberWeeklyTitle,
                   labels: {
                     style: {
-                      fontSize: '12px',
+                      fontSize: '14px',
+                      fontWeight: 'bold',
                       fontFamily: 'GmarketSansMedium',
                       colors: ['#1E1008'],
                     },

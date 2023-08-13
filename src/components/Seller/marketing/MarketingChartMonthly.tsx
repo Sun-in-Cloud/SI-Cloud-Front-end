@@ -93,8 +93,8 @@ function MarketingChartMonthly(props: any) {
                 dataLabels: {
                   style: {
                     fontSize: '12px',
-                    fontFamily: 'Jalnan',
-                    colors: ['#ffffff'],
+                    fontFamily: 'GmarketSansMedium',
+                    colors: ['#1E1008'],
                   },
                 },
                 fill: {
