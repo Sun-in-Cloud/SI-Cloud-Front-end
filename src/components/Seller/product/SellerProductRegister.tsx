@@ -99,8 +99,10 @@ function SellerProductRegister(props: any) {
 }
 
 const RegisterProduct = styled.div`
-  width: 100%;
-  height: 500px;
+  padding-top: 55px;
+  background-color: #f4f0ed;
+  border-radius: 15px 15px 0 0;
+  height: 100%;
   display: grid;
   grid-template-columns: 0.7fr 4fr 2.6fr 0.7fr;
   grid-template-rows: 4fr 1fr;
@@ -109,6 +111,7 @@ const RegisterProduct = styled.div`
 
 const RegisterForm = styled.div`
   grid-area: RegisterForm;
+  height: 90%;
 `;
 
 const RegisterBarcode = styled.div`

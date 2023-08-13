@@ -100,6 +100,9 @@ function SellerImporList(props: any) {
   return (
     <>
       <SellerImport>
+        <Title>
+          <SubTitle>입고내역 확인</SubTitle>
+        </Title>
         <p></p>
         <ImportList>
           <TableColumn title={ImportTitles} columns={ImportTitles.length} />
@@ -126,11 +129,28 @@ function SellerImporList(props: any) {
   );
 }
 
+const Title = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #f6f2ef;
+  width: 100%;
+  height: 120px;
+  border-radius: 0 0 10px 10px;
+`;
+
+const SubTitle = styled.div`
+  display: grid;
+  margin-top: 75px;
+  font-size: 20px;
+  font-family: 'GmarketSansMedium';
+`;
+
 const SellerImport = styled.div`
-  margin-top: -40px;
   display: grid;
   width: 100%;
-  height: 600px;
+  height: 550px;
+  padding-top: 50px;
   grid-template-columns: 0.7fr 1fr 4.5fr 0.7fr;
   overflow-x: hidden;
   z-index: 2;

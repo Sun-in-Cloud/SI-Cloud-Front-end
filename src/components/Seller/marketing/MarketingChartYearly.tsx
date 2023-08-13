@@ -76,7 +76,7 @@ function MarketingChartYearly(props: any) {
                   labels: {
                     style: {
                       fontSize: '12px',
-                      fontFamily: 'Jalnan',
+                      fontFamily: 'GmarketSansMedium',
                       colors: ['#1E1008'],
                     },
                   },
@@ -85,7 +85,7 @@ function MarketingChartYearly(props: any) {
                 dataLabels: {
                   style: {
                     fontSize: '12px',
-                    fontFamily: 'Jalnan',
+                    fontFamily: 'GmarketSansMedium',
                     colors: ['#ffffff'],
                   },
                 },
@@ -98,7 +98,7 @@ function MarketingChartYearly(props: any) {
                   y: { formatter: (value) => `${value}건` },
                   style: {
                     fontSize: '12px',
-                    fontFamily: 'Jalnan',
+                    fontFamily: 'GmarketSansMedium',
                   },
                 },
               }}
@@ -126,7 +126,7 @@ function MarketingChartYearly(props: any) {
                   labels: {
                     style: {
                       fontSize: '12px',
-                      fontFamily: 'Jalnan',
+                      fontFamily: 'GmarketSansMedium',
                       colors: ['#1E1008'],
                     },
                   },
@@ -142,7 +142,7 @@ function MarketingChartYearly(props: any) {
                 dataLabels: {
                   style: {
                     fontSize: '12px',
-                    fontFamily: 'Jalnan',
+                    fontFamily: 'GmarketSansMedium',
                     colors: ['#1E1008'],
                   },
                 },
@@ -162,7 +162,7 @@ function MarketingChartYearly(props: any) {
                   },
                   style: {
                     fontSize: '12px',
-                    fontFamily: 'Jalnan',
+                    fontFamily: 'GmarketSansMedium',
                   },
                 },
               }}

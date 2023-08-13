@@ -67,7 +67,7 @@ function SellerMainPage(props: any) {
         gl={{ alpha: false, antialias: false, stencil: false, depth: false }}
         dpr={[1, 1.5]}
       >
-        <color attach="background" args={['#fcf9ed']} />
+        <color attach="background" args={['#f4f0ed']} />
         <ScrollControls damping={3.5} pages={5}>
           <Items />
           <Scroll html>

@@ -35,7 +35,7 @@ function Filter(props: any) {
 }
 
 const Title = styled.div`
-  font-family: Jalnan;
+  font-family: KBO;
   font-size: 20px;
   margin-bottom: 10px;
 `;
@@ -53,16 +53,16 @@ const Chips = styled.div`
 
 const Chip = styled.button`
   display: inline-block;
-  border: 1px solid #1e1008;
-  border-radius: 30px;
-  font-family: Jalnan;
+  border: 1.5px solid #1e1008;
+  border-radius: 15px;
+  font-family: GmarketSansMedium;
   font-size: 15px;
   color: #1e1008;
   background: #ffffff;
   letter-spacing: 2px;
   width: fit-content;
   padding: 10px;
-  margin: 5px;
+  margin: 0px 5px;
 
   &:hover {
     color: #ffffff;

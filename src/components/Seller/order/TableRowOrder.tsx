@@ -20,12 +20,12 @@ const gridLayout = {
 };
 
 const backgroundColor = {
-  active: '#f4f0df',
+  active: '#fff',
   none: 'transparent',
 };
 
 const border = {
-  active: '2px solid black',
+  active: 'transparent',
   none: 'transparent',
 };
 
@@ -87,7 +87,9 @@ function TableRowOrder(props: any) {
                   );
                 })}
               </Row>
-              <img src={dashedLine} />
+              <Line>
+                <hr style={{ border: '0.1px solid black' }} />
+              </Line>
             </>
           );
         })}
@@ -105,9 +107,11 @@ const Tablerows = styled.div`
 
 const Row = styled.div<StyledGridProps>`
   display: grid;
+  height: 33px;
   align-items: center;
   grid-template-columns: ${(props) => gridLayout[props.columns]};
   grid-auto-rows: 1fr;
+  padding: 5px;
   margin: 10px 0 5px 0px;
   background-color: ${(props) => backgroundColor[props.bkgd]};
   border: ${(props) => border[props.bkgd]};
@@ -117,9 +121,9 @@ const Item = styled.div`
   font-size: 15px;
   font-family: 'Jalnan';
   letter-spacing: 2px;
-  padding: 10px;
+  padding: 5px;
 `;
-
+const Line = styled.div``;
 export default TableRowOrder;
 
 {

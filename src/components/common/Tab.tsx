@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const borderColor = {
-  primary: '#0073FF',
-  secondary: '#DA3915',
+  primary: '#d09da6',
+  secondary: '#382F2D',
 };
 
 const fontColor = {
@@ -12,8 +12,8 @@ const fontColor = {
 };
 
 const backgroundColor = {
-  primary: '#0073FF',
-  secondary: '#DA3915',
+  primary: '#d09da6',
+  secondary: '#382F2D',
   basic: 'transparent',
 };
 
@@ -29,9 +29,13 @@ const Tab = styled.button<StyledButtonProps>`
   border-bottom-style: hidden;
   border-radius: 14px 14px 0 0;
   background-color: ${(props) => backgroundColor[props.bg]};
-  font-family: 'Jalnan';
+  font-family: GmarketSansMedium;
+  font-size: 15px;
   color: ${(props) => fontColor[props.bg]};
   margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 3;
 `;
 

@@ -93,7 +93,7 @@ function SelectTable(props: any) {
           <Filter title={['가격', 'numValue']} option={options4} findFilter={findFilter}></Filter>
         )}
         <Filter title={['남은 계약 기간', 'contractPeriod']} option={options5} findFilter={findFilter}></Filter>
-        <LoginBtn variant="primary" type="landscape" onClick={getMacthList} style={{ marginTop: '20px' }}>
+        <LoginBtn variant="dark" type="landscape" onClick={getMacthList} style={{ marginTop: '10px' }}>
           조회하기
         </LoginBtn>
       </Table>
@@ -104,11 +104,12 @@ function SelectTable(props: any) {
 const Table = styled.div`
   //display: grid;
   margin-bottom: 10px;
+  height: 80%;
   border: 2px solid #1e1008;
   border-radius: 25px;
   text-align: left;
   padding: 30px;
-  background-color: #f4f0df;
+  background-color: 'transparent';
 `;
 
 const Title = styled.div`

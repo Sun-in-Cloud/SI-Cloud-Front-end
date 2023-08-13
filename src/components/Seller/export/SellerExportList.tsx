@@ -90,6 +90,9 @@ function SellerExportList(props: any) {
   return (
     <>
       <ExportForm>
+        <Title>
+          <SubTitle>출고 확인하기</SubTitle>
+        </Title>
         <p></p>
         <ExportList>
           <TableColumn title={exportTitles} columns={exportTitles.length} />
@@ -108,16 +111,31 @@ function SellerExportList(props: any) {
     </>
   );
 }
+const Title = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #f6f2ef;
+  width: 100%;
+  height: 120px;
+  border-radius: 0 0 10px 10px;
+`;
 
-const ExportForm = styled.div`
-  margin-top: -65px;
+const SubTitle = styled.div`
   display: grid;
+  margin-top: 75px;
+  font-size: 20px;
+  font-family: 'GmarketSansMedium';
+`;
+const ExportForm = styled.div`
+  display: grid;
+  height: 550px;
+  padding-top: 30px;
   grid-template-columns: 0.7fr 6.6fr 0.7fr;
   z-index: 2;
 `;
 
 const ExportList = styled.div`
-  margin-top: 30px;
   padding: 11px;
   overflow-x: hidden;
 `;

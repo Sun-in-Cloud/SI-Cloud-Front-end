@@ -83,7 +83,7 @@ function MarketingChartWeekly(props: any) {
                     style: {
                       fontSize: '14px',
                       fontWeight: 'bold',
-                      fontFamily: 'Jalnan',
+                      fontFamily: 'GmarketSansMedium',
                       colors: ['#1E1008'],
                     },
                   },
@@ -99,7 +99,7 @@ function MarketingChartWeekly(props: any) {
                 dataLabels: {
                   style: {
                     fontSize: '12px',
-                    fontFamily: 'Jalnan',
+                    fontFamily: 'GmarketSansMedium',
                     colors: ['#1E1008'],
                   },
                 },
@@ -140,7 +140,7 @@ function MarketingChartWeekly(props: any) {
                   labels: {
                     style: {
                       fontSize: '12px',
-                      fontFamily: 'Jalnan',
+                      fontFamily: 'GmarketSansMedium',
                       colors: ['#1E1008'],
                     },
                   },
@@ -157,7 +157,7 @@ function MarketingChartWeekly(props: any) {
                 dataLabels: {
                   style: {
                     fontSize: '12px',
-                    fontFamily: 'Jalnan',
+                    fontFamily: 'GmarketSansMedium',
                     colors: ['#1E1008'],
                   },
                 },
@@ -177,7 +177,7 @@ function MarketingChartWeekly(props: any) {
                   },
                   style: {
                     fontSize: '12px',
-                    fontFamily: 'Jalnan',
+                    fontFamily: 'GmarketSansMedium',
                   },
                 },
               }}

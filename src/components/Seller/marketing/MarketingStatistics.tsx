@@ -48,6 +48,9 @@ function MarketingStatistics(props: any) {
 
   return (
     <StatisticsPage>
+      <Title>
+        <SubTitle> 마케팅 통계 확인</SubTitle>
+      </Title>
       {data && (
         <>
           <Weekly>
@@ -129,9 +132,26 @@ function MarketingStatistics(props: any) {
     </StatisticsPage>
   );
 }
+
+const Title = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #f6f2ef;
+  width: 100%;
+  height: 120px;
+  border-radius: 0 0 10px 10px;
+`;
+
+const SubTitle = styled.div`
+  display: grid;
+  margin-top: 75px;
+  font-size: 20px;
+  font-family: 'GmarketSansMedium';
+`;
 const StatisticsPage = styled.div`
-  margin-top: -45px;
-  height: 480px;
+  height: 550px;
+  padding-top: 50px;
   display: grid;
   grid-template-columns: 0.5fr 3.5fr 2fr 0.5fr;
   grid-template-rows: 2fr 2fr;
@@ -177,7 +197,7 @@ const Btns = styled.div`
 
 const Item = styled.div`
   font-size: 15px;
-  font-family: 'Jalnan';
+  font-family: 'KBO';
   letter-spacing: 2px;
   margin-right: 50px;
   display: flex;

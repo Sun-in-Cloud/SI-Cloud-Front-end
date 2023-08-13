@@ -132,7 +132,7 @@ function SellerProductDetail(props: any) {
         </TopButtons>
         <ListDetailPage titles={titles} rows={productDetail} sellerNo={sellerNo} getDeleteProduct={getDeleteProduct} />
         <BotButtons>
-          <LoginBtn variant="primary" type={StyleType(props.style)} onClick={onClickToggleModal}>
+          <LoginBtn variant="dark" type={StyleType(props.style)} onClick={onClickToggleModal}>
             상품 수정
           </LoginBtn>
         </BotButtons>
@@ -153,11 +153,14 @@ function SellerProductDetail(props: any) {
   );
 }
 const ProductMain = styled.div`
-  margin-top: -55px;
+  padding-top: 25px;
   display: grid;
-  height: 350px;
-  grid-template-columns: 0.7fr 6.6fr 0.7fr;
-  grid-template-rows: 0.7fr 10fr 0.7fr;
+  background-color: #f4f0ed;
+  border-radius: 15px 15px 0 0;
+  height: 98%;
+  width: 100%;
+  grid-template-columns: 0.7fr 7fr 0.7fr;
+  grid-template-rows: 0.8fr 2fr 0.8fr;
   grid-template-areas: '. TopButtons .' '. ListingDetailPage .' '. BotButtons .';
 `;
 
@@ -165,16 +168,17 @@ const TopButtons = styled.div`
   grid-area: TopButtons;
   display: grid;
   justify-content: end;
-  align-items: center;
+  align-items: end;
   margin-left: 13px;
   margin-right: 13px;
+  margin-bottom: 17px;
 `;
 
 const BotButtons = styled.div`
   grid-area: BotButtons;
   display: grid;
   justify-content: end;
-  align-items: center;
+  align-items: start;
   margin-left: 13px;
   margin-right: 13px;
 `;

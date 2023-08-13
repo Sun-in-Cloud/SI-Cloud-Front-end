@@ -149,10 +149,10 @@ const SellerOrder = styled.div`
   background-color: #f4f0ed;
   border-radius: 15px 15px 0 0;
   display: grid;
-  width: 100%;
-  height: 92%;
-  grid-template-columns: 0.7fr 2.3fr 4fr 0.7fr;
+  grid-template-columns: 0.3fr 3.5fr 5fr 0.3fr;
+  column-gap: 15px;
   z-index: 2;
+  height: 93%;
 `;
 const OrderList = styled.div`
   width: 100%;
@@ -160,6 +160,15 @@ const OrderList = styled.div`
 const OrderDetail = styled.div`
   overflow-x: hidden;
   overflow-y: auto;
+  padding: 10px;
+  margin: 0 10px;
+  height: 500px;
+  display: flex;
+  background: #fff;
+
+  justify-content: center;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px -2px black;
 `;
 const Navbtns = styled.div`
   display: flex;
@@ -167,7 +176,7 @@ const Navbtns = styled.div`
 `;
 
 const Flow = styled.div`
-  padding: 0 10px;
+  width: 97%;
 `;
 
 export default SellerOrderList;

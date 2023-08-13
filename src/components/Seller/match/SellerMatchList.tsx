@@ -175,6 +175,7 @@ const MatchPage = styled.div`
   display: grid;
   padding-bottom: 20px;
   grid-template-columns: 0.7fr 2fr 4.5fr 0.7fr;
+  column-gap: 10px;
 `;
 
 const Navbtns = styled.div`

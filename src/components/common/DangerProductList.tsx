@@ -20,7 +20,7 @@ function DangerProductList(props: any) {
   const titles = [
     ['상품명', 'productName'],
     ['상품번호', 'productNo'],
-    ['마지막 주문', 'lastOrderDate'],
+    ['최종주문', 'lastOrderDate'],
     ['입고가', 'importPrice'],
     ['소비자가', 'consumerPrice'],
     ['위험도', 'dangerDegree'],
@@ -63,11 +63,11 @@ function DangerProductList(props: any) {
 
 const Product = styled.div`
   display: grid;
-  background-color: #fff;
+  background-color: #fdfaf7;
   margin: 15px;
   padding: 20px;
   height: 400px;
-  width: 300px;
+  width: 260px;
   border-radius: 10px;
   box-shadow: 0 0 3px -2px black;
 `;
@@ -75,17 +75,16 @@ const Product = styled.div`
 const OneRow = styled.div`
   display: flex;
   align-items: center;
-  width: 380px;
   height: 40px;
 `;
 
 const Item = styled.div`
   font-size: 16px;
-  font-family: 'Jalnan';
+  font-family: 'GmarketSansMedium';
   letter-spacing: 2px;
   background-color: 'green';
   align-items: center;
-  width: 200px;
+  width: 150px;
 `;
 
 export default DangerProductList;

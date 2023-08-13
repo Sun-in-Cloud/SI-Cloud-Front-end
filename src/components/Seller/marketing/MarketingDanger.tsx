@@ -53,6 +53,9 @@ function MarketingDanger(props: any) {
 
   return (
     <DangerList>
+      <Title>
+        <SubTitle> 위험상품 확인하기</SubTitle>
+      </Title>
       <p></p>
       <StyledSlider {...settings}>
         {prodctList.map((item) => {
@@ -67,17 +70,35 @@ function MarketingDanger(props: any) {
     </DangerList>
   );
 }
+
+const Title = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #f6f2ef;
+  width: 100%;
+  height: 120px;
+  border-radius: 0 0 10px 10px;
+`;
+
+const SubTitle = styled.div`
+  display: grid;
+  margin-top: 75px;
+  font-size: 20px;
+  font-family: 'GmarketSansMedium';
+`;
 const DangerList = styled.div`
-  margin-top: -45px;
+  padding-top: 30px;
   height: 550px;
   display: grid;
   align-items: center;
   justify-items: center;
   grid-template-columns: 0.5fr 6.6fr 0.5fr;
+  column-gap: 10px;
 `;
 
 const StyledSlider = styled(Slider)`
-  width: 1100px;
+  width: 950px;
   height: 500px;
 
   .slick-prev:before,

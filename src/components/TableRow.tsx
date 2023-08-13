@@ -33,8 +33,6 @@ function TableRow(props: any) {
   const pathName = location.pathname;
 
   function onDetail(detail: boolean, item: any) {
-    // 성은이랑 다시 얘기해보기.. switch로 바꿔도 괜춘?
-
     if (detail) {
       switch (pathName) {
         case '/seller/marketing/product': {
@@ -92,7 +90,9 @@ function TableRow(props: any) {
                   );
                 })}
               </Row>
-              <img src={dashedLine} />
+              <Line>
+                <hr style={{ border: '0.1px solid black' }} />
+              </Line>
             </>
           );
         })}
@@ -111,9 +111,9 @@ const Box = styled.div``;
 const Row = styled.div<StyledGridProps>`
   display: grid;
   grid-template-columns: ${(props) => gridLayout[props.columns]};
-  grid-auto-rows: 1fr;
+  height: 33px;
   align-items: center;
-  margin: 15px 0 5px 15px;
+  margin: 10px 0 5px 15px;
 `;
 
 const Item = styled.div`
@@ -121,6 +121,7 @@ const Item = styled.div`
   font-family: 'Jalnan';
   letter-spacing: 2px;
 `;
+const Line = styled.div``;
 
 export default TableRow;
 

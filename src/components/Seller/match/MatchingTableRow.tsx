@@ -70,7 +70,9 @@ function MatchingTableRow(props: any) {
                   );
                 })}
               </Row>
-              <img src={dashedLine} />
+              <Line>
+                <hr style={{ border: '0.1px solid black' }} />
+              </Line>
             </>
           );
         })}
@@ -83,11 +85,12 @@ const Tablerows = styled.div`
   height: 400px;
   width: 100%;
   overflow: hidden;
-  margin-top: 5px;
 `;
 
 const Row = styled.div<StyledGridProps>`
   display: grid;
+  align-items: center;
+  height: 33px;
   grid-template-columns: ${(props) => gridLayout[props.columns]};
   grid-auto-rows: 1fr;
   margin: 10px 0 5px 0;
@@ -95,8 +98,8 @@ const Row = styled.div<StyledGridProps>`
 
 const Item = styled.div`
   font-size: 15px;
-  font-family: 'Jalnan';
+  font-family: GmarketSansMedium;
   letter-spacing: 2px;
 `;
-
+const Line = styled.div``;
 export default MatchingTableRow;

@@ -8,7 +8,7 @@ function ProductDropdowm({ value, setGroupName, setIsOpen, isOpen }: any) {
   };
   return (
     <List onClick={ValueClick}>
-      <Li>{value}</Li>
+      <Li> *{value}</Li>
     </List>
   );
 }
@@ -22,20 +22,17 @@ const List = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
-  &:hover {
-    display: flex;
-    border-radius: 5px;
-    background-color: #fff;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 3px;
-  }
 `;
 
 const Li = styled.li`
   font-family: 'Jalnan';
   font-size: 15px;
+
+  &:before {
+    width: fit-content;
+    background-color: #e1dad3;
+    transition-duration: 2s;
+    transform: translate(-8%);
+  }
 `;
 export default ProductDropdowm;

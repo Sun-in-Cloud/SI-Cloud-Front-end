@@ -247,6 +247,9 @@ function SellerImportPre(props: any) {
   return (
     <>
       <SellerImport>
+        <Title>
+          <SubTitle>솔루션 신청하기</SubTitle>
+        </Title>
         <p></p>
         <ImportList>
           <TableColumn title={preImportTitles} columns={preImportTitles.length} />
@@ -315,10 +318,27 @@ function SellerImportPre(props: any) {
     </>
   );
 }
-const SellerImport = styled.div`
-  margin-top: -35px;
+
+const Title = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #f6f2ef;
+  width: 100%;
+  height: 120px;
+  border-radius: 0 0 10px 10px;
+`;
+
+const SubTitle = styled.div`
   display: grid;
-  height: 600px;
+  margin-top: 75px;
+  font-size: 20px;
+  font-family: 'GmarketSansMedium';
+`;
+const SellerImport = styled.div`
+  display: grid;
+  height: 550px;
+  padding-top: 50px;
   grid-template-columns: 0.7fr 2fr 5fr 0.7fr;
   z-index: 2;
 `;

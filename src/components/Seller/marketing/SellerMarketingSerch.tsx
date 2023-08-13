@@ -58,7 +58,7 @@ function SellerMarketingSerch(props: any) {
         <ModalDiv>
           <SearchDiv onSubmit={onSubmit}>
             <RegisterNew type="text" ref={searchProduct} />
-            <LoginBtn variant="primary" type="landscape">
+            <LoginBtn variant="dark" type="landscape">
               검색
             </LoginBtn>
           </SearchDiv>
