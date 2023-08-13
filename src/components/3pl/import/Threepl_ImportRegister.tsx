@@ -31,12 +31,14 @@ function Threepl_ImportRegister(props: any) {
 
   //바코드 스캔
   const [scanCode, setScanCode] = useState<string>('');
+  const [scanName, setScanName] = useState<string>('');
   const [amount, setAmount] = useState<number>(0);
   const [modal, setModal] = useState(false);
 
   const [same, setSame] = useState<boolean>(false);
 
   const onChangeAmount = (e: any) => {
+    console.log(e.target.value);
     setAmount(e.target.value);
   };
 
@@ -56,6 +58,7 @@ function Threepl_ImportRegister(props: any) {
       if (value.productNo == result.codeResult.code) {
         setSame(true);
         setScanCode(result ? result.codeResult.code : '');
+        setScanName(value.productName);
         setModal(false);
         setModal2(true);
         console.log('sc', scanCode);
@@ -136,6 +139,8 @@ function Threepl_ImportRegister(props: any) {
     console.log('s', rows);
     rows.current = newRow;
     setVRows(rows.current);
+    setAmount(0);
+    setScanCode('');
   }
 
   useEffect(() => {
@@ -189,36 +194,40 @@ function Threepl_ImportRegister(props: any) {
           aria-describedby="simple-modal-description"
         >
           <DialogContent>
-            <p>{same ? scanCode : '바코드를 다시 인식하세요'}</p>
-            {same ? '수량' : ''}
-            <input type="number" onChange={onChangeAmount} style={{ display: same ? 'block' : 'none' }} />
-            <LoginBtn
-              variant="primary"
-              type="landscape"
-              onClick={() => {
-                console.log(rows);
-                getProductNo(scanCode, amount);
-                setModal2(!modal2);
+            <SelTitleCode>
+              <p>{same ? [scanCode] : ''}</p>
+            </SelTitleCode>
+            <SelTitle>
+              <p>{same ? scanName : '바코드를 다시 인식하세요'}</p>
+            </SelTitle>
+
+            <SelContent>
+              <p>{same ? '입고된 수량을 입력해주세요' : ''}</p>
+            </SelContent>
+
+            <Input
+              type="number"
+              onChange={onChangeAmount}
+              style={{
+                display: same ? 'block' : 'none',
               }}
-              style={{ display: same ? 'block' : 'none' }}
-            ></LoginBtn>
+            />
+            <Btn>
+              <LoginBtn
+                variant="primary"
+                type="landscape"
+                onClick={() => {
+                  console.log(rows);
+                  getProductNo(scanCode, amount);
+                  setModal2(!modal2);
+                }}
+                style={{ display: same ? 'block' : 'none' }}
+              >
+                입고 수량 입력
+              </LoginBtn>
+            </Btn>
           </DialogContent>
         </Dialog>
-
-        {/*<p></p>
-        <ScanNBtn>
-          <BarcodeScan getItem={getProductNo} />
-          <LoginBtn
-            variant="primary"
-            type="landscape"
-            onClick={() => {
-              console.log(rows);
-              RegisterImport();
-            }}
-          >
-            입고 등록
-          </LoginBtn>
-          </ScanNBtn>*/}
       </MainPage>
     </>
   );
@@ -248,5 +257,44 @@ const ScanNBtn = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
+`;
+
+const SelTitleCode = styled.div`
+  display: flex;
+  width: 400px;
+  justify-content: center;
+  font-family: jalnan;
+  font-size: 20px;
+  margin-bottom: -20px;
+`;
+
+const SelTitle = styled.div`
+  display: flex;
+  width: 400px;
+  justify-content: center;
+  font-family: jalnan;
+  font-size: 30px;
+`;
+
+const SelContent = styled.div`
+  display: flex;
+  width: 400px;
+  justify-content: flex-start;
+  font-family: jalnan;
+  font-size: 20px;
+`;
+
+const Input = styled.input`
+  width: 400px;
+  height: 40px;
+  font-family: jalnan;
+  font-size: 20px;
+  margin: 10px;
+`;
+
+const Btn = styled.div`
+  display: flex;
+  width: 400px;
+  justify-content: center;
 `;
 export default Threepl_ImportRegister;

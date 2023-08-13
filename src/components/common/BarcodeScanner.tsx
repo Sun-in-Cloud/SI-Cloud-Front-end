@@ -68,7 +68,6 @@ const BarcodeScanner = (props: any) => {
   return (
     <ScanArea>
       <div id="interactive" className="viewport" />
-      <div className="scanBorder">BARCODE</div>
     </ScanArea>
   );
 };
