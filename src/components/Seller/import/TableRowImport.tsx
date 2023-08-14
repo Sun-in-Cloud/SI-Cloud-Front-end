@@ -27,7 +27,6 @@ interface PreDetailList {
 }
 
 function TableRowImport(props: any) {
-  // console.log(props.rows);
   const [num, setNum] = useState(0);
 
   const navigate = useNavigate();

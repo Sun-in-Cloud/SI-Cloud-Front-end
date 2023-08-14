@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import dashedLine from '../../../img/dashedLine.svg';
 import { Route, useLocation, useNavigate } from 'react-router-dom';
 import TableTitleWH from '../../common/TableTitleWH';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 interface StyledGridProps {
   readonly columns: '2' | '3' | '4' | '5' | '6' | '7';
@@ -39,7 +40,6 @@ function ExportTableRow(props: any) {
   const navigate = useNavigate();
   function onDetail(detail: boolean, item: any) {
     const exportNo = item.exportNo;
-    console.log(exportNo);
 
     if (detail) {
       navigate('/seller/export/' + exportNo, { state: { exportNo: exportNo } });

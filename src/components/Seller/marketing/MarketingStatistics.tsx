@@ -6,11 +6,13 @@ import Tab from '../../common/Tab';
 import MarketingChartWeekly from './MarketingChartWeekly';
 import MarketingChartMonthly from './MarketingChartMonthly';
 import MarketingChartYearly from './MarketingChartYearly';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 function MarketingStatistics(props: any) {
   const [weeklyType, setWeeklyType] = useState('weeklyCount');
   const [monthlyType, setMonthlyType] = useState('monthlyCount');
   const [yearlyType, setyearlyType] = useState('yearlyCount');
+  const seller = useAppSelect((state) => state.seller);
 
   const [data, setData] = useState<any>();
 
@@ -19,11 +21,10 @@ function MarketingStatistics(props: any) {
     await axios
       .get(listurl, {
         params: {
-          sellerNo: 44,
+          sellerNo: seller.userNo,
         },
       })
       .then(function (response) {
-        console.log(response.data);
         setData(response.data);
       })
       .catch(function (error) {

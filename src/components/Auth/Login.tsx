@@ -23,7 +23,6 @@ function Login(props: any) {
   const setUser = (e: any) => {
     e.preventDefault();
     dispatch(setUserReducer(loginUser));
-    //dispatch(setUserAsync(loginUser));
     getUserInfo();
   };
 
@@ -51,9 +50,10 @@ function Login(props: any) {
     await axios
       .post(listurl, info)
       .then(function (response) {
-        console.log(response.data);
+        console.log(response);
         if (response.data.userType == 'SELLER') {
           dispatch(setSellerReducer(response.data));
+          navigate('/seller');
         } else if (response.data.userType == 'THREE_PL') {
           dispatch(setThreeplReducer(response.data));
           navigate('/3pl');

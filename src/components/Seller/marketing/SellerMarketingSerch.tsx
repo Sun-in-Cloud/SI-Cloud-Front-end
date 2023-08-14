@@ -5,8 +5,10 @@ import { styled } from 'styled-components';
 import LoginBtn from '../../common/Loginbtn';
 import TableColumn from '../../TableColumn';
 import axios from 'axios';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 function SellerMarketingSerch(props: any) {
+  const seller = useAppSelect((state) => state.seller);
   const titles = [
     ['상품명', 'productName'],
     ['상품번호', 'productNo'],
@@ -32,7 +34,7 @@ function SellerMarketingSerch(props: any) {
 
   async function getProduct() {
     const listurl = '/seller/import/search';
-    const sellerNo = 8;
+    const sellerNo = seller.userNo;
     await axios
       .get(listurl, {
         params: {

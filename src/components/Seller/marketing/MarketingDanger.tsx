@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import DangerProductList from '../../common/DangerProductList';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 interface DangerProduct {
   consumerPrice: number;
@@ -17,6 +18,7 @@ interface DangerProduct {
 }
 
 function MarketingDanger(props: any) {
+  const seller = useAppSelect((state) => state.seller);
   const [prodctList, setProductList] = useState<Array<DangerProduct | undefined>>([]);
   const settings = {
     dots: true,
@@ -30,16 +32,13 @@ function MarketingDanger(props: any) {
 
   async function getProduct() {
     const listurl = '/seller/marketing/danger';
-
-    const sellerNo = 8;
     await axios
       .get(listurl, {
         params: {
-          sellerNo: sellerNo,
+          sellerNo: seller.userNo,
         },
       })
       .then(function (response) {
-        console.log(response);
         setProductList(response.data);
       })
       .catch(function (error) {

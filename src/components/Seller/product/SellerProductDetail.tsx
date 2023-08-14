@@ -7,6 +7,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Modal from '../../common/Modal';
 import SellerProductEdit from './SellerProductEdit';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 interface ProductDetail {
   [index: string]: string | undefined;
@@ -21,8 +23,7 @@ interface ProductDetail {
 }
 
 function SellerProductDetail(props: any) {
-  const sellerNo = 8;
-
+  const seller = useAppSelect((state) => state.seller);
   const [deleteProduct, setDeleteProduct] = useState<string>();
   const [editProduct, setEditProduct] = useState<ProductDetail[]>([]);
   const [isModalOpen, setOpenModal] = useState<boolean>(false);
@@ -126,11 +127,25 @@ function SellerProductDetail(props: any) {
     <>
       <ProductMain>
         <TopButtons>
-          <LoginBtn variant="secondary" type={StyleType(props.style)} onClick={showDeleteProduct}>
-            상품 삭제
-          </LoginBtn>
+          <div>
+            <LoginBtn variant="dark" type="landscape">
+              <Link to="/seller/product" style={{ textDecoration: 'none', color: 'black' }}>
+                뒤로가기
+              </Link>
+            </LoginBtn>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'end' }}>
+            <LoginBtn variant="secondary" type={StyleType(props.style)} onClick={showDeleteProduct}>
+              상품 삭제
+            </LoginBtn>
+          </div>
         </TopButtons>
-        <ListDetailPage titles={titles} rows={productDetail} sellerNo={sellerNo} getDeleteProduct={getDeleteProduct} />
+        <ListDetailPage
+          titles={titles}
+          rows={productDetail}
+          sellerNo={seller.userNo}
+          getDeleteProduct={getDeleteProduct}
+        />
         <BotButtons>
           <LoginBtn variant="dark" type={StyleType(props.style)} onClick={onClickToggleModal}>
             상품 수정
@@ -141,7 +156,7 @@ function SellerProductDetail(props: any) {
             <SellerProductEdit
               titles={titles}
               rows={productDetail}
-              sellerNo={sellerNo}
+              sellerNo={seller.userNo}
               getEditProduct={getEditProduct}
               type={StyleType(props.style)}
               onClickToggleModal={onClickToggleModal}
@@ -167,6 +182,7 @@ const ProductMain = styled.div`
 const TopButtons = styled.div`
   grid-area: TopButtons;
   display: grid;
+  grid-template-columns: 1fr 1fr;
   justify-content: end;
   align-items: end;
   margin-left: 13px;

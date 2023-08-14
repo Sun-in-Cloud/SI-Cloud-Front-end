@@ -4,6 +4,7 @@ import ListingPage from '../../ListingPage';
 import LoginBtn from '../../common/Loginbtn';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 interface Product {
   [index: string]: string;
@@ -17,7 +18,8 @@ interface Product {
 
 function SellerProductList(props: any) {
   const style = props.style;
-
+  const seller = useAppSelect((state) => state.seller);
+  console.log(seller);
   const [product, setProduct] = useState<Product[] | null>([]);
   const [totalPage, setTotalPage] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -53,7 +55,7 @@ function SellerProductList(props: any) {
     await axios
       .get(listurl, {
         params: {
-          sellerNo: 8,
+          sellerNo: seller.userNo,
           pageNum: currentPage,
           countPerPage: 10,
         },

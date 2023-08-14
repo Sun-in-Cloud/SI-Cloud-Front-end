@@ -6,6 +6,7 @@ import RegisterNew from '../../common/RegisterNew';
 import ProductDropdowm from './ProductDropdowm';
 import axios from 'axios';
 import UseProductGroup from '../customHook/UseProductGroup';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 interface Product {
   productNo: string;
@@ -18,6 +19,7 @@ interface Product {
 }
 
 function ProductRegisterPage(props: any) {
+  const seller = useAppSelect((state) => state.seller);
   const [view, setView] = useState(false);
   const [productList, setProductList] = useState([]);
 
@@ -36,7 +38,7 @@ function ProductRegisterPage(props: any) {
   }
 
   async function getProductList() {
-    const sellerNo = 8;
+    const sellerNo = seller.userNo;
     const listurl = '/detailProductGroup/list/' + sellerNo;
     await axios
       .get(listurl)

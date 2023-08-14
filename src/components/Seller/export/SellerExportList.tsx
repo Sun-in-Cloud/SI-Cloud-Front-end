@@ -6,6 +6,7 @@ import TableColumn from '../../TableColumn';
 import ExportTableRow from './ExportTableRow';
 import Navbtn from '../../common/Navbtn';
 import axios from 'axios';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 interface ExportList {
   exportNo: number;
@@ -44,7 +45,7 @@ function SellerExportList(props: any) {
     ['주문상태', 'orderStatus'],
   ];
   const [exportList, setExportList] = useState<ExportList[]>([]);
-
+  const seller = useAppSelect((state) => state.seller);
   const [totalPage, setTotalPage] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -53,7 +54,7 @@ function SellerExportList(props: any) {
     await axios
       .get(listurl, {
         params: {
-          sellerNo: 8,
+          sellerNo: seller.userNo,
           pageNum: currentPage,
           countPerPage: '3',
         },

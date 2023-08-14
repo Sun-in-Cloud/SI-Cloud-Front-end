@@ -5,6 +5,7 @@ import TableRowOrder from './TableRowOrder';
 import TableRow from '../../TableRow';
 import axios from 'axios';
 import Navbtn from '../../common/Navbtn';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 interface OrderList {
   orderNo: number;
@@ -20,6 +21,7 @@ interface OrderDetail {
 }
 
 function SellerOrderList(props: any) {
+  const seller = useAppSelect((state) => state.seller);
   const [orderList, setOrderList] = useState<OrderList[]>([]);
   const [orderNo, setOrderNo] = useState(0);
   const [orderDetail, setOrderDetail] = useState<OrderDetail[]>([]);
@@ -42,16 +44,15 @@ function SellerOrderList(props: any) {
   function getOrderNo(props: OrderList) {
     setOnDetail(true);
     setOrderNo(props.orderNo);
-    console.log(orderNo);
   }
   async function getOrderList() {
     const listurl = '/seller/order/list';
     await axios
       .get(listurl, {
         params: {
-          sellerNo: 8,
+          sellerNo: seller.userNo,
           pageNum: currentPage,
-          countPerPage: 7,
+          countPerPage: 10,
         },
         headers: {
           'Content-type': 'application/json',
@@ -73,12 +74,10 @@ function SellerOrderList(props: any) {
 
   async function getOrderDetail() {
     const listurl = '/seller/order/' + orderNo;
-
-    console.log(listurl);
     await axios
       .get(listurl, {
         params: {
-          sellerNo: 8,
+          sellerNo: seller.userNo,
         },
         headers: {
           'Content-type': 'application/json',
@@ -86,7 +85,6 @@ function SellerOrderList(props: any) {
       })
       .then(function (response) {
         setOrderDetail(response.data);
-        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);

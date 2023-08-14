@@ -10,6 +10,7 @@ import TableRow from '../../TableRow';
 import TableRowImport from './TableRowImport';
 import LoginBtn from '../../common/Loginbtn';
 import SellerSearchModal from './SellerSearchModal';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 //전체 리스트
 interface PreImportList {
@@ -69,6 +70,8 @@ function SellerImportPre(props: any) {
     ['발주여부', 'checkBox'],
   ];
 
+  const seller = useAppSelect((state) => state.seller);
+
   // 발주 테이블 * 자동 발주임
   const [preImportList, setPreImportList] = useState<PreImportList[]>([]);
   const [preCheck, setPreCheck] = useState(false);
@@ -103,7 +106,7 @@ function SellerImportPre(props: any) {
     await axios
       .get(listurl, {
         params: {
-          sellerNo: 8,
+          sellerNo: seller.userNo,
           pageNum: currentPage,
           countPerPage: 7,
         },
@@ -112,7 +115,6 @@ function SellerImportPre(props: any) {
         },
       })
       .then(function (response) {
-        console.log(response);
         setPreImportList(response.data.orders);
 
         let list = [];
@@ -140,8 +142,7 @@ function SellerImportPre(props: any) {
   }
 
   async function confirmImportList() {
-    const sellerNo = 8;
-    const post = { sellerNo: sellerNo, orderNo: preImportNo, importList: confirmList };
+    const post = { sellerNo: seller.userNo, orderNo: preImportNo, importList: confirmList };
     console.log(post);
     const listurl = '/seller/import/register';
     await axios
@@ -158,16 +159,15 @@ function SellerImportPre(props: any) {
 
   async function searchProduct(search: string) {
     const listurl = '/seller/import/search';
-    const sellerNo = 8;
+
     await axios
       .get(listurl, {
         params: {
-          sellerNo: sellerNo,
+          sellerNo: seller.userNo,
           productName: search,
         },
       })
       .then(function (response) {
-        console.log(response.data);
         setPreProductList(response.data);
       })
       .catch(function (error) {
@@ -229,7 +229,6 @@ function SellerImportPre(props: any) {
 
   const conFirmImport = () => {
     confirmImportList();
-
     setCheckedList([]);
     setPreProductList([]);
     setConfirmList([]);

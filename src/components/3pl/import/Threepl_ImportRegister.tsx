@@ -4,6 +4,7 @@ import Threepl_ListingPage from '../Threepl_ListingPage';
 import axios from 'axios';
 import { styled } from 'styled-components';
 import LoginBtn from '../../common/Loginbtn';
+// @ts-ignore
 import { Dialog, DialogContent } from '@material-ui/core';
 import { BarcodeScanner } from '../../common/BarcodeScanner';
 

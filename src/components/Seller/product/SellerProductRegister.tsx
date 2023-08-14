@@ -4,6 +4,7 @@ import ProductRegisterPage from './ProductRegisterPage';
 import BarcodeReader from '../../common/BarcodeScan';
 import LoginBtn from '../../common/Loginbtn';
 import axios from 'axios';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 interface Product {
   productNo: string;
@@ -16,6 +17,7 @@ interface Product {
 }
 
 function SellerProductRegister(props: any) {
+  const seller = useAppSelect((state) => state.seller);
   const [newProduct, setNewProduct] = useState<Product[]>([]);
 
   const style = String(props.type);
@@ -63,7 +65,7 @@ function SellerProductRegister(props: any) {
   }
 
   async function postProduct() {
-    const sellerNo = 8;
+    const sellerNo = seller.userNo;
     const listurl = '/seller/product/register/' + sellerNo;
     await axios
       .post(listurl, newProduct)

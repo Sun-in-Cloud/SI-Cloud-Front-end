@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import LoginBtn from '../../common/Loginbtn';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 interface DetailExportList {
   productNo: number;
@@ -32,7 +33,7 @@ function SellerDetailExport(props: any) {
   ];
 
   const [detailExport, setDetailExport] = useState<DetailExportList[]>([]);
-
+  const seller = useAppSelect((state) => state.seller);
   const [totalPage, setTotalPage] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -57,7 +58,6 @@ function SellerDetailExport(props: any) {
           list.push(i);
         }
         setTotalPage(list);
-        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);

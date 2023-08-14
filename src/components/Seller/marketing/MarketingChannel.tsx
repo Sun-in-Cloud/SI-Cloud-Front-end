@@ -5,6 +5,7 @@ import Tab from '../../common/Tab';
 import MarketingChartYearly from './MarketingChartYearly';
 import ChannelPortion from './ChannelPortion';
 import { isElementAccessExpression } from 'typescript';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 function MarketingChannel(props: any) {
   const [channelInfo, setChannelInfo] = useState<any>();
@@ -13,18 +14,16 @@ function MarketingChannel(props: any) {
   const [channelTitle, setChannelTitle] = useState<Array<string>>();
 
   async function getChannel() {
-    const sellerNo = 44;
-
+    const seller = useAppSelect((state) => state.seller);
     const listurl = '/seller/marketing/channel';
     await axios
       .get(listurl, {
         params: {
-          sellerNo: sellerNo,
+          sellerNo: seller.userNo,
         },
       })
       .then(function (response) {
         setChannelInfo(response.data);
-        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -47,7 +46,6 @@ function MarketingChannel(props: any) {
       setyearlyTopType('lastYearTop');
     }
   }
-  function getChannelTitle(data: any) {}
 
   return (
     <Channel>

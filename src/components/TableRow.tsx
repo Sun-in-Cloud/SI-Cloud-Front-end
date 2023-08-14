@@ -13,7 +13,7 @@ const gridLayout = {
   3: '1fr 1fr 1fr',
   4: '1fr 1fr 1fr 1fr',
   5: '1fr 1fr 1fr 1fr 1fr',
-  6: '1fr 1fr 1fr 1fr 1fr 1fr',
+  6: '200px 1fr 1fr 1fr 1fr 1fr',
   7: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
   8: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
   9: '150px 100px 60px 80px 160px 70px 80px 100px 150px',
@@ -121,7 +121,7 @@ const Row = styled.div<StyledGridProps>`
 
 const Item = styled.div`
   font-size: 15px;
-  font-family: 'Jalnan';
+  font-family: GmarketSansMedium;
   letter-spacing: 2px;
 
   text-overflow: ellipsis;

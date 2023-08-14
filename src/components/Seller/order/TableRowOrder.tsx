@@ -35,7 +35,6 @@ interface OrderList {
 }
 
 function TableRowOrder(props: any) {
-  console.log(props.rows);
   const [num, setNum] = useState(0);
 
   const navigate = useNavigate();
@@ -106,7 +105,7 @@ const Tablerows = styled.div`
 
 const Row = styled.div<StyledGridProps>`
   display: grid;
-  height: 33px;
+  height: 50px;
   align-items: center;
   grid-template-columns: ${(props) => gridLayout[props.columns]};
   grid-auto-rows: 1fr;
@@ -118,7 +117,7 @@ const Row = styled.div<StyledGridProps>`
 
 const Item = styled.div`
   font-size: 15px;
-  font-family: 'Jalnan';
+  font-family: GmarketSansMedium;
   letter-spacing: 2px;
   padding: 5px;
 `;

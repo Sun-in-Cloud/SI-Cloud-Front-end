@@ -5,6 +5,7 @@ import TableColumn from '../../TableColumn';
 import TableRow from '../../TableRow';
 import Navbtn from '../../common/Navbtn';
 import TableRowImport from './TableRowImport';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 interface ImportList {
   importNo: number;
@@ -24,6 +25,7 @@ function SellerImporList(props: any) {
   const [detailList, setDetailList] = useState<DetailList[]>([]);
   const [totalPage, setTotalPage] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const seller = useAppSelect((state) => state.seller);
 
   const ImportTitles: string[][] = [
     ['입고번호', 'importNo'],
@@ -41,7 +43,7 @@ function SellerImporList(props: any) {
     await axios
       .get(listurl, {
         params: {
-          sellerNo: 8,
+          sellerNo: seller.userNo,
           pageNum: currentPage,
           countPerPage: 3,
         },
@@ -50,7 +52,6 @@ function SellerImporList(props: any) {
         },
       })
       .then(function (response) {
-        console.log(response);
         setImportList(response.data.importproduct);
         let list = [];
         for (let i = 1; i <= response.data.totalPage; i++) {
@@ -70,7 +71,6 @@ function SellerImporList(props: any) {
       .get(listurl)
       .then(function (response) {
         setDetailList(response.data);
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);

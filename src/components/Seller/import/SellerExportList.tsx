@@ -6,6 +6,7 @@ import TableColumn from '../../TableColumn';
 import TableRowOrder from '../order/TableRowOrder';
 import TableRow from '../../TableRow';
 import TableRowImport from './TableRowImport';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 interface FixedImportList {
   importNo: number;
@@ -19,6 +20,7 @@ interface FixedDetailImportList {
 }
 
 function SellerExportList(props: any) {
+  const seller = useAppSelect((state) => state.seller);
   const [onDetail, setOnDetail] = useState(false);
   const [preImportList, setPreImportList] = useState<FixedImportList[]>([]);
   const [importNo, setImportNo] = useState(0);
@@ -48,7 +50,7 @@ function SellerExportList(props: any) {
     await axios
       .get(listurl, {
         params: {
-          sellerNo: 8,
+          sellerNo: seller.userNo,
           pageNum: currentPage,
           countPerPage: 3,
         },
@@ -57,7 +59,6 @@ function SellerExportList(props: any) {
         },
       })
       .then(function (response) {
-        console.log(response.data);
         setPreImportList(response.data.orders);
         let list = [];
         for (let i = 1; i <= response.data.totalPage; i++) {
@@ -75,7 +76,6 @@ function SellerExportList(props: any) {
     await axios
       .get(listurl)
       .then(function (response) {
-        console.log(response.data);
         setPreImportDetail(response.data);
       })
       .catch(function (error) {

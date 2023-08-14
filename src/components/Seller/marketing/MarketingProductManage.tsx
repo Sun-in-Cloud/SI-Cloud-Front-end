@@ -9,8 +9,10 @@ import MarketingChartYearly from './MarketingChartYearly';
 import LoginBtn from '../../common/Loginbtn';
 import Modal from '../../common/Modal';
 import SellerMarketingSerch from './SellerMarketingSerch';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 function MarketingProductManage(props: any) {
+  const seller = useAppSelect((state) => state.seller);
   const [product, setProduct] = useState<Array<string>>([]);
   const [isSearchModal, setSearchModal] = useState<boolean>(false);
   const [weeklyType, setWeeklyType] = useState('weeklyCount');
@@ -25,12 +27,11 @@ function MarketingProductManage(props: any) {
     await axios
       .get(listurl, {
         params: {
-          sellerNo: 8,
+          sellerNo: seller.userNo,
           productNo: product[0],
         },
       })
       .then(function (response) {
-        console.log(response.data);
         setData(response.data);
         setCheck(true);
       })
