@@ -16,8 +16,6 @@ function ThreePlRegister(props: any) {
   const [groupName, setGroupName] = useState('');
   const [isOpen, setIsOpen] = UseProductGroup(dropDownRef, false);
 
-  const seller = useAppSelect((state) => state.seller);
-
   const title_1 = [
     ['회사이름', 'companyName'],
     ['사업자 번호', 'businessNo'],
@@ -73,7 +71,6 @@ function ThreePlRegister(props: any) {
 
   useEffect(() => {
     getProductTypeList();
-    console.log(seller);
   }, []);
 
   useEffect(() => {

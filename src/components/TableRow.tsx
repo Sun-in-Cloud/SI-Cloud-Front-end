@@ -16,6 +16,8 @@ const gridLayout = {
   5: '1fr 1fr 1fr 1fr 1fr',
   6: '1fr 1fr 1fr 1fr 1fr 1fr',
   7: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+  8: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+  9: '150px 100px 60px 80px 160px 70px 80px 100px 150px',
 };
 
 interface Product {
@@ -107,7 +109,9 @@ const Tablerows = styled.div`
   overflow-x: hidden;
   margin-top: 5px;
 `;
+
 const Box = styled.div``;
+
 const Row = styled.div<StyledGridProps>`
   display: grid;
   grid-template-columns: ${(props) => gridLayout[props.columns]};
@@ -120,6 +124,10 @@ const Item = styled.div`
   font-size: 15px;
   font-family: 'Jalnan';
   letter-spacing: 2px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 const Line = styled.div``;
 

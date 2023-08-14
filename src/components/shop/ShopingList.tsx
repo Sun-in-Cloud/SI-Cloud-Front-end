@@ -19,20 +19,19 @@ interface Product {
 }
 function ShopingList(props: any) {
   const [product, setProduct] = useState<Product[] | null>([]);
-  const [totalPage, setTotalPage] = useState<number[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [on, setOn] = useState(false);
   const navigate = useNavigate();
 
   const titles: string[][] = [
     ['출고번호', 'exportNo'],
     ['주소', 'address'],
     ['주문자', 'ordererName'],
-    ['상품명', 'productName'],
+    ['품명', 'productName'],
     ['상품번호', 'productNo'],
-    ['소비자가', 'sellingPrice'],
-    ['주문일', 'localOrderDate'],
-    ['주문상태', 'orderStatus'],
-    ['송장번호', 'invoceNo'],
+    ['가격', 'sellingPrice'],
+    ['일자', 'localOrderDate'],
+    ['상태', 'orderStatus'],
+    ['송장번호', 'invoiceNo'],
   ];
 
   async function getProductList() {
@@ -40,9 +39,7 @@ function ShopingList(props: any) {
     await axios
       .get(listurl, {
         params: {
-          sellerNo: 44,
-          pageNum: currentPage,
-          countPerPage: 10,
+          sellerNo: 8,
         },
         headers: {
           'Content-type': 'application/json',
@@ -50,33 +47,36 @@ function ShopingList(props: any) {
       })
       .then(function (response) {
         console.log(response);
-        //setProduct(response.data.products);
-        let list = [];
-        for (let i = 1; i <= response.data.totalPage; i++) {
-          list.push(i);
-        }
-        setTotalPage(list);
+        setProduct(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
-  function navPage(e: React.MouseEvent<HTMLButtonElement> | undefined) {
-    if (e != undefined) {
-      const pageNum = Number(e.currentTarget.value);
-      setCurrentPage(pageNum);
-    }
+  async function getNewProductList() {
+    const SellerNo = 8;
+    const listurl = '/shop/order/' + SellerNo;
+    await axios
+      .post(listurl)
+      .then(function (response) {
+        console.log(response);
+        setProduct(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
-
   function registerProduct() {
-    console.log('새로 등록하기');
-    navigate('/seller/product/register');
+    // console.log('새로 등록하기');
+    // navigate('/seller/product/register');
+    getNewProductList();
+    setOn(!on);
   }
 
   useEffect(() => {
     getProductList();
-  }, [currentPage]);
+  }, [on]);
   return (
     <>
       <ShopHeader></ShopHeader>
@@ -89,14 +89,7 @@ function ShopingList(props: any) {
           </LoginBtn>
         </Buttons>
         <p></p>
-        <ListingPage
-          titles={titles}
-          number={totalPage}
-          rows={product}
-          columns={titles.length}
-          onDetail={true}
-          navPage={navPage}
-        />
+        <ListingPage titles={titles} rows={product} columns={titles.length} onDetail={false} />
         <p></p>
       </ProductMain>
     </>
@@ -106,7 +99,7 @@ function ShopingList(props: any) {
 const ProductMain = styled.div`
   padding-top: 90px;
   background-color: #f4f0ed;
-  border-radius: 15px 15px 0 0;
+
   height: 100%;
   display: grid;
   grid-template-columns: 0.2fr 6.6fr 0.2fr;
