@@ -10,7 +10,7 @@ function SubBar(props: any) {
   useEffect(() => {
     props.move ? setTab(props.seller) : '';
     props.setMove(false);
-  }, [props.move]);
+  }, []);
 
   const changeUnderLine = (e: any) => {
     setTab(e.target.value);
