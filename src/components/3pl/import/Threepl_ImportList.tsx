@@ -115,20 +115,26 @@ function Threepl_ImportList(props: any) {
       />
       <h1></h1>
       {finImport != undefined && (
-        <DetailTable>
-          <DetailTitle>
-            <p>입고번호: {finImport?.importNo}</p>
-            <p>{finImport?.importDate}</p>
-          </DetailTitle>
-          <Threepl_ListingPage
-            sellerNo={props.seller}
-            titles={titleDetail}
-            number={null}
-            rows={rowsDetail}
-            columns={titleDetail.length}
-            onDetail={false}
-          />
-        </DetailTable>
+        <>
+          <ImportDetail>
+            <Flow>
+              <DetailTable>
+                <DetailTitle>
+                  <p>입고번호: {finImport?.importNo}</p>
+                  <p>{finImport?.importDate}</p>
+                </DetailTitle>
+                <Threepl_ListingPage
+                  sellerNo={props.seller}
+                  titles={titleDetail}
+                  number={null}
+                  rows={rowsDetail}
+                  columns={titleDetail.length}
+                  onDetail={false}
+                />
+              </DetailTable>
+            </Flow>
+          </ImportDetail>
+        </>
       )}
     </MainPage>
   );
@@ -152,4 +158,23 @@ const DetailTitle = styled.div`
   font-family: jalnan;
   justify-content: space-between;
 `;
+
+const ImportDetail = styled.div`
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 10px;
+  margin: 0 10px;
+  height: 500px;
+  display: flex;
+  background: #fff;
+
+  justify-content: center;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px -2px black;
+`;
+
+const Flow = styled.div`
+  width: 97%;
+`;
+
 export default Threepl_ImportList;

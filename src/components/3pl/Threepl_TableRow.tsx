@@ -7,6 +7,7 @@ import { Order } from '../../global/OrderInterface';
 
 interface StyledGridProps {
   readonly columns: '2' | '3' | '4' | '5' | '6' | '7';
+  readonly bkgd: 'active' | 'none';
 }
 
 const gridLayout = {
@@ -19,19 +20,22 @@ const gridLayout = {
   // 7: '1.5fr 1.5fr 0.5fr 1fr 1.5fr 1fr 0.5fr',
 };
 
-function Threepl_TableRow(props: any) {
-  function getColumns(columns: number): string {
-    let new_columns = columns;
-    if (props.onDetail) {
-      new_columns = columns + 1;
-    }
-    return String(new_columns);
-  }
+const backgroundColor = {
+  active: '#fff',
+  none: 'transparent',
+};
 
+const border = {
+  active: 'transparent',
+  none: 'transparent',
+};
+
+function Threepl_TableRow(props: any) {
   const location: Location = useLocation();
 
   const navigate = useNavigate();
 
+  const [num, setNum] = useState(0);
   const [checkedList, setCheckedList] = useState<Array<any>>([]);
 
   interface invoice {
@@ -72,7 +76,11 @@ function Threepl_TableRow(props: any) {
           //console.log('=', props.title);
           return (
             <>
-              <Row key={index} columns={props.columns}>
+              <Row
+                key={index}
+                columns={props.columns}
+                bkgd={`${num === item.orderNo || num === item.importNo ? 'active' : 'none'}`}
+              >
                 {props.title.map((it: string, idx: number) => {
                   //console.log(it);
                   return (
@@ -82,7 +90,11 @@ function Threepl_TableRow(props: any) {
                           return (
                             <Item
                               onClick={() => {
-                                props.getItem !== undefined ? props.getItem(item) : '';
+                                if (props.getItem !== undefined) {
+                                  props.getItem(item);
+                                  if (item.orderNo !== undefined) setNum(item.orderNo);
+                                  else if (item.importNo !== undefined) setNum(item.importNo);
+                                }
                                 location.pathname === '/3pl/export/list'
                                   ? navigate('/3pl/export/invoice', { state: item })
                                   : '';
@@ -154,7 +166,10 @@ const Row = styled.div<StyledGridProps>`
   width: 100%;
   height: 33px;
   align-items: center;
-  margin: 10px 0 5px 0;
+  padding: 5px;
+  margin: 10px 0 5px 0px;
+  background-color: ${(props) => backgroundColor[props.bkgd]};
+  border: ${(props) => border[props.bkgd]};
 `;
 
 const Item = styled.div`
