@@ -25,7 +25,7 @@ const List = styled.div`
 `;
 
 const Li = styled.li`
-  font-family: 'Jalnan';
+  font-family: 'GmarketSansMedium';
   font-size: 15px;
 
   &:before {

@@ -14,6 +14,8 @@ const gridLayout = {
   5: '1fr 1fr 1fr 1fr 1fr',
   6: '1fr 1fr 1fr 1fr 1fr 1fr',
   7: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+  8: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+  9: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
 };
 
 function TableColumn(props: any) {

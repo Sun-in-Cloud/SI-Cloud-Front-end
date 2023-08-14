@@ -13,7 +13,7 @@ function MarketingChannel(props: any) {
   const [channelTitle, setChannelTitle] = useState<Array<string>>();
 
   async function getChannel() {
-    const sellerNo = 8;
+    const sellerNo = 44;
 
     const listurl = '/seller/marketing/channel';
     await axios

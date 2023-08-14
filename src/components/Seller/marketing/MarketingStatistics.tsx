@@ -19,7 +19,7 @@ function MarketingStatistics(props: any) {
     await axios
       .get(listurl, {
         params: {
-          sellerNo: 8,
+          sellerNo: 44,
         },
       })
       .then(function (response) {

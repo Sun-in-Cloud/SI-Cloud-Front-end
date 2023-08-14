@@ -116,7 +116,7 @@ const RegisterDrop = styled.input`
   height: 40px;
   border: 2px solid #382f2d;
   background-color: #fdfaf7;
-  font-family: Jalnan;
+  font-family: GmarketSansMedium;
   font-size: 15px;
 `;
 const RegisterUl = styled.ul`
