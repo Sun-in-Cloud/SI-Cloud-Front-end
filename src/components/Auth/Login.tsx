@@ -10,12 +10,15 @@ import LoginBtn from '../common/Loginbtn';
 import { CopyShader } from 'three-stdlib';
 import threepl, { setThreeplReducer } from '../../redux/threepl';
 import seller, { setSellerReducer } from '../../redux/seller';
+import { useNavigate } from 'react-router';
 
 function Login(props: any) {
   const [loginUser, setLoginUser] = useState<User>(initialStateValue);
 
   const user = useAppSelect((state) => state.user);
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const setUser = (e: any) => {
     e.preventDefault();
@@ -48,10 +51,12 @@ function Login(props: any) {
     await axios
       .post(listurl, info)
       .then(function (response) {
+        console.log(response.data);
         if (response.data.userType == 'SELLER') {
           dispatch(setSellerReducer(response.data));
-        } else {
+        } else if (response.data.userType == 'THREE_PL') {
           dispatch(setThreeplReducer(response.data));
+          navigate('/3pl');
           console.log(threepl);
         }
       })

@@ -4,7 +4,6 @@ import TableTitleBk from '../../common/TableTitleBk';
 import TableTitleWH from '../../common/TableTitleWH';
 
 function Threepl_DetailSellerModal(props: any) {
-  console.log(props.rows);
   return (
     <>
       <DetailThreepl>

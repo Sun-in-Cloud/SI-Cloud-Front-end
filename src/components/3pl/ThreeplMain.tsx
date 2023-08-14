@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from './ThreeplHeader';
 import Threepl_ProductList from './product/Threepl_ProductList';
-import { BrowserRouter, Location, Route, Routes, useLocation } from 'react-router-dom';
-import Sidebar from './Sidebar';
+import { Location, Route, Routes, useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { sellerCompany } from '../../global/CompanyInterface';
 import Threepl_OrderRegister from './order/Threepl_OrderRegister';
@@ -16,6 +15,8 @@ import Threepl_Match from './match/Threepl_MatchList';
 import Threepl_MyPage from './my/Threepl_MyPage';
 import Threepl_MySeller from './my/Threepl_MySeller';
 import BarcodeScan from '../common/BarcodeScan';
+import SubBar from './SubBar';
+import { useAppSelect } from '../../redux/configStore.hooks';
 
 function ThreeplMain(props: any) {
   function StyleType(style: any) {
@@ -26,66 +27,35 @@ function ThreeplMain(props: any) {
     }
   }
 
-  // const [com, setCom] = useState<sellerCompany[]>([]);
+  const threepl = useAppSelect((state) => state.threepl);
+  console.log(threepl);
 
-  // async function getList(pageNum: number, seller: number) {
-
-  //   const listurl = '/3pl/product/list';
-  //   await axios
-  //     .get(listurl, {
-  //       params: {
-  //         sellerNo: seller,
-  //         pageNum: pageNum,
-  //         countPerPage: 10,
-  //       },
-  //       headers: {
-  //         'Content-type': 'application/json',
-  //       },
-  //     })
-  //     .then(function (response) {
-  //       console.log(response.data);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }
-
-  const com: sellerCompany[] = [
-    { companyName: 'OutSfree', sellerNo: 9 },
-    { companyName: '유진 아이스크림', sellerNo: 2 },
-    { companyName: '성은 케이크', sellerNo: 3 },
-    { companyName: '성은이네 옷장1', sellerNo: 4 },
-    { companyName: '유진 아이스크림1', sellerNo: 5 },
-    { companyName: '성은 케이크1', sellerNo: 6 },
-    { companyName: 'Adidas', sellerNo: 7 },
-    { companyName: '에뛰드홈', sellerNo: 8 },
-  ];
+  const com: any[] = threepl.sellers;
 
   const location: Location = useLocation();
 
   const [seller, setSeller] = useState<number>();
+
+  const [move, setMove] = useState<boolean>(false);
 
   function findSeller(new_seller: any): void {
     setSeller(new_seller.item.sellerNo);
   }
 
   function submenu(location: Location) {
-    if (location.pathname.includes('/3pl/product')) {
-      return <Sidebar company={com} findSeller={findSeller} />;
-    } else if (location.pathname.includes('/3pl/order')) {
-      return <Sidebar company={com} findSeller={findSeller} />;
-    } else if (location.pathname.includes('/3pl/import')) {
-      return <Sidebar company={com} findSeller={findSeller} />;
-    } else if (location.pathname.includes('/3pl/export')) {
-      return <Sidebar company={com} findSeller={findSeller} />;
-    } else if (location.pathname.includes('/3pl/mypage/seller/list')) {
-      return <Sidebar company={com} findSeller={findSeller} />;
+    if (
+      location.pathname.includes('/3pl/product') ||
+      location.pathname.includes('/3pl/order') ||
+      location.pathname.includes('/3pl/import') ||
+      location.pathname.includes('/3pl/export') ||
+      location.pathname.includes('/3pl/mypage/seller/list')
+    ) {
+      return <SubBar company={com} findSeller={findSeller} seller={com[0].companyName} move={move} setMove={setMove} />;
     }
   }
 
-  useEffect(() => {}, [seller]);
-
   useEffect(() => {
+    setMove(true);
     setSeller(com[0].sellerNo);
   }, [location]);
 
@@ -132,38 +102,61 @@ function ThreeplMain(props: any) {
       )}
 
       {location.pathname !== '/3pl/import/pre/register' && location.pathname !== '/3pl/export/invoice' && (
-        <MainPage>
-          <h1></h1>
-          {submenu(location)}
-          <Routes>
-            <Route path="/product/list" element={<Threepl_ProductList seller={seller} />}></Route>{' '}
-            <Route path="/order/register" element={<Threepl_OrderRegister seller={seller} />}></Route>{' '}
-            <Route path="/order/list" element={<Threepl_OrderList seller={seller} />}></Route>{' '}
-            <Route path="/import/list" element={<Threepl_ImportList seller={seller} />}></Route>{' '}
-            <Route path="/import/pre/list" element={<Threepl_ImportPreList seller={seller} />}></Route>{' '}
-            <Route path="/export/list" element={<Threepl_Export seller={seller} />}></Route>{' '}
-            <Route path="/mypage/seller/list" element={<Threepl_MySeller seller={seller} />}></Route>{' '}
-            <Route path="/barcode" element={<BarcodeScan />}></Route>
-          </Routes>
-          <h1></h1>
-        </MainPage>
+        <>
+          <MainPage>
+            <ComBar>{submenu(location)}</ComBar>
+            <GridPage>
+              <h1></h1>
+
+              <Routes>
+                <Route path="/product/list" element={<Threepl_ProductList seller={seller} />}></Route>{' '}
+                <Route path="/order/register" element={<Threepl_OrderRegister seller={seller} />}></Route>{' '}
+                <Route path="/order/list" element={<Threepl_OrderList seller={seller} />}></Route>{' '}
+                <Route path="/import/list" element={<Threepl_ImportList seller={seller} />}></Route>{' '}
+                <Route path="/import/pre/list" element={<Threepl_ImportPreList seller={seller} />}></Route>{' '}
+                <Route path="/export/list" element={<Threepl_Export seller={seller} />}></Route>{' '}
+                <Route path="/mypage/seller/list" element={<Threepl_MySeller seller={seller} />}></Route>{' '}
+                <Route path="/barcode" element={<BarcodeScan />}></Route>
+              </Routes>
+              <h1></h1>
+            </GridPage>
+          </MainPage>
+        </>
       )}
     </>
   );
 }
 
 const MainPage = styled.div`
-  margin-top: -40px;
-  display: grid;
-  grid-template-columns: 0.5fr 1.6fr 5fr 0.5fr;
-  grid-template-areas: '. . Routes .';
+  height: 630px;
+  margin-top: 100px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  background-color: #f4f0ed;
 `;
 
-const ExportPage = styled.div`
-  margin-top: -40px;
+const ComBar = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const GridPage = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 5fr 0.5fr;
   grid-template-areas: '. Routes .';
+  padding-top: 30px;
+`;
+
+const ExportPage = styled.div`
+  height: 630px;
+  margin-top: 150px;
+  display: grid;
+  grid-template-columns: 0.5fr 5fr 0.5fr;
+  grid-template-areas: '. Routes .';
+  background-color: #f4f0ed;
+  margin-top: 100px;
+  padding-top: 80px;
+  padding-bottom: 20px;
 `;
 
 export default ThreeplMain;

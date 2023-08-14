@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Sidebar from '../Sidebar';
 import ListingPage from '../../ListingPage';
-import { styled } from 'styled-components';
-import { Location, useLocation } from 'react-router-dom';
-import { sellerCompany } from '../../../global/CompanyInterface';
 import axios from 'axios';
 
 function Threepl_ProductList(props: any) {
@@ -29,25 +25,22 @@ function Threepl_ProductList(props: any) {
         params: {
           sellerNo: props.seller,
           pageNum: currentPage,
-          countPerPage: 10,
+          countPerPage: 7,
         },
         headers: {
           'Content-type': 'application/json',
         },
       })
       .then(function (response) {
-        console.log('-', response.data.products);
         setRows(response.data.products);
         const list: number[] = [];
         for (let i = 0; i < response.data.totalPage; i++) {
           list[i] = i + 1;
         }
         setPageList(list);
-
-        console.log(response);
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 
@@ -59,7 +52,6 @@ function Threepl_ProductList(props: any) {
   }
 
   useEffect(() => {
-    console.log('---');
     getProductList();
   }, [props.seller, currentPage]);
 

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import LoginBtn from '../common/Loginbtn';
 import styled from 'styled-components';
-import line from '../../img/line.svg';
-import logo from '../../img/logo.svg';
+import logo from '../../img/s.png';
 import HeaderMenu from '../common/HeaderMenu';
 import SubMenu from './ThreeplSubMenu';
 import { Link } from 'react-router-dom';
@@ -28,31 +26,33 @@ function Header(type: any) {
     }
   }
 
+  function closeMenu() {
+    setTab('curr');
+  }
+
   useEffect(() => {}, [style, tab]);
 
   return (
     <Headers>
       <HeaderBar>
-        {/* <Loginbtns>
-          <LoginBtn variant="secondary" type={StyleType(style)}>
-            로그인
-          </LoginBtn>
-          <LoginBtn variant="primary" type={StyleType(style)}>
-            로그아웃
-          </LoginBtn>
-        </Loginbtns> */}
         <p></p>
-        <MenuTab>
-          <Link to="/3pl/product/list" style={{ textDecoration: 'none' }}>
-            <HeaderMenu
-              type={StyleType(style)}
-              onClick={onChangeMenu}
-              value="상품관리"
-              bg={`${tab === '상품관리' ? 'active' : 'none'}`}
-            >
-              상품관리
-            </HeaderMenu>
+        <HeaderLogo>
+          <Link to="/3pl">
+            <img src={logo} style={{ width: `${StyleType(style) === 'portrait' ? '90px' : '100px'}` }} />
           </Link>
+        </HeaderLogo>
+        <MenuTab>
+          <HeaderMenu
+            type={StyleType(style)}
+            onClick={onChangeMenu}
+            value="상품관리"
+            bg={`${tab === '상품관리' ? 'active' : 'none'}`}
+          >
+            <Link to="/3pl/product/list" style={{ textDecoration: 'none', color: 'black' }}>
+              상품관리
+            </Link>
+          </HeaderMenu>
+
           <HeaderMenu
             type={StyleType(style)}
             onClick={onChangeMenu}
@@ -61,6 +61,7 @@ function Header(type: any) {
           >
             발주관리
           </HeaderMenu>
+
           <HeaderMenu
             type={StyleType(style)}
             onClick={onChangeMenu}
@@ -69,28 +70,29 @@ function Header(type: any) {
           >
             입고관리
           </HeaderMenu>
-          <h1></h1>
-          <h1></h1>
-          <Link to="/3pl/export/list" style={{ textDecoration: 'none' }}>
-            <HeaderMenu
-              type={StyleType(style)}
-              onClick={onChangeMenu}
-              value="출고관리"
-              bg={`${tab === '출고관리' ? 'active' : 'none'}`}
-            >
+
+          <HeaderMenu
+            type={StyleType(style)}
+            onClick={onChangeMenu}
+            value="출고관리"
+            bg={`${tab === '출고관리' ? 'active' : 'none'}`}
+          >
+            <Link to="/3pl/export/list" style={{ textDecoration: 'none', color: 'black' }}>
               출고관리
-            </HeaderMenu>
-          </Link>
-          <Link to="/3pl/match/list" style={{ textDecoration: 'none' }}>
-            <HeaderMenu
-              type={StyleType(style)}
-              onClick={onChangeMenu}
-              value="매칭서비스"
-              bg={`${tab === '매칭서비스' ? 'active' : 'none'}`}
-            >
+            </Link>
+          </HeaderMenu>
+
+          <HeaderMenu
+            type={StyleType(style)}
+            onClick={onChangeMenu}
+            value="매칭서비스"
+            bg={`${tab === '매칭서비스' ? 'active' : 'none'}`}
+          >
+            <Link to="/3pl/match/list" style={{ textDecoration: 'none', color: 'black' }}>
               매칭서비스
-            </HeaderMenu>
-          </Link>
+            </Link>
+          </HeaderMenu>
+
           <HeaderMenu
             type={StyleType(style)}
             onClick={onChangeMenu}
@@ -99,55 +101,31 @@ function Header(type: any) {
           >
             마이페이지
           </HeaderMenu>
+          <p></p>
+          {tab === '발주관리' ? <SubMenu title={tab} closeMenu={closeMenu} /> : <p></p>}
+          {tab === '입고관리' ? <SubMenu title={tab} closeMenu={closeMenu} /> : <p></p>}
+          <p></p>
+          <p></p>
+          {tab === '마이페이지' ? <SubMenu title={tab} closeMenu={closeMenu} /> : ''}
         </MenuTab>
-        <SubMenu title={tab} />
-        <HeaderImages>
-          <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}` }} />
-          <img
-            src={line}
-            style={{
-              width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}`,
-              zIndex: '-1',
-            }}
-          />
-          <img
-            src={logo}
-            style={{
-              width: `${StyleType(style) === 'portrait' ? '150px' : '70%'}`,
-              marginTop: '-20px',
-            }}
-          />
-          <img
-            src={line}
-            style={{
-              width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}`,
-              zIndex: '-1',
-            }}
-          />
-          <img src={line} style={{ width: `${StyleType(style) === 'portrait' ? '260px' : '100%'}` }} />
-        </HeaderImages>
       </HeaderBar>
     </Headers>
   );
 }
 
 const HeaderBar = styled.div`
-  height: 10%;
-  background: '#FCF9ED';
+  width: 100%;
   display: grid;
-  align-items: center;
-  grid-template-rows: 30px 30px 30px 50px;
-  padding: 4%;
+  grid-template-columns: 0.3fr 1.5fr 12fr 0.5fr;
 `;
 
 const MenuTab = styled.div`
+  margin-top: 15px;
   display: grid;
-  // align-items: center;
-  // justify-items: center;
-  width: 100%;
-  grid-template-columns: 1fr 1fr 1fr 150px 30px 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 1.5fr 1.5fr 2fr 1.8fr 2fr 2fr;
   z-index: 2;
-  text-decoration: none;
 `;
 
 const Loginbtns = styled.div`
@@ -156,19 +134,23 @@ const Loginbtns = styled.div`
   z-index: 1;
 `;
 
-const HeaderImages = styled.div`
-  display: grid;
-  bottom: 20;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+const HeaderLogo = styled.div`
+  margin-top: -9px;
+  display: flex;
   justify-items: center;
   z-index: 0;
 `;
 
 const Headers = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  background-color: #fcf9ed;
-  display: flex;
+  display: grid;
+  padding: 20px 10px;
+  background-color: 'transparent';
+  height: 60px;
+  z-index: 10;
 `;
-//overflow : hidden
 
 export default Header;

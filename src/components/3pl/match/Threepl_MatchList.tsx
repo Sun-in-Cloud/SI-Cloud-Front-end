@@ -7,12 +7,6 @@ import Modal from '../../common/Modal';
 import ThreeplContractModal from './ThreeplContractModal';
 import Threepl_DetailSellerModal from './Threepl_DetailSellerModal';
 function Threepl_MatchList(props: any) {
-  // const rows = [
-  //   { companyName: 12312542, productGroup: '의류', endDate: '2023-09-09' },
-  //   { companyName: 12156104, productGroup: '냉장', endDate: '2023-09-09' },
-  //   { companyName: 125156306, productGroup: '냉장', endDate: '2023-09-09' },
-  // ];
-
   const titles: string[][] = [
     ['화주사명', 'companyName'],
     ['상품군', 'productGroup'],
@@ -63,14 +57,13 @@ function Threepl_MatchList(props: any) {
             numValue: item.numValue,
             contractPeriod: item.contractPeriod,
             pageNum: currentPage,
-            countPerPage: 3,
+            countPerPage: 7,
           },
           headers: {
             'Content-type': 'application/json',
           },
         })
         .then(function (response) {
-          console.log('res', response);
           setRows(response.data.matchingCompanies);
           const list: number[] = [];
           for (let i = 0; i < response.data.totalPage; i++) {
@@ -79,7 +72,7 @@ function Threepl_MatchList(props: any) {
           setPageList(list);
         })
         .catch(function (error) {
-          console.log(error);
+          //console.log(error);
         });
     }
   }
@@ -97,11 +90,10 @@ function Threepl_MatchList(props: any) {
           },
         })
         .then(function (response) {
-          console.log('res', response);
           setDetailSellers(response.data);
         })
         .catch(function (error) {
-          console.log(error);
+          //console.log(error);
         });
     }
   }
@@ -117,11 +109,10 @@ function Threepl_MatchList(props: any) {
         },
       })
       .then(function (response) {
-        console.log('res', response);
         setRemain(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 
@@ -133,11 +124,8 @@ function Threepl_MatchList(props: any) {
   }
 
   function onContract(id: string, name: string) {
-    console.log(id, name);
     setContractSeller({ sellerNo: id, companyName: name });
     getRemain();
-    console.log('contractSeller', contractSeller);
-    console.log('reamin', remain);
     setIsModalOpen(true);
   }
 
@@ -154,13 +142,11 @@ function Threepl_MatchList(props: any) {
   }, [isDetailOpen]);
 
   useEffect(() => {
-    console.log('---');
     getSellerList(item);
   }, [currentPage, isModalOpen]);
 
   useEffect(() => {
     if (isDetailOpen === true) {
-      console.log(contractSeller);
       getSellerDetail();
     }
   }, [isDetailOpen]);
@@ -169,7 +155,6 @@ function Threepl_MatchList(props: any) {
     <>
       <MainPage>
         <SelectTable getFilter={getSellerList}></SelectTable>
-        <h1></h1>
         <Threepl_ListingPage
           sellerNo={props.seller}
           titles={titles}
@@ -208,10 +193,12 @@ function Threepl_MatchList(props: any) {
 }
 
 const MainPage = styled.div`
-  margin-top: -40px;
+  border-radius: 15px 15px 0 0;
+  height: 92%;
   display: grid;
-  grid-template-columns: 3fr 0.2fr 5fr;
-  grid-template-areas: 'SelectTable . Threepl_ListingPage';
+  padding-bottom: 20px;
+  grid-template-columns: 2fr 4.5fr;
+  column-gap: 10px;
 `;
 
 export default Threepl_MatchList;

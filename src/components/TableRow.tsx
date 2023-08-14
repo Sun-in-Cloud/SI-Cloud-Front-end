@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import dashedLine from '../img/dashedLine.svg';
 import { Route, useLocation, useNavigate } from 'react-router-dom';
-import LandscapeMain from './LandscapeMain';
 import CheckBox from './common/CheckBox';
 
 interface StyledGridProps {

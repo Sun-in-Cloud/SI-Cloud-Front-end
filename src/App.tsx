@@ -5,7 +5,6 @@ import { useMediaQuery } from 'react-responsive';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbtn from './components/common/Navbtn';
 import ListingPage from './components/ListingPage';
-import LandscapeMain from './components/LandscapeMain';
 import SellerMain from './components/Seller/SellerMain';
 import ThreeplMain from './components/3pl/ThreeplMain';
 import WMSMain from './components/WMS/WMSMain';
