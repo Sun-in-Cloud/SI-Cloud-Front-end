@@ -33,6 +33,10 @@ function Threepl_ImportRegister(props: any) {
     setAmount(e.target.value);
   };
 
+  const onChangeCode = (e: any) => {
+    setScanCode(e.target.value);
+  };
+
   const _toggle = () => {
     setModal(!modal);
     setSame(false);
@@ -181,24 +185,35 @@ function Threepl_ImportRegister(props: any) {
         >
           <DialogContent>
             <SelTitleCode>
-              <p>{same ? [scanCode] : ''}</p>
+              <p>{same ? [scanCode] : '[바코드 인식 실패]'}</p>
             </SelTitleCode>
-            <SelTitle>
-              <p>{same ? scanName : '바코드를 다시 인식하세요'}</p>
-            </SelTitle>
-
-            <SelContent>
-              <p>{same ? '입고된 수량을 입력해주세요' : ''}</p>
+            {same && (
+              <SelTitle>
+                <p>{scanName}</p>
+              </SelTitle>
+            )}
+            <SelContent
+              style={{
+                display: same ? 'none' : 'block',
+              }}
+            >
+              <p>바코드 번호를 입력해주세요</p>
             </SelContent>
 
             <Input
               type="number"
-              onChange={onChangeAmount}
+              onChange={onChangeCode}
               style={{
-                display: same ? 'block' : 'none',
+                display: same ? 'none' : 'block',
               }}
             />
-            <Btn>
+
+            <SelContent>
+              <p>입고된 수량을 입력해주세요</p>
+            </SelContent>
+
+            <Input type="number" onChange={onChangeAmount} />
+            <RegBtn>
               <LoginBtn
                 variant="primary"
                 type="landscape"
@@ -207,11 +222,10 @@ function Threepl_ImportRegister(props: any) {
                   getProductNo(scanCode, amount);
                   setModal2(!modal2);
                 }}
-                style={{ display: same ? 'block' : 'none' }}
               >
                 입고 수량 입력
               </LoginBtn>
-            </Btn>
+            </RegBtn>
           </DialogContent>
         </Dialog>
       </MainPage>
@@ -283,6 +297,14 @@ const Btn = styled.div`
   display: flex;
   width: fit-content;
   justify-content: center;
+  height: 40px;
+`;
+
+const RegBtn = styled.div`
+  display: flex;
+  width: fit-content;
+  justify-content: center;
+  width: 100%;
   height: 40px;
 `;
 export default Threepl_ImportRegister;
