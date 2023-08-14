@@ -7,11 +7,6 @@ function SubBar(props: any) {
 
   useEffect(() => {}, [tab, props.company]);
 
-  useEffect(() => {
-    props.move ? setTab(props.seller) : '';
-    props.setMove(false);
-  }, []);
-
   const changeUnderLine = (e: any) => {
     setTab(e.target.value);
   };

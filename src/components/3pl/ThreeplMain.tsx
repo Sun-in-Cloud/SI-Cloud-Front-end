@@ -35,8 +35,6 @@ function ThreeplMain(props: any) {
 
   const [seller, setSeller] = useState<number>();
 
-  const [move, setMove] = useState<boolean>(false);
-
   const [isEmpty, setIsEmpty] = useState<boolean>(true);
 
   const navigate = useNavigate();
@@ -53,16 +51,9 @@ function ThreeplMain(props: any) {
       location.pathname.includes('/3pl/export') ||
       location.pathname.includes('/3pl/mypage/seller/list')
     ) {
-      return <SubBar company={com} findSeller={findSeller} seller={com[0].companyName} move={move} setMove={setMove} />;
+      return <SubBar company={com} findSeller={findSeller} />;
     }
   }
-
-  useEffect(() => {
-    if (!isEmpty) {
-      setMove(true);
-      setSeller(com[0].sellerNo);
-    }
-  }, [location]);
 
   useEffect(() => {
     if (threepl.sellers.length === 0) {
