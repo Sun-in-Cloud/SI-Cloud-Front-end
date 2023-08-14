@@ -58,6 +58,7 @@ const Item = styled.button`
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
+  background-color: #f4f0ed;
   border-bottom: ${(props) => (props.title === props.value ? '4px solid #222' : '1px solid #222')};
   :active,
   :focus {

@@ -5,6 +5,7 @@
   "dependencies": {
     "@babel/core": "^7.22.9",
     "@babel/preset-env": "^7.22.9",
+    "@material-ui/core": "^4.12.4",
     "@pmndrs/assets": "^1.6.0",
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.80.1",
@@ -19,8 +20,8 @@
     "@types/react-dom": "^18.2.7",
     "@types/react-responsive": "^8.0.5",
     "@types/react-router-dom": "^5.3.3",
-    "apexcharts": "^3.41.1",
     "@zxing/library": "^0.20.0",
+    "apexcharts": "^3.41.1",
     "axios": "^1.4.0",
     "maath": "^0.7.0",
     "moment": "^2.29.4",
@@ -68,8 +69,8 @@
     ]
   },
   "devDependencies": {
-    "@types/react-slick": "^0.23.10",
     "@types/react-datepicker": "^4.15.0",
+    "@types/react-slick": "^0.23.10",
     "@types/styled-components": "^5.1.26",
     "@types/three": "^0.155.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
@@ -86,5 +87,5 @@
   "presets": [
     "@babel/preset-env"
   ],
-  "proxy": "http://192.168.0.13:5000"
+  "proxy": "http://192.168.0.101:5000"
 }
