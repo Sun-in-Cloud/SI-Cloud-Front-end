@@ -13,7 +13,7 @@ const gridLayout = {
   4: '1fr 1fr 1fr 1fr',
   5: '1fr 1fr 1fr 1fr 1fr',
   6: '1fr 1fr 1fr 1fr 1fr 1fr',
-  7: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+  7: '220px 220px 70px 150px 150px 120px 50px',
 };
 
 function TableColumn(props: any) {
@@ -43,12 +43,10 @@ const TableColums = styled.div<StyledGridProps>`
   grid-template-columns: ${(props) => gridLayout[props.colums]};
   align-items: center;
   justify-items: center;
-  border: 1.5px solid #1e1008;
+  border: 2px solid #1e1008;
   border-radius: 10px;
   width: 100%;
   height: 60px;
-
-  background-color: #f4f0df;
 `;
 
 export default TableColumn;

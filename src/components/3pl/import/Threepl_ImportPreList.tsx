@@ -102,7 +102,7 @@ function Threepl_ImportPreList(props: any) {
         <DetailTable>
           <DetailTitle>
             <p>입고예정번호: {preImport?.importNo}</p>
-            <p>{preImport?.requestDate}</p>
+            <p>{preImport?.localRequestDate}</p>
           </DetailTitle>
           <Threepl_ListingPage
             sellerNo={props.seller}

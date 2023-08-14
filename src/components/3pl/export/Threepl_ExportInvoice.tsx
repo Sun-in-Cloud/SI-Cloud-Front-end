@@ -47,7 +47,7 @@ function Threepl_ExportInvoice(props: any) {
   const title: string[][] = [
     ['바코드 번호', 'productNo'],
     ['상품명', 'productName'],
-    ['주문수량', 'amount'],
+    ['수량', 'amount'],
     ['출고일자', 'localExportDate'],
     ['송장번호', 'invoiceNo'],
     ['주문상태', 'orderStatus'],
@@ -124,9 +124,10 @@ function Threepl_ExportInvoice(props: any) {
             nullList += value.productName;
           }
         });
-        alert(nullList + ' 재고 부족');
+        nullList !== '' ? alert(nullList + ' 재고 부족') : '';
 
         getExportDetail();
+        setCheckedList([]);
       })
       .catch(function (error) {
         console.log(error);
@@ -172,6 +173,7 @@ const MainPage = styled.div`
 const ExportHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  height: 40px;
   font-size: 16px;
   font-family: jalnan;
 `;

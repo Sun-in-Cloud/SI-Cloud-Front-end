@@ -158,6 +158,7 @@ function ThreeplMain(props: any) {
 }
 
 const MainPage = styled.div`
+  height: 630px;
   margin-top: 100px;
   padding-top: 30px;
   padding-bottom: 20px;
@@ -177,6 +178,7 @@ const GridPage = styled.div`
 `;
 
 const ExportPage = styled.div`
+  height: 630px;
   margin-top: 150px;
   display: grid;
   grid-template-columns: 0.5fr 5fr 0.5fr;

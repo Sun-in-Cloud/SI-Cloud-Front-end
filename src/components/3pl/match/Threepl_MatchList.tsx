@@ -169,7 +169,6 @@ function Threepl_MatchList(props: any) {
     <>
       <MainPage>
         <SelectTable getFilter={getSellerList}></SelectTable>
-        <h1></h1>
         <Threepl_ListingPage
           sellerNo={props.seller}
           titles={titles}
@@ -208,9 +207,12 @@ function Threepl_MatchList(props: any) {
 }
 
 const MainPage = styled.div`
+  border-radius: 15px 15px 0 0;
+  height: 92%;
   display: grid;
-  grid-template-columns: 3fr 0.2fr 5fr;
-  grid-template-areas: 'SelectTable . Threepl_ListingPage';
+  padding-bottom: 20px;
+  grid-template-columns: 2fr 4.5fr;
+  column-gap: 10px;
 `;
 
 export default Threepl_MatchList;

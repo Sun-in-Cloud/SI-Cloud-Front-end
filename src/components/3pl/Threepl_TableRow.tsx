@@ -15,7 +15,8 @@ const gridLayout = {
   4: '1fr 1fr 1fr 1fr',
   5: '1fr 1fr 1fr 1fr 1fr',
   6: '1fr 1fr 1fr 1fr 1fr 1fr',
-  7: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+  7: '200px 220px 80px 150px 150px 120px 50px',
+  // 7: '1.5fr 1.5fr 0.5fr 1fr 1.5fr 1fr 0.5fr',
 };
 
 function Threepl_TableRow(props: any) {
@@ -60,6 +61,10 @@ function Threepl_TableRow(props: any) {
     }
   }, [checkedList]);
 
+  useEffect(() => {
+    setCheckedList([]);
+  }, [props.rows]);
+
   return (
     <>
       <Tablerows>
@@ -92,35 +97,42 @@ function Threepl_TableRow(props: any) {
                   );
                 })}
                 {location.pathname === '/3pl/import/pre/list' && item?.isImported === false ? (
-                  <LoginBtn
-                    variant="primary"
-                    type="landscape"
-                    onClick={() => {
-                      console.log('입고');
-                      navigate('/3pl/import/pre/register', { state: { item: item, sellerNo: props.sellerNo } });
-                    }}
-                  >
-                    입고
-                  </LoginBtn>
+                  <BtnBox>
+                    <LoginBtn
+                      variant="primary"
+                      type="landscape"
+                      onClick={() => {
+                        console.log('입고');
+                        navigate('/3pl/import/pre/register', { state: { item: item, sellerNo: props.sellerNo } });
+                      }}
+                    >
+                      입고
+                    </LoginBtn>
+                  </BtnBox>
                 ) : (
                   location.pathname === '/3pl/import/pre/list' && item?.importNo !== null && ''
                 )}
                 {props.onDetail && location.pathname === '/3pl/export/invoice' && item?.invoiceNo === null && (
                   <ChkBox type="checkbox" onChange={(e) => onCheckedItem(e, item)} />
                 )}
+
                 {props.onDetail && location.pathname === '/3pl/match/list' && item?.endDate === null && (
-                  <LoginBtn
-                    variant="primary"
-                    type="landscape"
-                    onClick={() => {
-                      props.onContract(item.sellerNo, item.companyName);
-                    }}
-                  >
-                    계약하기
-                  </LoginBtn>
+                  <BtnBox>
+                    <LoginBtn
+                      variant="primary"
+                      type="landscape"
+                      onClick={() => {
+                        props.onContract(item.sellerNo, item.companyName);
+                      }}
+                    >
+                      계약하기
+                    </LoginBtn>
+                  </BtnBox>
                 )}
               </Row>
-              <img src={dashedLine} />
+              <Line>
+                <hr style={{ border: '0.1px solid black' }} />
+              </Line>
             </>
           );
         })}
@@ -132,17 +144,16 @@ function Threepl_TableRow(props: any) {
 const Tablerows = styled.div`
   height: 400px;
   width: 100%;
-  overflow-y: scroll;
   overflow-x: hidden;
-  margin-top: 5px;
+  vertical-align: middle;
 `;
 
 const Row = styled.div<StyledGridProps>`
   display: grid;
   grid-template-columns: ${(props) => gridLayout[props.columns]};
-  margin: 10px 0 5px 0;
+  height: 33px;
   align-items: center;
-  justify-items: center;
+  margin: 10px 0 5px 15px;
 `;
 
 const Item = styled.div`
@@ -167,5 +178,12 @@ const ChkBox = styled.input`
     background-color: #0073ff;
   }
 `;
+
+const BtnBox = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Line = styled.div``;
 
 export default Threepl_TableRow;
