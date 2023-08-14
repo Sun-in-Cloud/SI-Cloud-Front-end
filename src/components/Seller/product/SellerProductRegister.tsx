@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import ProductRegisterPage from './ProductRegisterPage';
 import BarcodeReader from '../../common/BarcodeScan';
@@ -22,6 +22,8 @@ function SellerProductRegister(props: any) {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const [barcodeNo, setBarcodeNo] = useState('');
+
   const style = String(props.type);
 
   function StyleType(style: any) {
@@ -36,9 +38,11 @@ function SellerProductRegister(props: any) {
   };
 
   const _onDetected = (result: any) => {
-    setNewProduct((prevState) => {
-      return { ...prevState, productNo: result.codeResult.code };
-    });
+    // setNewProduct((prevState) => {
+    //   return { ...prevState, productNo: result.codeResult.code };
+    // });
+    setBarcodeNo(result.codeResult.code);
+    console.log(result.codeResult.code);
     setIsOpen(false);
   };
 
@@ -91,6 +95,8 @@ function SellerProductRegister(props: any) {
       });
   }
 
+  useEffect(() => {}, [barcodeNo]);
+
   return (
     <>
       <RegisterProduct>
@@ -100,6 +106,7 @@ function SellerProductRegister(props: any) {
             productTitle={productTitle}
             getNewProduct={getNewProduct}
             getProductGroup={getProductGroup}
+            newItem={barcodeNo}
           />
 
           <Btns>

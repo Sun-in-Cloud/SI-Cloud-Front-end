@@ -83,6 +83,15 @@ function ProductRegisterPage(props: any) {
                   )}
                 </div>
               </>
+            ) : item[0] === '상품번호' ? (
+              <RegisterNew
+                type="text"
+                name={item[1]}
+                key={item[1]}
+                onChange={onChangeText}
+                onFocus={handleFocusEvent}
+                value={props.newItem !== undefined ? props.newItem : ''}
+              />
             ) : (
               <RegisterNew
                 type="text"
