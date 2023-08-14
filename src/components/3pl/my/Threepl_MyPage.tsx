@@ -3,6 +3,7 @@ import MyInfo from '../../common/my/MyInfo';
 import { styled } from 'styled-components';
 import axios from 'axios';
 import LoginBtn from '../../common/Loginbtn';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 function Threepl_MyPage(props: any) {
   const titles: string[][] = [
@@ -23,8 +24,10 @@ function Threepl_MyPage(props: any) {
 
   const [row, setRow] = useState<any>();
 
+  const threepl = useAppSelect((state) => state.threepl);
+
   async function getInfo() {
-    const listurl = '/3pl/mypage/' + '10';
+    const listurl = '/3pl/mypage/' + threepl.userNo;
     await axios
       .get(listurl, {
         params: {},

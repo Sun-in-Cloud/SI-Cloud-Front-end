@@ -16,6 +16,7 @@ import Threepl_MyPage from './my/Threepl_MyPage';
 import Threepl_MySeller from './my/Threepl_MySeller';
 import BarcodeScan from '../common/BarcodeScan';
 import SubBar from './SubBar';
+import { useAppSelect } from '../../redux/configStore.hooks';
 
 function ThreeplMain(props: any) {
   function StyleType(style: any) {
@@ -26,40 +27,10 @@ function ThreeplMain(props: any) {
     }
   }
 
-  // const [com, setCom] = useState<sellerCompany[]>([]);
+  const threepl = useAppSelect((state) => state.threepl);
+  console.log(threepl);
 
-  // async function getList(pageNum: number, seller: number) {
-
-  //   const listurl = '/3pl/product/list';
-  //   await axios
-  //     .get(listurl, {
-  //       params: {
-  //         sellerNo: seller,
-  //         pageNum: pageNum,
-  //         countPerPage: 10,
-  //       },
-  //       headers: {
-  //         'Content-type': 'application/json',
-  //       },
-  //     })
-  //     .then(function (response) {
-  //       console.log(response.data);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }
-
-  const com: sellerCompany[] = [
-    { companyName: 'OutSfree', sellerNo: 9 },
-    { companyName: '유진 아이스크림', sellerNo: 2 },
-    { companyName: '성은 케이크', sellerNo: 3 },
-    { companyName: '성은이네 옷장1', sellerNo: 4 },
-    { companyName: '유진 아이스크림1', sellerNo: 5 },
-    { companyName: '성은 케이크1', sellerNo: 6 },
-    { companyName: 'Adidas', sellerNo: 7 },
-    { companyName: '에뛰드홈', sellerNo: 8 },
-  ];
+  const com: any[] = threepl.sellers;
 
   const location: Location = useLocation();
 

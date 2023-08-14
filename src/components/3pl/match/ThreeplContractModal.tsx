@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import DayPicker from './DayPicker';
 import LoginBtn from '../../common/Loginbtn';
 import axios from 'axios';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 // dummy data
 const optionData = [
@@ -53,6 +54,8 @@ function ThreeplContractModal(props: any) {
   const [isExpand, setIsExpand] = useState(false);
   const [selected, setSelected] = useState<string>('A');
 
+  const threepl = useAppSelect((state) => state.threepl);
+
   const [date, setDate] = useState<string>();
 
   //const { type: deviceType } = useDevice();
@@ -88,7 +91,7 @@ function ThreeplContractModal(props: any) {
         location: location,
         endDate: endDate,
         sellerNo: props.sellerNo,
-        threePLNo: 201,
+        threePLNo: threepl.userNo,
       })
       .then(function (response) {
         if (response.data === true) {
