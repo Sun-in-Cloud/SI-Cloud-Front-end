@@ -4,6 +4,7 @@ import logo from '../../img/s.png';
 import HeaderMenu from '../common/HeaderMenu';
 import SubMenu from './ThreeplSubMenu';
 import { Link } from 'react-router-dom';
+import { types } from 'util';
 
 function Header(type: any) {
   const [tab, setTab] = useState<string>('curr');
@@ -48,9 +49,13 @@ function Header(type: any) {
             value="상품관리"
             bg={`${tab === '상품관리' ? 'active' : 'none'}`}
           >
-            <Link to="/3pl/product/list" style={{ textDecoration: 'none', color: 'black' }}>
-              상품관리
-            </Link>
+            {type.isEmpty !== true ? (
+              <Link to="/3pl/product/list" style={{ textDecoration: 'none', color: 'black' }}>
+                상품관리
+              </Link>
+            ) : (
+              '상품관리'
+            )}
           </HeaderMenu>
 
           <HeaderMenu
@@ -77,9 +82,13 @@ function Header(type: any) {
             value="출고관리"
             bg={`${tab === '출고관리' ? 'active' : 'none'}`}
           >
-            <Link to="/3pl/export/list" style={{ textDecoration: 'none', color: 'black' }}>
-              출고관리
-            </Link>
+            {type.isEmpty !== true ? (
+              <Link to="/3pl/export/list" style={{ textDecoration: 'none', color: 'black' }}>
+                출고관리
+              </Link>
+            ) : (
+              '출고관리'
+            )}
           </HeaderMenu>
 
           <HeaderMenu
@@ -102,11 +111,11 @@ function Header(type: any) {
             마이페이지
           </HeaderMenu>
           <p></p>
-          {tab === '발주관리' ? <SubMenu title={tab} closeMenu={closeMenu} /> : <p></p>}
-          {tab === '입고관리' ? <SubMenu title={tab} closeMenu={closeMenu} /> : <p></p>}
+          {tab === '발주관리' && !type.isEmpty ? <SubMenu title={tab} closeMenu={closeMenu} /> : <p></p>}
+          {tab === '입고관리' && !type.isEmpty ? <SubMenu title={tab} closeMenu={closeMenu} /> : <p></p>}
           <p></p>
           <p></p>
-          {tab === '마이페이지' ? <SubMenu title={tab} closeMenu={closeMenu} /> : ''}
+          {tab === '마이페이지' && !type.isEmpty ? <SubMenu title={tab} closeMenu={closeMenu} /> : ''}
         </MenuTab>
       </HeaderBar>
     </Headers>

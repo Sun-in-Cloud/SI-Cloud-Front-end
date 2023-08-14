@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from './ThreeplHeader';
 import Threepl_ProductList from './product/Threepl_ProductList';
-import { Location, Route, Routes, useLocation } from 'react-router-dom';
+import { Location, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { sellerCompany } from '../../global/CompanyInterface';
 import Threepl_OrderRegister from './order/Threepl_OrderRegister';
@@ -31,12 +31,15 @@ function ThreeplMain(props: any) {
   console.log(threepl);
 
   const com: any[] = threepl.sellers;
-
   const location: Location = useLocation();
 
   const [seller, setSeller] = useState<number>();
 
   const [move, setMove] = useState<boolean>(false);
+
+  const [isEmpty, setIsEmpty] = useState<boolean>(true);
+
+  const navigate = useNavigate();
 
   function findSeller(new_seller: any): void {
     setSeller(new_seller.item.sellerNo);
@@ -55,13 +58,23 @@ function ThreeplMain(props: any) {
   }
 
   useEffect(() => {
-    setMove(true);
-    setSeller(com[0].sellerNo);
+    if (!isEmpty) {
+      setMove(true);
+      setSeller(com[0].sellerNo);
+    }
   }, [location]);
+
+  useEffect(() => {
+    if (threepl.sellers.length === 0) {
+      navigate('/3pl/match/list');
+    } else {
+      setIsEmpty(false);
+    }
+  }, []);
 
   return (
     <>
-      <Header type={StyleType(props.type)} />
+      <Header type={StyleType(props.type)} isEmpty={isEmpty} />
       {location.pathname === '/3pl/import/pre/register' && (
         <ExportPage>
           <h1></h1>

@@ -18,24 +18,25 @@ function SubBar(props: any) {
 
   return (
     <BarList>
-      {props.company.map((item: sellerCompany, index: number) => {
-        return (
-          <Item
-            title={tab}
-            value={item.companyName}
-            onClick={() => {
-              changeUnderLine;
-              setTab(item.companyName);
-              props.findSeller({ item });
-            }}
-            style={{
-              color: tab === item.companyName ? 'black' : 'gray',
-            }}
-          >
-            {item.companyName}
-          </Item>
-        );
-      })}
+      {props.company !== undefined &&
+        props.company.map((item: sellerCompany, index: number) => {
+          return (
+            <Item
+              title={tab}
+              value={item.companyName}
+              onClick={() => {
+                changeUnderLine;
+                setTab(item.companyName);
+                props.findSeller({ item });
+              }}
+              style={{
+                color: tab === item.companyName ? 'black' : 'gray',
+              }}
+            >
+              {item.companyName}
+            </Item>
+          );
+        })}
     </BarList>
   );
 }
