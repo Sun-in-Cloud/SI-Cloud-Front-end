@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import LoginBtn from '../common/Loginbtn';
 import styled from 'styled-components';
-import line from '../../img/line.svg';
 import logo from '../../img/s.png';
 import HeaderMenu from '../common/HeaderMenu';
 import SubMenu from './ThreeplSubMenu';
@@ -37,15 +35,6 @@ function Header(type: any) {
   return (
     <Headers>
       <HeaderBar>
-        {/* <Loginbtns>
-          <LoginBtn variant="secondary" type={StyleType(style)}>
-            로그인
-          </LoginBtn>
-          <LoginBtn variant="primary" type={StyleType(style)}>
-            로그아웃
-          </LoginBtn>
-        </Loginbtns> */}
-
         <p></p>
         <HeaderLogo>
           <Link to="/3pl">
@@ -59,7 +48,7 @@ function Header(type: any) {
             value="상품관리"
             bg={`${tab === '상품관리' ? 'active' : 'none'}`}
           >
-            <Link to="/3pl/product/list" style={{ textDecoration: 'none' }}>
+            <Link to="/3pl/product/list" style={{ textDecoration: 'none', color: 'black' }}>
               상품관리
             </Link>
           </HeaderMenu>
@@ -88,7 +77,7 @@ function Header(type: any) {
             value="출고관리"
             bg={`${tab === '출고관리' ? 'active' : 'none'}`}
           >
-            <Link to="/3pl/export/list" style={{ textDecoration: 'none' }}>
+            <Link to="/3pl/export/list" style={{ textDecoration: 'none', color: 'black' }}>
               출고관리
             </Link>
           </HeaderMenu>
@@ -99,7 +88,7 @@ function Header(type: any) {
             value="매칭서비스"
             bg={`${tab === '매칭서비스' ? 'active' : 'none'}`}
           >
-            <Link to="/3pl/match/list" style={{ textDecoration: 'none' }}>
+            <Link to="/3pl/match/list" style={{ textDecoration: 'none', color: 'black' }}>
               매칭서비스
             </Link>
           </HeaderMenu>

@@ -1,49 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Threepl_ListingPage from '../Threepl_ListingPage';
 import { useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
 import LoginBtn from '../../common/Loginbtn';
 import axios from 'axios';
-import ListingPage from '../../ListingPage';
 
 function Threepl_ExportInvoice(props: any) {
-  // const columns: string[] = ['바코드 번호', '상품명', '주문수량', '출고일자', '송장번호', '주문 상태'];
-
-  // const rows: any = [
-  //   {
-  //     productNo: '0234101010',
-  //     productName: '바지',
-  //     amount: 2,
-  //     exportDate: '2022-08-02',
-  //     invoiceNo: 15641213,
-  //     orderStatus: '대기중',
-  //   },
-  //   {
-  //     productNo: '2345424',
-  //     productName: '자켓',
-  //     amount: 1,
-  //     exportDate: '2022-08-02',
-  //     invoiceNo: null,
-  //     orderStatus: '대기중',
-  //   },
-  //   {
-  //     productNo: '87654647',
-  //     productName: '슬리퍼',
-  //     amount: 1,
-  //     exportDate: '2022-08-02',
-  //     invoiceNo: null,
-  //     orderStatus: '대기중',
-  //   },
-  //   {
-  //     productNo: '324656534',
-  //     productName: '모자',
-  //     amount: 1,
-  //     exportDate: '2022-08-02',
-  //     invoiceNo: null,
-  //     orderStatus: '대기중',
-  //   },
-  // ];
-
   const title: string[][] = [
     ['바코드 번호', 'productNo'],
     ['상품명', 'productName'],
@@ -61,8 +23,6 @@ function Threepl_ExportInvoice(props: any) {
 
   const [checkedList, setCheckedList] = useState<[]>();
 
-  //const [nullList, setNullList] = useState<string[]>([]);
-
   async function getExportDetail() {
     const listurl = '/3pl/export/' + state.exportNo;
     await axios
@@ -77,18 +37,15 @@ function Threepl_ExportInvoice(props: any) {
         },
       })
       .then(function (response) {
-        console.log('-', response.data.exportProducts);
         setRows(response.data.exportProducts);
         const list: number[] = [];
         for (let i = 0; i < response.data.totalPage; i++) {
           list[i] = i + 1;
         }
         setPageList(list);
-
-        console.log(response);
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 
@@ -105,7 +62,6 @@ function Threepl_ExportInvoice(props: any) {
 
   async function printInvoice() {
     const listurl: string = '/3pl/export/invoice';
-    console.log(checkedList);
     await axios
       .put(listurl, {
         exportNo: state.exportNo,
@@ -116,8 +72,6 @@ function Threepl_ExportInvoice(props: any) {
         },
       })
       .then(function (response) {
-        console.log('-------------');
-        console.log(response);
         let nullList: string = '';
         response.data.map((value: any, index: number) => {
           if (value.invoiceNo === null) {
@@ -130,12 +84,11 @@ function Threepl_ExportInvoice(props: any) {
         setCheckedList([]);
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 
   useEffect(() => {
-    console.log('---');
     getExportDetail();
   }, [currentPage]);
 

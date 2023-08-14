@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import dashedLine from '../../../img/dashedLine.svg';
 import { Route, useNavigate } from 'react-router-dom';
-import LandscapeMain from '../../LandscapeMain';
 import TableTitleWH from '../../common/TableTitleWH';
 import CheckBox from '../../common/CheckBox';
 import RegisterNew from '../../common/RegisterNew';

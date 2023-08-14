@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import LoginBtn from '../../common/Loginbtn';
 import { styled } from 'styled-components';
-import Threepl_ListingPage from '../Threepl_ListingPage';
 import axios from 'axios';
 import ListingPage from '../../ListingPage';
 
@@ -21,40 +20,35 @@ function Threepl_OrderRegister(props: any) {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   //발주 등록할 내역 조회
-  async function getOrderList() {
+  async function getAutoOrderList() {
     const listurl = '/3pl/order/auto-list';
-    console.log('auto', props.seller);
     await axios
       .get(listurl, {
         params: {
           sellerNo: props.seller,
           pageNum: currentPage,
-          countPerPage: 3,
+          countPerPage: 7,
         },
         headers: {
           'Content-type': 'application/json',
         },
       })
       .then(function (response) {
-        console.log('-', response.data);
         setRows(response.data.products);
         const list: number[] = [];
         for (let i = 0; i < response.data.totalPage; i++) {
           list[i] = i + 1;
         }
         setPageList(list);
-
-        console.log(response);
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 
   //발주 등록
   async function registerOrder() {
     const listurl = '/3pl/order/register/' + props.seller;
-    console.log('reg', props.seller);
     await axios
       .post(listurl, {})
       .then(function (response) {
@@ -63,11 +57,10 @@ function Threepl_OrderRegister(props: any) {
         } else {
           alert('발주 등록 실패');
         }
-        console.log(response);
-        getOrderList();
+        getAutoOrderList();
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 
@@ -79,12 +72,10 @@ function Threepl_OrderRegister(props: any) {
   }
 
   useEffect(() => {
-    console.log('---');
-    getOrderList();
+    getAutoOrderList();
   }, [props.seller, currentPage]);
 
   const onClickRegister = () => {
-    console.log('등록');
     registerOrder();
   };
   return (
@@ -115,5 +106,6 @@ const MainPage = styled.div`
 const Btn = styled.div`
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 10px;
 `;
 export default Threepl_OrderRegister;

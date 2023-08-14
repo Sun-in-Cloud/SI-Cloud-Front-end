@@ -2,21 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Threepl_ListingPage from '../Threepl_ListingPage';
 import axios from 'axios';
-import BarcodeScan from '../../common/BarcodeScan';
 import { styled } from 'styled-components';
 import LoginBtn from '../../common/Loginbtn';
-import { Box, Button, Dialog, DialogContent } from '@material-ui/core';
+import { Dialog, DialogContent } from '@material-ui/core';
 import { BarcodeScanner } from '../../common/BarcodeScanner';
 
 function Threepl_ImportRegister(props: any) {
   const { state } = useLocation();
-
-  // const columns: string[] = ['바코드 번호', '상품명', '입고 예정 수량', '실제 입고량'];
-  const row = [
-    { productNo: 8809718020261, productName: '마스크', requestAmount: 200, importAmount: 23 },
-    { productNo: 4029787487862, productName: '비타민', requestAmount: 300, importAmount: 10 },
-    { productNo: 8806521017211, productName: '소화제', requestAmount: 180, importAmount: null },
-  ];
 
   const title: string[][] = [
     ['바코드 번호', 'productNo'],
@@ -25,7 +17,7 @@ function Threepl_ImportRegister(props: any) {
     ['실제 입고량', 'importAmount'],
   ];
 
-  const rows = useRef<any[]>(row); //처음 axios 값 가져와서 저장 후 변경
+  const rows = useRef<any[]>([]); //처음 axios 값 가져와서 저장 후 변경
 
   const [vRows, setVRows] = useState<any[]>(rows.current); //변경될 때마다 화면 렌더링을 위함
 
@@ -38,7 +30,6 @@ function Threepl_ImportRegister(props: any) {
   const [same, setSame] = useState<boolean>(false);
 
   const onChangeAmount = (e: any) => {
-    console.log(e.target.value);
     setAmount(e.target.value);
   };
 
@@ -61,12 +52,10 @@ function Threepl_ImportRegister(props: any) {
         setScanName(value.productName);
         setModal(false);
         setModal2(true);
-        console.log('sc', scanCode);
         return;
       }
       setModal(false);
       setModal2(true);
-      console.log(result.codeResult.code);
     });
   };
 
@@ -75,19 +64,18 @@ function Threepl_ImportRegister(props: any) {
     await axios
       .get(listurl, {
         params: {
-          //importNo: state.item.importNo,
+          importNo: state.item.importNo,
         },
         headers: {
           'Content-type': 'application/json',
         },
       })
       .then(function (response) {
-        console.log('-', response.data);
         rows.current = response.data;
         setVRows(rows.current);
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 
@@ -96,12 +84,11 @@ function Threepl_ImportRegister(props: any) {
     const listurl = '/3pl/import/register';
     await axios
       .post(listurl, {
-        //sellerNo: state.sellerNo,
-        //importNo: state.item.importNo,
+        sellerNo: state.sellerNo,
+        importNo: state.item.importNo,
         importList: vRows,
       })
       .then(function (response) {
-        console.log('res', response);
         if (response.data === true) {
           alert('입고 등록 성공');
         } else {
@@ -109,13 +96,11 @@ function Threepl_ImportRegister(props: any) {
         }
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 
   function getProductNo(barcode: string, amount: number) {
-    console.log('***', barcode);
-    console.log('rows', rows.current);
     const newRow: any[] = [];
     rows.current.map((value: any, index: number) => {
       if (value.productNo == barcode) {
@@ -126,7 +111,6 @@ function Threepl_ImportRegister(props: any) {
           requestAmount: value.requestAmount,
           importAmount: chAmount,
         };
-        console.log('()', value.importAmount);
       } else {
         newRow[index] = {
           productNo: value.productNo,
@@ -136,7 +120,6 @@ function Threepl_ImportRegister(props: any) {
         };
       }
     });
-    console.log('s', rows);
     rows.current = newRow;
     setVRows(rows.current);
     setAmount(0);
@@ -144,15 +127,31 @@ function Threepl_ImportRegister(props: any) {
   }
 
   useEffect(() => {
-    console.log('---');
-    //getProductList();
+    getProductList();
   }, []);
 
   return (
     <>
       <MainPage>
         <List>
-          <Title>{/*<p>입고예정번호: {state.item.importNo}</p>*/}</Title>
+          <Title>
+            <p>입고예정번호: {state.item.importNo}</p>
+            <Btn>
+              <LoginBtn variant="primary" type="landscape" onClick={_toggle} style={{ marginRight: '10px' }}>
+                바코드 인식
+              </LoginBtn>
+              <LoginBtn
+                variant="primary"
+                type="landscape"
+                onClick={() => {
+                  console.log(rows);
+                  RegisterImport();
+                }}
+              >
+                입고 등록
+              </LoginBtn>
+            </Btn>
+          </Title>
           <Threepl_ListingPage
             sellerNo={props.seller}
             titles={title}
@@ -162,19 +161,6 @@ function Threepl_ImportRegister(props: any) {
             onDetail={true}
           />
         </List>
-        <LoginBtn variant="primary" type="landscape" onClick={_toggle}>
-          바코드 인식
-        </LoginBtn>
-        <LoginBtn
-          variant="primary"
-          type="landscape"
-          onClick={() => {
-            console.log(rows);
-            RegisterImport();
-          }}
-        >
-          입고 등록
-        </LoginBtn>
 
         <Dialog
           open={modal}
@@ -249,7 +235,8 @@ const Title = styled.div`
   display: flex;
   font-size: 16px;
   font-family: jalnan;
-  justify-content: flex-start;
+  justify-content: space-between;
+  margin-bottom: 10px;
 `;
 
 const ScanNBtn = styled.div`
@@ -294,7 +281,8 @@ const Input = styled.input`
 
 const Btn = styled.div`
   display: flex;
-  width: 400px;
+  width: fit-content;
   justify-content: center;
+  height: 40px;
 `;
 export default Threepl_ImportRegister;

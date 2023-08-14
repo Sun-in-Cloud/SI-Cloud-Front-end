@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import DayPicker from './DayPicker';
 import LoginBtn from '../../common/Loginbtn';
@@ -12,20 +12,6 @@ const optionData = [
 
 // const
 const moWidth = 575;
-
-// custom hook
-const useDevice = () => {
-  // 모바일 디바이스인지 아닌지 체크
-  // uaParser 패키지 이용
-  //   const uaParser = new UAParser(window.navigator.userAgent);
-  //   return useMemo(() => {
-  //     try {
-  //       return uaParser.getDevice();
-  //     } catch (err) {
-  //       return null;
-  //     }
-  //   }, []);
-};
 
 const useResize = () => {
   // 브라우저 가로 너비 감지
@@ -105,7 +91,6 @@ function ThreeplContractModal(props: any) {
         threePLNo: 201,
       })
       .then(function (response) {
-        console.log('res', response);
         if (response.data === true) {
           alert('계약 성공');
         } else {
@@ -114,7 +99,7 @@ function ThreeplContractModal(props: any) {
         props.setIsModalOpen(false);
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 
@@ -197,7 +182,6 @@ function ThreeplContractModal(props: any) {
           type="landscape"
           onClick={() => {
             postContract(selected, date);
-            console.log(selected, date);
           }}
         >
           계약하기

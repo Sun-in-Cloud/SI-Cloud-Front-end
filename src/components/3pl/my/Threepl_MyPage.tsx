@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import MyInfo from '../../common/my/MyInfo';
 import { styled } from 'styled-components';
-import dashedLine from '../../../img/dashedLine.svg';
 import axios from 'axios';
 import LoginBtn from '../../common/Loginbtn';
 
@@ -34,11 +33,10 @@ function Threepl_MyPage(props: any) {
         },
       })
       .then(function (response) {
-        console.log('res', response);
         setRow(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 

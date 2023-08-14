@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Threepl_ListingPage from '../Threepl_ListingPage';
 import LoginBtn from '../../common/Loginbtn';
 import { styled } from 'styled-components';
 import axios from 'axios';
@@ -40,7 +39,7 @@ function Threepl_Export(props: any) {
         params: {
           sellerNo: props.seller,
           pageNum: currentPage,
-          countPerPage: 3,
+          countPerPage: 7,
         },
         headers: {
           'Content-type': 'application/json',
@@ -130,5 +129,6 @@ const MainPage = styled.div`
 const Btn = styled.div`
   display: flex;
   justify-content: flex-start;
+  margin-bottom: 10px;
 `;
 export default Threepl_Export;

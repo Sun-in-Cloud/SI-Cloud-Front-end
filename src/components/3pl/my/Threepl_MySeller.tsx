@@ -26,11 +26,10 @@ function Threepl_MySeller(props: any) {
     await axios
       .get(listurl, {})
       .then(function (response) {
-        console.log('res', response);
         setRow(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 
@@ -45,7 +44,6 @@ function Threepl_MySeller(props: any) {
         <PageTitle>
           <Title>{sellerName}</Title>
           <Line></Line>
-          {/* <img src={dashedLine} /> */}
         </PageTitle>
         {row && <MyInfo title={titles} rows={row} columns={titles.length} getItem={setSellerName}></MyInfo>}
       </Container>

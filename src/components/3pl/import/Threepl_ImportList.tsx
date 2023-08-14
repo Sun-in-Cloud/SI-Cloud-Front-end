@@ -46,25 +46,22 @@ function Threepl_ImportList(props: any) {
         params: {
           sellerNo: props.seller,
           pageNum: currentPage,
-          countPerPage: 3,
+          countPerPage: 7,
         },
         headers: {
           'Content-type': 'application/json',
         },
       })
       .then(function (response) {
-        console.log('-', response.data);
         setRowsList(response.data.importproduct);
         const list: number[] = [];
         for (let i = 0; i < response.data.totalPage; i++) {
           list[i] = i + 1;
         }
         setPageList(list);
-
-        console.log(response);
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 
@@ -79,11 +76,10 @@ function Threepl_ImportList(props: any) {
         },
       })
       .then(function (response) {
-        console.log('-', response.data);
         setRowsDetail(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 
@@ -140,7 +136,7 @@ function Threepl_ImportList(props: any) {
 
 const MainPage = styled.div`
   display: grid;
-  grid-template-columns: 1fr 0.1fr 1fr;
+  grid-template-columns: 1fr 0.1fr 1.5fr;
   grid-template-areas: 'ListingPage . ListingPage';
 `;
 

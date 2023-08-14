@@ -10,12 +10,12 @@ interface StyledGridProps {
 }
 
 const gridLayout = {
-  2: '1fr 1fr',
-  3: '1.2fr 1fr 1fr',
+  2: '1fr 1.5fr',
+  3: '1.5fr 1.5fr 1fr',
   4: '1fr 1fr 1fr 1fr',
   5: '1fr 1fr 1fr 1fr 1fr',
   6: '1fr 1fr 1fr 1fr 1fr 1fr',
-  7: '200px 220px 80px 150px 150px 120px 50px',
+  7: '200px 230px 80px 150px 150px 120px 50px',
   // 7: '1.5fr 1.5fr 0.5fr 1fr 1.5fr 1fr 0.5fr',
 };
 
@@ -151,9 +151,10 @@ const Tablerows = styled.div`
 const Row = styled.div<StyledGridProps>`
   display: grid;
   grid-template-columns: ${(props) => gridLayout[props.columns]};
+  width: 100%;
   height: 33px;
   align-items: center;
-  margin: 10px 0 5px 15px;
+  margin: 10px 0 5px 0;
 `;
 
 const Item = styled.div`
@@ -182,6 +183,7 @@ const ChkBox = styled.input`
 const BtnBox = styled.div`
   display: flex;
   justify-content: center;
+  height: 30px;
 `;
 
 const Line = styled.div``;

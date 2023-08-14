@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
-import { Order } from '../../../global/OrderInterface';
 import Threepl_ListingPage from '../Threepl_ListingPage';
-import { Import } from '../../../global/ImportInterface';
 import axios from 'axios';
 
 function Threepl_ImportPreList(props: any) {
@@ -32,25 +30,22 @@ function Threepl_ImportPreList(props: any) {
         params: {
           sellerNo: props.seller,
           pageNum: currentPage,
-          countPerPage: 15,
+          countPerPage: 7,
         },
         headers: {
           'Content-type': 'application/json',
         },
       })
       .then(function (response) {
-        console.log('-', response.data);
         setRowsList(response.data.preImports);
         const list: number[] = [];
         for (let i = 0; i < response.data.totalPage; i++) {
           list[i] = i + 1;
         }
         setPageList(list);
-
-        console.log(response);
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 
@@ -60,11 +55,10 @@ function Threepl_ImportPreList(props: any) {
     await axios
       .get(listurl, {})
       .then(function (response) {
-        console.log('-', response);
         setRowsDetail(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 

@@ -8,12 +8,12 @@ interface StyledGridProps {
 }
 
 const gridLayout = {
-  2: '1fr 1fr',
-  3: '1fr 1fr 1fr',
+  2: '1fr 1.5fr',
+  3: '1.5fr 1.5fr 1fr',
   4: '1fr 1fr 1fr 1fr',
   5: '1fr 1fr 1fr 1fr 1fr',
   6: '1fr 1fr 1fr 1fr 1fr 1fr',
-  7: '220px 220px 70px 150px 150px 120px 50px',
+  7: '200px 230px 80px 150px 150px 120px 50px',
 };
 
 function TableColumn(props: any) {

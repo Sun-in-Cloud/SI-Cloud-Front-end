@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from './ThreeplHeader';
 import Threepl_ProductList from './product/Threepl_ProductList';
-import { BrowserRouter, Location, Route, Routes, useLocation } from 'react-router-dom';
-import Sidebar from './Sidebar';
+import { Location, Route, Routes, useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { sellerCompany } from '../../global/CompanyInterface';
 import Threepl_OrderRegister from './order/Threepl_OrderRegister';
