@@ -9,7 +9,13 @@ import InputAmount from '../../common/InputAmount';
 
 interface StyledGridProps {
   readonly columns: '2' | '3' | '4' | '5' | '6' | '7';
+  readonly bkgd: 'active' | 'none';
 }
+
+const backgroundColor = {
+  active: '#f4f0ed',
+  none: 'transparent',
+};
 
 const gridLayout = {
   2: '1fr 1fr',
@@ -45,7 +51,12 @@ function TableRowImport(props: any) {
         {props.rows.map((item: PreDetailList, index: number) => {
           return (
             <>
-              <Row key={item.productNo} columns={props.columns} onClick={() => onDetail(props.onDetail, item)}>
+              <Row
+                key={item.productNo}
+                columns={props.columns}
+                onClick={() => onDetail(props.onDetail, item)}
+                bkgd={`${item.importNo === num ? 'active' : 'none'}`}
+              >
                 {props.title.map((it: string, idx: number) => {
                   return (
                     <>
@@ -99,12 +110,15 @@ const Tablerows = styled.div`
   margin-top: 5px;
 `;
 const Box = styled.div``;
+
 const Row = styled.div<StyledGridProps>`
   display: grid;
   grid-template-columns: ${(props) => gridLayout[props.columns]};
   grid-auto-rows: 1fr;
   align-items: center;
-  margin: 15px 0 5px 15px;
+  background-color: ${(props) => backgroundColor[props.bkgd]};
+  height: 30px;
+  padding: 10px;
 `;
 
 const Item = styled.div`
