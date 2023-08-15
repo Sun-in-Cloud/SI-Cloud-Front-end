@@ -6,15 +6,27 @@ import MarketingChartYearly from './MarketingChartYearly';
 import ChannelPortion from './ChannelPortion';
 import { isElementAccessExpression } from 'typescript';
 import { useAppSelect } from '../../../redux/configStore.hooks';
+import TopProduct from './TopProduct';
+import TopProductList from './TopProductList';
+import { tab } from '@testing-library/user-event/dist/tab';
 
 function MarketingChannel(props: any) {
   const [channelInfo, setChannelInfo] = useState<any>();
-  const [yearlyType, setyearlyType] = useState('yearlyCount');
-  const [yearlyTopType, setyearlyTopType] = useState('yearlyTopCount');
-  const [channelTitle, setChannelTitle] = useState<Array<string>>();
+  const [yearlyType, setyearlyType] = useState('thisYear');
+  const [yearlyTopType, setyearlyTopType] = useState('thisYearTop');
+
+  const [channelLastYearTitle, setChannelLastYearTitle] = useState<any>();
+  const [channelThisYearTitle, setChannelThisYearTitle] = useState<Array<string>>();
+
+  const [channelLastYearSales, setChannelLastYearSales] = useState<any>();
+  const [channelThisYearSales, setChannelThisYearSales] = useState<Array<string>>();
+  const [channelType, setChannelType] = useState('');
+
+  const [channelDetail, setChannelDetail] = useState<Array<any>>();
+
+  const seller = useAppSelect((state) => state.seller);
 
   async function getChannel() {
-    const seller = useAppSelect((state) => state.seller);
     const listurl = '/seller/marketing/channel';
     await axios
       .get(listurl, {
@@ -23,7 +35,29 @@ function MarketingChannel(props: any) {
         },
       })
       .then(function (response) {
+        const data = response.data;
         setChannelInfo(response.data);
+        let temp_title: any = [];
+        let temp_sales: any = [];
+
+        data.totalSalesLastYear.map((item: any, index: number) => {
+          temp_title.push(item.channelName);
+          temp_sales.push(Number(item.totalSales));
+        });
+
+        let temp2_title: any = [];
+        let temp2_sales: any = [];
+
+        data.totalSalesThisYear.map((item: any, index: number) => {
+          temp2_title.push(item.channelName);
+          temp2_sales.push(Number(item.totalSales));
+        });
+
+        setChannelLastYearTitle(temp_title);
+        setChannelLastYearSales(temp_sales);
+
+        setChannelThisYearTitle(temp2_title);
+        setChannelThisYearSales(temp2_sales);
       })
       .catch(function (error) {
         console.log(error);
@@ -46,6 +80,25 @@ function MarketingChannel(props: any) {
       setyearlyTopType('lastYearTop');
     }
   }
+
+  const getChannelType = (e: any) => {
+    const channelName = e.currentTarget.value;
+    setChannelType(channelName);
+
+    if (yearlyTopType.includes('last')) {
+      channelInfo.totalSalesLastYear.map((item: any, index: number) => {
+        if (item.channelName === channelName) {
+          setChannelDetail(item);
+        }
+      });
+    } else if (yearlyTopType.includes('this')) {
+      channelInfo.totalSalesThisYear.map((item: any, index: number) => {
+        if (item.channelName === channelName) {
+          setChannelDetail(item);
+        }
+      });
+    }
+  };
 
   return (
     <Channel>
@@ -75,7 +128,15 @@ function MarketingChannel(props: any) {
               </Tab>
               <Item>채널별 매출</Item>
             </Btns>
-            <ChannelPortion data={setChannelInfo} />
+            {channelLastYearSales && channelLastYearSales && channelThisYearSales && channelThisYearTitle && (
+              <ChannelPortion
+                tab={yearlyType}
+                channelLastYearTitle={channelLastYearTitle}
+                channelLastYearSales={channelLastYearSales}
+                channelThisYearSales={channelThisYearSales}
+                channelThisYearTitle={channelThisYearTitle}
+              />
+            )}
           </Statics>
         </Yearly>
       </WholeSales>
@@ -101,10 +162,19 @@ function MarketingChannel(props: any) {
                 작년
               </Tab>
               <Item>채널별 TOP5</Item>
-
               {/* https://goddino.tistory.com/227 */}
             </Btns>
-            <ChannelPortion data={setChannelInfo} />
+            {channelLastYearTitle && channelThisYearTitle && (
+              <>
+                <TopProduct
+                  tab={yearlyTopType}
+                  channelLastYearTitle={channelLastYearTitle}
+                  channelThisYearTitle={channelThisYearTitle}
+                  getChannelType={getChannelType}
+                />
+                {channelDetail && <TopProductList channelType={channelType} channelDetail={channelDetail} />}
+              </>
+            )}
           </Statics>
         </Yearly>
       </SalesDetail>
@@ -162,8 +232,12 @@ const Item = styled.div`
   justify-content: flex-end;
   width: 120px;
 `;
-const WholeSales = styled.div``;
+const WholeSales = styled.div`
+  padding-top: 80px;
+`;
 
-const SalesDetail = styled.div``;
+const SalesDetail = styled.div`
+  padding-top: 80px;
+`;
 
 export default MarketingChannel;

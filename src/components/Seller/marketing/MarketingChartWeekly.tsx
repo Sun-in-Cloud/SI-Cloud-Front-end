@@ -100,12 +100,12 @@ function MarketingChartWeekly(props: any) {
                   style: {
                     fontSize: '12px',
                     fontFamily: 'GmarketSansMedium',
-                    colors: ['#1E1008'],
+                    colors: ['#ebbba7'],
                   },
                 },
                 fill: {
                   type: 'gradient',
-                  gradient: { gradientToColors: ['#83EAF1'], stops: [0, 100] },
+                  gradient: { gradientToColors: ['#cfc7f8'], stops: [0, 100] },
                 },
                 colors: ['#63A4FF'],
                 tooltip: {

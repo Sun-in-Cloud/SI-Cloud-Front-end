@@ -99,9 +99,9 @@ function MarketingChartMonthly(props: any) {
                 },
                 fill: {
                   type: 'gradient',
-                  gradient: { gradientToColors: ['#A4BFEF'], stops: [0, 100] },
+                  gradient: { gradientToColors: ['#fad0c4'], stops: [0, 100] },
                 },
-                colors: ['#6A93CB'],
+                colors: ['#ff9a9e'],
                 tooltip: {
                   y: { formatter: (value) => `${value}건` },
                   style: {
@@ -156,9 +156,9 @@ function MarketingChartMonthly(props: any) {
                 },
                 fill: {
                   type: 'gradient',
-                  gradient: { gradientToColors: ['#A4BFEF'], stops: [0, 100] },
+                  gradient: { gradientToColors: ['#fad0c4'], stops: [0, 100] },
                 },
-                colors: ['#6A93CB'],
+                colors: ['#ff9a9e'],
                 tooltip: {
                   enabled: true,
                   enabledOnSeries: undefined,
