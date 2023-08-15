@@ -10,6 +10,7 @@ import ThreeplMain from './components/3pl/ThreeplMain';
 import WMSMain from './components/WMS/WMSMain';
 import CommonMain from './components/Auth/CommonMain';
 import ShopingList from './components/shop/ShopingList';
+import '../src/styles/font.css';
 
 // 세로 모드
 const TabletPortrait = ({ children }: any) => {
