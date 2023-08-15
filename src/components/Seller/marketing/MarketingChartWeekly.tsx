@@ -100,14 +100,14 @@ function MarketingChartWeekly(props: any) {
                   style: {
                     fontSize: '12px',
                     fontFamily: 'GmarketSansMedium',
-                    colors: ['#ebbba7'],
+                    colors: ['#1E1008'],
                   },
                 },
                 fill: {
                   type: 'gradient',
-                  gradient: { gradientToColors: ['#cfc7f8'], stops: [0, 100] },
+                  gradient: { gradientToColors: ['#e6dee9'], stops: [0, 100] },
                 },
-                colors: ['#63A4FF'],
+                colors: ['#bdc2e8'],
                 tooltip: {
                   y: { formatter: (value) => `${value}건` },
                   style: {
@@ -164,9 +164,9 @@ function MarketingChartWeekly(props: any) {
                 },
                 fill: {
                   type: 'gradient',
-                  gradient: { gradientToColors: ['#89D4CF'], stops: [0, 100] },
+                  gradient: { gradientToColors: ['#e6dee9'], stops: [0, 100] },
                 },
-                colors: ['#734AE8'],
+                colors: ['#bdc2e8'],
                 tooltip: {
                   enabled: true,
                   enabledOnSeries: undefined,
