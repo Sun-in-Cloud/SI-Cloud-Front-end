@@ -15,7 +15,7 @@ const gridLayout = {
   4: '1fr 1fr 1fr 1fr',
   5: '1fr 1fr 1fr 1fr 1fr',
   6: '1fr 1fr 1fr 1fr 1fr 1fr',
-  7: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+  7: '1fr 1fr 0.5fr 1fr 1fr 1fr 1fr',
 };
 
 interface ExportList {
@@ -80,7 +80,7 @@ function ExportTableRow(props: any) {
 const Tablerows = styled.div`
   height: 400px;
   width: 100%;
-  overflow: hidden;
+  overflow-y: auto;
   margin-top: 5px;
 `;
 
@@ -94,7 +94,7 @@ const Row = styled.div<StyledGridProps>`
 
 const Item = styled.div`
   font-size: 15px;
-  font-family: 'Jalnan';
+  font-family: GmarketSansMedium;
   letter-spacing: 2px;
 `;
 

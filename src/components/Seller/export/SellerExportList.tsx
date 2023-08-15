@@ -38,7 +38,7 @@ function SellerExportList(props: any) {
   const detailExportTitles: string[][] = [
     ['상품번호', 'productNo'],
     ['상품명', 'productName'],
-    ['주문수량', 'amount'],
+    ['수량', 'amount'],
     ['판매금액', 'sellingPrice'],
     ['출고일', 'exportDate'],
     ['송장번호', 'invoiceNo'],
@@ -56,7 +56,7 @@ function SellerExportList(props: any) {
         params: {
           sellerNo: seller.userNo,
           pageNum: currentPage,
-          countPerPage: '3',
+          countPerPage: 10,
         },
         headers: {
           'Content-type': 'application/json',
@@ -139,6 +139,7 @@ const ExportForm = styled.div`
 const ExportList = styled.div`
   padding: 11px;
   overflow-x: hidden;
+  overflow-y: auto;
 `;
 
 const Navbtns = styled.div`

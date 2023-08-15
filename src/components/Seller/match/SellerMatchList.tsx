@@ -52,7 +52,7 @@ function SellerMatchList(props: any) {
   const columns: string[][] = [
     ['3PL명', 'companyName'],
     ['상품군', 'productGroup'],
-    ['계약종료일', 'endDate'],
+    ['종료일', 'endDate'],
     ['남은자리', 'leftLocation'],
   ];
 

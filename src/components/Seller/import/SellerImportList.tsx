@@ -70,6 +70,7 @@ function SellerImporList(props: any) {
     await axios
       .get(listurl)
       .then(function (response) {
+        //console.log(response);
         setDetailList(response.data);
       })
       .catch(function (error) {

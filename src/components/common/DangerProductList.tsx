@@ -16,7 +16,6 @@ interface DangerProduct {
 }
 
 function DangerProductList(props: any) {
-  console.log(props);
   const titles = [
     ['상품명', 'productName'],
     ['상품번호', 'productNo'],

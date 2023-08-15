@@ -52,7 +52,7 @@ function SellerExportList(props: any) {
         params: {
           sellerNo: seller.userNo,
           pageNum: currentPage,
-          countPerPage: 3,
+          countPerPage: 10,
         },
         headers: {
           'Content-type': 'application/json',

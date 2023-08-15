@@ -77,6 +77,7 @@ function SellerImportFixedList(props: any) {
     await axios
       .get(listurl)
       .then(function (response) {
+        //console.log(response);
         setPreImportDetail(response.data);
       })
       .catch(function (error) {

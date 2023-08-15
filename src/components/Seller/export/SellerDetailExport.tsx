@@ -25,9 +25,9 @@ function SellerDetailExport(props: any) {
   const detailExportTitles: string[][] = [
     ['상품번호', 'productNo'],
     ['상품명', 'productName'],
-    ['주문수량', 'amount'],
+    ['수량', 'amount'],
     ['판매금액', 'sellingPrice'],
-    ['출고일', 'exportDate'],
+    ['출고일', 'localExportDate'],
     ['송장번호', 'invoiceNo'],
     ['주문상태', 'orderStatus'],
   ];
@@ -76,6 +76,9 @@ function SellerDetailExport(props: any) {
   return (
     <>
       <ExportForm>
+        <Title>
+          <SubTitle>출고 확인하기</SubTitle>
+        </Title>
         <p></p>
         <ExportList>
           <ExportHeader>
@@ -98,17 +101,32 @@ function SellerDetailExport(props: any) {
     </>
   );
 }
+const Title = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #f6f2ef;
+  width: 100%;
+  height: 120px;
+  border-radius: 0 0 10px 10px;
+`;
 
-const ExportForm = styled.div`
-  margin-top: -65px;
+const SubTitle = styled.div`
   display: grid;
-  grid-template-columns: 0.7fr 6.6fr 0.7fr;
+  margin-top: 75px;
+  font-size: 20px;
+  font-family: GmarketSansMedium;
+`;
+const ExportForm = styled.div`
+  display: grid;
+  padding-top: 30px;
+  grid-template-columns: 0.4fr 6.6fr 0.4fr;
   z-index: 2;
 `;
 
 const ExportNo = styled.div`
   font-size: 20px;
-  font-family: 'Jalnan';
+  font-family: GmarketSansMedium;
 `;
 
 const ExportList = styled.div`

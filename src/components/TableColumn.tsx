@@ -13,7 +13,7 @@ const gridLayout = {
   4: '1fr 1fr 1fr 1fr',
   5: '1fr 1fr 1fr 1fr 1fr',
   6: '215px 1fr 1fr 1fr 1fr 1fr',
-  7: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+  7: '1fr 1fr 0.5fr 1fr 1fr 1fr 1fr',
   8: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
   9: '150px 90px 100px 70px 160px 80px 70px 100px 150px',
 };
