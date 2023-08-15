@@ -108,7 +108,9 @@ function SellerHeader(type: any) {
             value="마이페이지"
             bg={`${tab === '마이페이지' ? 'active' : 'none'}`}
           >
-            마이페이지
+            <Link to="/seller/mypage" style={{ textDecoration: 'none', color: 'black' }}>
+              마이페이지
+            </Link>
           </HeaderMenu>
 
           <p></p>
