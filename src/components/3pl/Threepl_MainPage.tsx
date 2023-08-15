@@ -5,15 +5,15 @@ import { useIntersect, Image, ScrollControls, Scroll } from '@react-three/drei';
 import one from '../../img/registerImg/1.jpg';
 import two from '../../img/registerImg/2.jpg';
 import three from '../../img/registerImg/3.jpg';
-import four from '../../img/registerImg/4.jpg';
-import five from '../../img/registerImg/5.jpg';
-import six from '../../img/registerImg/6.jpg';
-import seven from '../../img/registerImg/7.jpg';
-import eight from '../../img/registerImg/8.jpg';
-import nine from '../../img/registerImg/9.jpg';
-import ten from '../../img/registerImg/10.jpg';
-import eleven from '../../img/registerImg/11.jpg';
-import twelve from '../../img/registerImg/12.jpg';
+import four from '../../img/registerImg/4.jpeg';
+import five from '../../img/registerImg/5.jpeg';
+import six from '../../img/registerImg/6.jpeg';
+import seven from '../../img/registerImg/7.jpeg';
+import eight from '../../img/registerImg/8.jpeg';
+import nine from '../../img/registerImg/9.png';
+import ten from '../../img/registerImg/10.jpeg';
+import eleven from '../../img/registerImg/11.jpeg';
+import twelve from '../../img/registerImg/12.png';
 import { styled } from 'styled-components';
 
 function Item({ url, scale, ...props }: any) {
