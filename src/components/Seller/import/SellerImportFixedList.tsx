@@ -47,7 +47,7 @@ function SellerImportFixedList(props: any) {
   }
 
   async function getFixedImportList() {
-    const listurl = '/seller/import/pre/list';
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/pre/list`;
     await axios
       .get(listurl, {
         params: {

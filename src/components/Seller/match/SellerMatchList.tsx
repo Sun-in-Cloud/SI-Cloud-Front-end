@@ -83,7 +83,8 @@ function SellerMatchList(props: any) {
   }, [isModalOpen]);
 
   async function getThreeplList() {
-    const listurl = '/seller/match/list';
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/match/list`;
+
     await axios
       .get(listurl, {
         params: {

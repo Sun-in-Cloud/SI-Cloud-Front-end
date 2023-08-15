@@ -5,6 +5,7 @@ import axios from 'axios';
 import { styled } from 'styled-components';
 import LoginBtn from '../common/Loginbtn';
 import ListingPage from '../ListingPage';
+import { useAppSelect } from '../../redux/configStore.hooks';
 
 interface Product {
   exportNo: string;
@@ -21,6 +22,7 @@ function ShopingList(props: any) {
   const [product, setProduct] = useState<Product[] | null>([]);
   const [on, setOn] = useState(false);
   const navigate = useNavigate();
+  const seller = useAppSelect((state) => state.seller);
 
   const titles: string[][] = [
     ['출고번호', 'exportNo'],
@@ -35,11 +37,12 @@ function ShopingList(props: any) {
   ];
 
   async function getProductList() {
-    const listurl = '/shop/list';
+    const listurl = `${process.env.REACT_APP_API_URL}/shop/list`;
+
     await axios
       .get(listurl, {
         params: {
-          sellerNo: 8,
+          sellerNo: seller.userNo,
         },
         headers: {
           'Content-type': 'application/json',
@@ -55,8 +58,8 @@ function ShopingList(props: any) {
   }
 
   async function getNewProductList() {
-    const SellerNo = 8;
-    const listurl = '/shop/order/' + SellerNo;
+    const listurl = `${process.env.REACT_APP_API_URL}/shop/order/${seller.userNo}`;
+
     await axios
       .post(listurl)
       .then(function (response) {

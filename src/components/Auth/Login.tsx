@@ -42,9 +42,8 @@ function Login(props: any) {
     const info = { loginId: loginUser.id, loginPassword: loginUser.password };
     //dispatch(setUserAsync(info));
     const listurl = `${process.env.REACT_APP_API_URL}/auth/login`;
-    const listurll = `/auth/login`;
     await axios
-      .post(listurll, info)
+      .post(listurl, info)
       .then(function (response) {
         console.log(response);
         if (response.data.userType == 'SELLER') {

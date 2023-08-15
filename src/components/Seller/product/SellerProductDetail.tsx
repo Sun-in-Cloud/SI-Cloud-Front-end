@@ -37,7 +37,8 @@ function SellerProductDetail(props: any) {
   }, [location]);
 
   async function getProductDetail(productNo: string) {
-    const listurl = '/seller/product/' + productNo;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/product/${productNo}`;
+
     await axios
       .get(listurl)
       .then(function (response) {
@@ -50,7 +51,8 @@ function SellerProductDetail(props: any) {
   }
 
   async function putProductDetail(editProduct: ProductDetail) {
-    const listurl = '/seller/product/edit';
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/product/edit`;
+
     console.log(productDetail);
     await axios
       .put(listurl, editProduct)
@@ -63,7 +65,7 @@ function SellerProductDetail(props: any) {
   }
 
   async function deleteProductDetail() {
-    const listurl = '/seller/product/delete';
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/product/delete`;
     await axios
       .delete(listurl, {
         data: {

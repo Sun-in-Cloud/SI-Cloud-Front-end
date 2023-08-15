@@ -39,7 +39,8 @@ function SellerImporList(props: any) {
   ];
 
   async function getImportList() {
-    const listurl = '/seller/import/list';
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/list`;
+
     await axios
       .get(listurl, {
         params: {
@@ -65,7 +66,8 @@ function SellerImporList(props: any) {
   }
 
   async function getImportDetail() {
-    const listurl = '/seller/import/' + importNo;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/` + importNo;
+
     console.log(importNo);
     await axios
       .get(listurl)

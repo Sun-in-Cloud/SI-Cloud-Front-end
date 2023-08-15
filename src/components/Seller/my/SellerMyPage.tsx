@@ -47,7 +47,6 @@ function SellerMyPage(props: any) {
 
   //seller 본인의 정보 가져오기
   async function getInfo() {
-    console.log(seller);
     const listurl = `${process.env.REACT_APP_API_URL}/seller/mypage/${seller.userNo}`;
     await axios
       .get(listurl, {
@@ -58,7 +57,6 @@ function SellerMyPage(props: any) {
       })
       .then(function (response) {
         setRow(response.data);
-        console.log(response.data);
       })
       .catch(function (error) {
         //console.log(error);

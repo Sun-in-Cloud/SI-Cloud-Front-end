@@ -27,7 +27,8 @@ function MarketingChannel(props: any) {
   const seller = useAppSelect((state) => state.seller);
 
   async function getChannel() {
-    const listurl = '/seller/marketing/channel';
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/marketing/channel`;
+
     await axios
       .get(listurl, {
         params: {
@@ -162,7 +163,6 @@ function MarketingChannel(props: any) {
                 작년
               </Tab>
               <Item>채널별 TOP5</Item>
-              {/* https://goddino.tistory.com/227 */}
             </Btns>
             {channelLastYearTitle && channelThisYearTitle && (
               <>

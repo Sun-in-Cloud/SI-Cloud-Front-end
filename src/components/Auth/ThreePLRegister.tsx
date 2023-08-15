@@ -42,7 +42,7 @@ function ThreePlRegister(props: any) {
   };
 
   async function postUserInfo() {
-    const listurl = '/3pl/auth/register';
+    const listurl = `${process.env.REACT_APP_API_URL}/3pl/auth/register`;
     await axios
       .post(listurl, newThreePL)
       .then(function (response) {
@@ -54,7 +54,7 @@ function ThreePlRegister(props: any) {
   }
 
   async function getProductTypeList() {
-    const listurl = '/productGroup/list';
+    const listurl = `${process.env.REACT_APP_API_URL}/productGroup/list`;
     await axios
       .get(listurl)
       .then(function (response) {
