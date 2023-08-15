@@ -108,7 +108,12 @@ function Header(type: any) {
             value="마이페이지"
             bg={`${tab === '마이페이지' ? 'active' : 'none'}`}
           >
-            마이페이지
+            {!type.isEmpty && '마이페이지'}
+            {type.isEmpty && (
+              <Link to="/3pl/mypage" style={{ textDecoration: 'none', color: 'black' }}>
+                마이페이지
+              </Link>
+            )}
           </HeaderMenu>
           <p></p>
           {tab === '발주관리' && !type.isEmpty ? <SubMenu title={tab} closeMenu={closeMenu} /> : <p></p>}

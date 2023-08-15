@@ -57,7 +57,7 @@ function ThreeplMain(props: any) {
 
   useEffect(() => {
     if (threepl.sellers.length === 0) {
-      navigate('/3pl/match/list');
+      navigate('/3pl/mypage');
     } else {
       setIsEmpty(false);
     }
