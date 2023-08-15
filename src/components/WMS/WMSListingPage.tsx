@@ -7,7 +7,6 @@ import { styled } from 'styled-components';
 function WMSListingPage(props: any) {
   return (
     <TableList>
-      {/* <h1>{props.sellerNo}</h1> */}
       <TableForm>
         <TableColumn title={props.titles} columns={props.columns} />
         <TableRow title={props.titles} rows={props.rows} columns={props.columns} onDetail={props.onDetail} />

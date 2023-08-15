@@ -47,17 +47,16 @@ function Login(props: any) {
   async function getUserInfo() {
     const info = { loginId: loginUser.id, loginPassword: loginUser.password };
     //dispatch(setUserAsync(info));
-    const listurl = '/auth/login';
+    const listurl = `${process.env.REACT_APP_API_URL}/auth/login`;
     await axios
       .post(listurl, info)
       .then(function (response) {
-        console.log(response.data);
+        console.log(response);
         if (response.data.userType == 'SELLER') {
           dispatch(setSellerReducer(response.data));
         } else if (response.data.userType == 'THREE_PL') {
           dispatch(setThreeplReducer(response.data));
           navigate('/3pl');
-          console.log(threepl);
         }
       })
       .catch(function (error) {

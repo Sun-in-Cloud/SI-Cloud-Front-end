@@ -16,30 +16,27 @@ function WMS_3plList(props: any) {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   async function get3plList() {
-    const listurl = '/wms/3pl/list';
+    const listurl = `${process.env.REACT_APP_API_URL}/wms/3pl/list`;
     await axios
       .get(listurl, {
         params: {
           pageNum: currentPage,
-          countPerPage: 3,
+          countPerPage: 7,
         },
         headers: {
           'Content-type': 'application/json',
         },
       })
       .then(function (response) {
-        console.log('-', response.data.companies);
         setRows(response.data.companies);
         const list: number[] = [];
         for (let i = 0; i < response.data.totalPage; i++) {
           list[i] = i + 1;
         }
         setPageList(list);
-
-        console.log(response);
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 
@@ -51,7 +48,6 @@ function WMS_3plList(props: any) {
   }
 
   useEffect(() => {
-    console.log('---');
     get3plList();
   }, [currentPage]);
 
