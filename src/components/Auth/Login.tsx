@@ -15,7 +15,6 @@ import { useNavigate } from 'react-router';
 function Login(props: any) {
   const [loginUser, setLoginUser] = useState<User>(initialStateValue);
 
-  const user = useAppSelect((state) => state.user);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -28,10 +27,6 @@ function Login(props: any) {
 
   const clearUser = () => {
     dispatch(setUserReducer(initialStateValue));
-  };
-
-  const consoleUser = () => {
-    console.log(user);
   };
 
   const handleSubmit = () => {};
@@ -47,8 +42,9 @@ function Login(props: any) {
     const info = { loginId: loginUser.id, loginPassword: loginUser.password };
     //dispatch(setUserAsync(info));
     const listurl = `${process.env.REACT_APP_API_URL}/auth/login`;
+    const listurll = `/auth/login`;
     await axios
-      .post(listurl, info)
+      .post(listurll, info)
       .then(function (response) {
         console.log(response);
         if (response.data.userType == 'SELLER') {
