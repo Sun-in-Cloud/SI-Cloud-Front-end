@@ -46,7 +46,8 @@ function Login(props: any) {
   async function getUserInfo() {
     const info = { loginId: loginUser.id, loginPassword: loginUser.password };
     //dispatch(setUserAsync(info));
-    const listurl = '/auth/login';
+    `${process.env.REACT_APP_API_URL}/auth/login`;
+    const listurl = `/auth/login`;
     await axios
       .post(listurl, info)
       .then(function (response) {
