@@ -46,7 +46,7 @@ function SellerImporList(props: any) {
         params: {
           sellerNo: seller.userNo,
           pageNum: currentPage,
-          countPerPage: 3,
+          countPerPage: 7,
         },
         headers: {
           'Content-type': 'application/json',
@@ -66,13 +66,12 @@ function SellerImporList(props: any) {
   }
 
   async function getImportDetail() {
-    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/` + importNo;
-
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/${importNo}`;
     console.log(importNo);
     await axios
       .get(listurl)
       .then(function (response) {
-        //console.log(response);
+        console.log(response);
         setDetailList(response.data);
       })
       .catch(function (error) {
