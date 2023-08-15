@@ -11,7 +11,7 @@ import store from './redux/configStore';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <div>
-    <GlobalStyle />
+    {/* <GlobalStyle /> */}
     <Provider store={store}>
       <App />
     </Provider>
