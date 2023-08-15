@@ -19,7 +19,7 @@ function Threepl_ProductList(props: any) {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   async function getProductList() {
-    const listurl = '/3pl/product/list';
+    const listurl = `${process.env.REACT_APP_API_URL}/3pl/product/list`;
     await axios
       .get(listurl, {
         params: {

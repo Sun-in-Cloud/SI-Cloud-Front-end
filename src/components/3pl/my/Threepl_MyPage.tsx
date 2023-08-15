@@ -16,7 +16,6 @@ function Threepl_MyPage(props: any) {
     ['담당자명', 'managerName'],
     ['담당자 메일', 'managerEmail'],
     ['담당자 번호', 'managerPhone'],
-    ['계약 종료일', 'endDate'],
     ['전체 창고 자리', 'cntTotal'],
     ['남은 창고 자리', 'leftContract'],
     ['100박스 당 가격', 'fee'],
@@ -27,7 +26,7 @@ function Threepl_MyPage(props: any) {
   const threepl = useAppSelect((state) => state.threepl);
 
   async function getInfo() {
-    const listurl = '/3pl/mypage/' + threepl.userNo;
+    const listurl = `${process.env.REACT_APP_API_URL}/3pl/mypage/${threepl.userNo}`;
     await axios
       .get(listurl, {
         params: {},

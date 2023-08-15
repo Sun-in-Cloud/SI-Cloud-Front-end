@@ -6,6 +6,7 @@ import axios from 'axios';
 import Modal from '../../common/Modal';
 import ThreeplContractModal from './ThreeplContractModal';
 import Threepl_DetailSellerModal from './Threepl_DetailSellerModal';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 function Threepl_MatchList(props: any) {
   const titles: string[][] = [
     ['화주사명', 'companyName'],
@@ -44,11 +45,13 @@ function Threepl_MatchList(props: any) {
 
   const [remain, setRemain] = useState<string[]>([]);
 
+  const threepl = useAppSelect((state) => state.threepl);
+
   //화주사 목록 조회
   async function getSellerList(item: any) {
     setItem(item);
     if (item !== null) {
-      const listurl = '/3pl/match/list';
+      const listurl = `${process.env.REACT_APP_API_URL}/3pl/match/list`;
       await axios
         .get(listurl, {
           params: {
@@ -81,7 +84,7 @@ function Threepl_MatchList(props: any) {
   async function getSellerDetail() {
     setItem(item);
     if (item !== null) {
-      const listurl = '/3pl/match/' + detailSellers.sellerNo;
+      const listurl = `${process.env.REACT_APP_API_URL}/3pl/match/${detailSellers.sellerNo}`;
       await axios
         .get(listurl, {
           params: {},
@@ -101,7 +104,7 @@ function Threepl_MatchList(props: any) {
   //남은 창고 자리 조회
   async function getRemain() {
     setItem(item);
-    const listurl = '/3pl/match/left/' + '201';
+    const listurl = `${process.env.REACT_APP_API_URL}/3pl/match/left/${threepl.userNo}`;
     await axios
       .get(listurl, {
         headers: {

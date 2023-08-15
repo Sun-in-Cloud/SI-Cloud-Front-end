@@ -5,21 +5,6 @@ import { Import } from '../../../global/ImportInterface';
 import axios from 'axios';
 
 function Threepl_ImportList(props: any) {
-  // const columns: string[] = ['입고 번호', '입고 일자'];
-  // const rows = [
-  //   { importNo: 12312542, importDate: '2023-02-05' },
-  //   { importNo: 12156104, importDate: '2023-05-11' },
-  //   { importNo: 125156306, importDate: '2023-06-21' },
-  //   { importNo: 7852225452, importDate: '2023-07-26' },
-  // ];
-
-  // const columns2: string[] = ['바코드 번호', '상품명', '입고량'];
-  // const rows2 = [
-  //   { product_no: 12312542, productName: '청바지', importAmount: 10 },
-  //   { product_no: 12156104, productName: '자켓', importAmount: 5 },
-  //   { product_no: 125156306, productName: '반바지', importAmount: 30 },
-  // ];
-
   const titleMain: string[][] = [
     ['입고 번호', 'importNo'],
     ['입고 일자', 'localRequestDate'],
@@ -40,7 +25,7 @@ function Threepl_ImportList(props: any) {
 
   //입고 내역 목록 조회
   async function getImportList() {
-    const listurl = '/seller/import/list';
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/list`;
     await axios
       .get(listurl, {
         params: {
@@ -67,7 +52,7 @@ function Threepl_ImportList(props: any) {
 
   //입고 상세 조회
   async function getImportDetail() {
-    const listurl = '/seller/import/' + finImport?.importNo;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/${finImport?.importNo}`;
     await axios
       .get(listurl, {
         params: {},
