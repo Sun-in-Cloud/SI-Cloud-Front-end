@@ -5,6 +5,7 @@ import LoginBtn from '../../common/Loginbtn';
 import axios from 'axios';
 import { BarcodeScanner } from '../../common/BarcodeScanner';
 import Modal from '../../common/Modal';
+import { useAppSelect } from '../../../redux/configStore.hooks';
 
 interface Product {
   productNo: string;
