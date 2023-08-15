@@ -26,7 +26,7 @@ function Threepl_OrderList(props: any) {
 
   //발주 내역 목록 조회
   async function getOrderList() {
-    const listurl = '/3pl/order/list';
+    const listurl = `${process.env.REACT_APP_API_URL}/3pl/order/list`;
     await axios
       .get(listurl, {
         params: {
@@ -53,7 +53,7 @@ function Threepl_OrderList(props: any) {
 
   //발주 상세 조회
   async function getOrderDetail() {
-    const listurl = '/3pl/order/' + order?.orderNo;
+    const listurl = `${process.env.REACT_APP_API_URL}/3pl/order/${order?.orderNo}`;
     await axios
       .get(listurl, {
         params: {},
@@ -101,20 +101,24 @@ function Threepl_OrderList(props: any) {
       />
       <h1></h1>
       {order != undefined && (
-        <DetailTable>
-          <DetailTitle>
-            <p>발주번호: {order?.orderNo}</p>
-            <p>{order?.orderDate}</p>
-          </DetailTitle>
-          <Threepl_ListingPage
-            sellerNo={props.seller}
-            titles={titleDetail}
-            number={null}
-            rows={rowsDetail}
-            columns={titleDetail.length}
-            onDetail={false}
-          />
-        </DetailTable>
+        <OrderDetail>
+          <Flow>
+            <DetailTable>
+              <DetailTitle>
+                <p>발주번호: {order?.orderNo}</p>
+                <p>{order?.orderDate}</p>
+              </DetailTitle>
+              <Threepl_ListingPage
+                sellerNo={props.seller}
+                titles={titleDetail}
+                number={null}
+                rows={rowsDetail}
+                columns={titleDetail.length}
+                onDetail={false}
+              />
+            </DetailTable>
+          </Flow>
+        </OrderDetail>
       )}
     </MainPage>
   );
@@ -137,6 +141,24 @@ const DetailTitle = styled.div`
   font-size: 16px;
   font-family: jalnan;
   justify-content: space-between;
+`;
+
+const OrderDetail = styled.div`
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 10px;
+  margin: 0 10px;
+  height: 500px;
+  display: flex;
+  background: #fff;
+
+  justify-content: center;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px -2px black;
+`;
+
+const Flow = styled.div`
+  width: 97%;
 `;
 
 export default Threepl_OrderList;

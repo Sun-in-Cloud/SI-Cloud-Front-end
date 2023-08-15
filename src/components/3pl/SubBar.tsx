@@ -7,35 +7,31 @@ function SubBar(props: any) {
 
   useEffect(() => {}, [tab, props.company]);
 
-  useEffect(() => {
-    props.move ? setTab(props.seller) : '';
-    props.setMove(false);
-  }, [props.move]);
-
   const changeUnderLine = (e: any) => {
     setTab(e.target.value);
   };
 
   return (
     <BarList>
-      {props.company.map((item: sellerCompany, index: number) => {
-        return (
-          <Item
-            title={tab}
-            value={item.companyName}
-            onClick={() => {
-              changeUnderLine;
-              setTab(item.companyName);
-              props.findSeller({ item });
-            }}
-            style={{
-              color: tab === item.companyName ? 'black' : 'gray',
-            }}
-          >
-            {item.companyName}
-          </Item>
-        );
-      })}
+      {props.company !== undefined &&
+        props.company.map((item: sellerCompany, index: number) => {
+          return (
+            <Item
+              title={tab}
+              value={item.companyName}
+              onClick={() => {
+                changeUnderLine;
+                setTab(item.companyName);
+                props.findSeller({ item });
+              }}
+              style={{
+                color: tab === item.companyName ? 'black' : 'gray',
+              }}
+            >
+              {item.companyName}
+            </Item>
+          );
+        })}
     </BarList>
   );
 }

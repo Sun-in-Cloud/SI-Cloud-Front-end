@@ -21,6 +21,7 @@ import MarketingStatistics from './marketing/MarketingStatistics';
 import MarketingDanger from './marketing/MarketingDanger';
 import MarketingChannel from './marketing/MarketingChannel';
 import { styled } from 'styled-components';
+import SellerMyPage from './my/SellerMyPage';
 
 function SellerMain(props: any) {
   const style = String(props.type);
@@ -57,7 +58,7 @@ function SellerMain(props: any) {
           {/* 매칭 */}
           <Route path="/match/*" element={<SellerMatchList type={'landscape'} />}></Route>
           {/* 마이페이지 */}
-          <Route path="/mypage" element={<SellerProductList type={'landscape'} />}></Route>
+          <Route path="/mypage" element={<SellerMyPage type={'landscape'} />}></Route>
           {/* 마케팅 */}
           <Route path="/marketing" element={<MarketingRegister type={'landscape'} />}></Route>
           <Route path="/marketing/statistics" element={<MarketingStatistics type={'landscape'} />}></Route>

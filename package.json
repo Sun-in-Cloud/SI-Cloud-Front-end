@@ -5,7 +5,6 @@
   "dependencies": {
     "@babel/core": "^7.22.9",
     "@babel/preset-env": "^7.22.9",
-    "@material-ui/core": "^4.12.4",
     "@pmndrs/assets": "^1.6.0",
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.80.1",
@@ -89,5 +88,5 @@
   "presets": [
     "@babel/preset-env"
   ],
-  "proxy": "http://si-cloud-env-1.eba-j9wedmup.ap-northeast-2.elasticbeanstalk.com/"
+  "homepage": "http://sun-in-cloud-react-server.s3-website.ap-northeast-2.amazonaws.com"
 }

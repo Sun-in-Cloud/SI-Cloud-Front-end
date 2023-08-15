@@ -8,7 +8,6 @@ import WMS_3plList from './page/WMS_3plList';
 
 function WMSMain(props: any) {
   const style = String(props.type);
-  console.log(style);
 
   function StyleType(style: any) {
     if (style == 'portrait') {
@@ -35,7 +34,8 @@ function WMSMain(props: any) {
   );
 }
 const MainPage = styled.div`
-  margin-top: -40px;
+  height: 630px;
+  margin-top: 100px;
   display: grid;
   grid-template-columns: 0.5fr 5fr 0.5fr;
   grid-template-areas: '. Routes .';

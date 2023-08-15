@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import ProductRegisterPage from './ProductRegisterPage';
-import BarcodeReader from '../../common/BarcodeScan';
 import LoginBtn from '../../common/Loginbtn';
 import axios from 'axios';
-import { useAppSelect } from '../../../redux/configStore.hooks';
+import { BarcodeScanner } from '../../common/BarcodeScanner';
+import Modal from '../../common/Modal';
 
 interface Product {
   productNo: string;
@@ -20,6 +20,10 @@ function SellerProductRegister(props: any) {
   const seller = useAppSelect((state) => state.seller);
   const [newProduct, setNewProduct] = useState<Product[]>([]);
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [barcodeNo, setBarcodeNo] = useState('');
+
   const style = String(props.type);
 
   function StyleType(style: any) {
@@ -29,6 +33,15 @@ function SellerProductRegister(props: any) {
       return 'landscape';
     }
   }
+  const onClickToggleModal = useCallback(() => {
+    setIsOpen(!isOpen);
+  }, [isOpen]);
+
+  const _onDetected = (result: any) => {
+    setBarcodeNo(result.codeResult.code);
+    console.log(result.codeResult.code);
+    setIsOpen(false);
+  };
 
   const productTitle = [
     ['상품번호', 'productNo'],
@@ -79,24 +92,44 @@ function SellerProductRegister(props: any) {
       });
   }
 
+  useEffect(() => {}, [barcodeNo]);
+
   return (
-    <RegisterProduct>
-      <RegisterForm>
-        <ProductRegisterPage
-          productTitle={productTitle}
-          getNewProduct={getNewProduct}
-          getProductGroup={getProductGroup}
-        />
-      </RegisterForm>
-      <RegisterBarcode>
-        <BarcodeReader />
-      </RegisterBarcode>
-      <Btns>
-        <LoginBtn variant="primary" type={StyleType(style)} onClick={getNewPro}>
-          상품등록
-        </LoginBtn>
-      </Btns>
-    </RegisterProduct>
+    <>
+      <RegisterProduct>
+        <p></p>
+        <RegisterForm>
+          <ProductRegisterPage
+            productTitle={productTitle}
+            getNewProduct={getNewProduct}
+            getProductGroup={getProductGroup}
+            newItem={barcodeNo}
+          />
+
+          <Btns>
+            <LoginBtn
+              variant="primary"
+              type="landscape"
+              onClick={() => {
+                setIsOpen(true);
+              }}
+              style={{ marginRight: '10px' }}
+            >
+              바코드 인식
+            </LoginBtn>
+            <LoginBtn variant="primary" type={StyleType(style)} onClick={getNewPro}>
+              상품등록
+            </LoginBtn>
+          </Btns>
+        </RegisterForm>
+        <p></p>
+        {isOpen && (
+          <Modal onClickToggleModal={onClickToggleModal}>
+            <BarcodeScanner handleScan={_onDetected} />
+          </Modal>
+        )}
+      </RegisterProduct>
+    </>
   );
 }
 
@@ -106,9 +139,8 @@ const RegisterProduct = styled.div`
   border-radius: 15px 15px 0 0;
   height: 100%;
   display: grid;
-  grid-template-columns: 0.7fr 4fr 2.6fr 0.7fr;
-  grid-template-rows: 4fr 1fr;
-  grid-template-areas: '. RegisterForm RegisterBarcode .' '. RegisterForm Btns .';
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-areas: '. RegisterForm . ';
 `;
 
 const RegisterForm = styled.div`
@@ -127,9 +159,10 @@ const RegisterBarcode = styled.div`
 
 const Btns = styled.div`
   grid-area: Btns;
-  display: grid;
+  display: flex;
   height: fit-content;
-  justify-items: end;
+  justify-content: flex-end;
+  margin-top: 10px;
 `;
 
 export default SellerProductRegister;

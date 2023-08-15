@@ -24,7 +24,7 @@ function Threepl_ImportPreList(props: any) {
 
   //입고 예정 내역 목록 조회
   async function getPreImportList() {
-    const listurl = '/seller/import/pre/list';
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/pre/list`;
     await axios
       .get(listurl, {
         params: {
@@ -51,7 +51,7 @@ function Threepl_ImportPreList(props: any) {
 
   //입고 예정 상세 조회
   async function getPreImportDetail() {
-    const listurl = '/seller/import/pre/detail/' + preImport?.importNo;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/pre/detail/${preImport?.importNo}`;
     await axios
       .get(listurl, {})
       .then(function (response) {
@@ -93,20 +93,24 @@ function Threepl_ImportPreList(props: any) {
       />
       <h1></h1>
       {preImport !== undefined && (
-        <DetailTable>
-          <DetailTitle>
-            <p>입고예정번호: {preImport?.importNo}</p>
-            <p>{preImport?.localRequestDate}</p>
-          </DetailTitle>
-          <Threepl_ListingPage
-            sellerNo={props.seller}
-            titles={titleDetail}
-            number={null}
-            rows={rowsDetail}
-            columns={titleDetail.length}
-            onDetail={false}
-          />
-        </DetailTable>
+        <ImportDetail>
+          <Flow>
+            <DetailTable>
+              <DetailTitle>
+                <p>입고예정번호: {preImport?.importNo}</p>
+                <p>{preImport?.localRequestDate}</p>
+              </DetailTitle>
+              <Threepl_ListingPage
+                sellerNo={props.seller}
+                titles={titleDetail}
+                number={null}
+                rows={rowsDetail}
+                columns={titleDetail.length}
+                onDetail={false}
+              />
+            </DetailTable>
+          </Flow>
+        </ImportDetail>
       )}
     </MainPage>
   );
@@ -129,6 +133,24 @@ const DetailTitle = styled.div`
   font-size: 16px;
   font-family: jalnan;
   justify-content: space-between;
+`;
+
+const ImportDetail = styled.div`
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 10px;
+  margin: 0 10px;
+  height: 500px;
+  display: flex;
+  background: #fff;
+
+  justify-content: center;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px -2px black;
+`;
+
+const Flow = styled.div`
+  width: 97%;
 `;
 
 export default Threepl_ImportPreList;

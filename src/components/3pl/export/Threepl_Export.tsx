@@ -5,18 +5,6 @@ import axios from 'axios';
 import ListingPage from '../../ListingPage';
 
 function Threepl_Export(props: any) {
-  // const columns: string[] = ['주문 번호', '주문자 이름', '주소', '판매채널', '주문상태'];
-
-  // const rows: any = [
-  //   {
-  //     exportNo: '0234101010',
-  //     ordererName: '노성은',
-  //     address: '고양시 일산동구 풍동',
-  //     salesChannel: '인터파크',
-  //     orderStatus: '대기중',
-  //   },
-  // ];
-
   const title: string[][] = [
     ['주문 번호', 'exportNo'],
     ['주문자 이름', 'ordererName'],
@@ -33,7 +21,7 @@ function Threepl_Export(props: any) {
 
   //출고 내역 조회
   async function getExportList() {
-    const listurl: string = '/3pl/export/list';
+    const listurl = `${process.env.REACT_APP_API_URL}/3pl/export/list`;
     await axios
       .get(listurl, {
         params: {
@@ -68,8 +56,9 @@ function Threepl_Export(props: any) {
     }
   }
 
+  //출고 하나 선택
   function collectOrder(): void {
-    const listurl = '/3pl/export/collect';
+    const listurl = `${process.env.REACT_APP_API_URL}/3pl/export/collect`;
     axios
       .get(listurl, {
         params: {

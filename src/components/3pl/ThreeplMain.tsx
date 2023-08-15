@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from './ThreeplHeader';
 import Threepl_ProductList from './product/Threepl_ProductList';
-import { Location, Route, Routes, useLocation } from 'react-router-dom';
+import { Location, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { sellerCompany } from '../../global/CompanyInterface';
 import Threepl_OrderRegister from './order/Threepl_OrderRegister';
@@ -14,9 +14,9 @@ import Threepl_ExportInvoice from './export/Threepl_ExportInvoice';
 import Threepl_Match from './match/Threepl_MatchList';
 import Threepl_MyPage from './my/Threepl_MyPage';
 import Threepl_MySeller from './my/Threepl_MySeller';
-import BarcodeScan from '../common/BarcodeScan';
 import SubBar from './SubBar';
 import { useAppSelect } from '../../redux/configStore.hooks';
+import Threepl_MainPage from './Threepl_MainPage';
 
 function ThreeplMain(props: any) {
   function StyleType(style: any) {
@@ -31,12 +31,13 @@ function ThreeplMain(props: any) {
   console.log(threepl);
 
   const com: any[] = threepl.sellers;
-
   const location: Location = useLocation();
 
   const [seller, setSeller] = useState<number>();
 
-  const [move, setMove] = useState<boolean>(false);
+  const [isEmpty, setIsEmpty] = useState<boolean>(true);
+
+  const navigate = useNavigate();
 
   function findSeller(new_seller: any): void {
     setSeller(new_seller.item.sellerNo);
@@ -50,18 +51,21 @@ function ThreeplMain(props: any) {
       location.pathname.includes('/3pl/export') ||
       location.pathname.includes('/3pl/mypage/seller/list')
     ) {
-      return <SubBar company={com} findSeller={findSeller} seller={com[0].companyName} move={move} setMove={setMove} />;
+      return <SubBar company={com} findSeller={findSeller} />;
     }
   }
 
   useEffect(() => {
-    setMove(true);
-    setSeller(com[0].sellerNo);
-  }, [location]);
+    if (threepl.sellers.length === 0) {
+      navigate('/3pl/mypage');
+    } else {
+      setIsEmpty(false);
+    }
+  }, []);
 
   return (
     <>
-      <Header type={StyleType(props.type)} />
+      <Header type={StyleType(props.type)} isEmpty={isEmpty} />
       {location.pathname === '/3pl/import/pre/register' && (
         <ExportPage>
           <h1></h1>
@@ -116,7 +120,7 @@ function ThreeplMain(props: any) {
                 <Route path="/import/pre/list" element={<Threepl_ImportPreList seller={seller} />}></Route>{' '}
                 <Route path="/export/list" element={<Threepl_Export seller={seller} />}></Route>{' '}
                 <Route path="/mypage/seller/list" element={<Threepl_MySeller seller={seller} />}></Route>{' '}
-                <Route path="/barcode" element={<BarcodeScan />}></Route>
+                <Route path="*" element={<Threepl_MainPage />}></Route>
               </Routes>
               <h1></h1>
             </GridPage>
@@ -144,6 +148,7 @@ const GridPage = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 5fr 0.5fr;
   grid-template-areas: '. Routes .';
+  height: 100%;
   padding-top: 30px;
 `;
 

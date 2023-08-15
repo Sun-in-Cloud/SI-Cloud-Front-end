@@ -21,7 +21,7 @@ function Threepl_OrderRegister(props: any) {
 
   //발주 등록할 내역 조회
   async function getAutoOrderList() {
-    const listurl = '/3pl/order/auto-list';
+    const listurl = `${process.env.REACT_APP_API_URL}/3pl/order/auto-list`;
     await axios
       .get(listurl, {
         params: {
@@ -48,7 +48,7 @@ function Threepl_OrderRegister(props: any) {
 
   //발주 등록
   async function registerOrder() {
-    const listurl = '/3pl/order/register/' + props.seller;
+    const listurl = `${process.env.REACT_APP_API_URL}/3pl/order/register/${props.seller}`;
     await axios
       .post(listurl, {})
       .then(function (response) {

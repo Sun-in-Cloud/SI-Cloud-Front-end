@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Threepl_ListingPage from '../Threepl_ListingPage';
 import axios from 'axios';
 import { styled } from 'styled-components';
 import LoginBtn from '../../common/Loginbtn';
-// @ts-ignore
-import { Dialog, DialogContent } from '@material-ui/core';
 import { BarcodeScanner } from '../../common/BarcodeScanner';
+import Modal from '../../common/Modal';
 
 function Threepl_ImportRegister(props: any) {
   const { state } = useLocation();
@@ -26,23 +25,26 @@ function Threepl_ImportRegister(props: any) {
   const [scanCode, setScanCode] = useState<string>('');
   const [scanName, setScanName] = useState<string>('');
   const [amount, setAmount] = useState<number>(0);
-  const [modal, setModal] = useState(false);
+  // const [modal, setModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isContractOpen, setIsContractOpen] = useState<boolean>(false);
 
   const [same, setSame] = useState<boolean>(false);
+
+  const onClickToggleModal = useCallback(() => {
+    setIsModalOpen(!isModalOpen);
+  }, [isModalOpen]);
+
+  const onClickToggleContract = useCallback(() => {
+    setIsContractOpen(!isContractOpen);
+  }, [isContractOpen]);
 
   const onChangeAmount = (e: any) => {
     setAmount(e.target.value);
   };
 
-  const _toggle = () => {
-    setModal(!modal);
-    setSame(false);
-  };
-
-  const [modal2, setModal2] = useState(false);
-
-  const _toggle2 = () => {
-    setModal2(!modal2);
+  const onChangeCode = (e: any) => {
+    setScanCode(e.target.value);
   };
 
   const _onDetected = (result: any) => {
@@ -51,17 +53,17 @@ function Threepl_ImportRegister(props: any) {
         setSame(true);
         setScanCode(result ? result.codeResult.code : '');
         setScanName(value.productName);
-        setModal(false);
-        setModal2(true);
+        setIsModalOpen(false);
+        setIsContractOpen(true);
         return;
       }
-      setModal(false);
-      setModal2(true);
+      setIsModalOpen(false);
+      setIsContractOpen(true);
     });
   };
 
   async function getProductList() {
-    const listurl = '/3pl/import/register';
+    const listurl = `${process.env.REACT_APP_API_URL}/3pl/import/register`;
     await axios
       .get(listurl, {
         params: {
@@ -82,7 +84,7 @@ function Threepl_ImportRegister(props: any) {
 
   //입고 등록
   async function RegisterImport() {
-    const listurl = '/3pl/import/register';
+    const listurl = `${process.env.REACT_APP_API_URL}/3pl/import/register`;
     await axios
       .post(listurl, {
         sellerNo: state.sellerNo,
@@ -138,7 +140,14 @@ function Threepl_ImportRegister(props: any) {
           <Title>
             <p>입고예정번호: {state.item.importNo}</p>
             <Btn>
-              <LoginBtn variant="primary" type="landscape" onClick={_toggle} style={{ marginRight: '10px' }}>
+              <LoginBtn
+                variant="primary"
+                type="landscape"
+                onClick={() => {
+                  setIsModalOpen(true);
+                }}
+                style={{ marginRight: '10px' }}
+              >
                 바코드 인식
               </LoginBtn>
               <LoginBtn
@@ -162,59 +171,58 @@ function Threepl_ImportRegister(props: any) {
             onDetail={true}
           />
         </List>
-
-        <Dialog
-          open={modal}
-          onClose={_toggle}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-        >
-          <DialogContent>
+        {isModalOpen && (
+          <Modal onClickToggleModal={onClickToggleModal}>
             <BarcodeScanner handleScan={_onDetected} />
-          </DialogContent>
-        </Dialog>
+          </Modal>
+        )}
 
-        <Dialog
-          open={modal2}
-          onClose={_toggle2}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-        >
-          <DialogContent>
+        {isModalOpen && (
+          <Modal onClickToggleModal={onClickToggleContract}>
             <SelTitleCode>
-              <p>{same ? [scanCode] : ''}</p>
+              <p>{same ? [scanCode] : '[바코드 인식 실패]'}</p>
             </SelTitleCode>
-            <SelTitle>
-              <p>{same ? scanName : '바코드를 다시 인식하세요'}</p>
-            </SelTitle>
-
-            <SelContent>
-              <p>{same ? '입고된 수량을 입력해주세요' : ''}</p>
+            {same && (
+              <SelTitle>
+                <p>{scanName}</p>
+              </SelTitle>
+            )}
+            <SelContent
+              style={{
+                display: same ? 'none' : 'block',
+              }}
+            >
+              <p>바코드 번호를 입력해주세요</p>
             </SelContent>
 
             <Input
               type="number"
-              onChange={onChangeAmount}
+              onChange={onChangeCode}
               style={{
-                display: same ? 'block' : 'none',
+                display: same ? 'none' : 'block',
               }}
             />
-            <Btn>
+
+            <SelContent>
+              <p>입고된 수량을 입력해주세요</p>
+            </SelContent>
+
+            <Input type="number" onChange={onChangeAmount} />
+            <RegBtn>
               <LoginBtn
                 variant="primary"
                 type="landscape"
                 onClick={() => {
                   console.log(rows);
                   getProductNo(scanCode, amount);
-                  setModal2(!modal2);
+                  setIsContractOpen(!isContractOpen);
                 }}
-                style={{ display: same ? 'block' : 'none' }}
               >
                 입고 수량 입력
               </LoginBtn>
-            </Btn>
-          </DialogContent>
-        </Dialog>
+            </RegBtn>
+          </Modal>
+        )}
       </MainPage>
     </>
   );
@@ -284,6 +292,14 @@ const Btn = styled.div`
   display: flex;
   width: fit-content;
   justify-content: center;
+  height: 40px;
+`;
+
+const RegBtn = styled.div`
+  display: flex;
+  width: fit-content;
+  justify-content: center;
+  width: 100%;
   height: 40px;
 `;
 export default Threepl_ImportRegister;
