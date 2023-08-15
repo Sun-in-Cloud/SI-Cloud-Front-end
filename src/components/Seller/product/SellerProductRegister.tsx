@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import ProductRegisterPage from './ProductRegisterPage';
 import BarcodeReader from '../../common/BarcodeScan';
 import LoginBtn from '../../common/Loginbtn';
 import axios from 'axios';
 import { BarcodeScanner } from '../../common/BarcodeScanner';
-import { Dialog, DialogContent } from '@material-ui/core';
+import Modal from '../../common/Modal';
 
 interface Product {
   productNo: string;
@@ -33,14 +33,11 @@ function SellerProductRegister(props: any) {
       return 'landscape';
     }
   }
-  const _toggle = () => {
+  const onClickToggleModal = useCallback(() => {
     setIsOpen(!isOpen);
-  };
+  }, [isOpen]);
 
   const _onDetected = (result: any) => {
-    // setNewProduct((prevState) => {
-    //   return { ...prevState, productNo: result.codeResult.code };
-    // });
     setBarcodeNo(result.codeResult.code);
     console.log(result.codeResult.code);
     setIsOpen(false);
@@ -110,7 +107,14 @@ function SellerProductRegister(props: any) {
           />
 
           <Btns>
-            <LoginBtn variant="primary" type="landscape" onClick={_toggle} style={{ marginRight: '10px' }}>
+            <LoginBtn
+              variant="primary"
+              type="landscape"
+              onClick={() => {
+                setIsOpen(true);
+              }}
+              style={{ marginRight: '10px' }}
+            >
               바코드 인식
             </LoginBtn>
             <LoginBtn variant="primary" type={StyleType(style)} onClick={getNewPro}>
@@ -119,16 +123,11 @@ function SellerProductRegister(props: any) {
           </Btns>
         </RegisterForm>
         <p></p>
-        <Dialog
-          open={isOpen}
-          onClose={_toggle}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-        >
-          <DialogContent>
+        {isOpen && (
+          <Modal onClickToggleModal={onClickToggleModal}>
             <BarcodeScanner handleScan={_onDetected} />
-          </DialogContent>
-        </Dialog>
+          </Modal>
+        )}
       </RegisterProduct>
     </>
   );
