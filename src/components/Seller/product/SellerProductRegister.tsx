@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import ProductRegisterPage from './ProductRegisterPage';
-import BarcodeReader from '../../common/BarcodeScan';
 import LoginBtn from '../../common/Loginbtn';
 import axios from 'axios';
 import { BarcodeScanner } from '../../common/BarcodeScanner';
