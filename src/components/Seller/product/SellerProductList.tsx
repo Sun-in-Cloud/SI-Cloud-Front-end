@@ -19,7 +19,6 @@ interface Product {
 function SellerProductList(props: any) {
   const style = props.style;
   const seller = useAppSelect((state) => state.seller);
-  console.log(seller);
   const [product, setProduct] = useState<Product[] | null>([]);
   const [totalPage, setTotalPage] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
