@@ -14,9 +14,9 @@ import Threepl_ExportInvoice from './export/Threepl_ExportInvoice';
 import Threepl_Match from './match/Threepl_MatchList';
 import Threepl_MyPage from './my/Threepl_MyPage';
 import Threepl_MySeller from './my/Threepl_MySeller';
-import BarcodeScan from '../common/BarcodeScan';
 import SubBar from './SubBar';
 import { useAppSelect } from '../../redux/configStore.hooks';
+import Threepl_MainPage from './Threepl_MainPage';
 
 function ThreeplMain(props: any) {
   function StyleType(style: any) {
@@ -120,7 +120,7 @@ function ThreeplMain(props: any) {
                 <Route path="/import/pre/list" element={<Threepl_ImportPreList seller={seller} />}></Route>{' '}
                 <Route path="/export/list" element={<Threepl_Export seller={seller} />}></Route>{' '}
                 <Route path="/mypage/seller/list" element={<Threepl_MySeller seller={seller} />}></Route>{' '}
-                <Route path="/barcode" element={<BarcodeScan />}></Route>
+                <Route path="*" element={<Threepl_MainPage />}></Route>
               </Routes>
               <h1></h1>
             </GridPage>
@@ -148,6 +148,7 @@ const GridPage = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 5fr 0.5fr;
   grid-template-areas: '. Routes .';
+  height: 100%;
   padding-top: 30px;
 `;
 
