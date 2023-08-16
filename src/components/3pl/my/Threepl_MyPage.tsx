@@ -49,7 +49,9 @@ function Threepl_MyPage(props: any) {
 
   return (
     <MyPage>
-      <p></p>
+      <MainTitle>
+        <SubTitle>회원 정보 관리하기</SubTitle>
+      </MainTitle>
       <Container>
         <PageTitle>
           <Title>My Profile</Title>
@@ -69,9 +71,25 @@ function Threepl_MyPage(props: any) {
 }
 
 const MyPage = styled.div`
-  margin-top: -40px;
   display: grid;
   overflow-x: hidden;
+`;
+
+const MainTitle = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: white;
+  width: 100%;
+  height: 120px;
+  border-radius: 0 0 10px 10px;
+`;
+
+const SubTitle = styled.div`
+  display: grid;
+  margin-top: 75px;
+  font-size: 20px;
+  font-family: 'GmarketSansMedium';
 `;
 
 const PageTitle = styled.div`

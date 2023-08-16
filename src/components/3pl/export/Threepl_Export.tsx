@@ -116,10 +116,11 @@ function Threepl_Export(props: any) {
 const MainPage = styled.div`
   display: grid;
   grid-template-rows: 0.1fr 0.9fr;
+  margin-top: -20px;
 `;
 const Btn = styled.div`
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 10px;
+  height: 40px;
 `;
 export default Threepl_Export;

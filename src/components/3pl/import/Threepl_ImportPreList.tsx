@@ -83,6 +83,9 @@ function Threepl_ImportPreList(props: any) {
 
   return (
     <MainPage>
+      <Title>
+        <SubTitle>입고 예정 내역 확인하기</SubTitle>
+      </Title>
       <Threepl_ListingPage
         sellerNo={props.seller}
         titles={titleMain}
@@ -122,6 +125,23 @@ const MainPage = styled.div`
   display: grid;
   grid-template-columns: 1fr 0.1fr 1fr;
   grid-template-areas: 'ListingPage . ListingPage';
+`;
+
+const Title = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: white;
+  width: 100%;
+  height: 120px;
+  border-radius: 0 0 10px 10px;
+`;
+
+const SubTitle = styled.div`
+  display: grid;
+  margin-top: 75px;
+  font-size: 20px;
+  font-family: 'GmarketSansMedium';
 `;
 
 const DetailTable = styled.div`

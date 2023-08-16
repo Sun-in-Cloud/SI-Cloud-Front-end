@@ -83,20 +83,25 @@ function Threepl_OrderRegister(props: any) {
   };
   return (
     <MainPage>
-      <Btn>
-        <LoginBtn variant="primary" type="landscape" onClick={onClickRegister}>
-          등록
-        </LoginBtn>
-      </Btn>
-      <ListingPage
-        sellerNo={props.seller}
-        titles={titles}
-        number={pageList}
-        rows={rows}
-        columns={titles.length}
-        onDetail={false}
-        navPage={navPage}
-      />
+      <Title>
+        <SubTitle>발주 등록하기</SubTitle>
+      </Title>
+      <Box>
+        <Btn>
+          <LoginBtn variant="primary" type="landscape" onClick={onClickRegister}>
+            등록
+          </LoginBtn>
+        </Btn>
+        <ListingPage
+          sellerNo={props.seller}
+          titles={titles}
+          number={pageList}
+          rows={rows}
+          columns={titles.length}
+          onDetail={false}
+          navPage={navPage}
+        />
+      </Box>
     </MainPage>
   );
 }
@@ -106,9 +111,31 @@ const MainPage = styled.div`
   grid-template-rows: 0.1fr 0.9fr;
 `;
 
+const Title = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #fff;
+  width: 100%;
+  height: 120px;
+  border-radius: 0 0 10px 10px;
+`;
+
+const SubTitle = styled.div`
+  display: grid;
+  margin-top: 75px;
+  font-size: 20px;
+  font-family: 'GmarketSansMedium';
+`;
+
 const Btn = styled.div`
   display: flex;
   justify-content: flex-end;
+  height: 40px;
   margin-bottom: 10px;
+`;
+
+const Box = styled.div`
+  margin-top: -30px;
 `;
 export default Threepl_OrderRegister;
