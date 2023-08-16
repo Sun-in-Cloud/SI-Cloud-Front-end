@@ -16,11 +16,10 @@ function SelectTable(props: any) {
     await axios
       .get(listurl, {})
       .then(function (response) {
-        console.log('-', response.data);
         setOptions1(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 
@@ -28,9 +27,9 @@ function SelectTable(props: any) {
 
   const options3: any[][] = [
     ['전체', 0],
-    ['1000 이상', 1000],
-    ['10000 이상', 10000],
-    ['50000 이상', 50000],
+    ['1000 이상', 100],
+    ['10000 이상', 300],
+    ['50000 이상', 500],
   ];
   const options4: any[][] = [
     ['전체', 10000000],
@@ -72,7 +71,6 @@ function SelectTable(props: any) {
   }
 
   const getMacthList = () => {
-    //console.log(filters);
     props.getFilter(filters);
   };
 
