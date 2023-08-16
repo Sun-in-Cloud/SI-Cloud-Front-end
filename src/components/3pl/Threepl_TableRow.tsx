@@ -174,7 +174,7 @@ const Row = styled.div<StyledGridProps>`
 
 const Item = styled.div`
   font-size: 15px;
-  font-family: 'Jalnan';
+  font-family: 'GmarketSansMedium';
   letter-spacing: 2px;
 `;
 

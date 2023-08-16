@@ -22,7 +22,7 @@ function Threepl_MatchList(props: any) {
     ['출고건수', 'exportCnt'],
     ['대표자명', 'ceoName'],
     ['담당자명', 'managerName'],
-    ['담당자 메일', 'managerEmail'],
+    ['메일', 'managerEmail'],
     ['담당자 번호', 'managerPhone'],
     ['계약 종료일', 'endDate'],
   ];

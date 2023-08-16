@@ -165,6 +165,58 @@ function Threepl_ImportRegister(props: any) {
               </LoginBtn>
             </Btn>
           </Title>
+          {isModalOpen && (
+            <Modal onClickToggleModal={onClickToggleModal}>
+              <BarcodeScanner handleScan={_onDetected} />
+            </Modal>
+          )}
+
+          {isContractOpen && (
+            <Modal onClickToggleModal={onClickToggleContract}>
+              <SelTitleCode>
+                <p>{same ? [scanCode] : '[바코드 인식 실패]'}</p>
+              </SelTitleCode>
+              {same && (
+                <SelTitle>
+                  <p>{scanName}</p>
+                </SelTitle>
+              )}
+              <SelContent
+                style={{
+                  display: same ? 'none' : 'block',
+                }}
+              >
+                <p>바코드 번호를 입력해주세요</p>
+              </SelContent>
+
+              <Input
+                type="number"
+                onChange={onChangeCode}
+                style={{
+                  display: same ? 'none' : 'block',
+                }}
+              />
+
+              <SelContent>
+                <p>입고된 수량을 입력해주세요</p>
+              </SelContent>
+
+              <Input type="number" onChange={onChangeAmount} />
+              <RegBtn>
+                <LoginBtn
+                  variant="primary"
+                  type="landscape"
+                  onClick={() => {
+                    console.log(rows);
+                    getProductNo(scanCode, amount);
+                    setIsContractOpen(!isContractOpen);
+                  }}
+                >
+                  입고 수량 입력
+                </LoginBtn>
+              </RegBtn>
+            </Modal>
+          )}
           <Threepl_ListingPage
             sellerNo={props.seller}
             titles={title}
@@ -174,64 +226,14 @@ function Threepl_ImportRegister(props: any) {
             onDetail={true}
           />
         </List>
-        {isModalOpen && (
-          <Modal onClickToggleModal={onClickToggleModal}>
-            <BarcodeScanner handleScan={_onDetected} />
-          </Modal>
-        )}
-
-        {isModalOpen && (
-          <Modal onClickToggleModal={onClickToggleContract}>
-            <SelTitleCode>
-              <p>{same ? [scanCode] : '[바코드 인식 실패]'}</p>
-            </SelTitleCode>
-            {same && (
-              <SelTitle>
-                <p>{scanName}</p>
-              </SelTitle>
-            )}
-            <SelContent
-              style={{
-                display: same ? 'none' : 'block',
-              }}
-            >
-              <p>바코드 번호를 입력해주세요</p>
-            </SelContent>
-
-            <Input
-              type="number"
-              onChange={onChangeCode}
-              style={{
-                display: same ? 'none' : 'block',
-              }}
-            />
-
-            <SelContent>
-              <p>입고된 수량을 입력해주세요</p>
-            </SelContent>
-
-            <Input type="number" onChange={onChangeAmount} />
-            <RegBtn>
-              <LoginBtn
-                variant="primary"
-                type="landscape"
-                onClick={() => {
-                  console.log(rows);
-                  getProductNo(scanCode, amount);
-                  setIsContractOpen(!isContractOpen);
-                }}
-              >
-                입고 수량 입력
-              </LoginBtn>
-            </RegBtn>
-          </Modal>
-        )}
       </MainPage>
     </>
   );
 }
 const MainPage = styled.div`
-  margin-top: -40px;
+  // margin-top: -40px;
+  // margin-left: -100px;
+  height: 630px;
   //display: grid;
   //grid-template-columns: 10fr 0.5fr 5fr;
   //grid-template-area: Threepl_ListingPage . ScanNBtn;
@@ -305,4 +307,5 @@ const RegBtn = styled.div`
   width: 100%;
   height: 40px;
 `;
+
 export default Threepl_ImportRegister;

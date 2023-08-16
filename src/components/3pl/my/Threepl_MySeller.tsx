@@ -78,14 +78,13 @@ const SubTitle = styled.div`
 `;
 
 const PageTitle = styled.div`
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      font-family=jalnan;
-    `;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
 
 const Title = styled.h1`
-  font-family: jalnan;
+  font-family: KBO;
 `;
 
 const Line = styled.div`

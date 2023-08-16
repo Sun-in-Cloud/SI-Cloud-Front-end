@@ -130,6 +130,7 @@ function Threepl_OrderList(props: any) {
 }
 
 const MainPage = styled.div`
+  height: 100%;
   display: grid;
   grid-template-columns: 1.9fr 0.3fr 2.8fr;
   grid-template-areas: 'ListingPage . ListingPage';

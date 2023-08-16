@@ -107,6 +107,7 @@ function Threepl_OrderRegister(props: any) {
 }
 
 const MainPage = styled.div`
+  height: 600px;
   display: grid;
   grid-template-rows: 0.1fr 0.9fr;
 `;

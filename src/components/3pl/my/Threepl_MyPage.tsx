@@ -96,11 +96,10 @@ const PageTitle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-family=jalnan;
 `;
 
 const Title = styled.h1`
-  font-family: jalnan;
+  font-family: KBO;
 `;
 
 const Line = styled.div`
@@ -114,6 +113,8 @@ const BtnDiv = styled.div`
   justify-content: flex-end;
 `;
 
-const Container = styled.div``;
+const Container = styled.div`
+  padding-top: 40px;
+`;
 
 export default Threepl_MyPage;

@@ -47,7 +47,7 @@ function ThreeplMain(props: any) {
     if (
       location.pathname.includes('/3pl/product') ||
       location.pathname.includes('/3pl/order') ||
-      location.pathname.includes('/3pl/import') ||
+      (location.pathname.includes('/3pl/import') && location.pathname !== '/3pl/import/pre/register') ||
       location.pathname.includes('/3pl/export') ||
       location.pathname.includes('/3pl/mypage/seller/list')
     ) {
@@ -113,7 +113,7 @@ function ThreeplMain(props: any) {
       )}
 
       {location.pathname !== '/3pl' &&
-        location.pathname !== '/import/pre/register' &&
+        location.pathname !== '/3pl/import/pre/register' &&
         location.pathname !== '/3pl/export/invoice' &&
         location.pathname !== '/3pl/match/list' &&
         location.pathname !== '/3pl/mypage' && (
@@ -154,22 +154,22 @@ const ComBar = styled.div`
 `;
 
 const GridPage = styled.div`
+  height: 630px;
   display: grid;
   grid-template-columns: 0.5fr 5fr 0.5fr;
   grid-template-areas: '. Routes .';
-  height: 100%;
   padding-top: 30px;
 `;
 
 const ExportPage = styled.div`
-  height: 630px;
+  height: 650px;
   display: grid;
   grid-template-columns: 0.5fr 5fr 0.5fr;
   grid-template-areas: '. Routes .';
   background-color: #f4f0ed;
   margin-top: 100px;
   padding-top: 80px;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
 `;
 
 export default ThreeplMain;
