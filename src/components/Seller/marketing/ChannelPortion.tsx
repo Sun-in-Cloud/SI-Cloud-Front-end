@@ -26,7 +26,7 @@ function ChannelPortion(props: any) {
                 colors: ['#fff'],
               },
             },
-            colors: ['#ccdbe2', '#917b56', '#e9e1d4', '#c9ba9b', '#ee9ca7'],
+
             tooltip: {
               y: {
                 formatter: (value) => `${value}원`,
@@ -35,9 +35,6 @@ function ChannelPortion(props: any) {
                 fontSize: '15px',
                 fontFamily: 'GmarketSansMedium',
               },
-            },
-            fill: {
-              colors: ['#ccdbe2', '#917b56', '#e9e1d4', '#c9ba9b', '#ee9ca7'],
             },
             responsive: [
               {

@@ -76,7 +76,9 @@ function MarketingChartWeekly(props: any) {
                 },
                 stroke: { curve: 'smooth' },
                 grid: { show: true },
-                yaxis: { show: false },
+                yaxis: {
+                  show: false,
+                },
                 xaxis: {
                   categories: numberWeeklyTitle,
                   labels: {
@@ -151,6 +153,14 @@ function MarketingChartWeekly(props: any) {
                   },
                   axisTicks: {
                     show: false,
+                  },
+                },
+                yaxis: {
+                  show: false,
+                  labels: {
+                    formatter: function (value) {
+                      return value.toFixed(5);
+                    },
                   },
                 },
                 labels: salesWeekly,

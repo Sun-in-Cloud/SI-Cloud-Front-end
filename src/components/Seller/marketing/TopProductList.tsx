@@ -53,7 +53,7 @@ function TopProductList(props: any) {
           colors: ['#fa709a', '#f9d423', '#e9e1d4', '#96e6a1', '#a1c4fd'],
           grid: {
             row: {
-              colors: ['#F44336', '#E91E63', '#9C27B0'],
+              colors: ['#fa709a', '#f9d423', '#e9e1d4', '#96e6a1', '#a1c4fd'],
             },
           },
           responsive: [

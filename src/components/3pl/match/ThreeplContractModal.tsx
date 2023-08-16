@@ -4,6 +4,7 @@ import DayPicker from './DayPicker';
 import LoginBtn from '../../common/Loginbtn';
 import axios from 'axios';
 import { useAppSelect } from '../../../redux/configStore.hooks';
+import swal from 'sweetalert';
 
 // dummy data
 const optionData = [
@@ -52,7 +53,7 @@ const useResize = () => {
 function ThreeplContractModal(props: any) {
   // state
   const [isExpand, setIsExpand] = useState(false);
-  const [selected, setSelected] = useState<string>('A');
+  const [selected, setSelected] = useState<string>('');
 
   const threepl = useAppSelect((state) => state.threepl);
 
@@ -87,6 +88,7 @@ function ThreeplContractModal(props: any) {
   async function postContract(location: string, endDate: string | undefined) {
     //const listurl = `${process.env.REACT_APP_API_URL}/3pl/match/contract`;
     const listurl = `/3pl/match/contract`;
+    console.log(location, endDate, props.sellerNo, threepl.userNo);
     await axios
       .post(listurl, {
         location: location,
@@ -96,9 +98,9 @@ function ThreeplContractModal(props: any) {
       })
       .then(function (response) {
         if (response.data === true) {
-          alert('계약 성공');
+          swal('계약 성공');
         } else {
-          alert('계약 실패');
+          swal('계약 실패');
         }
         props.setIsModalOpen(false);
       })

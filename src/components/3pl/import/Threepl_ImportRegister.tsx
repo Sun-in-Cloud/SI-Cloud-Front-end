@@ -6,6 +6,7 @@ import { styled } from 'styled-components';
 import LoginBtn from '../../common/Loginbtn';
 import { BarcodeScanner } from '../../common/BarcodeScanner';
 import Modal from '../../common/Modal';
+import swal from 'sweetalert';
 
 function Threepl_ImportRegister(props: any) {
   const { state } = useLocation();
@@ -95,9 +96,9 @@ function Threepl_ImportRegister(props: any) {
       })
       .then(function (response) {
         if (response.data === true) {
-          alert('입고 등록 성공');
+          swal('입고 등록 성공');
         } else {
-          alert('입고 등록 실패');
+          swal('입고 등록 실패');
         }
       })
       .catch(function (error) {

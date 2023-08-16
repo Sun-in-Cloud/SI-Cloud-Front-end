@@ -9,6 +9,7 @@ import SellerProductEdit from './SellerProductEdit';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useAppSelect } from '../../../redux/configStore.hooks';
+import swal from 'sweetalert';
 
 interface ProductDetail {
   [index: string]: string | undefined;
@@ -80,7 +81,7 @@ function SellerProductDetail(props: any) {
       })
       .then(function (response) {
         console.log(response);
-        alert('삭제되었습니다!');
+        swal('삭제되었습니다!');
       })
       .catch(function (error) {
         console.log(error);
