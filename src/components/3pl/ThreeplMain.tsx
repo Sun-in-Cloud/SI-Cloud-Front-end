@@ -66,6 +66,13 @@ function ThreeplMain(props: any) {
   return (
     <>
       <Header type={StyleType(props.type)} isEmpty={isEmpty} />
+      {location.pathname === '/3pl' && (
+        <div style={{ marginTop: '120px', height: '630px' }}>
+          <Routes>
+            <Route path="*" element={<Threepl_MainPage />}></Route>
+          </Routes>
+        </div>
+      )}
       {location.pathname === '/3pl/import/pre/register' && (
         <ExportPage>
           <h1></h1>
@@ -105,28 +112,30 @@ function ThreeplMain(props: any) {
         </ExportPage>
       )}
 
-      {location.pathname !== '/3pl/import/pre/register' && location.pathname !== '/3pl/export/invoice' && (
-        <>
-          <MainPage>
-            <ComBar>{submenu(location)}</ComBar>
-            <GridPage>
-              <h1></h1>
-
-              <Routes>
-                <Route path="/product/list" element={<Threepl_ProductList seller={seller} />}></Route>{' '}
-                <Route path="/order/register" element={<Threepl_OrderRegister seller={seller} />}></Route>{' '}
-                <Route path="/order/list" element={<Threepl_OrderList seller={seller} />}></Route>{' '}
-                <Route path="/import/list" element={<Threepl_ImportList seller={seller} />}></Route>{' '}
-                <Route path="/import/pre/list" element={<Threepl_ImportPreList seller={seller} />}></Route>{' '}
-                <Route path="/export/list" element={<Threepl_Export seller={seller} />}></Route>{' '}
-                <Route path="/mypage/seller/list" element={<Threepl_MySeller seller={seller} />}></Route>{' '}
-                <Route path="*" element={<Threepl_MainPage />}></Route>
-              </Routes>
-              <h1></h1>
-            </GridPage>
-          </MainPage>
-        </>
-      )}
+      {location.pathname !== '/3pl' &&
+        location.pathname !== '/import/pre/register' &&
+        location.pathname !== '/3pl/export/invoice' &&
+        location.pathname !== '/3pl/match/list' &&
+        location.pathname !== '/3pl/mypage' && (
+          <>
+            <MainPage>
+              <ComBar>{submenu(location)}</ComBar>
+              <GridPage>
+                <h1></h1>
+                <Routes>
+                  <Route path="/product/list" element={<Threepl_ProductList seller={seller} />}></Route>{' '}
+                  <Route path="/order/register" element={<Threepl_OrderRegister seller={seller} />}></Route>{' '}
+                  <Route path="/order/list" element={<Threepl_OrderList seller={seller} />}></Route>{' '}
+                  <Route path="/import/list" element={<Threepl_ImportList seller={seller} />}></Route>{' '}
+                  <Route path="/import/pre/list" element={<Threepl_ImportPreList seller={seller} />}></Route>{' '}
+                  <Route path="/export/list" element={<Threepl_Export seller={seller} />}></Route>{' '}
+                  <Route path="/mypage/seller/list" element={<Threepl_MySeller seller={seller} />}></Route>{' '}
+                </Routes>
+                <h1></h1>
+              </GridPage>
+            </MainPage>
+          </>
+        )}
     </>
   );
 }
@@ -154,7 +163,6 @@ const GridPage = styled.div`
 
 const ExportPage = styled.div`
   height: 630px;
-  margin-top: 150px;
   display: grid;
   grid-template-columns: 0.5fr 5fr 0.5fr;
   grid-template-areas: '. Routes .';
