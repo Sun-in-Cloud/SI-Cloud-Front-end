@@ -6,6 +6,7 @@ import { styled } from 'styled-components';
 import LoginBtn from '../common/Loginbtn';
 import ListingPage from '../ListingPage';
 import { useAppSelect } from '../../redux/configStore.hooks';
+import ShopListPage from './ShopListPage';
 
 interface Product {
   exportNo: string;
@@ -94,7 +95,7 @@ function ShopingList(props: any) {
           </LoginBtn>
         </Buttons>
         <p></p>
-        <ListingPage titles={titles} rows={product} columns={titles.length} onDetail={false} />
+        <ShopListPage titles={titles} rows={product} columns={titles.length} onDetail={false} />
         <p></p>
       </ProductMain>
     </>
