@@ -28,8 +28,8 @@ interface MatchingOpt {
 
 function MatchingTableRow(props: any) {
   async function getThreeplDetail(company: number) {
-    //const listurl = `${process.env.REACT_APP_API_URL}/seller/match/${company}`;
-    const listurl = '/seller/match/' + company;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/match/${company}`;
+    // const listurl = '/seller/match/' + company;
     await axios
       .get(listurl)
       .then(function (response) {

@@ -50,8 +50,8 @@ function SellerProductList(props: any) {
   }
 
   async function getProductList() {
-    //const listurl = `${process.env.REACT_APP_API_URL}/seller/product/list`;
-    const listurl = `/seller/product/list`;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/product/list`;
+    // const listurl = `/seller/product/list`;
 
     await axios
       .get(listurl, {

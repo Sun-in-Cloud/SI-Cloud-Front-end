@@ -46,8 +46,8 @@ function SellerOrderList(props: any) {
     setOrderNo(props.orderNo);
   }
   async function getOrderList() {
-    //const listurl = '${process.env.REACT_APP_API_URL}/seller/order/list';
-    const listurl = '/seller/order/list';
+    const listurl = '${process.env.REACT_APP_API_URL}/seller/order/list';
+    // const listurl = '/seller/order/list';
     await axios
       .get(listurl, {
         params: {
@@ -74,8 +74,8 @@ function SellerOrderList(props: any) {
   }
 
   async function getOrderDetail() {
-    //const listurl = `${process.env.REACT_APP_API_URL}/seller/order/${orderNo}`;
-    const listurl = `/seller/order/${orderNo}`;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/order/${orderNo}`;
+    // const listurl = `/seller/order/${orderNo}`;
 
     await axios
       .get(listurl, {

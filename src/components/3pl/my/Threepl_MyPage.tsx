@@ -26,8 +26,8 @@ function Threepl_MyPage(props: any) {
   const threepl = useAppSelect((state) => state.threepl);
 
   async function getInfo() {
-    //const listurl = `${process.env.REACT_APP_API_URL}/3pl/mypage/${threepl.userNo}`;
-    const listurl = `/3pl/mypage/${threepl.userNo}`;
+    const listurl = `${process.env.REACT_APP_API_URL}/3pl/mypage/${threepl.userNo}`;
+    // const listurl = `/3pl/mypage/${threepl.userNo}`;
     await axios
       .get(listurl, {
         params: {},

@@ -86,8 +86,8 @@ function ThreeplContractModal(props: any) {
   };
 
   async function postContract(location: string, endDate: string | undefined) {
-    //const listurl = `${process.env.REACT_APP_API_URL}/3pl/match/contract`;
-    const listurl = `/3pl/match/contract`;
+    const listurl = `${process.env.REACT_APP_API_URL}/3pl/match/contract`;
+    // const listurl = `/3pl/match/contract`;
     console.log(location, endDate, props.sellerNo, threepl.userNo);
     await axios
       .post(listurl, {

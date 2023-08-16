@@ -103,8 +103,8 @@ function SellerImportPre(props: any) {
   }
 
   async function getPreImportList() {
-    //const listurl = `${process.env.REACT_APP_API_URL}/seller/import/pre-order`;
-    const listurl = `/seller/import/pre-order`;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/pre-order`;
+    // const listurl = `/seller/import/pre-order`;
     await axios
       .get(listurl, {
         params: {
@@ -132,8 +132,8 @@ function SellerImportPre(props: any) {
   }
 
   async function getPreImportProduct() {
-    //const listurl = `${process.env.REACT_APP_API_URL}/seller/import/pre/` + preImportNo;
-    const listurl = `/seller/import/pre/` + preImportNo;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/pre/` + preImportNo;
+    // const listurl = `/seller/import/pre/` + preImportNo;
     await axios
       .get(listurl)
       .then(function (response) {
@@ -146,8 +146,8 @@ function SellerImportPre(props: any) {
 
   async function confirmImportList() {
     const post = { sellerNo: seller.userNo, orderNo: preImportNo, importList: confirmList };
-    //const listurl = `${process.env.REACT_APP_API_URL}/seller/import/register`;
-    const listurl = `/seller/import/register`;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/register`;
+    // const listurl = `/seller/import/register`;
     await axios
       .post(listurl, post)
       .then(function (response) {
@@ -161,8 +161,8 @@ function SellerImportPre(props: any) {
   }
 
   async function searchProduct(search: string) {
-    //const listurl = `${process.env.REACT_APP_API_URL}/seller/import/search`;
-    const listurl = `/seller/import/search`;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/search`;
+    // const listurl = `/seller/import/search`;
     await axios
       .get(listurl, {
         params: {

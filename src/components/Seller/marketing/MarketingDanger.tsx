@@ -31,8 +31,8 @@ function MarketingDanger(props: any) {
   };
 
   async function getProduct() {
-    //const listurl = `${process.env.REACT_APP_API_URL}/seller/marketing/danger`;
-    const listurl = `/seller/marketing/danger`;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/marketing/danger`;
+    // const listurl = `/seller/marketing/danger`;
 
     await axios
       .get(listurl, {

@@ -39,8 +39,8 @@ function ProductRegisterPage(props: any) {
 
   async function getProductList() {
     const sellerNo = seller.userNo;
-    //const listurl = `${process.env.REACT_APP_API_URL}/detailProductGroup/list/${seller.userNo}`;
-    const listurl = `/detailProductGroup/list/${seller.userNo}`;
+    const listurl = `${process.env.REACT_APP_API_URL}/detailProductGroup/list/${seller.userNo}`;
+    // const listurl = `/detailProductGroup/list/${seller.userNo}`;
     await axios
       .get(listurl)
       .then(function (response) {

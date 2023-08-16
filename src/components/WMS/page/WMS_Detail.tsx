@@ -45,8 +45,8 @@ function WMS_Detail(props: any) {
   const [name, setName] = useState<string>('');
 
   async function getSellerDetail() {
-    //const listurl = `${process.env.REACT_APP_API_URL}/wms/seller/${state.sellerNo}`;
-    const listurl = `/wms/seller/${state.sellerNo}`;
+    const listurl = `${process.env.REACT_APP_API_URL}/wms/seller/${state.sellerNo}`;
+    // const listurl = `/wms/seller/${state.sellerNo}`;
     await axios
       .get(listurl, {})
       .then(function (response) {
@@ -58,8 +58,8 @@ function WMS_Detail(props: any) {
   }
 
   async function get3plDetail() {
-    //const listurl = `${process.env.REACT_APP_API_URL}/wms/3pl/${state.threePLNo}`;
-    const listurl = `/wms/3pl/${state.threePLNo}`;
+    const listurl = `${process.env.REACT_APP_API_URL}/wms/3pl/${state.threePLNo}`;
+    // const listurl = `/wms/3pl/${state.threePLNo}`;
     await axios
       .get(listurl, {})
       .then(function (response) {

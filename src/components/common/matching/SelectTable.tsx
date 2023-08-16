@@ -11,8 +11,8 @@ function SelectTable(props: any) {
   const [options1, setOptions1] = useState<string[]>([]);
 
   async function getGroupList() {
-    //const listurl = `${process.env.REACT_APP_API_URL}/productGroup/list`;
-    const listurl = `/productGroup/list`;
+    const listurl = `${process.env.REACT_APP_API_URL}/productGroup/list`;
+    // const listurl = `/productGroup/list`;
     await axios
       .get(listurl, {})
       .then(function (response) {

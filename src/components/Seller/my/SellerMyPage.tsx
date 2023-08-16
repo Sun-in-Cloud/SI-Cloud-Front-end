@@ -47,8 +47,8 @@ function SellerMyPage(props: any) {
 
   //seller 본인의 정보 가져오기
   async function getInfo() {
-    //const listurl = `${process.env.REACT_APP_API_URL}/seller/mypage/${seller.userNo}`;
-    const listurl = `/seller/mypage/${seller.userNo}`;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/mypage/${seller.userNo}`;
+    // const listurl = `/seller/mypage/${seller.userNo}`;
     await axios
       .get(listurl, {
         params: {},
@@ -67,8 +67,8 @@ function SellerMyPage(props: any) {
   //매칭 3pl 정보 가져오기
   async function get3PLInfo() {
     console.log(seller);
-    //const listurl = `${process.env.REACT_APP_API_URL}/seller/mypage/3pl/${seller.userNo}`;
-    const listurl = `/seller/mypage/3pl/${seller.userNo}`;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/mypage/3pl/${seller.userNo}`;
+    // const listurl = `/seller/mypage/3pl/${seller.userNo}`;
     await axios
       .get(listurl, {
         params: {},

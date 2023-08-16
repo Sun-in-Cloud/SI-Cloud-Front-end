@@ -47,8 +47,8 @@ function SellerImportFixedList(props: any) {
   }
 
   async function getFixedImportList() {
-    //const listurl = `${process.env.REACT_APP_API_URL}/seller/import/pre/list`;
-    const listurl = `/seller/import/pre/list`;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/pre/list`;
+    // const listurl = `/seller/import/pre/list`;
     await axios
       .get(listurl, {
         params: {
@@ -74,8 +74,8 @@ function SellerImportFixedList(props: any) {
   }
 
   async function getPreImportDetail() {
-    //const listurl = `${process.env.REACT_APP_API_URL}/seller/import/pre/detail/${importNo}`;
-    const listurl = '/seller/import/pre/detail/' + importNo;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/pre/detail/${importNo}`;
+    // const listurl = '/seller/import/pre/detail/' + importNo;
     await axios
       .get(listurl)
       .then(function (response) {

@@ -33,8 +33,8 @@ function SellerMarketingSerch(props: any) {
   }
 
   async function getProduct() {
-    //const listurl = `${process.env.REACT_APP_API_URL}/seller/import/search`;
-    const listurl = `/seller/import/search`;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/search`;
+    // const listurl = `/seller/import/search`;
 
     const sellerNo = seller.userNo;
     await axios

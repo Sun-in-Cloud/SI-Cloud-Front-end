@@ -27,8 +27,8 @@ function MarketingChannel(props: any) {
   const seller = useAppSelect((state) => state.seller);
 
   async function getChannel() {
-    //const listurl = `${process.env.REACT_APP_API_URL}/seller/marketing/channel`;
-    const listurl = `/seller/marketing/channel`;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/marketing/channel`;
+    // const listurl = `/seller/marketing/channel`;
 
     await axios
       .get(listurl, {

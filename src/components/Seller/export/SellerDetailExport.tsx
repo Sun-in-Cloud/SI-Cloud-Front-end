@@ -38,8 +38,8 @@ function SellerDetailExport(props: any) {
   const [currentPage, setCurrentPage] = useState(1);
 
   async function getPreImportList() {
-    //const listurl = `${process.env.REACT_APP_API_URL}/seller/export/` + location.state.exportNo;
-    const listurl = `/seller/export/` + location.state.exportNo;
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/export/` + location.state.exportNo;
+    // const listurl = `/seller/export/` + location.state.exportNo;
     await axios
       .get(listurl, {
         params: {

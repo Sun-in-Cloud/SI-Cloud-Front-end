@@ -21,8 +21,8 @@ function Threepl_Export(props: any) {
 
   //출고 내역 조회
   async function getExportList() {
-    //const listurl = `${process.env.REACT_APP_API_URL}/3pl/export/list`;
-    const listurl = `/3pl/export/list`;
+    const listurl = `${process.env.REACT_APP_API_URL}/3pl/export/list`;
+    // const listurl = `/3pl/export/list`;
     await axios
       .get(listurl, {
         params: {
@@ -59,8 +59,8 @@ function Threepl_Export(props: any) {
 
   //출고 하나 선택
   function collectOrder(): void {
-    //const listurl = `${process.env.REACT_APP_API_URL}/3pl/export/collect`;
-    const listurl = `/3pl/export/collect`;
+    const listurl = `${process.env.REACT_APP_API_URL}/3pl/export/collect`;
+    // const listurl = `/3pl/export/collect`;
     axios
       .get(listurl, {
         params: {
