@@ -94,7 +94,9 @@ function SellerProductRegister(props: any) {
       });
   }
 
-  useEffect(() => {}, [barcodeNo]);
+  useEffect(() => {
+    setNewProduct({ ...newProduct, ['productNo' as keyof Product]: barcodeNo });
+  }, [barcodeNo]);
 
   return (
     <>
@@ -105,7 +107,7 @@ function SellerProductRegister(props: any) {
             productTitle={productTitle}
             getNewProduct={getNewProduct}
             getProductGroup={getProductGroup}
-            newItem={barcodeNo}
+            barcodeNo={barcodeNo}
           />
 
           <Btns>

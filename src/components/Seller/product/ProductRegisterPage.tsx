@@ -93,7 +93,7 @@ function ProductRegisterPage(props: any) {
                 key={item[1]}
                 onChange={onChangeText}
                 onFocus={handleFocusEvent}
-                value={props.newItem !== undefined ? props.newItem : ''}
+                defaultValue={props.barcodeNo}
               />
             ) : (
               <RegisterNew
