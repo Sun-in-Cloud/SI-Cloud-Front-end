@@ -11,6 +11,7 @@ import { CopyShader } from 'three-stdlib';
 import threepl, { setThreeplReducer } from '../../redux/threepl';
 import seller, { setSellerReducer } from '../../redux/seller';
 import { useNavigate } from 'react-router';
+import swal from 'sweetalert';
 
 function Login(props: any) {
   const [loginUser, setLoginUser] = useState<User>(initialStateValue);
@@ -53,6 +54,8 @@ function Login(props: any) {
         } else if (response.data.userType == 'THREE_PL') {
           dispatch(setThreeplReducer(response.data));
           navigate('/3pl');
+        } else {
+          swal('로그인이 실패하였습니다.');
         }
       })
       .catch(function (error) {

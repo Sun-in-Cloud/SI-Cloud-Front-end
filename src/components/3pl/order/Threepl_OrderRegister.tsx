@@ -3,6 +3,7 @@ import LoginBtn from '../../common/Loginbtn';
 import { styled } from 'styled-components';
 import axios from 'axios';
 import ListingPage from '../../ListingPage';
+import swal from 'sweetalert';
 
 function Threepl_OrderRegister(props: any) {
   const titles: string[][] = [
@@ -55,9 +56,9 @@ function Threepl_OrderRegister(props: any) {
       .post(listurl, {})
       .then(function (response) {
         if (response.data === true) {
-          alert('발주 등록 성공');
+          swal('발주 등록 성공');
         } else {
-          alert('발주 등록 실패');
+          swal('발주 등록 실패');
         }
         getAutoOrderList();
       })

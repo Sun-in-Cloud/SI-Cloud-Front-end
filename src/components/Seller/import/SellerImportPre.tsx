@@ -11,6 +11,7 @@ import TableRowImport from './TableRowImport';
 import LoginBtn from '../../common/Loginbtn';
 import SellerSearchModal from './SellerSearchModal';
 import { useAppSelect } from '../../../redux/configStore.hooks';
+import swal from 'sweetalert';
 
 //전체 리스트
 interface PreImportList {
@@ -151,7 +152,7 @@ function SellerImportPre(props: any) {
       .post(listurl, post)
       .then(function (response) {
         if (response.data) {
-          alert('등록되었습니다.');
+          swal('등록되었습니다.');
         }
       })
       .catch(function (error) {

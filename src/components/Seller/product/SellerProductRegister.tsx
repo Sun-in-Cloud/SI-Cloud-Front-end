@@ -6,6 +6,7 @@ import axios from 'axios';
 import { BarcodeScanner } from '../../common/BarcodeScanner';
 import Modal from '../../common/Modal';
 import { useAppSelect } from '../../../redux/configStore.hooks';
+import swal from 'sweetalert';
 
 interface Product {
   productNo: string;
@@ -86,7 +87,7 @@ function SellerProductRegister(props: any) {
       .post(listurl, newProduct)
       .then(function (response) {
         if (response.data) {
-          alert('등록이 완료 되었습니다.!');
+          swal('등록이 완료 되었습니다.!');
         }
       })
       .catch(function (error) {

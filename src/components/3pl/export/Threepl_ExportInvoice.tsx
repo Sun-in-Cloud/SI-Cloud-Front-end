@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
 import LoginBtn from '../../common/Loginbtn';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 function Threepl_ExportInvoice(props: any) {
   const title: string[][] = [
@@ -81,7 +82,7 @@ function Threepl_ExportInvoice(props: any) {
             nullList += value.productName;
           }
         });
-        nullList !== '' ? alert(nullList + ' 재고 부족') : '';
+        nullList !== '' ? swal(nullList + ' 재고 부족') : '';
 
         getExportDetail();
         setCheckedList([]);

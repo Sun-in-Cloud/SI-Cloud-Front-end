@@ -11,7 +11,7 @@ function Threepl_MatchList(props: any) {
   const titles: string[][] = [
     ['화주사명', 'companyName'],
     ['상품군', 'productGroup'],
-    ['계약 종료일', 'endDate'],
+    ['종료일', 'endDate'],
   ];
   const detailTitles: string[][] = [
     ['화주사명', 'companyName'],
