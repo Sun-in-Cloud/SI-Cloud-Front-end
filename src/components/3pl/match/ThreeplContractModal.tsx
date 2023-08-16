@@ -107,6 +107,7 @@ function ThreeplContractModal(props: any) {
       });
   }
 
+  console.log(props.possible);
   return (
     <ContractModal>
       <p>
@@ -187,8 +188,9 @@ function ThreeplContractModal(props: any) {
           onClick={() => {
             postContract(selected, date);
           }}
+          disabled={!props.possible}
         >
-          계약하기
+          {props.possible ? '계약하기' : '계약불가'}
         </LoginBtn>
       </BtnDiv>
     </ContractModal>

@@ -58,7 +58,7 @@ function Threepl_MatchList(props: any) {
           params: {
             productGroup: item.productGroup,
             address: item.address,
-            numValue: item.numValue,
+            numValue: item.exportAmount,
             contractPeriod: item.contractPeriod,
             pageNum: currentPage,
             countPerPage: 7,
@@ -115,7 +115,8 @@ function Threepl_MatchList(props: any) {
         },
       })
       .then(function (response) {
-        setRemain(response.data);
+        console.log(response);
+        setRemain(response.data.length !== 0 ? response.data : ['남은 자리 없음']);
       })
       .catch(function (error) {
         //console.log(error);
@@ -180,6 +181,7 @@ function Threepl_MatchList(props: any) {
             companyName={contractSeller.companyName}
             remain={remain}
             setIsModalOpen={setIsModalOpen}
+            possible={remain[0] !== '남은 자리 없음' ? true : false}
           />
         </Modal>
       )}
