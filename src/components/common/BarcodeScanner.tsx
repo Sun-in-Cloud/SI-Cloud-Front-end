@@ -76,9 +76,9 @@ const ScanArea = styled.div`
   position: relative;
   width: 300px;
   height: 200px;
-  margin-top: 95px;
-  margin-left: 60px;
-  transform: scale(0.6, 0.6);
+  margin-top: 150px;
+  margin-left: 320px;
+  transform: scale(0.8, 0.7);
   .viewport {
     position: absolute;
     top: -200px;

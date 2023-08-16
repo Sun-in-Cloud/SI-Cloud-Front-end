@@ -45,7 +45,7 @@ const DialogBox = styled.dialog`
   background-color: white;
   z-index: 10;
   flex-direction: column;
-  margin-top: -50px;
+  margin-top: 0px;
 `;
 
 const Backdrop = styled.div`

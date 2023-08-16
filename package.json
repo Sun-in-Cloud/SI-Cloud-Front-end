@@ -92,5 +92,5 @@
   "presets": [
     "@babel/preset-env"
   ],
-  "proxy": "http://si-cloud-env-1.eba-j9wedmup.ap-northeast-2.elasticbeanstalk.com"
+  "homepage": "http://sun-in-cloud-react-server.s3-website.ap-northeast-2.amazonaws.com"
 }

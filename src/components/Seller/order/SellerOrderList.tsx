@@ -46,7 +46,7 @@ function SellerOrderList(props: any) {
     setOrderNo(props.orderNo);
   }
   async function getOrderList() {
-    const listurl = '${process.env.REACT_APP_API_URL}/seller/order/list';
+    const listurl = `${process.env.REACT_APP_API_URL}/seller/order/list`;
     // const listurl = '/seller/order/list';
     await axios
       .get(listurl, {
