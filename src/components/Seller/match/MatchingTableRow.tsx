@@ -23,7 +23,7 @@ interface MatchingOpt {
   companyName: string;
   productGroup: string;
   endDate: string;
-  leftPos: number;
+  leftLocation: number;
 }
 
 function MatchingTableRow(props: any) {

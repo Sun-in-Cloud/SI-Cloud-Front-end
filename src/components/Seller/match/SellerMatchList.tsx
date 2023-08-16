@@ -94,13 +94,14 @@ function SellerMatchList(props: any) {
           numValue: filter?.numValue,
           conrtactPeriod: filter?.contractPeriod,
           pageNum: currentPage,
-          countPerPage: 3,
+          countPerPage: 7,
         },
         headers: {
           'Content-type': 'application/json',
         },
       })
       .then(function (response) {
+        console.log(response);
         setThreeplList(response.data.matchingCompanies);
         console.log(response.data.matchingCompanies);
 

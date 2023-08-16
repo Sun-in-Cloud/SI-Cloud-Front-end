@@ -64,7 +64,8 @@ function Threepl_ExportInvoice(props: any) {
 
   //송장 출력
   async function printInvoice() {
-    const listurl = `${process.env.REACT_APP_API_URL}/3pl/export/invoice`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/3pl/export/invoice`;
+    const listurl = `/3pl/export/invoice`;
     await axios
       .put(listurl, {
         exportNo: state.exportNo,

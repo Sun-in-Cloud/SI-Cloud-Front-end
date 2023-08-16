@@ -58,7 +58,7 @@ function SelectTable(props: any) {
     productGroup: '',
     address: '',
     exportAmount: 0,
-    numValue: 0,
+    numValue: 10000000,
     contractPeriod: 0,
   };
 
