@@ -250,7 +250,7 @@ function SellerImportPre(props: any) {
     <>
       <SellerImport>
         <Title>
-          <SubTitle>솔루션 신청하기</SubTitle>
+          <SubTitle>입고 등록하기</SubTitle>
         </Title>
         <p></p>
         <ImportList>
