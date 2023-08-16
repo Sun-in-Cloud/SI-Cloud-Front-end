@@ -39,7 +39,6 @@ function SellerProductList(props: any) {
   ];
 
   const columns: number = titles.length;
-  const sellerNo: number = 30123123;
 
   function StyleType(style: any) {
     if (style == 'portrait') {
@@ -87,6 +86,10 @@ function SellerProductList(props: any) {
 
   useEffect(() => {
     getProductList();
+  }, []);
+
+  useEffect(() => {
+    getProductList();
   }, [currentPage]);
 
   return (
@@ -105,7 +108,7 @@ function SellerProductList(props: any) {
           number={totalPage}
           rows={product}
           columns={columns}
-          sellerNo={sellerNo}
+          sellerNo={seller.userNo}
           onDetail={true}
           navPage={navPage}
         />
