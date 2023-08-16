@@ -51,7 +51,8 @@ function Threepl_MatchList(props: any) {
   async function getSellerList(item: any) {
     setItem(item);
     if (item !== null) {
-      const listurl = `${process.env.REACT_APP_API_URL}/3pl/match/list`;
+      //const listurl = `${process.env.REACT_APP_API_URL}/3pl/match/list`;
+      const listurl = `/3pl/match/list`;
       await axios
         .get(listurl, {
           params: {
@@ -84,7 +85,8 @@ function Threepl_MatchList(props: any) {
   async function getSellerDetail() {
     setItem(item);
     if (item !== null) {
-      const listurl = `${process.env.REACT_APP_API_URL}/3pl/match/${detailSellers.sellerNo}`;
+      //const listurl = `${process.env.REACT_APP_API_URL}/3pl/match/${detailSellers.sellerNo}`;
+      const listurl = `/3pl/match/${detailSellers.sellerNo}`;
       await axios
         .get(listurl, {
           params: {},
@@ -104,7 +106,8 @@ function Threepl_MatchList(props: any) {
   //남은 창고 자리 조회
   async function getRemain() {
     setItem(item);
-    const listurl = `${process.env.REACT_APP_API_URL}/3pl/match/left/${threepl.userNo}`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/3pl/match/left/${threepl.userNo}`;
+    const listurl = `/3pl/match/left/${threepl.userNo}`;
     await axios
       .get(listurl, {
         headers: {

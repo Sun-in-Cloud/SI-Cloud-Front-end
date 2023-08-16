@@ -16,7 +16,8 @@ function WMS_SellerList(props: any) {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   async function getSellerList() {
-    const listurl = `${process.env.REACT_APP_API_URL}/wms/seller/list`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/wms/seller/list`;
+    const listurl = `/wms/seller/list`;
     await axios
       .get(listurl, {
         params: {

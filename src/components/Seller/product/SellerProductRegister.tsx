@@ -80,7 +80,8 @@ function SellerProductRegister(props: any) {
 
   async function postProduct() {
     const sellerNo = seller.userNo;
-    const listurl = `${process.env.REACT_APP_API_URL}/seller/product/register/${sellerNo}`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/seller/product/register/${sellerNo}`;
+    const listurl = `/seller/product/register/${sellerNo}`;
     await axios
       .post(listurl, newProduct)
       .then(function (response) {

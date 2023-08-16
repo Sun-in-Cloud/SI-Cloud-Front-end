@@ -37,7 +37,8 @@ function ShopingList(props: any) {
   ];
 
   async function getProductList() {
-    const listurl = `${process.env.REACT_APP_API_URL}/shop/list`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/shop/list`;
+    const listurl = `/shop/list`;
 
     await axios
       .get(listurl, {
@@ -58,7 +59,8 @@ function ShopingList(props: any) {
   }
 
   async function getNewProductList() {
-    const listurl = `${process.env.REACT_APP_API_URL}/shop/order/${seller.userNo}`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/shop/order/${seller.userNo}`;
+    const listurl = `/shop/order/${seller.userNo}`;
 
     await axios
       .post(listurl)

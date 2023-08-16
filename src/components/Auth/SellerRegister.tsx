@@ -40,7 +40,8 @@ function SellerRegister(props: any) {
   };
 
   async function postUserInfo() {
-    const listurl = `${process.env.REACT_APP_API_URL}/seller/auth/register`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/seller/auth/register`;
+    const listurl = `/seller/auth/register`;
     await axios
       .post(listurl, newSeller)
       .then(function (response) {
@@ -52,7 +53,8 @@ function SellerRegister(props: any) {
   }
 
   async function getProductTypeList() {
-    const listurl = `${process.env.REACT_APP_API_URL}/productGroup/list`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/productGroup/list`;
+    const listurl = `/productGroup/list`;
     await axios
       .get(listurl)
       .then(function (response) {

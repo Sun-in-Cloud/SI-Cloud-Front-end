@@ -17,7 +17,8 @@ function MarketingStatistics(props: any) {
   const [data, setData] = useState<any>();
 
   async function getThreeplList() {
-    const listurl = `${process.env.REACT_APP_API_URL}/seller/marketing/statistics`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/seller/marketing/statistics`;
+    const listurl = `/seller/marketing/statistics`;
 
     await axios
       .get(listurl, {

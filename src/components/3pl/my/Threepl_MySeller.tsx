@@ -22,7 +22,8 @@ function Threepl_MySeller(props: any) {
   const [sellerName, setSellerName] = useState<string>('');
 
   async function getInfo() {
-    const listurl = `${process.env.REACT_APP_API_URL}/3pl/mypage/seller/${props.seller}`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/3pl/mypage/seller/${props.seller}`;
+    const listurl = `/3pl/mypage/seller/${props.seller}`;
     await axios
       .get(listurl, {})
       .then(function (response) {

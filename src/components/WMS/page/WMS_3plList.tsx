@@ -16,7 +16,8 @@ function WMS_3plList(props: any) {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   async function get3plList() {
-    const listurl = `${process.env.REACT_APP_API_URL}/wms/3pl/list`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/wms/3pl/list`;
+    const listurl = `/wms/3pl/list`;
     await axios
       .get(listurl, {
         params: {

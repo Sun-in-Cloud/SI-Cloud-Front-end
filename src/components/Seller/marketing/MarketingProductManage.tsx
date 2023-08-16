@@ -23,7 +23,8 @@ function MarketingProductManage(props: any) {
   const [check, setCheck] = useState<boolean>(false);
 
   async function getMarketingByPro() {
-    const listurl = `${process.env.REACT_APP_API_URL}/seller/marketing/product`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/seller/marketing/product`;
+    const listurl = `/seller/marketing/product`;
 
     await axios
       .get(listurl, {

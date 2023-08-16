@@ -63,7 +63,8 @@ function Threepl_ImportRegister(props: any) {
   };
 
   async function getProductList() {
-    const listurl = `${process.env.REACT_APP_API_URL}/3pl/import/register`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/3pl/import/register`;
+    const listurl = `/3pl/import/register`;
     await axios
       .get(listurl, {
         params: {

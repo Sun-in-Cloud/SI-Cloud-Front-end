@@ -25,7 +25,8 @@ function Threepl_ImportList(props: any) {
 
   //입고 내역 목록 조회
   async function getImportList() {
-    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/list`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/seller/import/list`;
+    const listurl = `/seller/import/list`;
     await axios
       .get(listurl, {
         params: {
@@ -52,7 +53,8 @@ function Threepl_ImportList(props: any) {
 
   //입고 상세 조회
   async function getImportDetail() {
-    const listurl = `${process.env.REACT_APP_API_URL}/seller/import/${finImport?.importNo}`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/seller/import/${finImport?.importNo}`;
+    const listurl = `/seller/import/${finImport?.importNo}`;
     await axios
       .get(listurl, {
         params: {},

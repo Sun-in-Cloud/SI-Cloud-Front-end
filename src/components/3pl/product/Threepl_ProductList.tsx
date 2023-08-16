@@ -19,7 +19,8 @@ function Threepl_ProductList(props: any) {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   async function getProductList() {
-    const listurl = `${process.env.REACT_APP_API_URL}/3pl/product/list`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/3pl/product/list`;
+    const listurl = `/3pl/product/list`;
     await axios
       .get(listurl, {
         params: {
@@ -32,6 +33,7 @@ function Threepl_ProductList(props: any) {
         },
       })
       .then(function (response) {
+        console.log(response);
         setRows(response.data.products);
         const list: number[] = [];
         for (let i = 0; i < response.data.totalPage; i++) {

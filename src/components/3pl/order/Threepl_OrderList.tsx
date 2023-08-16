@@ -26,7 +26,8 @@ function Threepl_OrderList(props: any) {
 
   //발주 내역 목록 조회
   async function getOrderList() {
-    const listurl = `${process.env.REACT_APP_API_URL}/3pl/order/list`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/3pl/order/list`;
+    const listurl = `/3pl/order/list`;
     await axios
       .get(listurl, {
         params: {
@@ -53,7 +54,8 @@ function Threepl_OrderList(props: any) {
 
   //발주 상세 조회
   async function getOrderDetail() {
-    const listurl = `${process.env.REACT_APP_API_URL}/3pl/order/${order?.orderNo}`;
+    //const listurl = `${process.env.REACT_APP_API_URL}/3pl/order/${order?.orderNo}`;
+    const listurl = `/3pl/order/${order?.orderNo}`;
     await axios
       .get(listurl, {
         params: {},
