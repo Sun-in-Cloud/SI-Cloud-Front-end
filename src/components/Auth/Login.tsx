@@ -77,7 +77,7 @@ function Login(props: any) {
           </OneRow>
           <OneRow>
             <Item>비밀번호</Item>
-            <RegisterNew type="text" name="password" onChange={onChange} />
+            <RegisterNew type="password" name="password" onChange={onChange} />
           </OneRow>
         </Text>
         <Btns>
@@ -132,6 +132,7 @@ const LoginText = styled.div`
 `;
 
 const Btns = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
 `;
